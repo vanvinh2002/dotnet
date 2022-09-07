@@ -1,0 +1,121 @@
+﻿
+@{
+    ViewBag.Title = "requirementNew";
+}
+
+<div class="div-span">
+    <div class="row">
+        <div class="col-md-4">
+            <textarea class="form-control" style="min-width:100%" rows="3" id="txare" placeholder="Nhập từ khóa tìm kiếm"></textarea>
+        </div>
+        <div class="col-md-4">
+        </div>
+        <div class="col-md-4">
+            <div class="row">
+                <div class="col-md-12">
+
+                    <select class="form-control" id="selTypeFill" onchange="fnLoad();">
+                        <option value="">Tất cả</option>
+                        @foreach (var i in ViewBag.ls_dep)
+                        {
+                            <option value="@i.departmentCode">@i.departmentName</option>
+                        }
+                    </select>
+                    <br />
+                </div>
+
+                <div class="col-md-12">
+                    @*<input type="button" class="form-control btn-info" onclick="fnLoad()" value="Tìm kiếm" />*@
+                    <a href="#" class="btn btn-success button_action" onclick="fnLoad()" style="width:200px;margin-bottom:15px;"><i class="fa fa-search" aria-hidden="true"></i> Tìm kiếm</a>
+                    @*<input type="button" class="form-control btn-primary" style="margin-top:20px" onclick="window.location = '/SourceProduct/Create'" value="Tạo mới" />*@
+
+                    <a href="#" class="btn btn-warning button_action" onclick="window.location = '/ScoreStore/requirementNew'" style="width:200px;margin-bottom:15px;"><i class="fa fa-plus-circle" aria-hidden="true"></i> Tạo mới</a>
+
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+<table id="tbl_Item" class="table table-bordered">
+    <thead>
+        <tr>
+            <th style="width:25%">
+                Mã Khối
+            </th>
+            <th style="width:25%">
+                Mã hạng mục
+            </th>
+            <th style="width:40%">
+                Tên hạng mục
+            </th>
+            <th style="width:10%">
+                Đánh giá
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+    </tbody>
+</table>
+
+
+
+
+<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
+<script type="text/javascript" src="http://ajax.cdnjs.com/ajax/libs/json2/20110223/json2.js"></script>
+<script type="text/javascript">
+
+    var arr_sub;
+    $(function () {
+
+        $('#txtHead').html("ĐÁNH GIÁ HẠNG MỤC CỬA HÀNG");
+
+        arr_sub = @Html.Raw(Json.Encode(@ViewBag.ls_Requi));
+
+        fnLoad();
+
+    });
+
+    function fnLoad() {
+
+        //if ($('#txare').val().length > 0) {
+
+
+        $("#tbl_Item > TBODY").html("");
+
+        var cd = $('#txare').val();
+        var depCode = $('#selTypeFill').val();
+
+        for (var i in arr_sub) {
+            if (arr_sub[i].departmentCode.toLowerCase().includes(depCode.toLowerCase()) == true && (arr_sub[i].requirementCode.toLowerCase().includes(cd.toLowerCase()) == true || arr_sub[i].requirementName.toLowerCase().includes(cd.toLowerCase()) == true)) {
+
+                var tBody = $("#tbl_Item > TBODY")[0];
+
+                //Add Row.
+                var row = tBody.insertRow(-1);
+
+                //Add Type cell
+                cell = $(row.insertCell(-1));
+                cell.html(arr_sub[i].departmentCode);
+
+                //Add Type cell
+                cell = $(row.insertCell(-1));
+                cell.html(arr_sub[i].requirementCode);
+
+                //Add Type cell
+                cell = $(row.insertCell(-1));
+                cell.html(arr_sub[i].requirementName);
+
+                //Add Type cell
+                cell = $(row.insertCell(-1));
+                cell.html('<a href="#" class="btn btn - warning button_action" onclick="fnScore(\'' + arr_sub[i].requirementCode+'\')" style="width: 200px; margin - bottom: 15px; "><i class="fa fa - plus - circle" aria-hidden="true"></i> Đánh giá</a>');
+            }
+        }
+    }
+
+    function fnScore(reqNo) {
+        window.location = "/ScoreStore/requirementScore?storeNo=@ViewBag.Store.Code&requirementNo=" + reqNo;
+    }
+</script>
+

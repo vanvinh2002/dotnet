@@ -1,0 +1,183 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2> </h2>
+
+<style>
+    .loader {
+        border: 16px solid #f3f3f3;
+        border-radius: 50%;
+        border-top: 16px solid #3498db;
+        width: 120px;
+        height: 120px;
+        -webkit-animation: spin 2s linear infinite; /* Safari */
+        animation: spin 2s linear infinite;
+    }
+
+    /* Safari */
+    @@-webkit-keyframes spin {
+        0% {
+            -webkit-transform: rotate(0deg);
+        }
+
+        100% {
+            -webkit-transform: rotate(360deg);
+        }
+    }
+
+    @@keyframes spin {
+        0% {
+            transform: rotate(0deg);
+        }
+
+        100% {
+            transform: rotate(360deg);
+        }
+    }
+    thead th{
+        text-align:center;
+    }
+    tbody td{
+        text-align:left;
+    }
+</style>
+
+
+<div class="row">
+    <div class="col-md-6">
+        <textarea class="form-control" style="min-width:100%" rows="5" id="txare" placeholder="Nhập danh sách tìm kiếm (cách nhau bởi dấu ',')"></textarea>
+    </div>
+    <div class="col-md-6">
+        <div style="width:100%;float:left">
+            <div>
+                <select class="form-control" id="selTypeFill" onchange="changed()">
+                    <option value="sku">Mã sản phẩm</option>
+                    <option value="name">Tên sản phẩm</option>
+                    <option value="ManufacturerCode">ManufacturerCode</option>
+                    <option value="DivisionCode">DivisionCode</option>
+                    <option value="CategoryCode">CategoryCode</option>
+                    <option value="GroupCode">GroupCode</option>
+                </select>
+            </div>
+            <div>
+                <a onclick="fnLoad()" class="btn btn-success box_search_text" style="width: 280px;margin-top: 12px;"><i class="fa fa-search" aria-hidden="true"></i> Tìm kiếm</a>
+            </div>
+        </div>
+
+        <div style="width:100%;float:left">
+            <div style="width:50%; float:left">
+                <div id="divLoading" style="visibility:hidden" class="loader"></div>
+            </div>
+            <div style="width:50%; float:left">
+                <input id="btnExport" type="button" class="form-control btn-primary" onclick="fnExport()" value="Xuất Excel" style="visibility:hidden;margin-top: 20%;" />
+            </div>
+        </div>
+    </div>
+</div>
+
+<table id="tbl_Item" class="table table-bordered">
+    <thead>
+        <tr>
+            <th>
+                Mã sản phẩm
+            </th>
+            <th>
+                Tên sản phẩm
+            </th>
+            <th>
+                Giá bán
+            </th>
+            <th>
+                Ảnh sản phẩm
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+    </tbody>
+</table>
+<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
+<script type="text/javascript" src="http://ajax.cdnjs.com/ajax/libs/json2/20110223/json2.js"></script>
+<script type="text/javascript">
+    $(function () {
+        $('#txtHead').html("QUẢN LÝ HÀNG HÓA");
+    });
+    function fnLoad() {
+        if ($('#txare').val().length > 0) {
+
+            $("#tbl_Item > TBODY").html("");
+            document.getElementById('divLoading').style.visibility = "inherit";
+            document.getElementById('btnExport').style.visibility = "hidden";
+
+            $.ajax({
+                type: "POST",
+                url: "/ProductImageWeb/getData",
+                data: '{typeFill:"' + $('#selTypeFill').val() + '",lsSku:"' + $('#txare').val() + '"}',
+                contentType: "application/json; charset=utf-8",
+                dataType: "json",
+                success: function (r) {
+                    if (r.length > 0) {
+
+                        //alert(r);
+
+                        var rt = JSON.parse(r);
+                        for (var i in rt) {
+
+                            var tBody = $("#tbl_Item > TBODY")[0];
+
+                            //Add Row.
+                            var row = tBody.insertRow(-1);
+
+                            //Add Type cell
+
+                            var str_date = rt[i].date;
+
+                            cell = $(row.insertCell(-1));
+                            cell.html(rt[i].sku);
+
+                            //Add Type cell
+                            cell = $(row.insertCell(-1));
+                            cell.html(rt[i].name);
+                            
+                            //Add Type cell
+                            cell = $(row.insertCell(-1));
+                            cell.html(rt[i].price);
+
+                            //Add Type cell
+                            cell = $(row.insertCell(-1));
+                            cell.html('<img src="' + rt[i].image_link + '" style="width:50px" class="thumbnail" />');
+
+                            document.getElementById('divLoading').style.visibility = "hidden";
+                            document.getElementById('btnExport').style.visibility = "inherit";
+                        }
+                       
+
+                    } else {
+                        document.getElementById('divLoading').style.visibility = "hidden";
+                        document.getElementById('btnExport').style.visibility = "hidden";
+                        alert("Không tìm thấy thông tin thỏa mãn!");
+                    }
+                }
+            });
+
+        } else {
+            alert("Nhap it nhat 1 ma");
+        }
+    }
+
+    function fnExport() {
+        document.getElementById('divLoading').style.visibility = "inherit";
+        window.location = '/ProductImageWeb/ExportExcel';
+        document.getElementById('divLoading').style.visibility = "hidden";
+    }
+
+    function changed() {
+        if ($('#selTypeFill').val() == 'name') {
+            $('#txare').attr("placeholder", "Nhập tên muốn tìm kiếm");
+        } else {
+            $('#txare').attr("placeholder", "Nhập danh sách tìm kiếm (cách nhau bởi dấu ',')");
+        }
+    }
+</script>
+

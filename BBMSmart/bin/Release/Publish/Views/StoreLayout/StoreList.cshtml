@@ -1,0 +1,257 @@
+﻿@model  PagedList.IPagedList<ProductAllTool.Models.StoreLayout.userRole>
+@using PagedList.Mvc
+
+@{
+    ViewBag.Title = "StoreList";
+}
+
+@if (Request.Browser.IsMobileDevice)
+{
+    <style>
+        .td_header {
+            font-size: 2vh;
+            color: #223141;
+            background-color: #e4e4e4;
+            width: 100%;
+        }
+
+        .body-content {
+            padding: 0px !important;
+        }
+
+        .tb_detail thead {
+            color: #223141;
+            background-color: #e4e4e4;
+        }
+
+        .pagination {
+            margin: 0px !important;
+        }
+
+        .btnAc {
+            width: 30%;
+            float: right;
+            border-radius: 10px;
+            margin-right: 10px;
+        }
+
+        thead th {
+            text-align: center;
+        }
+
+        tbody td {
+            text-align: left;
+        }
+    </style>
+
+    <div class="td_header" style="width:100%;float:left">
+        <div style="width:100%; float:left">
+            <b style="font-size:4vh">DANH SÁCH CỬA HÀNG</b>
+        </div>
+    </div>
+
+    <hr style="width:100%;float:left;" />
+
+    <div class="text-center" style="width:100%;float:left; padding:1%">
+        <input id="txtSearch" type="text" class="form-control" style="border-radius:10px; float:right;padding-left:65px !important;" placeholder="Nhập giá trị tìm kiếm" />
+        <label style="float:right;transform: translateY(50%);">Tìm kiếm</label>
+    </div>
+
+
+
+
+    <table width="100%" class="table text-center">
+        <tr>
+            <td>
+                <table class="table table-striped tb_detail" border="1" style="width: 100%">
+                    <thead>
+                        <tr>
+                            <th>Mã cửa hàng</th>
+                            <th>Tên cửa hàng</th>
+                            <th>Số lượng kệ</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var item in Model)
+                        {
+                            <tr onclick="fnShelfList('@item.storeNo')">
+                                <td>
+                                    <a onclick="fnShelfList('@item.storeNo')">@item.storeNo</a>
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.storeName)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.countShelf)
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <div>
+                    <div style="float:right; margin:0px !important; width:45%">
+                        @Html.PagedListPager(Model, page => Url.Action("StoreList", new { Router = ViewBag.Router, dateFill = ViewBag.dateFill, page, Size = ViewBag.pageSize, typeFill = ViewBag.typeFill, dataFill = ViewBag.dataFill, fillStore = ViewBag.fillStore, fillItem = ViewBag.fillItem }), new PagedListRenderOptions
+                        {
+                            MaximumPageNumbersToDisplay = 3,
+         DisplayLinkToFirstPage = PagedListDisplayMode.Never,
+         DisplayLinkToLastPage = PagedListDisplayMode.Never,
+         DisplayPageCountAndCurrentLocation = true
+                        })
+                    </div>
+                </div>
+            </td>
+        </tr>
+    </table>
+}
+else
+{
+    <style>
+        .td_header {
+            font-size: 2vh;
+            color: #223141;
+            background-color: #e4e4e4;
+            width: 100%;
+        }
+
+        .body-content {
+            padding: 0px !important;
+        }
+
+        .tb_detail thead {
+            color: #223141;
+            background-color: #e4e4e4;
+        }
+
+        .pagination {
+            margin: 0px !important;
+        }
+
+        .btnAc {
+            width: 30%;
+            float: right;
+            border-radius: 10px;
+            margin-right: 10px;
+            text-align:center;
+        }
+
+        thead th {
+            text-align: center;
+        }
+
+        tbody td {
+            text-align: left;
+        }
+    </style>
+
+    <div class="td_header" style="width:100%;float:left">
+        <div style="width:100%; float:left">
+            <b style="font-size:4vh">DANH SÁCH CỬA HÀNG</b>
+
+            @if (ViewBag.se_role_RP_score.view_act == 1)
+            {
+                @Html.ActionLink("Chi tiết layout thục tế", "ScoreReport", "StoreLayout", null, new { @class = "form-control btn-primary btnAc", @style= "margin-top: 1%" })
+            }
+        </div>
+    </div>
+
+    <hr style="width:100%;float:left;" />
+
+    <div class="text-center" style="width:100%;float:left; padding:1%">
+        <input id="txtSearch" type="text" class="form-control" style="border-radius:10px; float:right;padding-left:65px !important;" placeholder="Nhập giá trị tìm kiếm" />
+        <label style="float:right;margin-right: 5vh;transform: translateY(50%);">Tìm kiếm</label>
+    </div>
+
+
+
+
+    <table width="100%" class="table text-center">
+        <tr>
+            <td>
+                <table class="table table-striped tb_detail" border="1" style="width: 100%">
+                    <thead>
+                        <tr>
+                            <th>Mã cửa hàng</th>
+                            <th>Tên cửa hàng</th>
+                            <th>Địa chỉ</th>
+                            <th>Tỉnh/Thành</th>
+                            <th>Số lượng kệ</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var item in Model)
+                        {
+                            <tr onclick="fnShelfList('@item.storeNo')">
+                                <td>
+                                    <a onclick="fnShelfList('@item.storeNo')">@item.storeNo</a>
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.storeName)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.storeNo)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.storeNo)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.countShelf)
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <div>
+                    <div style="float:right; margin:0px !important; width:45%">
+                        @Html.PagedListPager(Model, page => Url.Action("StoreList", new { Router = ViewBag.Router, dateFill = ViewBag.dateFill, page, Size = ViewBag.pageSize, typeFill = ViewBag.typeFill, dataFill = ViewBag.dataFill, fillStore = ViewBag.fillStore, fillItem = ViewBag.fillItem }), new PagedListRenderOptions
+                        {
+                            MaximumPageNumbersToDisplay = 3,
+         DisplayLinkToFirstPage = PagedListDisplayMode.Never,
+         DisplayLinkToLastPage = PagedListDisplayMode.Never,
+         DisplayPageCountAndCurrentLocation = true
+                        })
+                    </div>
+                </div>
+            </td>
+        </tr>
+    </table>
+
+
+
+}
+
+<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
+<script type="text/javascript" src="http://ajax.cdnjs.com/ajax/libs/json2/20110223/json2.js"></script>
+<script type="text/javascript">
+
+        $(window).load(function () {
+            $('#txtSearch').val('@ViewBag.fillData');
+        });
+
+
+        $(function () {
+            $('#txtSearch').keydown(function (e) {
+                if (e.keyCode == 13) {
+                    fnPagesize();
+                }
+            });
+        });
+
+        function fnPagesize() {
+            window.location.href = "/StoreLayout/StoreList?fillData="+$('#txtSearch').val();
+        }
+
+        function fnShelfList(str_stNo) {
+            window.location.href = "/StoreLayout/ShelfList?storeNo=" + str_stNo;
+            //window.location.href = "/StoreShelf/Index?storeNo=" + str_stNo;
+        }
+
+</script>
+

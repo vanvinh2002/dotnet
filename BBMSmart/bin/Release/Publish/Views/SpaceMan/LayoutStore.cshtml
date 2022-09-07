@@ -1,0 +1,78 @@
+﻿@{
+    ViewBag.Title = "LayoutStore";
+}
+    <div>
+        <div class="div-span">
+
+            @if (((ProductAllTool.Models.SpaceMan.userRole)Session["u_Role"]).accept_act == "1" && ((ProductAllTool.Models.SpaceMan.userRole)Session["u_Role"]).controlCode == "C001")
+            {
+                @Html.ActionLink("Duyệt & Chấm trưng bày", "ShelfListScore", "SpaceMan", new { storeNo = @ViewBag.Store.Code }, new { @class = "btn btn-success" })
+            }
+            @if (((ProductAllTool.Models.SpaceMan.userRole)Session["u_Role"]).create_act == "1" && ((ProductAllTool.Models.SpaceMan.userRole)Session["u_Role"]).controlCode == "C001")
+            {
+                @Html.ActionLink("Danh sách kệ", "ShelfList", "SpaceMan", new { storeNo = @ViewBag.Store.Code }, new { @class = "btn btn-success" })
+            }
+            @Html.ActionLink("Sơ đồ quầy kệ", "LayoutStore", "SpaceMan", new { storeNo = @ViewBag.Store.Code }, new { @class = "btn btn-warning" })
+        </div>
+        <div class="div-span">
+            <div class="row">
+                <div class="col-md-3">
+                    <h3><b>Sơ đồ quầy kệ</b></h3>
+                </div>
+                <div class="col-md-9">
+                    @*<input style="" type="text" class="form-control btn-right inp" placeholder="Nhập thông tin tìm kiếm" />*@
+                </div>
+            </div>
+            <br />
+            <div class="row">               
+                <div class="col-md-3">
+                    <h3><b>Trưng bày cửa hàng</b></h3>
+                    <div class="row">
+                        <ul>
+                            <li> <a onclick="$('#txtType').val('2D');loadDiv('div_2D');" href="javascipt:void(0)">Sơ đồ mặt bằng 2D</a></li>
+                            <li> <a onclick="$('#txtType').val('3D');loadDiv('div_3D');" href="javascipt:void(0)">Phối cảnh 3D</a></li>
+                            <li> <a onclick="$('#txtType').val('SL');loadDiv('div_SL');" href="javascipt:void(0)">Sơ đồ ngành hàng</a></li>
+                            <li> <a onclick="" href="javascipt:void(0)">Hình ảnh quảng cáo</a></li>
+                        </ul>
+                    </div>
+                    <input id="txtType" type="hidden" value="2D" />
+                </div>
+                <div class="col-md-9">
+                    @foreach (var i in ViewBag.ls_render)
+                    {
+                        if (i.SL_Code == "SL")
+                        {
+                            <a style="display:none" href="@i.link" id="@i.SL_Code"><img src="https://img.icons8.com/color/144/000000/ms-excel.png"></a>
+                        }
+                        else
+                        {
+                            <div style="display:none" id="@i.SL_Code">
+                                <img src="@i.link" style="width:100%;" />
+                            </div>
+                        }
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
+<script type="text/javascript" src="http://ajax.cdnjs.com/ajax/libs/json2/20110223/json2.js"></script>
+<script type="text/javascript">
+    $(function () {
+
+        $('#txtHead').html("QUẢN LÝ TRẢI NGHIỆM");
+
+        loadDiv();
+    });
+
+    function loadDiv() {
+        //disable all image
+        $('#2D').attr("style", "display:none;");
+        $('#3D').attr("style", "display:none;");
+        $('#SL').attr("style", "display:none;");
+        //show by id
+        $('#' + $('#txtType').val()).attr("style", "display:block;");
+    }
+</script>

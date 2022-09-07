@@ -1,0 +1,402 @@
+﻿
+@{
+    ViewBag.Title = "StoreCheckList";
+}
+<div class="div-span"
+    <div class="row">
+        <div class="col-md-4">
+            @*<label style="transform: translateY(0.5em);" for="sl_func"></label>*@
+            <textarea class="form-control" style="min-width:100%;margin-top: 1.75em;" rows="1" id="txare" placeholder="Nhập từ khóa tìm kiếm"></textarea>
+        </div>
+        <div class="col-md-4">
+            <div class="row">
+                <div class="col-md-5" >
+                    <label style="transform: translateY(0.5em);" for="sl_func">Chọn bộ phận:</label>
+                    <select class="form-control" id="selTypeFill" onchange="fnLoad();">
+                        <option value="">Tất cả</option>
+                        @foreach (var i in ViewBag.ls_dep)
+                        {
+                            <option value="@i.departmentCode">@i.departmentName</option>
+                        }
+                    </select>
+                    <br />
+                </div>
+
+                <div class="col-md-3">
+                    <a href="#" class="btn btn-success button_action" onclick="fnLoad()" style="        width: 100px;
+        margin-bottom: 15px;
+        margin-top: 1.75em;
+"><i class="fa fa-search" aria-hidden="true"></i> Tìm kiếm</a>
+                </div>
+                <div class="col-md-1"> </div>
+                <div class="col-md-3">
+                    @if (((ProductAllTool.Models.SpaceMan.userRole)Session["u_Role"]).root_act == "1" && ((ProductAllTool.Models.SpaceMan.userRole)Session["u_Role"]).controlCode == "C003")
+                    {
+                        <a href="#" class="btn btn-warning button_action" onclick="fn_detail();" style="width:100px;margin-bottom:15px;margin-top: 1.75em;"><i class="fa fa-plus-circle" aria-hidden="true"></i> Tạo mới</a>
+                    }
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-4">
+            <div class="row" >
+                @Html.ActionLink("Xem Báo cáo", "requirementReport", "ScoreStore", new { storeNo = @ViewBag.Store.Code }, new { @class = "btn btn-info btn-right", @style = "margin-top: 1.75em; background-color: #5bc0de !important; " })
+                @*@Html.ActionLink("Đánh giá", "StoreCheckList", "ScoreStore", new { storeNo = @ViewBag.Store.Code }, new { @class = "btn btn-success btn-right" })*@
+            </div>
+        </div>
+
+
+    </div>
+    </div>
+
+<!--
+<div class="div-span">
+    <div class="row">
+        <div class="col-md-4">
+            <textarea class="form-control" style="min-width:100%" rows="3" id="txare" placeholder="Nhập từ khóa tìm kiếm"></textarea>
+        </div>
+        <div class="col-md-4">
+        </div>
+        <div class="col-md-4">
+            <div class="row">
+                <div class="col-md-12">
+
+                    <select class="form-control" id="selTypeFill" onchange="fnLoad();">
+                        <option value="">Tất cả</option>
+                        @foreach (var i in ViewBag.ls_dep)
+                        {
+                            <option value="@i.departmentCode">@i.departmentName</option>
+                        }
+                    </select>
+                    <br />
+                </div>
+
+                <div class="col-md-12">
+                   
+                    <a href="#" class="btn btn-success button_action" onclick="fnLoad()" style="width:200px;margin-bottom:15px;"><i class="fa fa-search" aria-hidden="true"></i> Tìm kiếm</a>
+                    
+                    @if (((ProductAllTool.Models.SpaceMan.userRole)Session["u_Role"]).root_act == "1" && ((ProductAllTool.Models.SpaceMan.userRole)Session["u_Role"]).controlCode == "C003")
+                    {
+                        <a href="#" class="btn btn-warning button_action" onclick="fn_detail();" style="width:200px;margin-bottom:15px;"><i class="fa fa-plus-circle" aria-hidden="true"></i> Tạo mới</a>
+                    }
+
+
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+-->
+
+<table id="tbl_Item" class="table table-bordered">
+    <thead>
+        <tr>
+            <th style="width:25%">
+                Mã Khối
+            </th>
+            <th style="width:25%">
+                Mã hạng mục
+            </th>
+            <th style="width:40%">
+                Tên hạng mục
+            </th>
+            <th style="width:10%">
+                Đánh giá
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+    </tbody>
+</table>
+
+
+<div class="modal fade bd-example-modal-lg" id="@string.Concat("modalDetails")" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="false">
+    <div class="modal-dialog modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <h3 style="margin:15px;" class="modal-title" id="exampleModalLongTitle">Chi tiết</h3>
+            <div class="modal-body">
+
+
+                <div class="div-span">
+
+                    <div class="row">
+                        <div class="col-md-6">
+                            <h4 id="h_dep">Khối : <b id="b_dep"></b></h4>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="form-group">
+                            @*<div class="col-md-3">
+                <label for="txtCodeN">Nhập mã mới</label>
+                <input type="text" id="txtCodeN" class="form-control" placeholder="Nhập mã hạng mục" />
+            </div>*@
+
+                            <div class="col-md-7">
+                                <label for="txtNameN">Mô tả công việc</label>
+                                <textarea style="min-width:100%" rows="3" id="txtNameN" class="form-control" placeholder="Nhập tên hạng mục"></textarea>
+                            </div>
+
+                            <div class="col-md-3">
+                                <label for="txtPoint">Điểm số</label>
+                                <input type="text" maxlength="2" id="txtPoint" class="form-control" value="0" />
+                            </div>
+
+                            <div class="col-md-2">
+                                <button id="btn_pop_Save" type="button" style="margin-top: 1.75em;" class="btn btn-warning" onclick="fn_SaveHeader()">Lưu thông tin</button>
+                            </div>
+                        </div>
+
+                        <div style="padding: 16PX !important; margin-top: 8em !important;">
+                            <table id="tbl_Detail" class="table table-striped">
+                                <thead>
+                                    <tr>
+                                        <th class="col-md-2">
+                                            Mã
+                                        </th>
+                                        <th class="col-md-8">
+                                            Tên
+                                        </th>
+                                        <th class="col-md-2">
+                                            Thao tác
+                                        </th>
+                                    </tr>
+                                </thead>
+                                <tbody></tbody>
+                            </table>
+                        </div>
+
+                    </div>
+                </div>
+
+                <div class="modal-footer">
+                    @*<button id="btn_pop_Save" type="button" class="btn btn-secondary" onclick="fn_SaveMDS('')">Lưu</button>*@
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
+<script type="text/javascript" src="http://ajax.cdnjs.com/ajax/libs/json2/20110223/json2.js"></script>
+<script type="text/javascript">
+
+    var arr_sub;
+    $(function () {
+
+        $('#txtHead').html("ĐÁNH GIÁ CHẤT LƯỢNG");
+
+        //arr_sub = @Html.Raw(Json.Encode(@ViewBag.ls_Requi));
+
+        fnLoad();
+
+    });
+
+    $("#txtPoint").on('keyup', function () {
+        var n = parseInt($(this).val().replace(/\D/g, ''), 10);
+        if (n.toLocaleString() != 'NaN') {
+            $(this).val(n.toLocaleString());
+        } else {
+            $(this).val('0');
+        }
+    });
+
+    function fnLoad() {
+
+        //if ($('#txare').val().length > 0) {
+
+
+        $("#tbl_Item > TBODY").html("");
+
+        var obj = new Object();
+
+        obj.depCode = $('#selTypeFill').val();
+        obj.fillter = $('#txare').val();
+
+        console.log(JSON.stringify(obj));
+
+
+        $.ajax({
+            type: "POST",
+            url: "/ScoreStore/getStoreCheckList",
+            data: JSON.stringify(obj),
+            contentType: "application/json; charset=utf-8",
+            dataType: "json",
+            success: function (r) {
+
+                if (r != null) {
+
+                    arr_sub = r;
+                    for (var i in r) {
+
+                        if (r[i].status == 1) {
+                            var tBody = $("#tbl_Item > TBODY")[0];
+
+                            //Add Row.
+                            var row = tBody.insertRow(-1);
+
+                            //Add Type cell
+                            cell = $(row.insertCell(-1));
+                            cell.html(r[i].departmentCode);
+
+                            //Add Type cell
+                            cell = $(row.insertCell(-1));
+                            cell.html(r[i].requirementCode);
+
+                            //Add Type cell
+                            cell = $(row.insertCell(-1));
+                            cell.html(r[i].requirementName);
+
+                            //Add Type cell
+                            cell = $(row.insertCell(-1));
+                            cell.html('<a href="#" class="btn btn-warning button_action" onclick="fnScore(\'' + r[i].requirementCode + '\')" style="width: 200px; margin-bottom: 15px; "><i class="fa fa-plus-circle" aria-hidden="true"></i> Đánh giá</a>');
+                        }
+                    }
+
+                    loadPop();
+                } else {
+                    alert("Không có dữ liệu thỏa mãn!")
+                }
+            }
+        });
+    }
+
+    function fnScore(reqNo) {
+        window.location = "/ScoreStore/requirementScore?storeNo=@ViewBag.Store.Code&requirementNo=" + reqNo;
+    }
+
+    function fn_detail() {
+
+        if ($('#selTypeFill').val() == '') {
+
+            alert("Chọn mã khối hạng mục!");
+
+        } else {
+
+            $('#exampleModalLongTitle').html("Thêm mới mô tả công việc");
+            $('#b_dep').html($('#selTypeFill').val() + '-' + $('#selTypeFill option:selected').text());
+
+            $('#modalDetails').modal('show');
+        }
+    }
+
+
+    function loadPop() {
+
+        $("#tbl_Detail > TBODY").html("");
+
+        for (var i in arr_sub) {
+
+            var tBody = $("#tbl_Detail > TBODY")[0];
+
+            //Add Row.
+            var row = tBody.insertRow(-1);
+
+            //Add Type cell
+            cell = $(row.insertCell(-1));
+            cell.html(arr_sub[i].requirementCode);
+
+            //Add Type cell
+            cell = $(row.insertCell(-1));
+            cell.html(arr_sub[i].requirementName);
+
+            //Add Type cell
+            cell = $(row.insertCell(-1));
+
+            if (arr_sub[i].status == 0) {
+                cell.html('<a href="#" class="btn btn-warning" onclick="fnAction(\'' + arr_sub[i].requirementCode + '\',\'1\')" style="width: 8em;">Áp dụng</a>');
+            } else {
+                cell.html('<a href="#" class="btn btn-warning button_action" onclick="fnAction(\'' + arr_sub[i].requirementCode + '\',\'0\')" style="width: 8em;background-color: #f0ad4e !important; ">Hủy bỏ</a>');
+            }
+
+        }
+    }
+
+    function fn_SaveHeader() {
+        if (/*$('#txtCodeN').val().length > 0 &&*/ $('#txtNameN').val().length > 0) {
+
+            //check code
+
+            $.ajax({
+                type: "POST",
+                url: "/ScoreStore/checkExistRe",
+                data: '{no:\'' + $('#txtCodeN').val() + '\'}',
+                contentType: "application/json; charset=utf-8",
+                dataType: "json",
+                success: function (r1) {
+
+                    if (r1.length > 0) {
+
+                        alert("Mã đã tồn tại, nhập mã khác!");
+
+                    } else {
+
+                        var obj = new Object();
+
+                        obj.departmentCode = $('#selTypeFill').val();
+                        //obj.requirementCode = $('#txtCodeN').val();
+                        obj.requirementCode = ' ';
+                        obj.requirementName = $('#txtNameN').val();
+                        obj.points = $('#txtPoint').val();
+
+                        $.ajax({
+                            type: "POST",
+                            url: "/ScoreStore/addRequirementHeader",
+                            data: JSON.stringify(obj),
+                            contentType: "application/json; charset=utf-8",
+                            dataType: "json",
+                            success: function (r) {
+
+                                $('#txtCodeN').val('');
+                                $('#txtNameN').val('');
+                                $('#txtPoint').val('0');
+
+                                $('#modalDetails').modal('hide');
+
+                                if (r.length > 0) {
+                                    alert("Thêm thành công!");
+
+                                    fnLoad();
+
+                                } else {
+                                    alert("Có lỗi sảy ra thử lại sau!");
+                                }
+                            }
+                        });
+                    }
+                }
+            });
+
+        } else {
+            alert("Nhập đủ thông tin");
+        }
+    }
+
+    function fnAction(strReq, type) {
+        var obj = new Object();
+
+        obj.requirementCode = strReq;
+        obj.status = type;
+
+        $.ajax({
+            type: "POST",
+            url: "/ScoreStore/addRequirementHeader",
+            data: JSON.stringify(obj),
+            contentType: "application/json; charset=utf-8",
+            dataType: "json",
+            success: function (r) {
+
+                if (r.length > 0) {
+                    fnLoad();
+                } else {
+                    alert("Có lỗi sảy ra thử lại sau!");
+                }
+            }
+        });
+    }
+
+</script>
+

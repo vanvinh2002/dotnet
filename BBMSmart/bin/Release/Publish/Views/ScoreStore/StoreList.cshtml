@@ -1,0 +1,126 @@
+﻿
+@{
+    ViewBag.Title = "StoreList";
+}
+
+<div>
+    <div class="div-span">
+        <div class="row">
+            <div class="col-md-4">
+                <h3 class="title_01"><b>Danh sách cửa hàng</b></h3>
+            </div>
+            <div class="col-md-8">
+                <input id="txtSearch" type="text" class="form-control btn-right inp" placeholder="Nhập thông tin tìm kiếm" />
+            </div>
+        </div>
+        <div>
+            <div class="row">
+                <div class="col-md-3">
+                    <div>
+                        <p for="province">Tỉnh/ Thành phố</p>
+                        <input list="provinces" name="province" id="province" placeholder="Chọn" class="form-control" onchange="fillStore()">
+
+                        <datalist id="provinces">
+                            @foreach (var i in ViewBag.ls_ProVince)
+                            {
+                                <option value="@i.provinceCode - @i.provinceName" />
+                            }
+                        </datalist>
+                    </div>
+                </div>
+                <div class="col-md-9">
+                    <div>
+                        <table id="tblReceivables" class="table table-bordered">
+                            <thead>
+                                <tr>
+                                    <th class="col-md-4">Mã cửa hàng</th>
+                                    <th class="col-md-8">Địa chỉ</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach (var it in ViewBag.ls_Store)
+                                {
+                                    <tr onclick="fnDetail('@it.Code')">
+                                        <td>@it.Code</td>
+                                        <td>@it.Name</td>
+                                    </tr>
+                                }
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
+<script type="text/javascript" src="http://ajax.cdnjs.com/ajax/libs/json2/20110223/json2.js"></script>
+<script type="text/javascript">
+
+    $(function () {
+
+        $('#txtHead').html("ĐÁNH GIÁ CHẤT LƯỢNG");
+
+
+        $('#txtSearch').keydown(function (e) {
+            if (e.keyCode == 13) {
+                fillStore();
+            }
+        });
+    });
+
+    function fillStore() {
+        $("#tblReceivables > TBODY").html("");
+
+            $.ajax({
+                type: "POST",
+                url: "/ScoreStore/getlistStore",
+                data: '{province:"' + $('#province').val() + '",fillter:"' + $('#txtSearch').val() + '"}',
+                contentType: "application/json; charset=utf-8",
+                dataType: "json",
+                success: function (r) {
+
+                    if (r.length > 4) {
+
+                        var rt = JSON.parse(r);
+
+                        for (i in rt) {
+
+                            var tBody = $("#tblReceivables > TBODY")[0];
+
+                            //Add Row.
+                            var row = tBody.insertRow(-1);
+                            row.setAttribute("onclick", "fnDetail('" + rt[i].Code + "')");
+
+                            //Add Type cell
+                            cell = $(row.insertCell(-1));
+                            cell.html(rt[i].Code);
+
+                            //Add Type cell
+                            cell = $(row.insertCell(-1));
+                            cell.html(rt[i].Name);
+
+                        }
+
+                    }
+                }
+            });
+    }
+
+    function fnDetail(str_shlNo) {
+
+        @*if (@is_root== 1) {
+            window.location.href = "/SpaceMan/ShelfRoot?storeNo=" + str_shlNo;
+        } else if (@is_root== 2) {
+            window.location.href = "/SpaceMan/ShelfListScore?storeNo=" + str_shlNo;
+        }else {*@
+            window.location.href = "/ScoreStore/StoreCheckList?storeNo=" + str_shlNo;
+        //}
+
+    }
+
+
+</script>
+

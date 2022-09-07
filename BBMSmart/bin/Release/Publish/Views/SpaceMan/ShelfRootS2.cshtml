@@ -1,0 +1,590 @@
+﻿
+@{
+    ViewBag.Title = "ShelfRootS2";
+}
+
+    <div style="width:100%; float:left;">
+        <div class="div-span">
+            @if (((ProductAllTool.Models.SpaceMan.userRole)Session["u_Role"]).accept_act == "1" && ((ProductAllTool.Models.SpaceMan.userRole)Session["u_Role"]).controlCode == "C001")
+            {
+                @Html.ActionLink("Duyệt & Chấm trưng bày", "ShelfListScore", "SpaceMan", new { storeNo = ViewBag.shelf.storeNo }, new { @class = "btn btn-info btn-right" })
+                @Html.ActionLink("Sơ đồ quầy kệ", "LayoutStore", "SpaceMan", new { storeNo = ViewBag.shelf.storeNo }, new { @class = "btn btn-success btn-right" })
+            }
+
+            @if (((ProductAllTool.Models.SpaceMan.userRole)Session["u_Role"]).create_act == "1" && ((ProductAllTool.Models.SpaceMan.userRole)Session["u_Role"]).controlCode == "C001")
+            {
+                @Html.ActionLink("Danh sách kệ", "ShelfList", "SpaceMan", new { storeNo = ViewBag.shelf.storeNo }, new { @class = "btn btn-info btn-right" })
+                @Html.ActionLink("Sơ đồ quầy kệ", "LayoutStore", "SpaceMan", new { storeNo = ViewBag.shelf.storeNo }, new { @class = "btn btn-success btn-right" })
+
+            }
+            @if (((ProductAllTool.Models.SpaceMan.userRole)Session["u_Role"]).root_act == "1" && ((ProductAllTool.Models.SpaceMan.userRole)Session["u_Role"]).controlCode == "C001")
+            {
+                @Html.ActionLink("Danh sách cửa hàng", "StoreList", "SpaceMan", new { storeNo = ViewBag.shelf.storeNo }, new { @class = "btn btn-info btn-right" })
+
+                @Html.ActionLink("Báo cáo tổng hợp ", "SpaceManReport", "SpaceMan", new { storeNo = ViewBag.shelf.storeNo }, new { @class = "btn btn-success btn-right" })
+            }
+        </div>
+
+        <div class="div-span">
+            <div class="row">
+                <div class="col-md-3">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <h3 class="title_01"><b>Danh sách kệ</b></h3>
+                        </div>
+                    </div>
+                    <div class="btn-left">
+
+                        <ul>
+                            <li><a onclick="window.location.href = '/SpaceMan/ShelfRoot?storeNo=@ViewBag.shelf.storeNo'" href="#">Cần trưng bày mới</a></li>
+                            <li><a onclick="$('#txtType').val('2D');loadDiv('div_2D');" href="#">Sơ đồ mặt 2D</a></li>
+                            <li><a onclick="$('#txtType').val('3D');loadDiv('div_3D');" href="#">Phối cảnh 3D</a></li>
+                            <li><a onclick="$('#txtType').val('SL');loadDiv('div_SL');" href="#">Sơ đồ ngành hàng</a></li>
+                            <li><a onclick="" href="#">Hình ảnh quảng cáo</a></li>
+                        </ul>
+                    </div>
+
+                    <input id="txtType" type="hidden" value="SI" />
+                </div>
+                <div class="col-md-9">
+                    <div class="row" id="ShelfList">
+                        <h3>@ViewBag.shelf.shelfCode - @ViewBag.shelf.subCode : @ViewBag.shelf.Group_Name</h3>
+                        <div class="col-md-8">
+                            <input type="hidden" id="txt_srcImg_SI" />
+                            <img id="thum_img_SI" src="~/Image/no-image.jpg" style="width:100%;min-height:200px" />
+                            <!--<a id="real_img_SI" data-toggle="modal" onclick="fn_detail('');" data-target="#modalDetails">Ảnh thực tế</a>-->
+                        </div>
+                        <div class="col-md-4">
+                            <form id="upload" enctype="multipart/form-data" action="@Url.Action("uploadImg", "SpaceMan")" method="POST">
+                                <input type="file" style="width: 0.1px;height: 0.1px;opacity: 0;overflow: hidden;position: absolute;z-index: -1;" name="fileUpload" id="fileUpload" class="inputfile">
+                                <label class="btn btn-warning" for="fileUpload" style="width: 100%;margin-bottom:20px;"><i class="fa fa-file-image-o" aria-hidden="true"></i> Ảnh kệ mẫu mới</label>
+                            </form>
+                            @*<label class="btn-left" id="img_link_SI"></label>
+                            <br />
+                            <br />
+                            <br />
+                            <br />
+                            <br />*@
+                            @* end img *@
+                            @* for file *@
+
+                            <input type="hidden" id="txt_srcFile_SI" />
+                            <form id="ExcelUpload2">
+                                <input type="file" style="width: 0.1px;height: 0.1px;opacity: 0;overflow: hidden;position: absolute;z-index: -1;" id="ExcelFileUpload2" class="inputfile">
+                                <label class="btn btn-primary" for="ExcelFileUpload2" style="width: 100%;margin-bottom:20px;"><i class="fa fa-file-excel-o" aria-hidden="true"></i> Tải file</label>
+                                <span style="color:red;font:bolder;float:left; visibility:hidden" id="fileErrorMessage2"></span>
+                            </form>
+                            <label class="btn-left" id="file_link_SI"></label>
+                            @* end file *@
+                            <input type="button" class="btn btn-success" value="Lưu" onclick="fnSaveItemRoot();"  style="width: 100%;margin-bottom:20px;"/>
+                        </div>
+                        
+                        <div style="width:100%; float:left">
+                            <label style="background-color:black; height:2px; min-width:100%"></label>
+                            <div>Gần đây</div>
+
+                            @foreach (var ii in ViewBag.ls_his_imgRoot)
+                            {
+                                <div class="div-shelf">
+                                    <img src="@ii.img_root" style="width:100%" />
+                                    <b>@ii.createdDate</b>
+                                </div>
+                            }
+                        </div>
+
+                    </div>
+
+                    <div style="width:100%; float:left;display:none;" id="div_2D">
+                        <h3>Mặt bằng</h3>
+                        <div class="col75">
+                            <input type="hidden" id="txt_srcImg_2D" />
+
+                            <img id="thum_img_2D" src="~/Content/images/bg-01.jpg" style="width:100%;min-height:200px" />
+
+                            <a id="real_img_2D" data-toggle="modal" onclick="fn_detail('');" data-target="#modalDetails">Ảnh thực tế</a>
+                        </div>
+                        <div class="col25">
+                            <form id="upload" enctype="multipart/form-data" action="@Url.Action("uploadImg", "SpaceMan")" method="POST">
+                                <input type="file" style="width: 0.1px;height: 0.1px;opacity: 0;overflow: hidden;position: absolute;z-index: -1;" name="fileUpload" id="fileUpload" class="inputfile">
+
+                                <label class="form-control btn-primary btn-left text-center" for="fileUpload">Ảnh mặt bằng mới</label>
+                            </form>
+
+                            <label class="btn-left" id="img_link_2D"></label>
+                            <br />
+                            <br />
+                            <br />
+                            <br />
+                            <br />
+
+                            <input type="button" class="form-control btn-primary btn-left" value="Lưu ảnh" onclick="fnSave('2D');" />
+                        </div>
+                        <div style="width:100%; float:left" id="sub_2D">
+                            <label style="background-color:black; height:2px; min-width:100%"></label>
+                            <div>Trước</div>
+
+                        </div>
+                    </div>
+
+                    <div style="width:100%; float:left;display:none;" id="div_3D">
+                        <h3>Phối cảnh</h3>
+
+                        <div class="col75">
+                            <input type="hidden" id="txt_srcImg_3D" />
+
+                            <img id="thum_img_3D" src="~/Content/images/bg-01.jpg" style="width:100%;min-height:200px" />
+
+                            <a id="real_img_3D" data-toggle="modal" onclick="fn_detail('');" data-target="#modalDetails">Ảnh thực tế</a>
+                        </div>
+                        <div class="col25">
+                            <form id="upload" enctype="multipart/form-data" action="@Url.Action("uploadImg", "SpaceMan")" method="POST">
+                                <input type="file" style="width: 0.1px;height: 0.1px;opacity: 0;overflow: hidden;position: absolute;z-index: -1;" name="fileUpload" id="fileUpload" class="inputfile">
+
+                                <label class="form-control btn-primary btn-left text-center" for="fileUpload">Ảnh phối cảnh mới</label>
+                            </form>
+
+                            <label class="btn-left" id="img_link_3D"></label>
+                            <br />
+                            <br />
+                            <br />
+                            <br />
+                            <br />
+
+                            <input type="button" class="form-control btn-primary btn-left" value="Lưu ảnh" onclick="fnSave('3D');" />
+                        </div>
+
+                        <div style="width:100%; float:left" id="sub_3D">
+                            <label style="background-color:black; height:2px; min-width:100%"></label>
+                            <div>Trước</div>
+
+                        </div>
+                    </div>
+
+                    <div style="width:100%; float:left;display:none" id="div_SL">
+                        <h3>Sơ đồ ngành hàng</h3>
+
+                        <div class="col75">
+                            <input type="hidden" id="txt_srcImg_SL" />
+
+                            <img id="thum_img_SL" src="~/Content/images/bg-01.jpg" style="width:100%;min-height:200px" />
+                        </div>
+                        <div class="col25">
+
+                            <form id="ExcelUpload">
+                                <input type="file" style="width: 0.1px;height: 0.1px;opacity: 0;overflow: hidden;position: absolute;z-index: -1;" id="ExcelFileUpload" class="inputfile">
+                                <label class="btn btn-info" for="ExcelFileUpload">Tải file</label>
+                                <span style="color:red;font:bolder;float:left; visibility:hidden" id="fileErrorMessage"></span>
+                                <button type="button" class="btn btn-info" style="visibility:hidden" onclick="UploadExcel()">Sơ đồ ngành hàng mới</button>
+                            </form>
+
+                            <label class="btn-left" id="img_link_SL"></label>
+                            <br />
+                            <br />
+                            <br />
+                            <br />
+                            <br />
+
+                            <input type="button" class="form-control btn-primary btn-left" value="Lưu" onclick="fnSave('SL');" />
+                        </div>
+
+                        <div style="width:100%; float:left" id="sub_SL">
+                            <label style="background-color:black; height:2px; min-width:100%"></label>
+                            <div>Trước</div>
+
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade bd-example-modal-lg" id="@string.Concat("modalDetails")" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="false">
+        <div class="modal-dialog modal-dialog modal-lg" role="document">
+            <div class="modal-content">
+                <h3 style="margin:15px;" class="modal-title" id="exampleModalLongTitle">Chi tiết</h3>
+                <div class="modal-body">
+                    <img id="imgsrc" style="width:100%" src="" />
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Đóng</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
+<script type="text/javascript" src="http://ajax.cdnjs.com/ajax/libs/json2/20110223/json2.js"></script>
+<script type="text/javascript">
+
+
+    $(function () {
+
+        $('#txtHead').html("QUẢN LÝ TRẢI NGHIỆM");
+
+        $('#txtSearch').keydown(function (e) {
+            if (e.keyCode == 13) {
+                fillShelf();
+            }
+        });
+
+        $("#fileUpload").change(function () {
+            //fileErrorMessage.innerHTML = '';
+            var vtrUpload = $("#fileUpload").val().toLowerCase();
+            var regexVTRUpload = new RegExp("(.*?)\.(png|jpg|jpeg)$");
+            if (!(regexVTRUpload.test(vtrUpload))) {
+                $("#fileUpload").val("");
+
+                alert("file false");
+            } else {
+                UploadFile();
+            }
+        });
+
+
+        $("#ExcelFileUpload").change(function () {
+            fileErrorMessage.innerHTML = '';
+            var vtrUpload = $("#ExcelFileUpload").val().toLowerCase();
+            var regexVTRUpload = new RegExp("(.*?)\.(xlsx|xls)$");
+            if (!(regexVTRUpload.test(vtrUpload))) {
+                $("#ExcelFileUpload").val("");
+                //fileErrorMessage.innerHTML = 'Please select .xls or .xlsx files';
+                alert("file false");
+            } else {
+                //alert("2222222222222222");
+                UploadExcel();
+            }
+        });
+
+        $("#ExcelFileUpload2").change(function () {
+            fileErrorMessage2.innerHTML = '';
+            var vtrUpload = $("#ExcelFileUpload2").val().toLowerCase();
+            var regexVTRUpload = new RegExp("(.*?)\.(xlsx|xls)$");
+            if (!(regexVTRUpload.test(vtrUpload))) {
+                $("#ExcelFileUpload2").val("");
+                //fileErrorMessage.innerHTML = 'Please select .xls or .xlsx files';
+                alert("file false");
+            } else {
+                //alert("2222222222222222");
+                UploadExcel2();
+            }
+        });
+
+
+        var array = @Html.Raw(Json.Encode(@ViewBag.ls_store_lay));
+        for (var i = 0; i < array.length; i++) {
+            console.log(array[i].SL_Code);
+
+            var arr = array[i].link.split('/');
+
+            if (array[i].SL_Code == 'SL') {
+                document.getElementById('sub_' + array[i].SL_Code).innerHTML += '<div class="div-shelf"><a class="form-control btn-primary" href = "' + array[i].link + '">' + arr[arr.length - 1]+'</a> </div>';
+            } else {
+                document.getElementById('sub_' + array[i].SL_Code).innerHTML += '<div class="div-shelf"><img src = "' + array[i].link + '" style ="width:100%;"/><b>' + arr[arr.length-1] + '</b></div>';
+            }
+
+        }
+
+    });
+
+    function loadSub(str_IdRoot, str_IdSub, typeFill) {
+
+        //(string , string fillter)
+
+        $.ajax({
+            type: "POST",
+            url: "/SpaceMan/getSubSelect",
+            data: '{type:"' + typeFill + '",fillter:"' + $('#' + str_IdRoot).val()+'"}',
+            contentType: "application/json; charset=utf-8",
+            dataType: "json",
+            success: function (r) {
+
+                console.log(r);
+                var bode = document.getElementById(str_IdSub);
+                bode.innerHTML = '';
+
+                if (r.length > 4) {
+
+                    var rt = JSON.parse(r);
+
+                    for (i in rt) {
+
+                        option = document.createElement('option');
+                        option.value = rt[i];
+                        bode.appendChild(option);
+
+                    }
+
+                }
+            }
+        });
+
+        if (str_IdRoot == 'division') {
+            $('#category').val('');
+
+            $('#group').val('');
+
+            $('#function').val('');
+
+            $('#shelfType').val('');
+        }
+
+        if (str_IdRoot == 'category') {
+
+            $('#group').val('');
+
+            $('#function').val('');
+
+            $('#shelfType').val('');
+        }
+
+        if (str_IdRoot == 'group') {
+
+            $('#function').val('');
+
+            $('#shelfType').val('');
+        }
+
+        if (str_IdRoot == 'function') {
+
+            $('#shelfType').val('');
+        }
+
+
+
+        fillShelf();
+    }
+
+    function loadDiv(strId) {
+
+        //disable all div
+        $('#ShelfList').attr("style", "display:none;");
+        $('#div_2D').attr("style", "display:none;");
+        $('#div_3D').attr("style", "display:none;");
+        $('#div_SL').attr("style", "display:none;");
+
+        //disable all img
+        $('#txt_srcImg_' + $('#txtType').val()).val('');
+
+        $('#thum_img_' + $('#txtType').val()).attr("src", '');
+
+        $('#real_img_' + $('#txtType').val()).attr("onclick", "fn_detail('')");
+
+        $('#img_link_' + $('#txtType').val()).html('');
+
+        //show by ID
+        $('#' + strId).attr("style", "width:100%; float:left; display:block;");
+
+    }
+
+
+    //import image
+    function UploadFile() {
+            var data = new FormData();
+            var files = $("#fileUpload").get(0).files;
+            if (files.length > 0) {
+                data.append("MyImages", files[0]);
+            }
+
+            $.ajax({
+                url: "/SpaceMan/uploadImg",
+                type: "POST",
+                processData: false,
+                contentType: false,
+                data: data,
+                success: function (data) {
+
+                    console.log(data);
+
+                    //var sub = JSON.parse(data);
+                    console.log(data.link);
+
+                    if (data.code == 0) {
+                        img_link = data.link;
+                        $('#txt_srcImg_' + $('#txtType').val()).val(data.link);
+
+                        $('#thum_img_' + $('#txtType').val()).attr("src", data.link);
+
+                        $('#real_img_' + $('#txtType').val()).attr("onclick", "fn_detail('" + data.link + "')");
+
+                        $('#img_link_' + $('#txtType').val()).html(data.link);
+                    }
+
+                },
+                error: function (er) {
+                    alert("Thiết bị không hỗ trợ up ảnh từ camera. Chọn file từ bộ nhớ thiết bị !");
+                }
+
+            });
+
+    }
+
+    function fn_detail(str_img) {
+            $('#imgsrc').attr("src", str_img);
+        }
+
+    //End import image
+
+    //import excel file
+
+    function UploadExcel()
+    {
+        var formdata = new FormData(); //FormData object
+        var fileInput = document.getElementById('ExcelFileUpload');
+        var filename = fileInput.files[0].name
+        var extension = filename.split('.').pop().toUpperCase();
+
+        for (i = 0; i < fileInput.files.length; i++) {
+            formdata.append(fileInput.files[i].name, fileInput.files[i]);
+        }
+
+        $.ajax({
+            url: '@Url.Action("uploadExcel", "SpaceMan")', //ReadExcelFile is a Action Name and ExcelUpload is Controller name
+            type: 'POST',
+            data: formdata, // Posting the uploaded excel file to controller
+            //async: true,
+            success: function (data) {
+
+                console.log(data);
+
+                //var sub = JSON.parse(data);
+                console.log(data.link);
+
+                if (data.code == 0) {
+                    img_link = data.link;
+                    $('#txt_srcImg_' + $('#txtType').val()).val(data.link);
+
+                    //$('#thum_img_' + $('#txtType').val()).attr("src", data.link);
+
+                    //$('#real_img_' + $('#txtType').val()).attr("onclick", "fn_detail('" + data.link + "')");
+
+                    $('#img_link_' + $('#txtType').val()).html(data.link);
+                }
+            },
+            cache: false,
+            contentType: false,
+            processData: false
+        });
+    }
+
+    function UploadExcel2()
+    {
+        var formdata = new FormData(); //FormData object
+        var fileInput = document.getElementById('ExcelFileUpload2');
+        var filename = fileInput.files[0].name
+        var extension = filename.split('.').pop().toUpperCase();
+
+        for (i = 0; i < fileInput.files.length; i++) {
+            formdata.append(fileInput.files[i].name, fileInput.files[i]);
+        }
+
+        $.ajax({
+            url: '@Url.Action("ReadExcelFile", "SpaceMan")', //ReadExcelFile is a Action Name and ExcelUpload is Controller name
+            type: 'POST',
+            data: formdata, // Posting the uploaded excel file to controller
+            //async: true,
+            success: function (data) {
+
+                console.log(data);
+
+                //var sub = JSON.parse(data);
+                console.log(data.link);
+
+                if (data.code == 0) {
+                    img_link = data.link;
+
+                    $('#txt_srcFile_SI').val(data.link);
+
+                    $('#file_link_SI').html(data.link);
+                }
+            },
+            cache: false,
+            contentType: false,
+            processData: false
+        });
+    }
+
+    //End import excel
+
+    function fnSave(strCode) {
+
+        if ($('#txt_srcImg_' + $('#txtType').val()).val().length > 0) {
+
+            var it_pdt = new Object();
+
+            it_pdt.storeNo = '@ViewBag.shelf.storeNo';
+            it_pdt.SL_Code = strCode;
+            it_pdt.link = $('#txt_srcImg_' + $('#txtType').val()).val();
+
+                $.ajax({
+                    type: "POST",
+                    url: "/SpaceMan/addStoreLayout",
+                    data: JSON.stringify(it_pdt),
+                    contentType: "application/json; charset=utf-8",
+                    dataType: "json",
+                    success: function (r1) {
+                        //var sub = JSON.parse(r1);
+                        if (r1.length > 0) {
+                            window.location.href = '/SpaceMan/ShelfRoot?storeNo=@ViewBag.shelf.storeNo';
+                        } else {
+                            alert("Có lỗi xảy ra thử lại sau!");
+                        }
+                    }
+                });
+            } else {
+                alert("Chưa đăng ảnh thực tế tại cửa hàng!");
+            }
+    }
+
+    function fnSaveItemRoot() {
+
+        var obj = new Object();
+        obj.storeNo = '@ViewBag.shelf.storeNo';
+        obj.shelfCode = '@ViewBag.shelf.shelfCode';
+        obj.subCode = '@ViewBag.shelf.subCode';
+
+        if ($('#txt_srcImg_SI').val().length > 0) {
+
+            obj.img_root = $('#txt_srcImg_SI').val();
+
+
+                $.ajax({
+                    type: "POST",
+                    url: "/SpaceMan/saveImageRoot",
+                    data: JSON.stringify(obj),
+                    contentType: "application/json; charset=utf-8",
+                    dataType: "json",
+                    success: function (r1) {
+                        //var sub = JSON.parse(r1);
+                        if (r1.length > 0) {
+                            window.location.href = '/SpaceMan/ShelfRoot?storeNo=@ViewBag.shelf.storeNo';
+                        } else {
+                            alert("Có lỗi xảy ra thử lại sau!");
+                        }
+                    }
+                });
+
+        } else {
+            if ($('#txt_srcFile_SI').val().length > 0) {
+                $.ajax({
+                    type: "POST",
+                    url: "/SpaceMan/saveItemRoot",
+                    data: JSON.stringify(obj),
+                    contentType: "application/json; charset=utf-8",
+                    dataType: "json",
+                    success: function (r1) {
+                        //var sub = JSON.parse(r1);
+                        if (r1.length > 0) {
+                            window.location.href = '/SpaceMan/ShelfRoot?storeNo=@ViewBag.shelf.storeNo';
+                        } else {
+                            alert("Có lỗi xảy ra thử lại sau!");
+                        }
+                    }
+                });
+            } else {
+                alert("Chọn nhập ảnh mẫu hoặc file sản phẩm");
+            }
+        }
+    }
+</script>
+

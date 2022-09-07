@@ -1,0 +1,272 @@
+﻿
+@{
+    ViewBag.Title = "ShelfScore";
+}
+<style>
+    .btn-success{
+        margin-right: 10px;
+    }
+</style>
+    <div>
+        <div class="div-span">
+            @if (((ProductAllTool.Models.SpaceMan.userRole)Session["u_Role"]).accept_act == "1" && ((ProductAllTool.Models.SpaceMan.userRole)Session["u_Role"]).controlCode == "C001")
+            {
+                @Html.ActionLink("Duyệt & Chấm trưng bày", "ShelfListScore", "SpaceMan", new { storeNo = @ViewBag.Store.Code }, new { @class = "btn btn-success" })
+
+                @Html.ActionLink("Sơ đồ quầy kệ", "LayoutStore", "SpaceMan", new { storeNo = @ViewBag.Store.Code }, new { @class = "btn btn-warning" })
+            }
+
+            @if (((ProductAllTool.Models.SpaceMan.userRole)Session["u_Role"]).create_act == "1" && ((ProductAllTool.Models.SpaceMan.userRole)Session["u_Role"]).controlCode == "C001")
+            {
+                @Html.ActionLink("Danh sách kệ", "ShelfList", "SpaceMan", new { storeNo = @ViewBag.Store.Code }, new { @class = "btn btn-success" })
+
+                @Html.ActionLink("Sơ đồ quầy kệ", "LayoutStore", "SpaceMan", new { storeNo = @ViewBag.Store.Code }, new { @class = "btn btn-warning" })
+            }
+            @if (((ProductAllTool.Models.SpaceMan.userRole)Session["u_Role"]).root_act == "1" && ((ProductAllTool.Models.SpaceMan.userRole)Session["u_Role"]).controlCode == "C001")
+            {
+                @Html.ActionLink("Danh sách cửa hàng", "StoreList", "SpaceMan", null, new { @class = "btn btn-success" })
+                @Html.ActionLink("Báo cáo tổng hợp ", "SpaceManReport", "SpaceMan", null, new { @class = "btn btn-warning" })
+            }
+        </div>
+        <div class="div-span">
+            <div class="row">
+                <div class="col-md-8">
+                    <h3><b style="float:left;">Danh sách kệ</b></h3>
+                </div>
+                <div class="col-md-4">
+                    <input id="txtSearch" type="text" class="form-control btn-right inp" onfocus="fnReset('txtSearch');" placeholder="Nhập thông tin tìm kiếm" />
+                </div>
+            </div>
+            <br />
+            <div class="row">
+                <div class="col-md-3">
+                    <a onclick="$('#txtType').val(0); fillShelf()">Duyệt trưng bày mới</a>
+                    <br />
+                    <a onclick="$('#txtType').val(2); fillShelf()">Chấm trưng bày mới</a>
+                    <br />
+                    <a onclick="$('#txtType').val(0); fillShelf()">Tất cả</a>
+
+                    <input id="txtType" type="hidden" value="0" />
+
+                    <div>
+                        <p for="division">Division</p>
+                        <input list="divisions" name="division" id="division" placeholder="Tất cả" class="form-control" onfocus="fnReset('division');" onchange="loadSub('division','categories','Category')">
+                        <datalist id="divisions">
+                            @foreach (var i in ViewBag.ls_DIV)
+                            {
+                                <option value="@i" />
+                            }
+                        </datalist>
+                    </div>
+                    <div>
+                        <p for="category">Category</p>
+                        <input list="categories" name="category" id="category" placeholder="Tất cả" class="form-control" onfocus="fnReset('category');" onchange="loadSub('category','groups','Group_Name')">
+                        <datalist id="categories">
+                            @foreach (var i in ViewBag.ls_CAT)
+                            {
+                                <option value="@i" />
+                            }
+                        </datalist>
+                    </div>
+                    <div>
+                        <p for="group">Group</p>
+                        <input list="groups" name="group" id="group" placeholder="Tất cả" class="form-control" onfocus="fnReset('group');" onchange="loadSub('group','functions','Function')">
+                        <datalist id="groups">
+                            @foreach (var i in ViewBag.ls_GROUP)
+                            {
+                                <option value="@i" />
+                            }
+                        </datalist>
+                    </div>
+                    <div>
+                        <p for="function">Function</p>
+                        <input list="functions" name="function" id="function" placeholder="Tất cả" class="form-control" onfocus="fnReset('function');" onchange="loadSub('function','shelfTypes','shelfCode')">
+                        <datalist id="functions">
+                            @foreach (var i in ViewBag.ls_FUNC)
+                            {
+                                <option value="@i" />
+                            }
+                        </datalist>
+                    </div>
+                    <div>
+                        <p for="shelfType">Loại kệ</p>
+                        <input list="shelfTypes" name="shelfType" id="shelfType" placeholder="Tất cả" class="form-control" onfocus="fnReset('shelfType');" onchange="fillShelf()">
+                        <datalist id="shelfTypes">
+                            @foreach (var i in ViewBag.ls_ShelfType)
+                            {
+                                <option value="@i" />
+                            }
+                        </datalist>
+                    </div>
+                </div>
+                <div class="col-md-9" id="divImage">
+                    @*<div class="div-shelf">
+                            <img src="~/Content/images/bg-01.jpg" style="width:100%;" />
+                            <div style="float:left">Bánh kẹo snack</div> <b style="float:right">Kệ 4T-01</b>
+                        </div>
+
+                        <div class="div-shelf">
+                            <img src="~/Content/images/bg-01.jpg" style="width:100%;" />
+                            <div style="float:left">Bánh kẹo snack</div> <b style="float:right">Kệ 4T-01</b>
+                        </div>*@
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
+<script type="text/javascript" src="http://ajax.cdnjs.com/ajax/libs/json2/20110223/json2.js"></script>
+<script type="text/javascript">
+
+    $(document).ready(function () {
+        fillShelf();
+    });
+
+
+    $(function () {
+
+        $('#txtHead').html("QUẢN LÝ TRẢI NGHIỆM");
+
+        $('#txtSearch').keydown(function (e) {
+            if (e.keyCode == 13) {
+                fillStore();
+            }
+        });
+    });
+
+    function fillShelf() {
+        var obj = new Object();
+        obj.Division = $('#division').val();
+        obj.Category = $('#category').val();
+        obj.Group_Name = $('#group').val();
+        obj.Function = $('#function').val();
+        obj.shelfCode = $('#shelfType').val();
+        obj.storeNo = '@ViewBag.Store.Code';
+        obj.imgStatus = $('#txtType').val();
+        obj.shelfName = $('#txtSearch').val();
+
+
+        document.getElementById('divImage').innerHTML = '';
+
+            $.ajax({
+                type: "POST",
+                url: "/SpaceMan/getListShelf",
+                data: JSON.stringify(obj),
+                contentType: "application/json; charset=utf-8",
+                dataType: "json",
+                success: function (r) {
+
+                    var srcImg;
+                   
+                    
+                    if (r.length > 4) {
+
+                        var rt = JSON.parse(r);
+
+                        for (i in rt) {
+                            if (rt[i].img_link.length > 0) {
+                                srcImg = rt[i].img_link;
+                            } else {
+                                srcImg = '/Image/no-image.jpg';
+                            }
+                            //document.getElementById('divImage').innerHTML += '<div class="div-shelf"><img src = "~/Content/images/bg-01.jpg" style = "width:100%;"/><div style="float:left">' + rt[i].Function + '</div> <b style="float:right">' + rt[i].shelfName + '-' + rt[i].subCode + '</b></div >';
+
+                            document.getElementById('divImage').innerHTML += '<div class="div-shelf" onclick="fnDetail(\'' + rt[i].shelfCode + '\',\'' + rt[i].subCode + '\',\'' + $('#txtType').val() + '\')"><img src = "' + srcImg + '" style = "width:100%;"/><div>' + rt[i].Group_Name + '</div> <b>' + rt[i].shelfName + '-' + rt[i].subCode + '</b></div >';
+                        }
+
+                    }
+                }
+            });
+    }
+
+    function loadSub(str_IdRoot, str_IdSub, typeFill) {
+
+        //(string , string fillter)
+
+        $.ajax({
+            type: "POST",
+            url: "/SpaceMan/getSubSelect",
+            data: '{type:"' + typeFill + '",fillter:"' + $('#' + str_IdRoot).val()+'"}',
+            contentType: "application/json; charset=utf-8",
+            dataType: "json",
+            success: function (r) {
+
+                console.log(r);
+                var bode = document.getElementById(str_IdSub);
+                bode.innerHTML = '';
+
+                if (r.length > 4) {
+
+                    var rt = JSON.parse(r);
+
+                    for (i in rt) {
+
+                        option = document.createElement('option');
+                        option.value = rt[i];
+                        bode.appendChild(option);
+
+                    }
+
+                }
+            }
+        });
+
+        if (str_IdRoot == 'division') {
+            $('#category').val('');
+
+            $('#group').val('');
+
+            $('#function').val('');
+
+            $('#shelfType').val('');
+        }
+
+        if (str_IdRoot == 'category') {
+
+            $('#group').val('');
+
+            $('#function').val('');
+
+            $('#shelfType').val('');
+        }
+
+        if (str_IdRoot == 'group') {
+
+            $('#function').val('');
+
+            $('#shelfType').val('');
+        }
+
+        if (str_IdRoot == 'function') {
+
+            $('#shelfType').val('');
+        }
+
+
+
+        fillShelf();
+    }
+
+    function fnDetail(str_shlNo, str_shlSub, type) {
+        if (type == '0') {
+            window.location.href = "/SpaceMan/ShelfDetail?storeNo=@ViewBag.Store.Code&shelfCode="+str_shlNo+"&subCode="+str_shlSub;
+        } else {
+            window.location.href = "/SpaceMan/ShelfScore?storeNo=@ViewBag.Store.Code&shelfCode="+str_shlNo+"&subCode="+str_shlSub;
+        }
+
+    }
+
+    function fnReset(str_id) {
+        if ($('#' + str_id).val().length > 0) {
+
+            $('#' + str_id).val('');
+
+            $('#' + str_id).trigger("change");
+        }
+    }
+
+
+</script>
+

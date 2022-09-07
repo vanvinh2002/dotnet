@@ -1,0 +1,311 @@
+﻿
+@{
+    ViewBag.Title = "SpaceManReport";
+}
+    <div class="row-01">
+        <div class="col-md-8">
+
+        </div>
+        <div class="col-md-4">
+            <div class="div-span">
+                @if (((ProductAllTool.Models.SpaceMan.userRole)Session["u_Role"]).root_act == "1" && ((ProductAllTool.Models.SpaceMan.userRole)Session["u_Role"]).controlCode == "C001")
+                {
+                    <a class="btn btn-info" href="/SpaceMan/SpaceManReport"><i class="fa fa-file-text" aria-hidden="true"></i> Báo cáo tổng hợp </a>
+                    <a class="btn btn-success" href="/SpaceMan/StoreList"><i class="fa fa-list-alt" aria-hidden="true"></i> Danh sách cửa hàng</a>
+                }
+            </div>
+        </div>
+       
+        <div class="div-span">
+            <div class="row">
+                <div class="col-md-4">
+                    <h3 class="title_01"><b>Báo cáo tổng hợp</b></h3>
+                </div>
+                <div class="col-md-8">
+                    <input id="txtSearch" type="text" class="form-control btn-right inp" placeholder="Nhập thông tin tìm kiếm" />
+                </div>
+            </div>
+            
+            <div class="wp_table row">
+                <div class="col-md-4">
+                  
+                    <div class="btn-left">
+                        <ul>
+                            <li><a href="#" onclick="$('#txtType').val('New'); loadDiv(); fillShelf()">Trưng bày mới</a></li>
+                            <li><a href="#" onclick="$('#txtType').val('FQ'); loadDiv(); fillShelf()">Tần xuất chấm trưng bày</a></li>
+                        </ul>
+                    </div>
+
+                    <input id="txtType" type="hidden" value="New" />
+                </div>
+                <div class="col-md-8">
+
+                    <div style="width:100%; display:none;" id="div_New">
+                        <div>
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <p for="province">Tỉnh / thành phố</p>
+                                    <input list="provinces" name="province" id="province" placeholder="Tất cả" class="form-control" onfocus="fnReset('province')" onchange="loadTable()">
+                                    <datalist id="provinces">
+                                        @foreach (var i in ViewBag.ls_ProVince)
+                                        {
+                                            <option value="@i.provinceCode-@i.provinceName" />
+                                        }
+                                    </datalist>
+                                </div>
+                                <div class="col-md-4">
+                                    <p for="fromDate">Từ ngày</p>
+                                    <input type="date" name="fromDate" id="fromDate" class="form-control" onchange="loadTable()">
+                                </div>
+                                <div class="col-md-4">
+                                    <p for="toDate">Đến ngày</p>
+                                    <input type="date" name="toDate" id="toDate" class="form-control" onchange="loadTable()">
+                                </div>
+                            </div>
+
+                            <div style="margin-top:20px;">
+
+                                <table id="tbl_RP_New" class="table table-bordered">
+                                    <thead>
+                                        <tr>
+                                            <th scope="col">Mã cửa hàng</th>
+                                            <th scope="col">Số lượng kệ cần trưng bày</th>
+                                            <th scope="col">Số lượng kệ được duyệt</th>
+                                            <th scope="col">Tỉ lệ hoàn thành trưng bày</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                    </tbody>
+                                </table>
+                            </div>
+
+                        </div>
+
+
+                    </div>
+
+                    <div style="display:none;" id="div_FQ">
+                        <div>
+
+                            <div>
+                              
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <p for="activity">Chức vụ</p>
+                                        <input list="activity_s" name="activity" id="activity" placeholder="Tất cả" class="form-control" onfocus="fnReset('activity')" onchange="loadTable()">
+                                        <datalist id="activity_s">
+                                            @foreach (var i in ViewBag.ls_position)
+                                            {
+                                                <option value="@i" />
+                                            }
+                                        </datalist>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <p for="month">Tháng</p>
+                                        <input list="month_s" name="month" id="month" placeholder="Chọn" class="form-control"  onfocus="fnReset('month')" onchange="loadTable()">
+                                        <datalist id="month_s">
+                                            <option value="01" />
+                                            <option value="02" />
+                                            <option value="03" />
+                                            <option value="04" />
+                                            <option value="05" />
+                                            <option value="06" />
+                                            <option value="07" />
+                                            <option value="08" />
+                                            <option value="09" />
+                                            <option value="10" />
+                                            <option value="11" />
+                                            <option value="12" />
+                                        </datalist>
+                                    </div>
+                                </div>
+
+                            </div>
+
+                            <div style="margin-top:20px;">
+                                <table id="tbl_RP_FQ"class="table table-bordered">
+                                    <thead>
+                                        <tr>
+                                            <th style="width:25%">Tên nhân viên</th>
+                                            <th style="width:25%">Chức vụ</th>
+                                            <th style="width:25%">Số lượng kệ đã chấm trong tháng</th>
+                                            <th style="width:25%">Tần suất chấm trưng bày mới</th>
+                                        </tr>
+                                    </thead>
+
+                                    <tbody>
+                                    </tbody>
+                                </table>
+                            </div>
+
+                        </div>
+
+
+                    </div>
+
+
+
+
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade bd-example-modal-lg" id="@string.Concat("modalDetails")" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="false">
+        <div class="modal-dialog modal-dialog modal-lg" role="document">
+            <div class="modal-content">
+                <h3 style="margin:15px;" class="modal-title" id="exampleModalLongTitle">Chi tiết</h3>
+                <div class="modal-body">
+                    <img id="imgsrc" style="width:100%" src="" />
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Đóng</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
+<script type="text/javascript" src="http://ajax.cdnjs.com/ajax/libs/json2/20110223/json2.js"></script>
+<script type="text/javascript">
+    $(document).ready(function () {
+
+        $('#txtHead').html("QUẢN LÝ TRẢI NGHIỆM");
+
+        loadDiv();
+
+        $('#txtSearch').keydown(function (e) {
+            if (e.keyCode == 13) {
+                loadTable();
+            }
+        });
+
+
+    });
+
+    function loadDiv() {
+
+        //disable list
+        $('#div_New').attr("style", "display:none;");
+        $('#div_FQ').attr("style", "display:none;");
+        $('#txtSearch').val('');
+
+        //show
+        $('#div_' + $('#txtType').val()).attr("style", "width:100%; float:left; display:block;");
+
+        loadTable();
+    }
+
+    function loadTable() {
+
+        $("#tbl_RP_" + $('#txtType').val() + " > TBODY").html("");
+
+        if ($('#txtType').val() == 'New') {
+            var obj = new Object();
+            obj.fromDate = $('#fromDate').val();
+            obj.toDate = $('#toDate').val();
+            obj.province = $('#province').val().split('-')[0];
+            obj.fillter = $('#txtSearch').val();
+
+            $.ajax({
+                type: "POST",
+                url: "/SpaceMan/getRateNew",
+                data: JSON.stringify(obj),
+                contentType: "application/json; charset=utf-8",
+                dataType: "json",
+                success: function (r) {
+
+                    if (r != null) {
+
+                        for (i in r) {
+
+                            var tBody = $("#tbl_RP_New > TBODY")[0];
+
+                            //Add Row.
+                            var row = tBody.insertRow(-1);
+
+                            //Add Type cell
+                            cell = $(row.insertCell(-1));
+                            cell.html(r[i].storeNo);
+
+                            //Add Type cell
+                            cell = $(row.insertCell(-1));
+                            cell.html(r[i].total_new);
+
+                            //Add Type cell
+                            cell = $(row.insertCell(-1));
+                            cell.html(r[i].total_accept);
+
+                            //Add Type cell
+                            cell = $(row.insertCell(-1));
+                            cell.html(r[i].rate);
+
+                        }
+
+                    }
+                }
+            });
+
+
+
+        } else if ($('#txtType').val() == 'FQ') {
+            var obj = new Object();
+            //obj.province = $('#province2').val().split('-')[0];
+            obj.province = '';
+            obj.activity = $('#activity').val();
+            obj.month = $('#month').val();
+            obj.fillter = $('#txtSearch').val();
+
+
+            $.ajax({
+                type: "POST",
+                url: "/SpaceMan/getFQShelf",
+                data: JSON.stringify(obj),
+                contentType: "application/json; charset=utf-8",
+                dataType: "json",
+                success: function (r) {
+
+                    if (r != null) {
+
+                        for (i in r) {
+
+                            var tBody = $("#tbl_RP_FQ > TBODY")[0];
+
+                            //Add Row.
+                            var row = tBody.insertRow(-1);
+
+                            //Add Type cell
+                            cell = $(row.insertCell(-1));
+                            cell.html(r[i].staffName);
+
+                            //Add Type cell
+                            cell = $(row.insertCell(-1));
+                            cell.html(r[i].positionName);
+
+                            //Add Type cell
+                            cell = $(row.insertCell(-1));
+                            cell.html(r[i].qty);
+
+                            //Add Type cell
+                            cell = $(row.insertCell(-1));
+                            cell.html(r[i].qtyDay);
+
+                        }
+
+                    }
+                }
+            });
+        }
+    }
+
+    function fnReset(str_id) {
+        if ($('#' + str_id).val().length > 0) {
+
+            $('#' + str_id).val('');
+
+            $('#' + str_id).trigger("change");
+        }
+    }
+</script>
+

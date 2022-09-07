@@ -1,0 +1,242 @@
+﻿@model PagedList.IPagedList<ProductAllTool.Models.comparePrice.compareLine>
+@using PagedList.Mvc;
+
+
+@{
+    ViewBag.Title = "Index";
+}
+<style>
+    .loader {
+        border: 16px solid #f3f3f3;
+        border-radius: 50%;
+        border-top: 16px solid #3498db;
+        width: 5vh;
+        height: 5vh;
+        -webkit-animation: spin 2s linear infinite; /* Safari */
+        animation: spin 2s linear infinite;
+        padding: 20px;
+    }
+
+    /* Safari */
+    @@-webkit-keyframes spin {
+        0% {
+            -webkit-transform: rotate(0deg);
+        }
+
+        100% {
+            -webkit-transform: rotate(360deg);
+        }
+    }
+    @@keyframes spin {
+        0% {
+            transform: rotate(0deg);
+        }
+
+        100% {
+            transform: rotate(360deg);
+        }
+        
+    }
+</style>
+
+<div class="container01">
+    <div class="row box-action">
+        <div class="col-md-6">
+            <form id="ExcelUpload">
+                <div class="row">
+                    <div class="col-md-8 col-xs-6"><button type="button" class="btn btn-success" onclick="UploadExcel()" style="background-color: #A45D41 !important;border-color: #A45D41 !important;"><i class="fa fa-upload" aria-hidden="true"></i> Upload file</button></div>
+                    <div class="col-md-4 col-xs-6"><input type="file" id="ExcelFileUpload" style="width: 0.1px; height: 0.1px; opacity: 0; overflow: hidden; position: absolute; z-index: -1;" class="file" value="Chọn file"><span style="color: red;font: bolder;" id="fileErrorMessage"></span></div>
+
+                </div>
+            </form>
+            <div id="div_load" style="visibility: hidden" class="loader"></div>
+        </div>
+        <div class="col-md-6">
+            <div class="row wp_export">
+                <div class="col-md-6 col-xs-6">
+                    <input type="text" id="txt_ItemNo" class="form-control" placeholder="Nhập mã sản phẩm" />
+                </div>
+                <div class="col-md-6 col-xs-6">
+                    <a id="btnExport" href="#" class="btn btn-info" onclick="fnExport()"><i class="fa fa-file-excel-o" aria-hidden="true"></i> Export</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row01" style="overflow-x:auto;">
+        <table class="table table-bordered tb_detail">
+            <thead>
+                <tr>
+                    <th>
+                        Mã đối thủ
+                    </th>
+                    <th>
+                        Tên đối thủ
+                    </th>
+                    <th>
+                        Mã hàng
+                    </th>
+                    <th>
+                        Tên hàng
+                    </th>
+                    <th>
+                        Brand
+                    </th>
+                    <th>
+                        Giá BBM
+                    </th>
+                    <th>
+                        Giá đối thủ
+                    </th>
+                    <th>
+                        Link đối thủ
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr>
+
+                        <td>
+                            @Html.DisplayFor(modelItem => item.compareCode)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.compareName)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.sku)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.name)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.brand)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.bb_price)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.comparePrice)
+                        </td>
+                        <td>
+                            <a href="@Html.DisplayFor(modelItem => item.compareLink)" target="_blank">Lấy link</a>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+            <tfoot>
+            </tfoot>
+        </table>
+    </div>
+</div>
+
+   
+<div>
+    <div>
+        @Html.PagedListPager(Model, page => Url.Action("Index", new { page, itemNo = @ViewBag.itemNo }), new PagedListRenderOptions
+        {
+            MaximumPageNumbersToDisplay = 3,
+            DisplayPageCountAndCurrentLocation = true
+        })
+    </div>
+</div>
+
+
+<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
+<script type="text/javascript" src="http://ajax.cdnjs.com/ajax/libs/json2/20110223/json2.js"></script>
+<script type="text/javascript">
+
+    $(window).load(function () {
+        $('#txt_ItemNo').val('@ViewBag.itemNo');
+    });
+
+    $(function () {
+
+        $('#txtHead').html("QUẢN LÝ GIÁ");
+
+        $('#txt_ItemNo').keydown(function (e) {
+            if (e.keyCode == 13) {
+                fnRedi();
+            }
+        });
+    });
+
+    function fnRedi() {
+        window.location.href = "/ComparePrice/Index?itemNo=" + $('#txt_ItemNo').val();
+
+	}
+
+
+    //Upload file
+
+
+    $(document).ready(function () {
+        //validating uploaded file whether it is Excel or not while uploading
+        $("#ExcelFileUpload").change(function () {
+            fileErrorMessage.innerHTML = '';
+            var vtrUpload = $("#ExcelFileUpload").val().toLowerCase();
+            var regexVTRUpload = new RegExp("(.*?)\.(xlsx|xls)$");
+            if (!(regexVTRUpload.test(vtrUpload))) {
+                $("#ExcelFileUpload").val("");
+                //fileErrorMessage.innerHTML = 'Please select .xls or .xlsx files';
+                alert("file false");
+            } else {
+                //alert("2222222222222222");
+                //UploadExcel();
+            }
+        });
+    });
+
+    function UploadExcel()
+    {
+        var formdata = new FormData(); //FormData object
+        var fileInput = document.getElementById('ExcelFileUpload');
+        var filename = fileInput.files[0].name
+        var extension = filename.split('.').pop().toUpperCase();
+
+        for (i = 0; i < fileInput.files.length; i++) {
+            formdata.append(fileInput.files[i].name, fileInput.files[i]);
+        }
+
+        $('#div_load').css("visibility", "inherit");
+
+        $.ajax({
+            url: '@Url.Action("ReadExcelFile", "ComparePrice")', //ReadExcelFile is a Action Name and ExcelUpload is Controller name
+            type: 'POST',
+            data: formdata, // Posting the uploaded excel file to controller
+            //async: true,
+            success: function (data) {
+
+                var sub = JSON.parse(data);
+
+                $('html,body').scrollTop(0);
+
+                if (sub.code == "0") {
+
+                    //window.location.href = "/ComparePrice/Index";
+
+                    alert("Thêm mới thành công:"+sub.message+" bản ghi!");
+
+                    $('#ExcelFileUpload').val("");
+                    $('#div_load').css("visibility", "hidden");
+                } else if (sub.code == "2") {
+                    alert("Cấu trúc file nhập không đúng!");
+                    $('#div_load').css("visibility", "hidden");
+                } else {
+                    alert("Cô lỗi sảy ra thử lại sau!");
+                    $('#div_load').css("visibility", "hidden");
+                }
+            },
+            cache: false,
+            contentType: false,
+            processData: false
+        });
+    }
+    //export file
+    function fnExport() {
+        document.getElementById('div_load').style.visibility = "inherit";
+        window.location = '/ComparePrice/ExportExcel';
+        document.getElementById('div_load').style.visibility = "hidden";
+    }
+</script>
+

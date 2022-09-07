@@ -1,0 +1,388 @@
+﻿@model  PagedList.IPagedList<ProductAllTool.Models.StoreLayout.storeShelf>
+@using PagedList.Mvc
+
+@{
+    ViewBag.Title = "ShelfList";
+}
+
+@if (Request.Browser.IsMobileDevice)
+{
+    <style>
+        .td_header {
+            font-size: 2vh;
+            color: #223141;
+            background-color: #e4e4e4;
+            width: 100%;
+        }
+
+        .body-content {
+            padding: 0px !important;
+        }
+
+        .tb_detail thead {
+            color: #223141;
+            background-color: #e4e4e4;
+            text-align: center;
+        }
+
+        .pagination {
+            margin: 0px !important;
+        }
+
+        .btnAc {
+            /*width: 15%;*/
+            float: right;
+            border-radius: 10px;
+            margin-right: 10px;
+        }
+
+        .tblAct td, th {
+            padding: 15px 0px;
+        }
+
+        thead th {
+            text-align: center;
+        }
+
+        tbody td {
+            text-align: left;
+        }
+    </style>
+
+    if (ViewBag.st_info != null)
+    {
+        <div style="width:100%;float:left">
+            <div class="td_header" style="width:100%; float:left;margin-top: 1vh; padding:1vh">
+                <b style="font-size:3vh; float:left; width:100%">CỬA HÀNG</b>
+
+                @if (ViewBag.role.create_act == 1)
+                {
+                    @Html.ActionLink("Thêm ảnh kệ", "DraftList", "StoreLayout", new { storeNo = ViewBag.st_info.storeNo }, new { @class = "btn btn-primary btnAc" })
+                }
+
+                @if (ViewBag.role.accept_act == 1)
+                {
+                    @Html.ActionLink("Chấm thực tế", "ScoreLayout", "StoreLayout", new { storeNo = ViewBag.st_info.storeNo }, new { @class = "btn btn-primary btnAc" })
+                }
+
+            </div>
+        </div>
+
+        <hr style="width:100%;float:left;" />
+
+        <div style="width:100%; float:left">
+            <div style="width:50%; float:left">
+                <p><b> Cửa hàng: </b> @ViewBag.st_info.storeNo - @ViewBag.st_info.storeName</p>
+            </div>
+            <div style="width:50%; float:left">
+                <p><b>Số lượng kệ</b>: @ViewBag.st_info.countShelf</p>
+            </div>
+        </div>
+
+
+        <div class="text-center" style="width:100%;float:left; padding:1%">
+            <input id="txtSearch" type="text" class="form-control" style="border-radius:10px; float:right;padding-left:65px !important;" placeholder="Nhập giá trị tìm kiếm" />
+            <label style="float:right;transform: translateY(50%);">Tìm kiếm</label>
+        </div>
+    }
+
+
+
+
+    <table width="100%" class="table text-center">
+        <tr>
+            <td>
+                <table class="table table-striped tb_detail" border="1" style="width: 100%">
+                    <thead>
+                        <tr>
+                            <th>Mã kệ</th>
+                            <th>Nhóm chức năng</th>
+                            <th>Ảnh</th>
+                            <th>Người tạo</th>
+                            <th>Trạng thái</th>
+                            
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var item in Model)
+                        {
+                            <tr>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.shelfNo)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.catName)
+                                </td>
+                                <td>
+                                    <a data-toggle="modal" onclick="fn_detail('@item.img_link');" data-target="#modalDetails">Ảnh</a>
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.createdBy)
+                                </td>
+                                <td>
+                                    @if (item.status == 1)
+                                    {
+                                        <p onclick="fnDetail('@item.id')">@item.comment</p>
+                                    }
+                                    else
+                                    {
+                                        <p> @item.comment</p>
+                                    }
+
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <div>
+                    <div style="float:right; margin:0px !important; width:45%">
+                        @Html.PagedListPager(Model, page => Url.Action("ShelfList", new { page, fillData = ViewBag.fillData, storeNo = ViewBag.st_info.storeNo }),
+                       new PagedListRenderOptions
+                       {
+                           MaximumPageNumbersToDisplay = 3,
+                           DisplayLinkToFirstPage = PagedListDisplayMode.Never,
+                           DisplayLinkToLastPage = PagedListDisplayMode.Never,
+                           DisplayPageCountAndCurrentLocation = true
+                       })
+                    </div>
+                </div>
+            </td>
+        </tr>
+    </table>
+
+    <div class="modal fade bd-example-modal-lg" id="@string.Concat("modalDetails")" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="false">
+        <div class="modal-dialog modal-dialog modal-lg" role="document">
+            <div class="modal-content">
+                <h3 style="margin:15px;" class="modal-title" id="exampleModalLongTitle">Chi tiết báo cáo</h3>
+                <div class="modal-body">
+                    <img id="imgsrc" style="width:100%" src="" />
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Đóng</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function fn_detail(str_img) {
+
+            console.log(str_img);
+
+            $('#imgsrc').attr("src", str_img);
+        }
+    </script>
+}
+else
+{
+    <style>
+        .td_header {
+            font-size: 2vh;
+            color: #223141;
+            background-color: #e4e4e4;
+            width: 100%;
+        }
+
+        .body-content {
+            padding: 0px !important;
+        }
+
+        .tb_detail thead {
+            color: #223141;
+            background-color: #e4e4e4;
+            text-align: center;
+        }
+
+        .pagination {
+            margin: 0px !important;
+        }
+
+        .btnAc {
+            width: 15%;
+            float: right;
+            border-radius: 10px;
+            margin-right: 10px;
+        }
+
+        .tblAct td, th {
+            padding: 15px 0px;
+        }
+
+        thead th {
+            text-align: center;
+        }
+
+        tbody td {
+            text-align: left;
+        }
+    </style>
+
+    if (ViewBag.st_info != null)
+    {
+        <div style="width:100%;float:left">
+            <div class="td_header" style="width:100%; float:left;margin-top: 1vh; padding:1vh">
+                <b style="font-size:3vh; float:left">CỬA HÀNG</b>
+                @if (ViewBag.role.create_act == 1)
+                {
+                    @Html.ActionLink("Thêm ảnh kệ", "DraftList", "StoreLayout", new { storeNo = ViewBag.st_info.storeNo }, new { @class = "btn btn-primary btnAc" })
+                }
+
+                @if (ViewBag.role.accept_act == 1)
+                {
+                    @Html.ActionLink("Chấm thực tế", "ScoreLayout", "StoreLayout", new { storeNo = ViewBag.st_info.storeNo }, new { @class = "btn btn-primary btnAc" })
+                }
+
+                 @Html.ActionLink("Sơ đồ quầy kệ", "PreRen", "StoreLayout", new { storeNo = ViewBag.st_info.storeNo }, new { @class = "btn btn-primary btnAc" })
+
+            </div>
+        </div>
+
+        <hr style="width:100%;float:left;" />
+
+        <div style="width:100%; float:left">
+            <div style="width:50%; float:left">
+                <p><b> Cửa hàng: </b> @ViewBag.st_info.storeNo - @ViewBag.st_info.storeName</p>
+            </div>
+            <div style="width:50%; float:left">
+                <p><b>Số lượng kệ</b>: @ViewBag.st_info.countShelf</p>
+            </div>
+        </div>
+
+
+        <div class="text-center" style="width:100%;float:left; padding:1%">
+            <input id="txtSearch" type="text" class="form-control" style="border-radius:10px; float:right;padding-left:65px !important;" placeholder="Nhập giá trị tìm kiếm" />
+            <label style="float:right;margin-right: 5vh;transform: translateY(50%);">Tìm kiếm</label>
+        </div>
+    }
+
+
+
+
+    <table width="100%" class="table text-center">
+        <tr>
+            <td>
+                <table class="table table-striped tb_detail" border="1" style="width: 100%">
+                    <thead>
+                        <tr>
+                            <th>Mã kệ</th>
+                            <th>Miêu tả</th>
+                            <th>Nhóm chức năng</th>
+                            <th>Ảnh</th>
+                            <th>Ngày tạo</th>
+                            <th>Trạng thái</th>
+                            <th>Người tạo</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var item in Model)
+                        {
+                            <tr>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.shelfNo)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.shelfName)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.catName)
+                                </td>
+                                <td>
+                                    <a data-toggle="modal" onclick="fn_detail('@item.img_link');" data-target="#modalDetails">Ảnh</a>
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.createdDate)
+                                </td>
+                                <td>
+                                    @if (item.status == 1)
+                                    {
+                                        <a onclick="fnDetail('@item.id')">@item.comment</a>
+                                    }
+                                    else
+                                    {
+                                        <p> @item.comment</p>
+                                    }
+
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.createdBy)
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <div>
+                    <div style="float:right; margin:0px !important; width:45%">
+                        @Html.PagedListPager(Model, page => Url.Action("ShelfList", new { page, fillData = ViewBag.fillData, storeNo = ViewBag.st_info.storeNo }),
+                       new PagedListRenderOptions
+                       {
+                           MaximumPageNumbersToDisplay = 3,
+                           DisplayLinkToFirstPage = PagedListDisplayMode.Never,
+                           DisplayLinkToLastPage = PagedListDisplayMode.Never,
+                           DisplayPageCountAndCurrentLocation = true
+                       })
+                    </div>
+                </div>
+            </td>
+        </tr>
+    </table>
+
+    <div class="modal fade bd-example-modal-lg" id="@string.Concat("modalDetails")" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="false">
+        <div class="modal-dialog modal-dialog modal-lg" role="document">
+            <div class="modal-content">
+                <h3 style="margin:15px;" class="modal-title" id="exampleModalLongTitle">Chi tiết báo cáo</h3>
+                <div class="modal-body">
+                    <img id="imgsrc" style="width:100%" src="" />
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Đóng</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
+    <script type="text/javascript" src="http://ajax.cdnjs.com/ajax/libs/json2/20110223/json2.js"></script>
+    <script type="text/javascript">
+        $(window).load(function () {
+            $('#txtSearch').val('@ViewBag.fillData');
+        });
+
+
+        $(function () {
+            $('#txtSearch').keydown(function (e) {
+                if (e.keyCode == 13) {
+                    fnPagesize();
+                }
+            });
+        });
+
+        function fnPagesize() {
+            window.location.href = "/StoreLayout/ShelfList?fillData=" + $('#txtSearch').val() +"&storeNo=@ViewBag.st_info.storeNo";
+        }
+
+        function fnDetail(str_shlNo) {
+            if (@ViewBag.role.accept_act== 1) {
+                window.location.href = "/StoreLayout/ShelfDetail?id=" + str_shlNo;
+            }
+        }
+
+        function fn_detail(str_img) {
+
+            console.log(str_img);
+
+            $('#imgsrc').attr("src", str_img);
+        }
+
+    </script>
+}
+
+
+

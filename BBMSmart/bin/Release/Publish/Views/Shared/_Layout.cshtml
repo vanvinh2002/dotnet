@@ -1,0 +1,415 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title - My ASP.NET Application</title>
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+    <link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" />
+</head>
+<body>
+
+    <style>
+        body {
+            padding-top: 0px !important;
+            padding-bottom: 0px !important;
+        }
+        .wp_content{
+            background-color: #f5f5f5;
+            box-shadow: 1px 0px 5px 1px #a0a0a0;
+        }
+        .thumbnail:hover {
+            position: relative;
+            top: -25px;
+            left: -35px;
+            width: 200px !important;
+            height: 200px !important;
+            display: block;
+            z-index: 999;
+        }
+        .btn-success{
+            background-color: #658EC6 !important;
+            border-color: #658EC6 !important;
+        }
+        .btn-warning{
+            background-color: #658EC6 !important;
+            border-color: #658EC6 !important;
+        }
+        .btn-info{
+            background-color: #658EC6 !important;
+            border-color: #658EC6 !important;
+        }
+        .navbar-inverse {
+            background-color: transparent;
+            border-color: transparent;
+        }
+        .navbar-inverse .navbar-collapse, .navbar-inverse .navbar-form {
+            background-color: whitesmoke;
+        }
+        .inp {
+            border-radius: 30px;
+        }
+        .col50 {
+            width: 45%;
+            float: left;
+            margin: auto 20px;
+        }
+        .col25 > div, .col75 > div, .col50 > div {
+            padding: 10px;
+        }
+        .col25 {
+            width: 25%;
+            float: left;
+        }
+
+        .col75 {
+            width: 75%;
+            float: left;
+        }
+
+        .btn-right {
+            float: right;
+            margin: 10px 1vh;
+        }
+
+        .btn-left {
+            float: left;
+            margin-left: 1vh;
+        }
+
+        .div-span {
+            background-color: whitesmoke;
+            width: 100%;
+            /*float: left;*/
+            margin: 10px auto;
+        }
+
+        .div-span > div {
+            padding: 10px;
+        }
+
+        .div-span > label {
+            transform: translateY(38%);
+        }
+        .div-shelf {
+            width: 31% !important;
+            float: left !important;
+            margin-right: 14px !important;
+            height: 291px;
+            margin: 0px;
+            cursor: pointer;
+        }
+        .div-shelf > img {
+            height: 200px;
+        }
+
+        #menuToggle {
+            display: block;
+            position: relative;
+            left: 10px;
+            z-index: 1;
+            -webkit-user-select: none;
+            user-select: none;
+            top: 1.75vh;
+        }
+
+            #menuToggle input {
+                display: block;
+                width: 40px;
+                height: 32px;
+                position: absolute;
+                top: -7px;
+                left: -5px;
+                cursor: pointer;
+                opacity: 0; /* hide this */
+                z-index: 2; /* and place it over the hamburger */
+                -webkit-touch-callout: none;
+            }
+
+            #menuToggle span {
+                display: block;
+                width: 23px;
+                height: 4px;
+                margin-bottom: 2px;
+                position: relative;
+                /*background: #cdcdcd;*/
+                background: #000000;
+                border-radius: 3px;
+                z-index: 1;
+                transform-origin: 4px 0px;
+                transition: transform 0.5s cubic-bezier(0.77,0.2,0.05,1.0), background 0.5s cubic-bezier(0.77,0.2,0.05,1.0), opacity 0.55s ease;
+            }
+
+                #menuToggle span:first-child {
+                    transform-origin: 0% 0%;
+                }
+
+                #menuToggle span:nth-last-child(2) {
+                    transform-origin: 0% 100%;
+                }
+
+            #menuToggle input:checked ~ span {
+                opacity: 1;
+                transform: rotate(45deg) translate(-2px, -1px);
+                background: #232323;
+            }
+
+                #menuToggle input:checked ~ span:nth-last-child(3) {
+                    opacity: 0;
+                    transform: rotate(0deg) scale(0.2, 0.2);
+                }
+
+                #menuToggle input:checked ~ span:nth-last-child(2) {
+                    transform: rotate(-45deg) translate(0, -1px);
+                }
+
+        #menu {
+            position: absolute;
+            width: 300px;
+            margin: -45px 0 0 -50px;
+            /*50px 0px 0px 50px;*/
+            padding: 50px 0px 0px 50px;
+            ;
+            /*50px*/
+            /*padding-top: 125px;*/
+            background: #ededed;
+            list-style-type: none;
+            -webkit-font-smoothing: antialiased;
+            /* to stop flickering of text in safari */
+            transform-origin: 0% 0%;
+            transform: translate(-100%, 0);
+            transition: transform 0.5s cubic-bezier(0.77,0.2,0.05,1.0);
+        }
+
+            #menu li {
+                /*padding: 10px 0;*/
+                font-size: 22px;
+            }
+
+        #menuToggle input:checked ~ ul {
+            transform: none;
+        }
+
+        navbar-header {
+            display: none !important;
+            width: 100% !important;
+        }
+
+        .nav .open > a, .nav .open > a:hover, .nav .open > a:focus {
+            background-color: none !important;
+            border-color: none !important;
+        }
+
+        .text_date {
+            margin-top: 30px;
+            color: #e5232c;
+            font-size: 15px;
+            font-weight: bold;
+        }
+
+        #txtHead {
+            font-size: 30px;
+            font-weight: bold;
+        }
+
+        .wp_hearder {
+            padding: 12px;
+        }
+        .title_01{
+            text-transform: uppercase;
+            font-size: 20px;
+            padding-left: 24px;
+        }
+        .btn-left ul li{
+            padding-bottom: 10px;
+        }
+        #menu_main{
+           list-style: none;
+           padding-left: 0px;
+           margin-top: 19px;
+           background-color: #000000;
+        }
+        #menu_main li{
+           display: inline-block;
+           padding: 10px 0px;
+        }
+        #menu_main li a{
+           padding: 10px;
+           color: #fff;
+           text-transform: uppercase;
+        }
+            .div-shelf02 {
+        width: 31% !important;
+        float: left !important;
+        margin-right: 14px !important;
+        height: 234px;
+        cursor: pointer;
+        border: 1px solid #dad8d8;
+        margin-bottom: 12px;
+    }
+    .div-shelf02 img {
+        width: 100%;
+        max-height: 231px;
+    }
+    .title_01 {
+                padding-left: 0px !important;
+            }
+        @@media screen and (max-width: 600px) {
+            #txtHead {
+                font-size: 24px;
+            }
+
+            .text_date {
+                margin-top: 0px;
+            }
+
+            .navbar-nav {
+                margin: 0px !important;
+            }
+
+            #selTypeFill {
+                width: 100% !important;
+                max-width: 100% !important;
+                margin-top: 10px !important;
+            }
+            .box_search_text{
+                 width: 100% !important;
+            }
+            .loader{
+                 height: 0px !important;
+            }
+            #div_load{
+                display: none;
+            }
+            .box-action{
+                margin-bottom: 20px;
+            }
+            .wp_export{
+                margin-top: 10px;
+            }
+            .button_action{
+                 width: 100% !important;
+            }
+            #province{
+                margin-bottom: 10px;
+            }
+            .btn-right{
+                float: none !important;
+                margin: 0px !important;
+            }
+            .btn-left{
+                 float: none !important;
+                margin: 0px !important;
+            }
+            .title_01 {
+                padding-left: 0px !important;
+            }
+            .div-shelf {
+                width: 45% !important;
+                margin-right: 14px !important;
+                height: 164px !important;
+            }
+            .div-shelf > img {
+                height: 117px !important;
+            }
+            .div-span {
+                float: none;
+            }
+            .div-span .btn{
+                width: 100% !important;
+                margin-bottom: 10px !important;
+            }
+            .div-shelf02 {
+                width: 45% !important;
+                height: 166px !important;
+            }
+        }
+    </style>
+    <div class="wp_content container">
+        <div class="wp_hearder">
+            <div class="container_01">
+                <div class="row">
+                    <div class="col-md-8">
+                        <div class="row">
+                            <div class="logo_img col-md-6"><a href="/"><img style="width:75%;" src="~/Content/images/logo-02.png" /></a></div>
+                            <div class="col-md-6"><h3 id="txtHead"></h3></div>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="text_date">Ngày: @DateTime.Now.ToString("dd/MM/yyyy")</div>
+                            </div>
+                            <div class="col-md-6">
+                                <ul class="nav navbar-nav" style="        float: right;
+        margin-top: 14px;
+">
+                                    <li class="dropdown ignore-override" id="li-bl-dt">
+                                        <a href="#" data-toggle="dropdown">
+                                            <i class="fa fa-user-circle-o" aria-hidden="true"></i>  @Session["uid"]
+                                            <span class="caret"></span>
+                                        </a>
+                                        <ul class="dropdown-menu">
+                                            <li>
+                                                <a href="@Url.Action("Logout", "Account")">Đăng xuất</a>
+                                            </li>
+                                        </ul>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="wp_menu">
+                <ul id="menu_main">
+                    <li>@Html.ActionLink("Quản lý hàng hóa", "Index", "ProductImageWeb")</li>
+                    <li>@Html.ActionLink("Quản lý giá", "Index", "ComparePrice")</li>
+                    @*<li>@Html.ActionLink("QUẢN LÝ TRẢI NGHIỆM", "StoreList", "StoreLayout")</li>*@
+                    <li>@Html.ActionLink("QUẢN LÝ TRẢI NGHIỆM", "StoreList", "SpaceMan")</li>
+                    <li>@Html.ActionLink("Quản lý hàng mới", "Index", "SourceProduct")</li>
+                    <li>@Html.ActionLink("Đánh giá vận hành cửa hàng","StoreList", "ScoreStore")</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="body-content" style="padding-top: 2vh;
+    ">
+            @RenderBody()
+            <hr />
+            <footer class="clearfix">
+                <p>&copy; @DateTime.Now.Year - Bibomart.com.vn</p>
+            </footer>
+        </div>
+    </div>
+    
+    <!--<div>
+        <nav role="navigation" style="max-height:0px">
+            <div id="menuToggle">
+
+                <input type="checkbox" />
+
+                <span></span>
+                <span></span>
+                <span></span>
+
+                <ul id="menu">
+                    <li>@Html.ActionLink("Quản lý hàng hóa", "Index", "ProductImageWeb")</li>
+                    <li>@Html.ActionLink("Quản lý giá", "Index", "ComparePrice")</li>
+                    @*<li>@Html.ActionLink("QUẢN LÝ TRẢI NGHIỆM", "StoreList", "StoreLayout")</li>*@
+                    <li>@Html.ActionLink("SpaceMan", "StoreList", "SpaceMan")</li>
+                    <li>@Html.ActionLink("Quản lý hàng mới", "Index", "SourceProduct")</li>
+                </ul>
+
+            </div>
+        </nav>
+    </div>-->
+
+
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+    @RenderSection("scripts", required: false)
+</body>
+</html>

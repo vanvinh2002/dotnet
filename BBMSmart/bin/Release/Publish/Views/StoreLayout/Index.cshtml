@@ -1,0 +1,2368 @@
+﻿@{
+    ViewBag.Title = "Index";
+    @Scripts.Render("https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.3.1/css/bootstrap.min.css")
+    @Scripts.Render("https://code.jquery.com/jquery-3.3.1.slim.min.js")
+    @Scripts.Render("https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.3.1/js/bootstrap.bundle.min.js")
+    @Scripts.Render("https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css")
+}
+<h2>Index</h2>
+<style>
+ *,
+:after,
+:before {
+  box-sizing: border-box
+}
+
+.clearfix:after,
+.clearfix:before {
+  content: '';
+  display: table
+}
+
+.clearfix:after {
+  clear: both;
+  display: block
+}
+ul{
+	list-style:none;
+	margin: 0;
+	padding: 0;
+}
+a, a:hover, a.active, a:active, a:visited, a:focus{
+	color:#fefefe;
+	text-decoration:none;
+}
+.content{
+	margin: 50px 100px 0px 100px;
+}
+
+.exo-menu{
+	width: 100%;
+	float: left;
+	list-style: none;
+	position:relative;
+	background: #23364B;
+}
+.exo-menu > li {	display: inline-block;float:left;}
+.exo-menu > li > a{
+	color: #ccc;
+	text-decoration: none;
+	text-transform: uppercase;
+	border-right: 1px #365670 dotted;
+	-webkit-transition: color 0.2s linear, background 0.2s linear;
+	-moz-transition: color 0.2s linear, background 0.2s linear;
+	-o-transition: color 0.2s linear, background 0.2s linear;
+	transition: color 0.2s linear, background 0.2s linear;
+}
+.exo-menu > li > a.active,
+.exo-menu > li > a:hover,
+li.drop-down ul > li > a:hover{
+	background:#009FE1;
+	color:#fff;
+}
+.exo-menu i {
+  float: left;
+  font-size: 18px;
+  margin-right: 6px;
+  line-height: 20px !important;
+}
+li.drop-down,
+.flyout-right,
+.flyout-left{position:relative;}
+li.drop-down:before {
+  content: "\f103";
+  color: #fff;
+  font-family: FontAwesome;
+  font-style: normal;
+  display: inline;
+  position: absolute;
+  right: 6px;
+  top: 20px;
+  font-size: 14px;
+}
+li.drop-down>ul{
+	left: 0px;
+	min-width: 230px;
+
+}
+.drop-down-ul{display:none;}
+.flyout-right>ul,
+.flyout-left>ul{
+  top: 0;
+  min-width: 230px;
+  display: none;
+  border-left: 1px solid #365670;
+  }
+
+li.drop-down>ul>li>a,
+.flyout-right ul>li>a ,
+.flyout-left ul>li>a {
+	color: #fff;
+	display: block;
+	padding: 20px 22px;
+	text-decoration: none;
+	background-color: #365670;
+	border-bottom: 1px dotted #547787;
+	-webkit-transition: color 0.2s linear, background 0.2s linear;
+	-moz-transition: color 0.2s linear, background 0.2s linear;
+	-o-transition: color 0.2s linear, background 0.2s linear;
+	transition: color 0.2s linear, background 0.2s linear;
+}
+.flyout-right ul>li>a ,
+.flyout-left ul>li>a {
+	border-bottom: 1px dotted #B8C7BC;
+}
+
+
+/*Flyout Mega*/
+.flyout-mega-wrap {
+	top: 0;
+	right: 0;
+	left: 100%;
+	width: 100%;
+	display:none;
+	height: 100%;
+	padding: 15px;
+	min-width: 742px;
+
+}
+h4.row.mega-title {
+  color:#eee;
+  margin-top: 0px;
+  font-size: 14px;
+  padding-left: 15px;
+  padding-bottom: 13px;
+  text-transform: uppercase;
+  border-bottom: 1px solid #ccc;
+ }
+.flyout-mega ul > li > a {
+  font-size: 90%;
+  line-height: 25px;
+  color: #fff;
+  font-family: inherit;
+}
+.flyout-mega ul > li > a:hover,
+.flyout-mega ul > li > a:active,
+.flyout-mega ul > li > a:focus{
+  text-decoration: none;
+  background-color: transparent !important;
+  color: #ccc !important
+}
+/*mega menu*/
+
+.mega-menu {
+  left: 0;
+  right: 0;
+  padding: 15px;
+  display:none;
+  padding-top: 0;
+  min-height: 100%;
+
+}
+h4.row.mega-title {
+  color: #eee;
+  margin-top: 0px;
+  font-size: 14px;
+  padding-left: 15px;
+  padding-bottom: 13px;
+  text-transform: uppercase;
+  border-bottom: 1px solid #547787;
+  padding-top: 15px;
+  background-color: #365670
+  }
+ .mega-menu ul li a {
+  line-height: 25px;
+  font-size: 90%;
+  display: block;
+}
+ul.stander li a {
+    padding: 3px 0px;
+}
+
+ul.description li {
+    padding-bottom: 12px;
+    line-height: 8px;
+}
+
+ul.description li span {
+    color: #ccc;
+    font-size: 85%;
+}
+a.view-more{
+  border-radius: 1px;
+  margin-top:15px;
+  background-color: #009FE1;
+  padding: 2px 10px !important;
+  line-height: 21px !important;
+  display: inline-block !important;
+}
+a.view-more:hover{
+	color:#fff;
+	background:#0DADEF;
+}
+ul.icon-des li a i {
+    color: #fff;
+    width: 35px;
+    height: 35px;
+    border-radius: 50%;
+    text-align: center;
+    background-color: #009FE1;
+    line-height: 35px !important;
+}
+
+ul.icon-des li {
+    width: 100%;
+    display: table;
+    margin-bottom: 11px;
+}
+/*Blog DropDown*/
+.Blog{
+	left:0;
+	display:none;
+	color:#fefefe;
+	padding-top:15px;
+	background:#547787;
+	padding-bottom:15px;
+}
+.Blog .blog-title{
+	color:#fff;
+	font-size:15px;
+	text-transform:uppercase;
+
+}
+.Blog .blog-des{
+	color:#ccc;
+	font-size:90%;
+	margin-top:15px;
+}
+.Blog a.view-more{
+	margin-top:0px;
+}
+/*Images*/
+.Images{
+	left:0;
+   width:100%;
+	 display:none;
+	color:#fefefe;
+	padding-top:15px;
+	background:#547787;
+	padding-bottom:15px;
+}
+.Images h4 {
+  font-size: 15px;
+  margin-top: 0px;
+  text-transform: uppercase;
+}
+/*common*/
+.flyout-right ul>li>a ,
+.flyout-left ul>li>a,
+.flyout-mega-wrap,
+.mega-menu{
+	background-color: #547787;
+}
+
+/*hover*/
+.Blog:hover,
+.Images:hover,
+.mega-menu:hover,
+.drop-down-ul:hover,
+li.flyout-left>ul:hover,
+li.flyout-right>ul:hover,
+.flyout-mega-wrap:hover,
+li.flyout-left a:hover +ul,
+li.flyout-right a:hover +ul,
+.blog-drop-down >a:hover+.Blog,
+li.drop-down>a:hover +.drop-down-ul,
+.images-drop-down>a:hover +.Images,
+.mega-drop-down a:hover+.mega-menu,
+li.flyout-mega>a:hover +.flyout-mega-wrap{
+	display:block;
+}
+/*responsive*/
+ @@media (min-width:767px){
+	.exo-menu > li > a{
+	display:block;
+	padding: 20px 22px;
+ }
+.mega-menu, .flyout-mega-wrap, .Images, .Blog,.flyout-right>ul,
+.flyout-left>ul, li.drop-down>ul{
+		position:absolute;
+}
+ .flyout-right>ul{
+	left: 100%;
+	}
+	.flyout-left>ul{
+	right: 100%;
+}
+ }
+@@media (max-width:767px){
+
+	.exo-menu {
+		min-height: 58px;
+		background-color: #23364B;
+		width: 100%;
+	}
+
+	.exo-menu > li > a{
+		width:100% ;
+	    display:none ;
+
+	}
+	.exo-menu > li{
+		width:100%;
+	}
+	.display.exo-menu > li > a{
+	  display:block ;
+	  	padding: 20px 22px;
+	}
+
+.mega-menu, .Images, .Blog,.flyout-right>ul,
+.flyout-left>ul, li.drop-down>ul{
+		position:relative;
+}
+
+}
+a.toggle-menu{
+    position: absolute;
+    right: 0px;
+    padding: 20px;
+    font-size: 27px;
+    background-color: #ccc;
+    color: #23364B;
+    top: 0px;
+}
+</style>
+
+
+
+<div>
+    <ul class="exo-menu">
+        <li class="drop-down">
+            <a href="#"><i class="fa fa-cogs"></i> Flyout</a>
+            <!--Drop Down-->
+            <ul class="drop-down-ul animated fadeIn">
+                <li class="flyout-right">
+                    <a href="#">Flyout Right</a><!--Flyout Right-->
+                    <ul class="animated fadeIn">
+                        <li>
+                            <div style="width:100%">
+                                <div style="width:30%; float:left">
+                                    <a href="https://bibomart.com.vn/sua-physiolac.html" style="color:#333;">
+                                        <span>Sữa Physiolac</span>
+                                    </a>
+                                    <a href="https://bibomart.com.vn/sua-physiolac.html" style="color:#333;">
+                                        <span>Sữa Physiolac</span>
+                                    </a>
+                                    <a href="https://bibomart.com.vn/sua-physiolac.html" style="color:#333;">
+                                        <span>Sữa Physiolac</span>
+                                    </a>
+                                    <a href="https://bibomart.com.vn/sua-physiolac.html" style="color:#333;">
+                                        <span>Sữa Physiolac</span>
+                                    </a>
+                                    <a href="https://bibomart.com.vn/sua-physiolac.html" style="color:#333;">
+                                        <span>Sữa Physiolac</span>
+                                    </a>
+                                </div>
+                                <div style="width:30%; float:left">
+                                    <a href="https://bibomart.com.vn/sua-meiji.html" style="color:#333;">
+                                        <span>Sữa Meiji</span>
+                                    </a>
+                                    <a href="https://bibomart.com.vn/sua-meiji.html" style="color:#333;">
+                                        <span>Sữa Meiji</span>
+                                    </a>
+                                    <a href="https://bibomart.com.vn/sua-meiji.html" style="color:#333;">
+                                        <span>Sữa Meiji</span>
+                                    </a>
+                                    <a href="https://bibomart.com.vn/sua-meiji.html" style="color:#333;">
+                                        <span>Sữa Meiji</span>
+                                    </a>
+
+                                </div>
+                            </div>
+                        </li>
+                    </ul>
+                </li> 
+                <li class="flyout-right">
+                    <a href="#">Flyout Right</a><!--Flyout Right-->
+                    <ul class="animated fadeIn">
+                        <li><a href="#">Mobile</a></li>
+                        <li><a href="#">Computer</a></li>
+                        <li><a href="#">Watch</a></li>
+                    </ul>
+                </li>
+                <li class="flyout-right">
+                    <a href="#">Flyout Right</a><!--Flyout Right-->
+                    <ul class="animated fadeIn">
+                        <li><a href="#">Mobile</a></li>
+                        <li><a href="#">Computer</a></li>
+                        <li><a href="#">Watch</a></li>
+                    </ul>
+                </li>
+                <li class="flyout-right">
+                    <a href="#">Flyout Right</a><!--Flyout Right-->
+                    <ul class="animated fadeIn">
+                        <li><a href="#">Mobile</a></li>
+                        <li><a href="#">Computer</a></li>
+                        <li><a href="#">Watch</a></li>
+                    </ul>
+                </li>
+
+            </ul>
+        </li>
+    </ul>
+</div>
+
+
+@*<div>
+    <ul class="nav-exploded explodedmenu megamenu-menu-ul megamenu-ul">
+
+        <li class="menu megamenu-item  has-child  has-content ">
+            <a href="https://bibomart.com.vn/be-uong-sua.html" class="item_224">
+                <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mP8Xg8AAnMBeJQW2OIAAAAASUVORK5CYII=" data-original="https://bibomart.com.vn/media/mega_menu/item/1-binhsua_1.png" alt="" lazy-menu="">
+                <span style="display: none; background-image: url(https://bibomart.com.vn/media/mega_menu/item/1-binhsua_1.png)"></span>
+                <span>Bé uống sữa</span>
+            </a>
+
+            <ul class="megamenu-ul">
+                <div class="megamenu-box " style="width: 965px;">
+
+
+
+                    <div class="block-main grid                                     col-md-8">
+                        <div class="grid-child col-md-4">
+                            <ul class="megamenu-ul">
+
+
+                                <li >
+                                    <a href="https://bibomart.com.vn/sua-bot-cac-loai.html" style="color: rgb(51, 51, 51);">
+                                        <span>Sữa bột các loại</span>
+                                    </a>
+                                    <ul class="megamenu-ul">
+
+                                        <li >
+                                            <a href="https://bibomart.com.vn/sua-morinaga.html" style="color:#333;">
+                                                <span>Sữa Morinaga</span>
+                                            </a>
+                                        </li>
+
+
+                                        <li >
+                                            <a href="https://bibomart.com.vn/sua-meiji.html" style="color:#333;">
+                                                <span>Sữa Meiji</span>
+                                            </a>
+                                        </li>
+
+
+                                        <li >
+                                            <a href="https://bibomart.com.vn/sua-glico-icreo.html" style="color:#333;">
+                                                <span>Sữa Glico Icreo</span>
+                                            </a>
+                                        </li>
+
+
+                                        <li >
+                                            <a href="https://bibomart.com.vn/sua-aptamil.html" style="color:#333;">
+                                                <span>Sữa Aptamil</span>
+                                            </a>
+                                        </li>
+
+
+                                        <li >
+                                            <a href="https://bibomart.com.vn/sua-pediasure.html" style="color:#333;">
+                                                <span>Sữa PediaSure</span>
+                                            </a>
+                                        </li>
+
+
+                                        <li >
+                                            <a href="https://bibomart.com.vn/sua-blackmores.html" style="color:#333;">
+                                                <span>Sữa Blackmores</span>
+                                            </a>
+                                        </li>
+
+
+                                        <li >
+                                            <a href="https://bibomart.com.vn/sua-nan.html" style="color:#333;">
+                                                <span>Sữa Nan</span>
+                                            </a>
+                                        </li>
+
+
+                                        <li >
+                                            <a href="https://bibomart.com.vn/sua-enfa.html" style="color:#333;">
+                                                <span>Sữa Enfa</span>
+                                            </a>
+                                        </li>
+
+
+                                        <li >
+                                            <a href="https://bibomart.com.vn/sua-grow.html" style="color:#333;">
+                                                <span>Sữa Abbott Grow</span>
+                                            </a>
+                                        </li>
+
+
+                                        <li >
+                                            <a href="https://bibomart.com.vn/sua-hipp.html" style="color:#333;">
+                                                <span>Sữa Hipp</span>
+                                            </a>
+                                        </li>
+
+
+                                        <li >
+                                            <a href="https://bibomart.com.vn/sua-physiolac.html" style="color:#333;">
+                                                <span>Sữa Physiolac</span>
+                                            </a>
+                                        </li>
+
+
+                                        <li >
+                                            <a href="https://bibomart.com.vn/sua-similac.html" style="color:#333;">
+                                                <span>Sữa Similac</span>
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </li>
+
+
+                                <li >
+                                    <a href="https://bibomart.com.vn/sua-nuoc-cac-loai.html" style="color:#333;">
+                                        <span>Sữa nước các loại</span>
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="grid-child col-md-4">
+                            <ul class="megamenu-ul">
+
+
+                                <li >
+                                    <a href="https://bibomart.com.vn/binh-sua.html" style="color: rgb(51, 51, 51);">
+                                        <span>Bình sữa</span>
+                                    </a>
+                                    <ul class="megamenu-ul">
+
+                                        <li >
+                                            <a href="https://bibomart.com.vn/binh-sua-pigeon.html" style="color:#333;">
+                                                <span>Bình sữa Pigeon</span>
+                                            </a>
+                                        </li>
+
+
+                                        <li >
+                                            <a href="https://bibomart.com.vn/binh-sua-comotomo.html" style="color:#333;">
+                                                <span>Bình sữa Comotomo</span>
+                                            </a>
+                                        </li>
+
+
+                                        <li >
+                                            <a href="https://bibomart.com.vn/binh-sua-pur.html" style="color:#333;">
+                                                <span>Bình sữa Pur</span>
+                                            </a>
+                                        </li>
+
+
+                                        <li >
+                                            <a href="https://bibomart.com.vn/binh-sua-chuchu-baby.html" style="color:#333;">
+                                                <span>Bình sữa ChuChu Baby</span>
+                                            </a>
+                                        </li>
+
+
+                                        <li >
+                                            <a href="https://bibomart.com.vn/binh-sua-drbrown-s.html" style="color:#333;">
+                                                <span>Bình sữa DrBrown's</span>
+                                            </a>
+                                        </li>
+
+
+                                        <li >
+                                            <a href="https://bibomart.com.vn/binh-sua-philips-avent.html" style="color:#333;">
+                                                <span>Bình sữa Philips Avent</span>
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </li>
+
+
+                                <li >
+                                    <a href="https://bibomart.com.vn/num-ty.html" style="color:#333;">
+                                        <span>Núm ty</span>
+                                    </a>
+                                    <ul class="megamenu-ul">
+
+                                        <li >
+                                            <a href="https://bibomart.com.vn/num-ty-pigeon.html" style="color:#333;">
+                                                <span>Núm ty Pigeon</span>
+                                            </a>
+                                        </li>
+
+
+                                        <li >
+                                            <a href="https://bibomart.com.vn/num-ty-comotomo.html" style="color:#333;">
+                                                <span>Núm ty Comotomo</span>
+                                            </a>
+                                        </li>
+
+
+                                        <li >
+                                            <a href="https://bibomart.com.vn/num-ty-pur.html" style="color:#333;">
+                                                <span>Núm ty Pur</span>
+                                            </a>
+                                        </li>
+
+
+                                        <li >
+                                            <a href="https://bibomart.com.vn/num-ty-chuchu-baby.html" style="color:#333;">
+                                                <span>Núm ty ChuChu Baby</span>
+                                            </a>
+                                        </li>
+
+
+                                        <li >
+                                            <a href="https://bibomart.com.vn/num-ty-drbrown-s.html" style="color:#333;">
+                                                <span>Núm ty Dr. Brown's</span>
+                                            </a>
+                                        </li>
+
+
+                                        <li >
+                                            <a href="https://bibomart.com.vn/num-ty-philips-avent.html" style="color:#333;">
+                                                <span>Núm ty Philips Avent</span>
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="grid-child col-md-4">
+                            <ul class="megamenu-ul">
+
+
+                                <li >
+                                    <a href="https://bibomart.com.vn/dung-cu-tru-sua-ham-sua.html" style="color:#333;">
+                                        <span>Dụng cụ trữ sữa, hâm sữa</span>
+                                    </a>
+                                    <ul class="megamenu-ul">
+
+                                        <li >
+                                            <a href="https://bibomart.com.vn/binh-u-sua-hop-chia-sua.html" style="color:#333;">
+                                                <span>Bình ủ sữa - Hộp chia sữa</span>
+                                            </a>
+                                        </li>
+
+
+                                        <li >
+                                            <a href="https://bibomart.com.vn/may-tiet-trung-may-ham-sua.html" style="color:#333;">
+                                                <span>Máy tiệt trùng, máy hâm sữa</span>
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </li>
+
+
+                                <li >
+                                    <a href="https://bibomart.com.vn/ve-sinh-binh-sua.html" style="color:#333;">
+                                        <span>Vệ sinh bình sữa</span>
+                                    </a>
+                                    <ul class="megamenu-ul">
+
+                                        <li >
+                                            <a href="https://bibomart.com.vn/nuoc-rua-binh-sua.html" style="color:#333;">
+                                                <span>Nước rửa bình sữa</span>
+                                            </a>
+                                        </li>
+
+
+                                        <li >
+                                            <a href="https://bibomart.com.vn/dung-cu-rua-binh-sua.html" style="color:#333;">
+                                                <span>Dụng cụ rửa bình sữa</span>
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="block-right  col-md-4">
+                        <div class="item"><a href="https://bibomart.com.vn/phao-sale-tung-bung-ron-rang-sam-tet"><img src="https://bibomart.com.vn/media/wysiwyg/bibomart_megamenu/346x200_28.jpg" data-original="https://bibomart.com.vn/media/wysiwyg/bibomart_megamenu/346x200_28.jpg" alt=""></a><a href="https://bibomart.com.vn/phao-sale-tung-bung-ron-rang-sam-tet#top_sua_bot"><img src="https://bibomart.com.vn/media/wysiwyg/bibomart_megamenu/top_sua_cho_be_-_desk.jpg" data-original="https://bibomart.com.vn/media/wysiwyg/bibomart_megamenu/top_sua_cho_be_-_desk.jpg" alt=""></a></div>
+                    </div>
+
+                </div>
+            </ul>
+
+        </li>
+
+
+        <li class="menu megamenu-item  has-child  has-content ">
+            <a href="https://bibomart.com.vn/be-an-dam.html" class="item_233">
+                <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mP8Xg8AAnMBeJQW2OIAAAAASUVORK5CYII=" data-original="https://bibomart.com.vn/media/mega_menu/item/2-andam_1.png" alt="" lazy-menu="">
+                <span style="display: none; background-image: url(https://bibomart.com.vn/media/mega_menu/item/2-andam_1.png)"></span>
+                <span>Bé ăn dặm</span>
+            </a>
+
+            <ul class="megamenu-ul">
+                <div class="megamenu-box " style="width: 965px;">
+
+
+
+                    <div class="block-main grid                                     col-md-8">
+                        <div class="grid-child col-md-4">
+                            <ul class="megamenu-ul">
+
+
+                                <li >
+                                    <a href="https://bibomart.com.vn/bot-an-dam.html" style="color:#333;">
+                                        <span>Bột ăn dặm</span>
+                                    </a>
+                                    <ul class="megamenu-ul">
+
+                                        <li >
+                                            <a href="https://bibomart.com.vn/bot-an-dam-hipp.html" style="color:#333;">
+                                                <span>Bột ăn dặm HiPP</span>
+                                            </a>
+                                        </li>
+
+
+                                        <li >
+                                            <a href="https://bibomart.com.vn/bot-an-dam-nestle.html" style="color: rgb(51, 51, 51);">
+                                                <span>Bột ăn dặm Nestlé</span>
+                                            </a>
+                                        </li>
+
+
+                                        <li >
+                                            <a href="https://bibomart.com.vn/ngu-coc-n-choice.html" style="color: rgb(51, 51, 51);">
+                                                <span>Ngũ cốc N-Choice</span>
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </li>
+
+
+                                <li >
+                                    <a href="https://bibomart.com.vn/banh-an-dam.html" style="color: rgb(51, 51, 51);">
+                                        <span>Bánh ăn dặm</span>
+                                    </a>
+                                    <ul class="megamenu-ul">
+
+                                        <li >
+                                            <a href="https://bibomart.com.vn/banh-an-dam-pigeon.html" style="color:#333;">
+                                                <span>Bánh ăn dặm Pigeon</span>
+                                            </a>
+                                        </li>
+
+
+                                        <li >
+                                            <a href="https://bibomart.com.vn/banh-an-dam-gerber.html" style="color: rgb(51, 51, 51);">
+                                                <span>Bánh ăn dặm Gerber</span>
+                                            </a>
+                                        </li>
+
+
+                                        <li >
+                                            <a href="https://bibomart.com.vn/banh-an-dam-maiel-dairies.html" style="color: rgb(51, 51, 51);">
+                                                <span>Bánh gạo Maeil Dairies</span>
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </li>
+
+
+                                <li >
+                                    <a href="https://bibomart.com.vn/my-chao-an-dam.html" style="color:#333;">
+                                        <span>Mỳ - Cháo ăn dặm</span>
+                                    </a>
+                                    <ul class="megamenu-ul">
+
+                                        <li >
+                                            <a href="https://bibomart.com.vn/chao-soup-sai-gon.html" style="color:#333;">
+                                                <span>Cháo - Soup Sài Gòn</span>
+                                            </a>
+                                        </li>
+
+
+                                        <li >
+                                            <a href="https://bibomart.com.vn/chao-heinz.html" style="color:#333;">
+                                                <span>Cháo Heinz</span>
+                                            </a>
+                                        </li>
+
+
+                                        <li >
+                                            <a href="https://bibomart.com.vn/chao-tuoi-cay-thi.html" style="color:#333;">
+                                                <span>Cháo tươi Cây Thị</span>
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </li>
+
+
+                                <li >
+                                    <a href="https://bibomart.com.vn/dinh-duong-dong-lo.html" style="color:#333;">
+                                        <span>Dinh dưỡng đóng lọ</span>
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="grid-child col-md-4">
+                            <ul class="megamenu-ul">
+
+
+                                <li >
+                                    <a href="https://bibomart.com.vn/vang-sua-pho-mai-sua-chua.html" style="color: rgb(51, 51, 51);">
+                                        <span>Váng sữa/Phô mai/Sữa chua</span>
+                                    </a>
+                                </li>
+
+
+                                <li >
+                                    <a href="https://bibomart.com.vn/thuc-pham-an-dam-khac.html" style="color: rgb(51, 51, 51);">
+                                        <span>Thực phẩm ăn dặm khác</span>
+                                    </a>
+                                    <ul class="megamenu-ul">
+
+                                        <li >
+                                            <a href="https://bibomart.com.vn/dau-o-liu.html" style="color:#333;">
+                                                <span>Dầu ô liu</span>
+                                            </a>
+                                        </li>
+
+
+                                        <li >
+                                            <a href="https://bibomart.com.vn/keo-cho-be.html" style="color:#333;">
+                                                <span>Kẹo cho bé</span>
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </li>
+
+
+                                <li >
+                                    <a href="https://bibomart.com.vn/dung-cu-tap-an-tap-uong.html" style="color:#333;">
+                                        <span>Dụng cụ tập ăn, tập uống</span>
+                                    </a>
+                                    <ul class="megamenu-ul">
+
+                                        <li >
+                                            <a href="https://bibomart.com.vn/bat-thia-dia.html" style="color:#333;">
+                                                <span>Bát - Thìa - Đĩa</span>
+                                            </a>
+                                        </li>
+
+
+                                        <li >
+                                            <a href="https://bibomart.com.vn/coc-binh-tap-uong.html" style="color:#333;">
+                                                <span>Cốc - Bình tập uống</span>
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </li>
+
+
+                                <li >
+                                    <a href="https://bibomart.com.vn/yem-an-cho-be.html" style="color:#333;">
+                                        <span>Yếm ăn cho bé</span>
+                                    </a>
+                                    <ul class="megamenu-ul">
+
+                                        <li >
+                                            <a href="https://bibomart.com.vn/yem-mang.html" style="color:#333;">
+                                                <span>Yếm máng</span>
+                                            </a>
+                                        </li>
+
+
+                                        <li >
+                                            <a href="https://bibomart.com.vn/yem-dan-khuy-bam.html" style="color:#333;">
+                                                <span>Yếm dán/khuy bấm</span>
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="grid-child col-md-4">
+                            <ul class="megamenu-ul">
+
+
+                                <li >
+                                    <a href="https://bibomart.com.vn/ghe-an-cho-be.html" style="color:#333;">
+                                        <span>Ghế ăn cho bé</span>
+                                    </a>
+                                    <ul class="megamenu-ul">
+
+                                        <li >
+                                            <a href="https://bibomart.com.vn/ghe-an-mastela.html" style="color:#333;">
+                                                <span>Ghế ăn Mastela</span>
+                                            </a>
+                                        </li>
+
+
+                                        <li >
+                                            <a href="https://bibomart.com.vn/ghe-an-joie.html" style="color: rgb(51, 51, 51);">
+                                                <span>Ghế ăn Joie</span>
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </li>
+
+
+                                <li >
+                                    <a href="https://bibomart.com.vn/dung-cu-che-bien-an-dam.html" style="color:#333;">
+                                        <span>Dụng cụ chế biến ăn dặm</span>
+                                    </a>
+                                </li>
+
+
+                                <li >
+                                    <a href="https://bibomart.com.vn/may-xay.html" style="color:#333;">
+                                        <span>Máy xay</span>
+                                    </a>
+                                    <ul class="megamenu-ul">
+
+                                        <li >
+                                            <a href="https://bibomart.com.vn/braun.html" style="color:#333;">
+                                                <span>Máy xay Braun</span>
+                                            </a>
+                                        </li>
+
+
+                                        <li >
+                                            <a href="https://bibomart.com.vn/fatzbaby.html" style="color:#333;">
+                                                <span>Máy Fatzbaby</span>
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </li>
+
+
+                                <li >
+                                    <a href="https://bibomart.com.vn/do-dung-cho-be-an-dam-khac.html" style="color:#333;">
+                                        <span>Đồ dùng cho bé ăn dặm khác</span>
+                                    </a>
+                                    <ul class="megamenu-ul">
+
+                                        <li >
+                                            <a href="https://bibomart.com.vn/tui-nhai-chong-hoc.html" style="color:#333;">
+                                                <span>Túi nhai chống hóc</span>
+                                            </a>
+                                        </li>
+
+
+                                        <li >
+                                            <a href="https://bibomart.com.vn/dung-cu-giu-nhiet.html" style="color:#333;">
+                                                <span>Dụng cụ giữ nhiệt</span>
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="block-right  col-md-4">
+                        <p><a href="https://bibomart.com.vn/phao-sale-tung-bung-ron-rang-sam-tet#thuc_pham_cho_be"><img src="https://bibomart.com.vn/media/wysiwyg/bibomart_megamenu/thuc_pham_cho_be_-_desk.jpg" data-original="https://bibomart.com.vn/media/wysiwyg/bibomart_megamenu/thuc_pham_cho_be_-_desk.jpg" alt=""></a><a href="https://bibomart.com.vn/phao-sale-tung-bung-ron-rang-sam-tet#dealhot"><img src="https://bibomart.com.vn/media/wysiwyg/bibomart_megamenu/ghe_cho_be_an_-_desk.jpg" data-original="https://bibomart.com.vn/media/wysiwyg/bibomart_megamenu/ghe_cho_be_an_-_desk.jpg" alt=""></a></p>
+                    </div>
+
+                </div>
+            </ul>
+
+        </li>
+
+
+        <li class="menu megamenu-item  has-child  has-content ">
+            <a href="https://bibomart.com.vn/be-tam-va-ve-sinh.html" class="item_282">
+                <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mP8Xg8AAnMBeJQW2OIAAAAASUVORK5CYII=" data-original="https://bibomart.com.vn/media/mega_menu/item/5-ta.png" alt="" lazy-menu="">
+                <span style="display: none; background-image: url(https://bibomart.com.vn/media/mega_menu/item/5-ta.png)"></span>
+                <span>Bé tắm và vệ sinh</span>
+            </a>
+
+            <ul class="megamenu-ul">
+                <div class="megamenu-box " style="width: 965px;">
+
+
+
+                    <div class="block-main grid                                     col-md-8">
+                        <div class="grid-child col-md-4">
+                            <ul class="megamenu-ul">
+
+
+                                <li >
+                                    <a href="https://bibomart.com.vn/bim-va-ta-giay-cho-be.html" style="color:#333;">
+                                        <span>Bỉm và tã giấy cho bé</span>
+                                    </a>
+                                    <ul class="megamenu-ul">
+
+                                        <li >
+                                            <a href="https://bibomart.com.vn/ta-quan.html" style="color:#333;">
+                                                <span>Tã quần</span>
+                                            </a>
+                                        </li>
+
+
+                                        <li >
+                                            <a href="https://bibomart.com.vn/ta-dan.html" style="color:#333;">
+                                                <span>Tã dán</span>
+                                            </a>
+                                        </li>
+
+
+                                        <li >
+                                            <a href="https://bibomart.com.vn/bim-moony-ta-moony.html" style="color:#333;">
+                                                <span>Bỉm Moony - Tã Moony</span>
+                                            </a>
+                                        </li>
+
+
+                                        <li >
+                                            <a href="https://bibomart.com.vn/bim-merries-ta-merries.html" style="color:#333;">
+                                                <span>Bỉm Merries - Tã Merries</span>
+                                            </a>
+                                        </li>
+
+
+                                        <li >
+                                            <a href="https://bibomart.com.vn/bim-huggies-ta-huggies.html" style="color: rgb(51, 51, 51);">
+                                                <span>Bỉm Huggies - Tã Huggies</span>
+                                            </a>
+                                        </li>
+
+
+                                        <li >
+                                            <a href="https://bibomart.com.vn/bim-goon-ta-goon.html" style="color: rgb(51, 51, 51);">
+                                                <span>Bỉm Goon - Tã Goon</span>
+                                            </a>
+                                        </li>
+
+
+                                        <li >
+                                            <a href="https://bibomart.com.vn/bim-bobby-ta-bobby.html" style="color:#333;">
+                                                <span>Bỉm Bobby - Tã Bobby</span>
+                                            </a>
+                                        </li>
+
+
+                                        <li >
+                                            <a href="https://bibomart.com.vn/bim-unidry-ta-unidry.html" style="color:#333;">
+                                                <span>Bỉm Unidry - Tã Unidry</span>
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </li>
+
+
+                                <li >
+                                    <a href="https://bibomart.com.vn/khan-giay-uot-giay-kho.html" style="color:#333;">
+                                        <span>Khăn giấy ướt - Giấy khô</span>
+                                    </a>
+                                </li>
+
+
+                                <li >
+                                    <a href="https://bibomart.com.vn/kem-ham-phan-rom.html" style="color:#333;">
+                                        <span>Kem hăm - Phấn rôm</span>
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="grid-child col-md-4">
+                            <ul class="megamenu-ul">
+
+
+                                <li >
+                                    <a href="https://bibomart.com.vn/ve-sinh-ca-nhan-cho-be.html" style="color:#333;">
+                                        <span>Vệ sinh cá nhân cho bé</span>
+                                    </a>
+                                    <ul class="megamenu-ul">
+
+                                        <li >
+                                            <a href="https://bibomart.com.vn/ban-chai-kem-danh-rang.html" style="color:#333;">
+                                                <span>Bàn chải - Kem đánh răng</span>
+                                            </a>
+                                        </li>
+
+
+                                        <li >
+                                            <a href="https://bibomart.com.vn/bo-ve-sinh.html" style="color:#333;">
+                                                <span>Bô vệ sinh</span>
+                                            </a>
+                                        </li>
+
+
+                                        <li >
+                                            <a href="https://bibomart.com.vn/dung-cu-ve-sinh-cho-be.html" style="color:#333;">
+                                                <span>Dụng cụ vệ sinh cho bé</span>
+                                            </a>
+                                        </li>
+
+
+
+                                        <li >
+                                            <a href="https://bibomart.com.vn/dung-cu-hut-mui.html" style="color:#333;">
+                                                <span>Dụng cụ hút mũi</span>
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </li>
+
+
+                                <li >
+                                    <a href="https://bibomart.com.vn/dau-goi-sua-tam-cho-be.html" style="color:#333;">
+                                        <span>Dầu gội - Sữa tắm cho bé</span>
+                                    </a>
+                                    <ul class="megamenu-ul">
+
+                                        <li >
+                                            <a href="https://bibomart.com.vn/sua-tam-goi-chicco.html" style="color:#333;">
+                                                <span>Sữa tắm gội Chicco</span>
+                                            </a>
+                                        </li>
+
+
+                                        <li >
+                                            <a href="https://bibomart.com.vn/sua-tam-goi-pigeon.html" style="color:#333;">
+                                                <span>Sữa tắm gội Pigeon</span>
+                                            </a>
+                                        </li>
+
+
+                                        <li >
+                                            <a href="https://bibomart.com.vn/sua-tam-goi-bubchen.html" style="color:#333;">
+                                                <span>Sữa tắm gội Bubchen</span>
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </li>
+
+
+                                <li >
+                                    <a href="https://bibomart.com.vn/do-dung-tam-be.html" style="color:#333;">
+                                        <span>Đồ dùng tắm bé</span>
+                                    </a>
+                                    <ul class="megamenu-ul">
+
+                                        <li >
+                                            <a href="https://bibomart.com.vn/chau-tam-va-phu-kien.html" style="color:#333;">
+                                                <span>Chậu tắm và phụ kiện</span>
+                                            </a>
+                                        </li>
+
+
+                                        <li >
+                                            <a href="https://bibomart.com.vn/khan-mat-khan-tam.html" style="color:#333;">
+                                                <span>Khăn mặt, khăn tắm</span>
+                                            </a>
+                                        </li>
+
+
+                                        <li >
+                                            <a href="https://bibomart.com.vn/do-nhiet-do-tam-be.html" style="color:#333;">
+                                                <span>Đo nhiệt độ tắm bé</span>
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="grid-child col-md-4">
+                            <ul class="megamenu-ul">
+
+
+                                <li >
+                                    <a href="https://bibomart.com.vn/bot-giat-nuoc-xa-vai.html" style="color:#333;">
+                                        <span>Bột giặt, nước xả vải</span>
+                                    </a>
+                                    <ul class="megamenu-ul">
+
+                                        <li >
+                                            <a href="https://bibomart.com.vn/d-nee.html" style="color:#333;">
+                                                <span>D-nee</span>
+                                            </a>
+                                        </li>
+
+
+                                        <li >
+                                            <a href="https://bibomart.com.vn/k-mom.html" style="color:#333;">
+                                                <span>K-Mom</span>
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </li>
+
+
+                                <li >
+                                    <a href="https://bibomart.com.vn/do-ve-sinh-khac.html" style="color:#333;">
+                                        <span>Đồ vệ sinh khác</span>
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="block-right  col-md-4">
+                        <p><a href="https://bibomart.com.vn/phao-sale-tung-bung-ron-rang-sam-tet#moony"><img src="https://bibomart.com.vn/media/wysiwyg/bibomart_megamenu/bim_-_desk.jpg" data-original="https://bibomart.com.vn/media/wysiwyg/bibomart_megamenu/bim_-_desk.jpg" alt=""></a><a href="https://game.bibomart.com.vn/vong-quay-den-bibo-rinh-oto"><img src="https://bibomart.com.vn/media/wysiwyg/bibomart_megamenu/346x200_20.jpg" data-original="https://bibomart.com.vn/media/wysiwyg/bibomart_megamenu/346x200_20.jpg" alt=""></a></p>
+                    </div>
+
+                </div>
+            </ul>
+
+        </li>
+
+
+        <li class="menu megamenu-item  has-child  has-content ">
+            <a href="https://bibomart.com.vn/be-mac.html" class="item_246">
+                <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mP8Xg8AAnMBeJQW2OIAAAAASUVORK5CYII=" data-original="https://bibomart.com.vn/media/mega_menu/item/3-bemac.png" alt="" lazy-menu="">
+                <span style="display: none; background-image: url(https://bibomart.com.vn/media/mega_menu/item/3-bemac.png)"></span>
+                <span>Bé mặc</span>
+            </a>
+
+            <ul class="megamenu-ul">
+                <div class="megamenu-box " style="width: 965px;">
+
+
+
+                    <div class="block-main grid                                     col-md-8">
+                        <div class="grid-child col-md-4">
+                            <ul class="megamenu-ul">
+
+
+                                <li >
+                                    <a href="https://bibomart.com.vn/do-so-sinh-cho-be.html" style="color:#333;">
+                                        <span>Đồ sơ sinh cho bé</span>
+                                    </a>
+                                    <ul class="megamenu-ul">
+
+                                        <li >
+                                            <a href="https://bibomart.com.vn/bao-chan-bao-tay.html" style="color:#333;">
+                                                <span>Bao chân, bao tay</span>
+                                            </a>
+                                        </li>
+
+
+                                        <li >
+                                            <a href="https://bibomart.com.vn/mu-so-sinh-che-thop.html" style="color:#333;">
+                                                <span>Mũ sơ sinh - che thóp</span>
+                                            </a>
+                                        </li>
+
+
+                                        <li >
+                                            <a href="https://bibomart.com.vn/ta-vai.html" style="color:#333;">
+                                                <span>Tã vải</span>
+                                            </a>
+                                        </li>
+
+
+                                        <li >
+                                            <a href="https://bibomart.com.vn/be-mac/do-so-sinh-cho-be/khan-xo-khan-sua.html" style="color:#333;">
+                                                <span>Khăn xô, khăn sữa</span>
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </li>
+
+
+                                <li >
+                                    <a href="https://bibomart.com.vn/quan-ao-so-sinh.html" style="color:#333;">
+                                        <span>Quần áo sơ sinh</span>
+                                    </a>
+                                    <ul class="megamenu-ul">
+
+                                        <li >
+                                            <a href="https://bibomart.com.vn/ao-so-sinh.html" style="color:#333;">
+                                                <span>Áo sơ sinh</span>
+                                            </a>
+                                        </li>
+
+
+                                        <li >
+                                            <a href="https://bibomart.com.vn/quan-so-sinh.html" style="color:#333;">
+                                                <span>Quần sơ sinh</span>
+                                            </a>
+                                        </li>
+
+
+                                        <li >
+                                            <a href="https://bibomart.com.vn/bo-quan-ao-so-sinh.html" style="color:#333;">
+                                                <span>Bộ quần áo sơ sinh</span>
+                                            </a>
+                                        </li>
+
+
+                                        <li >
+                                            <a href="https://bibomart.com.vn/bo-body.html" style="color:#333;">
+                                                <span>Bộ body</span>
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="grid-child col-md-4">
+                            <ul class="megamenu-ul">
+
+
+                                <li >
+                                    <a href="https://bibomart.com.vn/thoi-trang-be-gai.html" style="color:#333;">
+                                        <span>Thời trang bé gái</span>
+                                    </a>
+                                    <ul class="megamenu-ul">
+
+                                        <li >
+                                            <a href="https://bibomart.com.vn/ao-be-gai.html" style="color:#333;">
+                                                <span>Áo bé gái</span>
+                                            </a>
+                                        </li>
+
+
+                                        <li >
+                                            <a href="https://bibomart.com.vn/quan-be-gai.html" style="color:#333;">
+                                                <span>Quần bé gái</span>
+                                            </a>
+                                        </li>
+
+
+                                        <li >
+                                            <a href="https://bibomart.com.vn/vay-be-gai.html" style="color:#333;">
+                                                <span>Váy bé gái</span>
+                                            </a>
+                                        </li>
+
+
+                                        <li >
+                                            <a href="https://bibomart.com.vn/bo-quan-ao-be-gai.html" style="color:#333;">
+                                                <span>Bộ quần áo bé gái</span>
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </li>
+
+
+                                <li >
+                                    <a href="https://bibomart.com.vn/thoi-trang-be-trai.html" style="color:#333;">
+                                        <span>Thời trang bé trai</span>
+                                    </a>
+                                    <ul class="megamenu-ul">
+
+                                        <li >
+                                            <a href="https://bibomart.com.vn/ao-be-trai.html" style="color:#333;">
+                                                <span>Áo bé trai</span>
+                                            </a>
+                                        </li>
+
+
+                                        <li >
+                                            <a href="https://bibomart.com.vn/giay-tre-em.html" style="color:#333;">
+                                                <span>Giày trẻ em</span>
+                                            </a>
+                                        </li>
+
+
+                                        <li >
+                                            <a href="https://bibomart.com.vn/quan-be-trai.html" style="color:#333;">
+                                                <span>Quần bé trai</span>
+                                            </a>
+                                        </li>
+
+
+                                        <li >
+                                            <a href="https://bibomart.com.vn/bo-quan-ao-be-trai.html" style="color:#333;">
+                                                <span>Bộ quần áo bé trai</span>
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="grid-child col-md-4">
+                            <ul class="megamenu-ul">
+
+
+                                <li >
+                                    <a href="https://bibomart.com.vn/giay-dep-tre-em.html" style="color:#333;">
+                                        <span>Giày - Dép trẻ em</span>
+                                    </a>
+                                    <ul class="megamenu-ul">
+
+                                        <li >
+                                            <a href="https://bibomart.com.vn/giay-xang-dan-tap-di.html" style="color:#333;">
+                                                <span>Giày - Xăng đan tập đi</span>
+                                            </a>
+                                        </li>
+
+
+                                        <li >
+                                            <a href="https://bibomart.com.vn/xang-dan-dep-tre-em.html" style="color:#333;">
+                                                <span>Xăng đan - dép trẻ em</span>
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </li>
+
+
+                                <li >
+                                    <a href="https://bibomart.com.vn/balo-cho-be.html" style="color:#333;">
+                                        <span>Balo cho bé</span>
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="grid-child col-md-4">
+                            <ul class="megamenu-ul">
+
+
+                                <li >
+                                    <a href="https://bibomart.com.vn/phu-kien-thoi-trang.html" style="color:#333;">
+                                        <span>Phụ kiện thời trang</span>
+                                    </a>
+                                    <ul class="megamenu-ul">
+
+                                        <li >
+                                            <a href="https://bibomart.com.vn/mu-khan.html" style="color:#333;">
+                                                <span>Mũ khăn</span>
+                                            </a>
+                                        </li>
+
+
+                                        <li >
+                                            <a href="https://bibomart.com.vn/tat.html" style="color:#333;">
+                                                <span>Tất</span>
+                                            </a>
+                                        </li>
+
+
+                                        <li >
+                                            <a href="https://bibomart.com.vn/cap-toc-day-chun-bom.html" style="color:#333;">
+                                                <span>Cặp tóc, dây chun, bờm</span>
+                                            </a>
+                                        </li>
+
+
+                                        <li >
+                                            <a href="https://bibomart.com.vn/phu-kien-khac.html" style="color:#333;">
+                                                <span>Phụ kiện khác</span>
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="block-right  col-md-4">
+                        <div class="item"><a href="https://bibomart.com.vn/xa-hang-don-tet"><img src="https://bibomart.com.vn/media/wysiwyg/bibomart_megamenu/346x200_27.jpg" data-original="https://bibomart.com.vn/media/wysiwyg/bibomart_megamenu/346x200_27.jpg" alt=""></a><a href="https://bibomart.com.vn/thoi-trang-thu-dong-2019"><img src="https://bibomart.com.vn/media/wysiwyg/bibomart_megamenu/346x200-thoitrang_1.jpg" data-original="https://bibomart.com.vn/media/wysiwyg/bibomart_megamenu/346x200-thoitrang_1.jpg" alt=""></a></div>
+                    </div>
+
+                </div>
+            </ul>
+
+        </li>
+
+
+        <li class="menu megamenu-item  has-child  has-content ">
+            <a href="https://bibomart.com.vn/be-ngu.html" class="item_276">
+                <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mP8Xg8AAnMBeJQW2OIAAAAASUVORK5CYII=" data-original="https://bibomart.com.vn/media/mega_menu/item/4-bengu.png" alt="" lazy-menu="">
+                <span style="display: none; background-image: url(https://bibomart.com.vn/media/mega_menu/item/4-bengu.png)"></span>
+                <span>Bé ngủ</span>
+            </a>
+
+            <ul class="megamenu-ul">
+                <div class="megamenu-box " style="width: 965px;">
+
+
+
+                    <div class="block-main grid                                     col-md-8">
+                        <div class="grid-child col-md-4">
+                            <ul class="megamenu-ul">
+
+
+                                <li >
+                                    <a href="https://bibomart.com.vn/chan-dem-ga-goi.html" style="color:#333;">
+                                        <span>Chăn, đệm, ga, gối</span>
+                                    </a>
+                                    <ul class="megamenu-ul">
+
+                                        <li >
+                                            <a href="https://bibomart.com.vn/chan.html" style="color:#333;">
+                                                <span>Chăn</span>
+                                            </a>
+                                        </li>
+
+
+                                        <li >
+                                            <a href="https://bibomart.com.vn/goi.html" style="color:#333;">
+                                                <span>Gối</span>
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </li>
+
+
+                                <li >
+                                    <a href="https://bibomart.com.vn/choang-be.html" style="color:#333;">
+                                        <span>Choàng bế</span>
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="grid-child col-md-4">
+                            <ul class="megamenu-ul">
+
+
+                                <li >
+                                    <a href="https://bibomart.com.vn/giuong-cui-va-phu-kien.html" style="color:#333;">
+                                        <span>Giường, cũi và phụ kiện</span>
+                                    </a>
+                                    <ul class="megamenu-ul">
+
+                                        <li >
+                                            <a href="https://bibomart.com.vn/giuong-cho-be.html" style="color:#333;">
+                                                <span>Giường cho bé</span>
+                                            </a>
+                                        </li>
+
+
+                                        <li >
+                                            <a href="https://bibomart.com.vn/cui-va-phu-kien.html" style="color:#333;">
+                                                <span>Cũi và phụ kiện</span>
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </li>
+
+
+                                <li >
+                                    <a href="https://bibomart.com.vn/ghe-rung-cho-be.html" style="color:#333;">
+                                        <span>Ghế rung cho bé</span>
+                                    </a>
+                                    <ul class="megamenu-ul">
+
+                                        <li >
+                                            <a href="https://bibomart.com.vn/ghe-rung-mastela.html" style="color:#333;">
+                                                <span>Ghế rung Mastela</span>
+                                            </a>
+                                        </li>
+
+
+                                        <li >
+                                            <a href="https://bibomart.com.vn/ghe-rung-konig-kids.html" style="color:#333;">
+                                                <span>Ghế rung Konig Kids</span>
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="grid-child col-md-4">
+                            <ul class="megamenu-ul">
+
+
+                                <li >
+                                    <a href="https://bibomart.com.vn/noi-cho-be.html" style="color:#333;">
+                                        <span>Nôi cho bé</span>
+                                    </a>
+                                    <ul class="megamenu-ul">
+
+                                        <li >
+                                            <a href="https://bibomart.com.vn/noi-mastela.html" style="color:#333;">
+                                                <span>Nôi Mastela</span>
+                                            </a>
+                                        </li>
+
+
+                                        <li >
+                                            <a href="https://bibomart.com.vn/noi-autoru.html" style="color:#333;">
+                                                <span>Nôi Autoru</span>
+                                            </a>
+                                        </li>
+
+
+                                        <li >
+                                            <a href="https://bibomart.com.vn/noi-joie.html" style="color:#333;">
+                                                <span>Nôi Joie</span>
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="block-right  col-md-4">
+                        <div class="item"><a href="https://bibomart.com.vn/phao-sale-tung-bung-ron-rang-sam-tet#dealhot"><img src="https://bibomart.com.vn/media/wysiwyg/bibomart_megamenu/noi_cho_be_-_desk.jpg" data-original="https://bibomart.com.vn/media/wysiwyg/bibomart_megamenu/noi_cho_be_-_desk.jpg" alt=""></a></div>
+                    </div>
+
+                </div>
+            </ul>
+
+        </li>
+
+
+        <li class="menu megamenu-item  has-child  has-content ">
+            <a href="https://bibomart.com.vn/be-di-choi-va-van-dong.html" class="item_315">
+                <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mP8Xg8AAnMBeJQW2OIAAAAASUVORK5CYII=" data-original="https://bibomart.com.vn/media/mega_menu/item/6-xeday.png" alt="" lazy-menu="">
+                <span style="display: none; background-image: url(https://bibomart.com.vn/media/mega_menu/item/6-xeday.png)"></span>
+                <span>Bé đi chơi và vận động</span>
+            </a>
+
+            <ul class="megamenu-ul">
+                <div class="megamenu-box " style="width: 965px;">
+
+
+
+                    <div class="block-main grid                                     col-md-8">
+                        <div class="grid-child col-md-4">
+                            <ul class="megamenu-ul">
+
+
+                                <li >
+                                    <a href="https://bibomart.com.vn/xe-day.html" style="color:#333;">
+                                        <span>Xe đẩy</span>
+                                    </a>
+                                    <ul class="megamenu-ul">
+
+                                        <li >
+                                            <a href="https://bibomart.com.vn/xe-day-gluck.html" style="color:#333;">
+                                                <span>Xe đẩy Gluck Baby</span>
+                                            </a>
+                                        </li>
+
+
+                                        <li >
+                                            <a href="https://bibomart.com.vn/xe-day-seebaby.html" style="color:#333;">
+                                                <span>Xe đẩy Seebaby</span>
+                                            </a>
+                                        </li>
+
+
+                                        <li >
+                                            <a href="https://bibomart.com.vn/xe-day-combi.html" style="color:#333;">
+                                                <span>Xe đẩy Combi</span>
+                                            </a>
+                                        </li>
+
+
+                                        <li >
+                                            <a href="https://bibomart.com.vn/xe-day-joie.html" style="color:#333;">
+                                                <span>Xe đẩy Joie</span>
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="grid-child col-md-4">
+                            <ul class="megamenu-ul">
+
+
+                                <li >
+                                    <a href="https://bibomart.com.vn/xe-cho-be.html" style="color:#333;">
+                                        <span>Xe cho bé</span>
+                                    </a>
+                                    <ul class="megamenu-ul">
+
+                                        <li >
+                                            <a href="https://bibomart.com.vn/xe-tap-di.html" style="color:#333;">
+                                                <span>Xe tập đi</span>
+                                            </a>
+                                        </li>
+
+
+                                        <li >
+                                            <a href="https://bibomart.com.vn/xe-lac-xe-choi-chan.html" style="color:#333;">
+                                                <span>Xe lắc, xe chòi chân</span>
+                                            </a>
+                                        </li>
+
+
+                                        <li >
+                                            <a href="https://bibomart.com.vn/xe-scooter.html" style="color:#333;">
+                                                <span>Xe Scooter</span>
+                                            </a>
+                                        </li>
+
+
+                                        <li >
+                                            <a href="https://bibomart.com.vn/xe-dap.html" style="color:#333;">
+                                                <span>Xe đạp</span>
+                                            </a>
+                                        </li>
+
+
+                                        <li >
+                                            <a href="https://bibomart.com.vn/xe-va-phu-kien-van-dong-khac.html" style="color:#333;">
+                                                <span>Xe và phụ kiện vận động khác</span>
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="grid-child col-md-4">
+                            <ul class="megamenu-ul">
+
+
+                                <li >
+                                    <a href="https://bibomart.com.vn/diu-dai-cho-be.html" style="color:#333;">
+                                        <span>Địu, đai cho bé</span>
+                                    </a>
+                                    <ul class="megamenu-ul">
+
+                                        <li >
+                                            <a href="https://bibomart.com.vn/diu-gluck.html" style="color:#333;">
+                                                <span>Địu Gluck</span>
+                                            </a>
+                                        </li>
+
+
+                                        <li >
+                                            <a href="https://bibomart.com.vn/diu-ngoi-baby-lab.html" style="color:#333;">
+                                                <span>Địu ngồi Baby Lab</span>
+                                            </a>
+                                        </li>
+
+
+                                        <li >
+                                            <a href="https://bibomart.com.vn/diu-ngoi-eggbaby.html" style="color:#333;">
+                                                <span>Địu ngồi Eggbaby</span>
+                                            </a>
+                                        </li>
+
+
+                                        <li >
+                                            <a href="https://bibomart.com.vn/diu-ngoi-aag.html" style="color:#333;">
+                                                <span>Địu ngồi AAG</span>
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="grid-child col-md-4">
+                            <ul class="megamenu-ul">
+
+
+                                <li >
+                                    <a href="https://bibomart.com.vn/do-boi-cho-be.html" style="color:#333;">
+                                        <span>Đồ bơi cho bé</span>
+                                    </a>
+                                    <ul class="megamenu-ul">
+
+                                        <li >
+                                            <a href="https://bibomart.com.vn/quan-ao-boi.html" style="color:#333;">
+                                                <span>Quần áo bơi</span>
+                                            </a>
+                                        </li>
+
+
+                                        <li >
+                                            <a href="https://bibomart.com.vn/phu-kien-do-boi.html" style="color:#333;">
+                                                <span>Phụ kiện đồ bơi</span>
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="block-right  col-md-4">
+                        <p><a href="https://bibomart.com.vn/phao-sale-tung-bung-ron-rang-sam-tet#dealhot"><img src="https://bibomart.com.vn/media/wysiwyg/bibomart_megamenu/xe_day_cho_be_-_desk.jpg" data-original="https://bibomart.com.vn/media/wysiwyg/bibomart_megamenu/xe_day_cho_be_-_desk.jpg" alt=""></a></p>
+                    </div>
+
+                </div>
+            </ul>
+
+        </li>
+
+
+        <li class="menu megamenu-item  has-child  has-content ">
+            <a href="https://bibomart.com.vn/be-choi-va-hoc.html" class="item_300">
+                <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mP8Xg8AAnMBeJQW2OIAAAAASUVORK5CYII=" data-original="https://bibomart.com.vn/media/mega_menu/item/7-bechoi.png" alt="" lazy-menu="">
+                <span style="display: none; background-image: url(https://bibomart.com.vn/media/mega_menu/item/7-bechoi.png)"></span>
+                <span>Bé chơi và học</span>
+            </a>
+
+            <ul class="megamenu-ul">
+                <div class="megamenu-box " style="width: 965px;">
+
+
+
+                    <div class="block-main grid                                     col-md-8">
+                        <div class="grid-child col-md-4">
+                            <ul class="megamenu-ul">
+
+
+                                <li >
+                                    <a href="https://bibomart.com.vn/do-choi-cho-tre-so-sinh.html" style="color:#333;">
+                                        <span>Đồ chơi cho trẻ sơ sinh</span>
+                                    </a>
+                                    <ul class="megamenu-ul">
+
+                                        <li >
+                                            <a href="https://bibomart.com.vn/do-choi-bop-chip-xuc-xac.html" style="color:#333;">
+                                                <span>Đồ chơi bóp chíp - xúc xắc</span>
+                                            </a>
+                                        </li>
+
+
+                                        <li >
+                                            <a href="https://bibomart.com.vn/do-choi-treo-noi-cui-xe-day.html" style="color:#333;">
+                                                <span>Treo nôi cũi, xe đẩy</span>
+                                            </a>
+                                        </li>
+
+
+                                        <li >
+                                            <a href="https://bibomart.com.vn/tham-choi-cho-be.html" style="color:#333;">
+                                                <span>Thảm chơi cho bé</span>
+                                            </a>
+                                        </li>
+
+
+                                        <li >
+                                            <a href="https://bibomart.com.vn/ke-chu-a.html" style="color:#333;">
+                                                <span>Kệ chữ A</span>
+                                            </a>
+                                        </li>
+
+
+                                        <li >
+                                            <a href="https://bibomart.com.vn/can-rang.html" style="color:#333;">
+                                                <span>Cắn răng</span>
+                                            </a>
+                                        </li>
+
+
+                                        <li >
+                                            <a href="https://bibomart.com.vn/ty-ngam.html" style="color:#333;">
+                                                <span>Ty ngậm</span>
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </li>
+
+
+                                <li >
+                                    <a href="https://bibomart.com.vn/do-choi-giao-duc.html" style="color:#333;">
+                                        <span>Đồ chơi giáo dục</span>
+                                    </a>
+                                    <ul class="megamenu-ul">
+
+                                        <li >
+                                            <a href="https://bibomart.com.vn/do-choi-hoc-tap.html" style="color:#333;">
+                                                <span>Đồ chơi học tập</span>
+                                            </a>
+                                        </li>
+
+
+                                        <li >
+                                            <a href="https://bibomart.com.vn/dat-nan-bot-nan.html" style="color:#333;">
+                                                <span>Đất nặn - Bột nặn</span>
+                                            </a>
+                                        </li>
+
+
+                                        <li >
+                                            <a href="https://bibomart.com.vn/do-choi-am-nhac.html" style="color:#333;">
+                                                <span>Đồ chơi âm nhạc</span>
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </li>
+
+
+                                <li >
+                                    <a href="https://bibomart.com.vn/do-choi-xep-hinh-lap-rap.html" style="color: rgb(51, 51, 51);">
+                                        <span>Đồ chơi xếp hình, lắp ráp</span>
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="grid-child col-md-4">
+                            <ul class="megamenu-ul">
+
+
+                                <li >
+                                    <a href="https://bibomart.com.vn/do-choi-van-dong.html" style="color:#333;">
+                                        <span>Đồ chơi vận động</span>
+                                    </a>
+                                </li>
+
+
+                                <li >
+                                    <a href="https://bibomart.com.vn/do-choi-go.html" style="color:#333;">
+                                        <span>Đồ chơi gỗ</span>
+                                    </a>
+                                    <ul class="megamenu-ul">
+
+                                        <li >
+                                            <a href="https://bibomart.com.vn/do-choi-winwin-toys.html" style="color:#333;">
+                                                <span>Đồ chơi Winwin Toys</span>
+                                            </a>
+                                        </li>
+
+
+                                        <li >
+                                            <a href="https://bibomart.com.vn/do-choi-colligo.html" style="color:#333;">
+                                                <span>Đồ chơi Colligo</span>
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </li>
+
+
+                                <li >
+                                    <a href="https://bibomart.com.vn/do-choi-mo-hinh-dieu-khien.html" style="color:#333;">
+                                        <span>Đồ chơi mô hình, điều khiển</span>
+                                    </a>
+                                    <ul class="megamenu-ul">
+
+                                        <li >
+                                            <a href="https://bibomart.com.vn/do-choi-mo-hinh.html" style="color:#333;">
+                                                <span>Đồ chơi mô hình</span>
+                                            </a>
+                                        </li>
+
+
+                                        <li >
+                                            <a href="https://bibomart.com.vn/do-choi-dieu-khien.html" style="color:#333;">
+                                                <span>Đồ chơi điều khiển</span>
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="grid-child col-md-4">
+                            <ul class="megamenu-ul">
+
+
+                                <li >
+                                    <a href="https://bibomart.com.vn/sach-truyen-dung-cu-hoc-tap.html" style="color:#333;">
+                                        <span>Sách, truyện, dụng cụ học tập</span>
+                                    </a>
+                                    <ul class="megamenu-ul">
+
+                                        <li >
+                                            <a href="https://bibomart.com.vn/sach-truyen-cho-be.html" style="color:#333;">
+                                                <span>Sách,truyện cho bé</span>
+                                            </a>
+                                        </li>
+
+
+                                        <li >
+                                            <a href="https://bibomart.com.vn/dung-cu-hoc-tap.html" style="color:#333;">
+                                                <span>Dụng cụ học tập</span>
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </li>
+
+
+                                <li >
+                                    <a href="https://bibomart.com.vn/bup-be-thu-bong.html" style="color:#333;">
+                                        <span>Búp bê - Thú bông</span>
+                                    </a>
+                                    <ul class="megamenu-ul">
+
+                                        <li >
+                                            <a href="https://bibomart.com.vn/bup-be.html" style="color:#333;">
+                                                <span>Búp bê</span>
+                                            </a>
+                                        </li>
+
+
+                                        <li >
+                                            <a href="https://bibomart.com.vn/thu-bong.html" style="color:#333;">
+                                                <span>Thú bông</span>
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </li>
+
+
+                                <li >
+                                    <a href="https://bibomart.com.vn/do-choi-huong-nghiep.html" style="color:#333;">
+                                        <span>Đồ chơi hướng nghiệp</span>
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="grid-child col-md-4">
+                            <ul class="megamenu-ul">
+
+
+                                <li >
+                                    <a href="https://bibomart.com.vn/do-choi-khac.html" style="color:#333;">
+                                        <span>Đồ chơi khác</span>
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="block-right  col-md-4">
+                        <p><a href="https://bibomart.com.vn/be-choi-va-hoc.html"><img src="https://bibomart.com.vn/media/wysiwyg/bibomart_megamenu/346x200-h_ctap_1.jpg" data-original="https://bibomart.com.vn/media/wysiwyg/bibomart_megamenu/346x200-h_ctap_1.jpg" alt=""></a></p>
+                    </div>
+
+                </div>
+            </ul>
+
+        </li>
+
+
+        <li class="menu megamenu-item  has-child  has-content ">
+            <a href="https://bibomart.com.vn/be-khoe-va-an-toan.html" class="item_357">
+                <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mP8Xg8AAnMBeJQW2OIAAAAASUVORK5CYII=" data-original="https://bibomart.com.vn/media/mega_menu/item/8-bekhoe.png" alt="" lazy-menu="">
+                <span style="display: none; background-image: url(https://bibomart.com.vn/media/mega_menu/item/8-bekhoe.png)"></span>
+                <span>Bé khỏe và an toàn</span>
+            </a>
+
+            <ul class="megamenu-ul">
+                <div class="megamenu-box " style="width: 965px;">
+
+
+
+                    <div class="block-main grid                                     col-md-8">
+                        <div class="grid-child col-md-4">
+                            <ul class="megamenu-ul">
+
+
+                                <li >
+                                    <a href="https://bibomart.com.vn/tu-thuoc-gia-dinh.html" style="color:#333;">
+                                        <span>Tủ thuốc gia đình</span>
+                                    </a>
+                                </li>
+
+
+                                <li >
+                                    <a href="https://bibomart.com.vn/nhiet-ke-cho-be.html" style="color:#333;">
+                                        <span>Nhiệt kế cho bé</span>
+                                    </a>
+                                    <ul class="megamenu-ul">
+
+                                        <li >
+                                            <a href="https://bibomart.com.vn/nhiet-ke-omron.html" style="color:#333;">
+                                                <span>Nhiệt kế Omron</span>
+                                            </a>
+                                        </li>
+
+
+                                        <li >
+                                            <a href="https://bibomart.com.vn/nhiet-ke-microlife.html" style="color:#333;">
+                                                <span>Nhiệt kế Microlife</span>
+                                            </a>
+                                        </li>
+
+
+                                        <li >
+                                            <a href="https://bibomart.com.vn/nhiet-ke-hubdic.html" style="color:#333;">
+                                                <span>Nhiệt kế Hubdic</span>
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="grid-child col-md-4">
+                            <ul class="megamenu-ul">
+
+
+                                <li >
+                                    <a href="https://bibomart.com.vn/thiet-bi-bao-ve-an-toan.html" style="color:#333;">
+                                        <span>Thiết bị bảo vệ an toàn</span>
+                                    </a>
+                                </li>
+
+
+                                <li >
+                                    <a href="https://bibomart.com.vn/can-suc-khoe-cho-be.html" style="color:#333;">
+                                        <span>Cân sức khỏe cho bé</span>
+                                    </a>
+                                    <ul class="megamenu-ul">
+
+                                        <li >
+                                            <a href="https://bibomart.com.vn/can-laica.html" style="color:#333;">
+                                                <span>Cân Laica</span>
+                                            </a>
+                                        </li>
+
+
+                                        <li >
+                                            <a href="https://bibomart.com.vn/can-camry.html" style="color:#333;">
+                                                <span>Cân Camry</span>
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="grid-child col-md-4">
+                            <ul class="megamenu-ul">
+
+
+                                <li >
+                                    <a href="https://bibomart.com.vn/cham-soc-da-cho-be.html" style="color:#333;">
+                                        <span>Chăm sóc da cho bé</span>
+                                    </a>
+                                    <ul class="megamenu-ul">
+
+                                        <li >
+                                            <a href="https://bibomart.com.vn/kem-chong-nang.html" style="color:#333;">
+                                                <span>Kem chống nắng</span>
+                                            </a>
+                                        </li>
+
+
+                                        <li >
+                                            <a href="https://bibomart.com.vn/kem-duong-da.html" style="color:#333;">
+                                                <span>Kem dưỡng da</span>
+                                            </a>
+                                        </li>
+
+
+                                        <li >
+                                            <a href="https://bibomart.com.vn/chong-muoi-con-trung.html" style="color:#333;">
+                                                <span>Chống muỗi, côn trùng</span>
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="block-right  col-md-4">
+                        <p><a href="https://bibomart.com.vn/be-khoe-va-an-toan.html"><img src="https://bibomart.com.vn/media/wysiwyg/bibomart_megamenu/346x200-baoboi_1.jpg" data-original="https://bibomart.com.vn/media/wysiwyg/bibomart_megamenu/346x200-baoboi_1.jpg" alt=""></a></p>
+                    </div>
+
+                </div>
+            </ul>
+
+        </li>
+
+
+        <li class="menu megamenu-item  has-child  has-content ">
+            <a href="https://bibomart.com.vn/danh-cho-me.html" class="item_348">
+                <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mP8Xg8AAnMBeJQW2OIAAAAASUVORK5CYII=" data-original="https://bibomart.com.vn/media/mega_menu/item/9-me.png" alt="" lazy-menu="">
+                <span style="display: none; background-image: url(https://bibomart.com.vn/media/mega_menu/item/9-me.png)"></span>
+                <span>Dành cho mẹ</span>
+            </a>
+
+            <ul class="megamenu-ul">
+                <div class="megamenu-box " style="width: 965px;">
+
+
+
+                    <div class="block-main grid                                     col-md-8">
+                        <div class="grid-child col-md-4">
+                            <ul class="megamenu-ul">
+
+
+                                <li >
+                                    <a href="https://bibomart.com.vn/sua-ba-bau.html" style="color:#333;">
+                                        <span>Sữa bà bầu</span>
+                                    </a>
+                                    <ul class="megamenu-ul">
+
+                                        <li >
+                                            <a href="https://bibomart.com.vn/sua-enfamama.html" style="color:#333;">
+                                                <span>Sữa Enfamama</span>
+                                            </a>
+                                        </li>
+
+
+                                        <li >
+                                            <a href="https://bibomart.com.vn/sua-similac-mom.html" style="color:#333;">
+                                                <span>Sữa Similac Mom</span>
+                                            </a>
+                                        </li>
+
+
+                                        <li >
+                                            <a href="https://bibomart.com.vn/sua-frisomum.html" style="color:#333;">
+                                                <span>Sữa Frisomum</span>
+                                            </a>
+                                        </li>
+
+
+                                        <li >
+                                            <a href="https://bibomart.com.vn/sua-bau-morinaga.html" style="color:#333;">
+                                                <span>Sữa bầu Morinaga</span>
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </li>
+
+
+                                <li >
+                                    <a href="https://bibomart.com.vn/dinh-duong-cho-me.html" style="color:#333;">
+                                        <span>Dinh dưỡng cho mẹ</span>
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="grid-child col-md-4">
+                            <ul class="megamenu-ul">
+
+
+                                <li >
+                                    <a href="https://bibomart.com.vn/sua-cho-nguoi-lon.html" style="color:#333;">
+                                        <span>Sữa cho người lớn</span>
+                                    </a>
+                                </li>
+
+
+                                <li >
+                                    <a href="https://bibomart.com.vn/may-hut-sua-tui-tru-sua.html" style="color:#333;">
+                                        <span>Máy hút sữa - túi trữ sữa</span>
+                                    </a>
+                                    <ul class="megamenu-ul">
+
+                                        <li >
+                                            <a href="https://bibomart.com.vn/may-hut-sua-unimom.html" style="color:#333;">
+                                                <span>Máy hút sữa Unimom</span>
+                                            </a>
+                                        </li>
+
+
+                                        <li >
+                                            <a href="https://bibomart.com.vn/may-hut-sua-medela.html" style="color:#333;">
+                                                <span>Máy hút sữa Medela</span>
+                                            </a>
+                                        </li>
+
+
+                                        <li >
+                                            <a href="https://bibomart.com.vn/may-hut-sua-philips-avent.html" style="color:#333;">
+                                                <span>Máy hút sữa Philips Avent</span>
+                                            </a>
+                                        </li>
+
+
+                                        <li >
+                                            <a href="https://bibomart.com.vn/may-hut-sua-gluck.html" style="color:#333;">
+                                                <span>Máy hút sữa Gluck</span>
+                                            </a>
+                                        </li>
+
+
+                                        <li >
+                                            <a href="https://bibomart.com.vn/may-hut-sua-spectra.html" style="color:#333;">
+                                                <span>Máy hút sữa Spectra</span>
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="grid-child col-md-4">
+                            <ul class="megamenu-ul">
+
+
+                                <li >
+                                    <a href="https://bibomart.com.vn/thoi-trang-cho-me.html" style="color:#333;">
+                                        <span>Thời trang cho mẹ</span>
+                                    </a>
+                                </li>
+
+
+                                <li >
+                                    <a href="https://bibomart.com.vn/do-dung-cho-me-khac.html" style="color:#333;">
+                                        <span>Đồ dùng cho mẹ khác</span>
+                                    </a>
+                                    <ul class="megamenu-ul">
+
+                                        <li >
+                                            <a href="https://bibomart.com.vn/my-pham-cho-me.html" style="color:#333;">
+                                                <span>Mỹ phẩm cho mẹ</span>
+                                            </a>
+                                        </li>
+
+
+                                        <li >
+                                            <a href="https://bibomart.com.vn/do-dung-khac.html" style="color:#333;">
+                                                <span>Đồ dùng khác</span>
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="block-right  col-md-4">
+                        <p><a href="https://bibomart.com.vn/phao-sale-tung-bung-ron-rang-sam-tet#sua_cho_me"><img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mP8Xg8AAnMBeJQW2OIAAAAASUVORK5CYII=" data-original="https://bibomart.com.vn/media/wysiwyg/bibomart_megamenu/top_sua_cho_me_1_-_desk.jpg" alt="" lazy-menu=""></a><a href="https://bibomart.com.vn/phao-sale-tung-bung-ron-rang-sam-tet#sua_cho_me"><img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mP8Xg8AAnMBeJQW2OIAAAAASUVORK5CYII=" data-original="https://bibomart.com.vn/media/wysiwyg/bibomart_megamenu/top_sua_cho_me_2_-_desk.jpg" alt="" lazy-menu=""></a></p>
+                    </div>
+
+                </div>
+            </ul>
+
+        </li>
+
+
+        <li class="menu megamenu-item  has-child  has-content ">
+            <a href="https://bibomart.com.vn/do-dung-trong-nha.html" class="item_366">
+                <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mP8Xg8AAnMBeJQW2OIAAAAASUVORK5CYII=" data-original="https://bibomart.com.vn/media/mega_menu/item/10-tu.png" alt="" lazy-menu="">
+                <span style="display: none; background-image: url(https://bibomart.com.vn/media/mega_menu/item/10-tu.png)"></span>
+                <span>Đồ dùng trong nhà</span>
+            </a>
+
+            <ul class="megamenu-ul">
+                <div class="megamenu-box " style="width: 965px;">
+
+
+
+                    <div class="block-main content                                     col-md-8">
+                        <ul class="megamenu-ul">
+
+
+                            <li >
+                                <a href="https://bibomart.com.vn/trang-tri-nha-cua.html" style="color:#333;">
+                                    <span>Trang trí nhà cửa</span>
+                                </a>
+                            </li>
+
+
+                            <li >
+                                <a href="https://bibomart.com.vn/do-gia-dung.html" style="color:#333;">
+                                    <span>Đồ gia dụng</span>
+                                </a>
+                            </li>
+
+
+                            <li >
+                                <a href="https://bibomart.com.vn/do-dung-trong-nha-khac.html" style="color:#333;">
+                                    <span>Đồ dùng trong nhà khác</span>
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+
+                    <div class="block-right  col-md-4">
+                        <div class="item"><a href="https://bibomart.com.vn/do-dung-trong-nha.html"><img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mP8Xg8AAnMBeJQW2OIAAAAASUVORK5CYII=" data-original="https://bibomart.com.vn/media/wysiwyg/bibomart_megamenu/346x200-mayloc_1.jpg" alt="" lazy-menu=""></a></div>
+                    </div>
+
+                </div>
+            </ul>
+
+        </li>
+
+    </ul>
+</div>*@
+
+
+
+<script>
+    $(function () {
+        $('.toggle-menu').click(function () {
+            $('.exo-menu').toggleClass('display');
+
+        });
+
+    });
+</script>

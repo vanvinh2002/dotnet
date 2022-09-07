@@ -1,0 +1,430 @@
+﻿
+@{
+    ViewBag.Title = "NewShelf";
+}
+
+@if (Request.Browser.IsMobileDevice)
+{
+    <style>
+        .td_header {
+            font-size: 2vh;
+            color: #223141;
+            background-color: #e4e4e4;
+            width: 100%;
+        }
+
+        .body-content {
+            padding: 0px !important;
+        }
+
+        .tb_detail thead {
+            color: #223141;
+            background-color: #e4e4e4;
+            text-align: center;
+        }
+
+        .pagination {
+            margin: 0px !important;
+        }
+
+        .btnAc {
+            width: 75%;
+            float: right;
+            border-radius: 10px;
+            margin-right: 10px;
+        }
+
+        .tblAct td, th {
+            padding: 15px 0px;
+        }
+
+        thead th {
+            text-align: center;
+        }
+
+        tbody td {
+            text-align: left;
+            width: 25%;
+        }
+    </style>
+
+    <div style="width:100%;float:left">
+        <div class="td_header" style="width:100%; float:left;margin-top: 1vh; padding:1vh">
+            <b style="font-size:3vh">CHỌN NHÓM CHỨC NĂNG</b>
+        </div>
+    </div>
+
+    <hr style="width:100%;float:left;" />
+
+    <div class="" style="width:100%;float:left; padding:1%">
+        <div style="width:60%; float:left">
+            <table style="width:100%" class="tblAct">
+                <tr>
+                    <td>
+                        Mã kệ
+                    </td>
+                    <td>@ViewBag.shelf.shelfNo - @ViewBag.shelf.sub_id - @ViewBag.shelf.shelfName</td>
+                    @*<td>Miêu tả</td>*@
+                </tr>
+                <tr>
+                    <td>Nhóm chức năng</td>
+                    <td>
+                        @ViewBag.shelf.catNo - @ViewBag.shelf.catName
+                    </td>
+                </tr>
+            </table>
+        </div>
+        <input type="hidden" id="txt_srcImg" />
+
+        <div style="width:40%; float:right">
+
+            <div style="width:100%; float:left;padding: 20px;">
+                <a id="real_img" data-toggle="modal" onclick="fn_detail('');" data-target="#modalDetails">Ảnh thực tế</a>
+            </div>
+
+            <div style="width:100%; float:left">
+                <input type="button" class="form-control btn-primary btnAc" value="Lưu" onclick="fnSave()" />
+                <form id="upload" enctype="multipart/form-data" action="@Url.Action("uploadImg", "StoreLayout")" method="POST">
+                    <input type="file" style="width: 0.1px;height: 0.1px;opacity: 0;overflow: hidden;position: absolute;z-index: -1;" name="fileUpload" id="fileUpload" class="inputfile">
+                    <label class="form-control btn-default btnAc" for="fileUpload">Upload ảnh</label>
+                </form>
+                @Html.ActionLink("Quay lại", "DraftList", "StoreLayout", new { storeNo = ViewBag.storeNo }, new { @class = "form-control btn-toolbar btnAc" })
+            </div>
+        </div>
+    </div>
+
+    <div style="width:100%; float:left">
+        <b style="font-size:2vh">DANH SÁCH SẢN PHẨM TRONG NHÓM CHỨC NĂNG</b>
+    </div>
+
+
+    <table width="100%" class="table text-center">
+        <tr>
+            <td>
+                <table id="tblReceivables" class="table table-striped tb_detail" border="1" style="width: 100%">
+                    <thead>
+                        <tr>
+                            <th>Mã sản phẩm</th>
+                            <th>Tên sản phẩm</th>
+                            <th>Giá bán</th>
+                            <th>Ảnh sản phẩm</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                    </tbody>
+                </table>
+            </td>
+        </tr>
+    </table>
+
+    <div class="modal fade bd-example-modal-lg" id="@string.Concat("modalDetails")" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="false">
+        <div class="modal-dialog modal-dialog modal-lg" role="document">
+            <div class="modal-content">
+                <h3 style="margin:15px;" class="modal-title" id="exampleModalLongTitle">Chi tiết báo cáo</h3>
+                <div class="modal-body">
+                    <img id="imgsrc" style="width:100%" src="" />
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Đóng</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+}
+else
+{
+    <style>
+        .td_header {
+            font-size: 2vh;
+            color: #223141;
+            background-color: #e4e4e4;
+            width: 100%;
+        }
+
+        .body-content {
+            padding: 0px !important;
+        }
+
+        .tb_detail thead {
+            color: #223141;
+            background-color: #e4e4e4;
+            text-align: center;
+        }
+
+        .pagination {
+            margin: 0px !important;
+        }
+
+        .btnAc {
+            width: 30%;
+            float: right;
+            border-radius: 10px;
+            margin-right: 10px;
+        }
+
+        .tblAct td, th {
+            padding: 15px 0px;
+        }
+
+        thead th {
+            text-align: center;
+        }
+
+        tbody td {
+            text-align: left;
+            width: 25%;
+        }
+    </style>
+
+    <div style="width:100%;float:left">
+        <div class="td_header" style="width:100%; float:left;margin-top: 1vh; padding:1vh">
+            <b style="font-size:3vh">CHỌN NHÓM CHỨC NĂNG</b>
+        </div>
+    </div>
+
+    <hr style="width:100%;float:left;" />
+
+    <div class="" style="width:100%;float:left; padding:1%">
+        <div style="width:40%; float:left">
+            <table style="width:100%" class="tblAct">
+                <tr>
+                    <td>
+                        Mã kệ
+                    </td>
+                    <td>@ViewBag.shelf.shelfNo - @ViewBag.shelf.sub_id - @ViewBag.shelf.shelfName</td>
+                    @*<td>Miêu tả</td>*@
+                </tr>
+                <tr>
+                    <td>Nhóm chức năng</td>
+                    <td>
+                        @ViewBag.shelf.catNo - @ViewBag.shelf.catName
+                    </td>
+                </tr>
+            </table>
+        </div>
+
+        <input type="hidden" id="txt_srcImg" />
+
+        <div style="width:40%; float:right">
+
+            <div style="width:100%; float:left;padding: 20px;">
+                <a id="real_img" data-toggle="modal" onclick="fn_detail('');" data-target="#modalDetails">Ảnh thực tế</a>
+            </div>
+
+            <div style="width:100%; float:left">
+                <input type="button" class="form-control btn-primary btnAc" value="Lưu" onclick="fnSave()" />
+                <form id="upload" enctype="multipart/form-data" action="@Url.Action("uploadImg", "StoreLayout")" method="POST">
+                    <input type="file" style="width: 0.1px;height: 0.1px;opacity: 0;overflow: hidden;position: absolute;z-index: -1;" name="fileUpload" id="fileUpload" class="inputfile">
+                    <label class="form-control btn-default btnAc" for="fileUpload">Upload ảnh</label>
+                </form>
+                @Html.ActionLink("Quay lại", "DraftList", "StoreLayout", new { storeNo = ViewBag.storeNo }, new { @class = "form-control btn-toolbar btnAc" })
+            </div>
+        </div>
+    </div>
+
+    <div style="width:100%; float:left">
+        <b style="font-size:2vh">DANH SÁCH SẢN PHẨM TRONG NHÓM CHỨC NĂNG</b>
+    </div>
+
+
+    <table width="100%" class="table text-center">
+        <tr>
+            <td>
+                <table id="tblReceivables" class="table table-striped tb_detail" border="1" style="width: 100%">
+                    <thead>
+                        <tr>
+                            <th>Mã sản phẩm</th>
+                            <th>Tên sản phẩm</th>
+                            <th>Giá bán</th>
+                            <th>Ảnh sản phẩm</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                    </tbody>
+                </table>
+            </td>
+        </tr>
+    </table>
+
+    <div class="modal fade bd-example-modal-lg" id="@string.Concat("modalDetails")" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="false">
+        <div class="modal-dialog modal-dialog modal-lg" role="document">
+            <div class="modal-content">
+                <h3 style="margin:15px;" class="modal-title" id="exampleModalLongTitle">Chi tiết báo cáo</h3>
+                <div class="modal-body">
+                    <img id="imgsrc" style="width:100%" src="" />
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Đóng</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+}
+
+
+
+<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
+<script type="text/javascript" src="http://ajax.cdnjs.com/ajax/libs/json2/20110223/json2.js"></script>
+<script type="text/javascript">
+        $(window).load(function () {
+
+            loadItem();
+        });
+
+        function fnPagesize() {
+            window.location.href = "/StoreLayout/StoreList?fillData="+$('#txtSearch').val();
+        }
+
+        function fnShelfList(str_stNo) {
+            window.location.href = "/StoreLayout/ShelfList?storeNo=" + str_stNo;
+        }
+
+        //Upload file
+        $(document).ready(function () {
+            //validating uploaded file whether it is Excel or not while uploading
+            $("#fileUpload").change(function () {
+                //fileErrorMessage.innerHTML = '';
+                var vtrUpload = $("#fileUpload").val().toLowerCase();
+                var regexVTRUpload = new RegExp("(.*?)\.(png|jpg|jpeg)$");
+                if (!(regexVTRUpload.test(vtrUpload))) {
+                    $("#fileUpload").val("");
+
+                    alert("file false");
+                } else {
+                    UploadFile();
+                }
+            });
+        });
+
+        function UploadFile() {
+            var data = new FormData();
+            var files = $("#fileUpload").get(0).files;
+            if (files.length > 0) {
+                data.append("MyImages", files[0]);
+            }
+
+            $.ajax({
+                url: "/StoreLayout/uploadImg",
+                type: "POST",
+                processData: false,
+                contentType: false,
+                data: data,
+                success: function (data) {
+
+                    console.log(data);
+
+                    //var sub = JSON.parse(data);
+                    console.log(data.link);
+                    if (data.code == 0) {
+                        img_link = data.link;
+                        $('#txt_srcImg').val(data.link);
+                        $('#real_img').attr("onclick", "fn_detail('" + data.link + "')");
+                    }
+
+                },
+                error: function (er) {
+                    alert(er);
+                }
+
+            });
+
+        }
+
+        function fnSave() {
+
+            if ($('#txt_srcImg').val().length > 0) {
+                var it_pdt = new Object();
+
+                it_pdt.storeNo = '@ViewBag.storeNo';
+                it_pdt.shelfNo = '@ViewBag.shelf.shelfNo';
+                it_pdt.catNo = '@ViewBag.shelf.catNo';
+                it_pdt.sub_id = '@ViewBag.shelf.sub_id';
+                it_pdt.img_link = $('#txt_srcImg').val();
+
+                $.ajax({
+                    type: "POST",
+                    url: "/StoreLayout/addShelf",
+                    data: JSON.stringify(it_pdt),
+                    contentType: "application/json; charset=utf-8",
+                    dataType: "json",
+                    success: function (r1) {
+                        //var sub = JSON.parse(r1);
+                        if (r1.length > 0) {
+                            window.location.href = '/StoreLayout/DraftList?storeNo=@ViewBag.storeNo';
+                        } else {
+                            alert("Có lỗi xảy ra thử lại sau!");
+                        }
+                    }
+                });
+            } else {
+                alert("Chưa đăng ảnh thực tế tại cửa hàng!");
+            }
+        }
+
+        function loadItem() {
+
+            $("#tblReceivables > TBODY").html("");
+
+            $.ajax({
+                type: "POST",
+                url: "/StoreLayout/getProduct",
+                data: '{cID:"' + @ViewBag.shelf.catNo + '"}',
+                contentType: "application/json; charset=utf-8",
+                dataType: "json",
+                success: function (r) {
+                    if (r.length > 0) {
+
+                        $('#cID').val(str_cID);
+
+                        var rt = JSON.parse(r);
+
+                        for (var i in rt) {
+                            var tBody = $("#tblReceivables > TBODY")[0];
+
+                            //Add Row.
+                            var row = tBody.insertRow(-1);
+
+                            //Add Type cell
+                            cell = $(row.insertCell(-1));
+                            cell.html(rt[i].sku);
+
+                            //Add Type cell
+                            cell = $(row.insertCell(-1));
+                            cell.html(rt[i].name);
+
+                            //Add Type cell
+                            cell = $(row.insertCell(-1));
+                            cell.html(rt[i].price);
+
+                            //Add Type cell
+                            //cell = $(row.insertCell(-1));
+                            //cell.html(rt[i].image_link);
+
+                            //Add Button cell.
+                            cell = $(row.insertCell(-1));
+                            //var btnRemove = $("<a/>");
+                            //btnRemove.attr("data-toggle", "modal");
+                            //btnRemove.attr("onclick", "fn_detail('" + rt[i].image_link + "')");
+                            //btnRemove.attr("data-target", "#modalDetails");
+                            //btnRemove.html("Chi tiết");
+
+                            var btnRemove = $("<img/>")
+                            btnRemove.attr("src", rt[i].image_link);
+                            btnRemove.attr("style", "width:100%");
+                            cell.append(btnRemove);
+                        }
+
+                    } else {
+                        alert("Không tìm thấy dữ liệu phù hợp!");
+                    }
+                }
+            });
+        }
+
+        function fn_detail(str_img) {
+            $('#imgsrc').attr("src", str_img);
+        }
+
+</script>
+

@@ -1,0 +1,240 @@
+﻿
+@{
+    ViewBag.Title = "SheflDetail";
+}
+
+
+@if (!Request.Browser.IsMobileDevice)
+{
+
+    <div style="width:100%; float:left;">
+        <div class="div-span">
+            @*<input type="button" class="form-control btn-info btn-left" value="Quay lại" />*@
+
+            @*<input type="button" class="form-control btn-primary btn-right" value="Danh sách kệ" />
+
+            <input type="button" class="form-control btn-primary btn-right" value="Sơ đồ quầy kệ" />*@
+
+            @Html.ActionLink("Danh sách kệ", "ShelfList", "SpaceMan", new { storeNo = @ViewBag.shelf.storeNo }, new { @class = "form-control btn-primary btn-right col25 text-center" })
+
+            @Html.ActionLink("Sơ đồ quầy kệ", "LayoutStore", "SpaceMan", new { storeNo = @ViewBag.shelf.storeNo }, new { @class = "form-control btn-primary btn-right col25 text-center" })
+        </div>
+
+        <div class="div-span">
+
+            @if (((ProductAllTool.Models.SpaceMan.userRole)Session["u_Role"]).create_act == "1")
+            {
+                <div style="width:100%;float:left">
+                    <div class="col25">
+                        <h3><b style="float:left;">Chi tiết kệ</b></h3>
+                    </div>
+                    <div class="col25">
+                        <div class="btn-right">Mã kệ: <b>@ViewBag.shelf.shelfName</b></div>
+                    </div>
+
+                    <div class="col25">
+                        <div class="btn-right">Ngày đăng: <b>23/5/2020</b></div>
+                    </div>
+
+                    <div class="col25">
+                        <div class="btn-right">Trạng thái: <b>@ViewBag.shelf.imgStatusName</b></div>
+                    </div>
+
+                    <label style="background-color:black; height:2px; min-width:100%"></label>
+                </div>
+            }
+            else
+            {
+                <div style="width:100%;float:left">
+                    <div class="col25">
+                        <h3><b style="float:left;">Chi tiết kệ</b></h3>
+                    </div>
+                    <div class="col25">
+                        <div class="btn-right">Mã kệ: <b>@ViewBag.shelf.shelfName</b></div>
+                    </div>
+
+                    <div class="col25">
+                        <div class="btn-right">Cửa hàng: <b>@ViewBag.shelf.storeNo</b></div>
+                    </div>
+
+                    <div class="col25">
+                        <div class="btn-right">Trạng thái: <b>@ViewBag.shelf.imgStatusName</b></div>
+                    </div>
+
+                    <label style="background-color:black; height:2px; min-width:100%"></label>
+                </div>
+            }
+
+
+            <div style="width:100%; float:left">
+                <div class="col75">
+                    <div>
+                        <table class="table table-striped" border="1" style="min-width:100%">
+                            <thead>
+                                <tr>
+                                    <th style="width:10%">Mã SP</th>
+                                    <th style="width:40%">Sản phẩm</th>
+                                    <th style="width:10%">Tư thế trung bày</th>
+                                    <th style="width:10%">Số face trưng bày</th>
+                                    <th style="width:20%">Ảnh sản phẩm</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach (var i in ViewBag.ls_item)
+                                {
+                                    <tr>
+                                        <td>
+                                            @i.itemNo
+                                        </td>
+                                        <td>
+                                            @i.itemName
+                                        </td>
+                                        <td>
+                                            @i.site
+                                        </td>
+                                        <td>
+                                            @i.presentStock
+                                        </td>
+                                        <td class="text-center">
+                                            <img src="@i.img_link" style="width:100%"/>
+                                        </td>
+                                    </tr>
+                                }
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <div class="col25">
+
+                    <img src="@ViewBag.shelf.img_link" style="width:100%;min-height:200px" />
+
+                    <a id="real_img" data-toggle="modal" data-target="#modalDetails">Ảnh thực tế</a>
+
+                    @if (((ProductAllTool.Models.SpaceMan.userRole)Session["u_Role"]).accept_act == "1" && ((ProductAllTool.Models.SpaceMan.userRole)Session["u_Role"]).controlCode == "C001" )
+                    {
+                        <div>
+                            <input type="button" class="form-control btn-primary btn-right" value="Duyệt" onclick="fnAccept(1)" />
+                        </div>
+
+                        <div style="margin-top:3vh;">
+                            <input type="button" class="form-control btn-danger btn-right" value="Từ chối" onclick="fnAccept(-1)" />
+                        </div>
+                    }
+
+                </div>
+            </div>
+        </div>
+        @*<div style="width:100%;float:left">
+                <label style="background-color:black; height:2px; min-width:100%"></label>
+                <div>Gần đây</div>
+                <div class="col25">
+                    <div>
+                        <img src="~/Content/images/bg-01.jpg" style="width:100%;" />
+                        <b class="text-center">20/04/2020</b>
+                    </div>
+
+                </div>
+                <div class="col25">
+                    <div>
+                        <img src="~/Content/images/bg-01.jpg" style="width:100%;" />
+                        <b class="text-center">20/04/2020</b>
+                    </div>
+                </div>
+                <div class="col25">
+                    <div>
+                        <img src="~/Content/images/bg-01.jpg" style="width:100%;" />
+                        <b class="text-center">20/04/2020</b>
+                    </div>
+                </div>
+
+                <div class="col25">
+                    <div>
+                        <img src="~/Content/images/bg-01.jpg" style="width:100%;" />
+                        <b class="text-center">20/04/2020</b>
+                    </div>
+                </div>
+            </div>*@
+
+    </div>
+
+    <div class="modal fade bd-example-modal-lg" id="@string.Concat("modalDetails")" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="false">
+        <div class="modal-dialog modal-dialog modal-lg" role="document">
+            <div class="modal-content">
+                <h3 style="margin:15px;" class="modal-title" id="exampleModalLongTitle">Chi tiết</h3>
+                <div class="modal-body">
+                    <img id="imgsrc" style="width:100%" src="@ViewBag.shelf.img_link" />
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Đóng</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+}
+else
+{
+    <p>Layout for mobile</p>
+}
+
+<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
+<script type="text/javascript" src="http://ajax.cdnjs.com/ajax/libs/json2/20110223/json2.js"></script>
+<script type="text/javascript">
+
+    $(function () {
+        $('#txtHead').html("QUẢN LÝ TRƯNG BÀY");
+    });
+    function fnAccept(int_type) {
+
+        if (int_type == -1) {
+            var person = prompt("Nhập lý do từ chối (bắt buộc)", "");
+            if (person == null || person == "") {
+                console.log("User cancelled the prompt.");
+            } else {
+                var it_pdt = new Object();
+
+                it_pdt.imgID = '@ViewBag.shelf.imgID';
+                it_pdt.imgStatus = int_type;
+                it_pdt.description = person;
+
+                $.ajax({
+                    type: "POST",
+                    url: "/SpaceMan/updateShelf",
+                    data: JSON.stringify(it_pdt),
+                    contentType: "application/json; charset=utf-8",
+                    dataType: "json",
+                    success: function (r1) {
+                        if (r1.length > 0) {
+                            window.location.href = '/SpaceMan/ShelfList?storeNo=@ViewBag.shelf.storeNo';
+                        } else {
+                            alert("Có lỗi xảy ra thử lại sau!");
+                        }
+                    }
+                });
+            }
+        } else if (int_type == 1) {
+            var it_pdt = new Object();
+
+            it_pdt.imgID = '@ViewBag.shelf.imgID';
+            it_pdt.imgStatus = int_type;
+            it_pdt.description = " ";
+
+                $.ajax({
+                    type: "POST",
+                    url: "/SpaceMan/updateShelf",
+                    data: JSON.stringify(it_pdt),
+                    contentType: "application/json; charset=utf-8",
+                    dataType: "json",
+                    success: function (r1) {
+                        if (r1.length > 0) {
+                            window.location.href = '/SpaceMan/ShelfList?storeNo=@ViewBag.shelf.storeNo';
+                        } else {
+                            alert("Có lỗi xảy ra thử lại sau!");
+                        }
+                    }
+                });
+            }
+    }
+
+</script>
+

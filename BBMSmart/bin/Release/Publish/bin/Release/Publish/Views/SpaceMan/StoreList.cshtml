@@ -1,0 +1,147 @@
+﻿
+@{
+    ViewBag.Title = "StoreList";
+    var is_root = 0;
+    if(((@ProductAllTool.Models.SpaceMan.userRole)Session["u_Role"]).root_act == "1" && ((@ProductAllTool.Models.SpaceMan.userRole)Session["u_Role"]).controlCode == "C001")
+    {
+        is_root = 1;
+    }else if (((@ProductAllTool.Models.SpaceMan.userRole)Session["u_Role"]).accept_act == "1" && ((@ProductAllTool.Models.SpaceMan.userRole)Session["u_Role"]).controlCode == "C001")
+    {
+        is_root = 2;
+    }
+}
+
+    <div>
+        <div class="div-span">
+            <div class="row">
+                <div class="col-md-4">
+                    <h3 class="title_01"><b>Danh sách của hàng</b></h3>
+                </div>
+                <div class="col-md-8">
+                    <input id="txtSearch" type="text" class="form-control btn-right inp" placeholder="Nhập thông tin tìm kiếm" />
+                </div>
+            </div>
+            <div>
+                <div class="row">
+                    <div class="col-md-3">
+                        <div>
+                            <p for="province">Tỉnh/ Thành phố</p>
+                            <input list="provinces" name="province" id="province" placeholder="Chọn" class="form-control" onfocus="fnReset('province')" onchange="fillStore()">
+
+                            <datalist id="provinces">
+                                @foreach (var i in ViewBag.ls_ProVince)
+                                {
+                                    <option value="@i.provinceCode - @i.provinceName" />
+                                }
+                            </datalist>
+                        </div>
+                    </div>
+                    <div class="col-md-9">
+                        <div>
+                            <table id="tblReceivables" class="table table-bordered">
+                                <thead>
+                                    <tr>
+                                        <th>Mã cửa hàng</th>
+                                        <th>Địa chỉ</th>
+                                        <th>Số lượng kệ</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach (var it in ViewBag.ls_Store)
+                                    {
+                                        <tr onclick="fnDetail('@it.Code')">
+                                            <td>@it.Code</td>
+                                            <td>@it.Name</td>
+                                            <td>@it.total_Shelf</td>
+                                        </tr>
+                                    }
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+              
+            </div>
+        </div>
+    </div>
+
+<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
+<script type="text/javascript" src="http://ajax.cdnjs.com/ajax/libs/json2/20110223/json2.js"></script>
+<script type="text/javascript">
+
+    $(function () {
+
+        $('#txtHead').html("QUẢN LÝ TRẢI NGHIỆM");
+
+
+        $('#txtSearch').keydown(function (e) {
+            if (e.keyCode == 13) {
+                fillStore();
+            }
+        });
+    });
+
+    function fillStore() {
+        $("#tblReceivables > TBODY").html("");
+
+            $.ajax({
+                type: "POST",
+                url: "/SpaceMan/getlistStore",
+                data: '{province:"' + $('#province').val() + '",fillter:"' + $('#txtSearch').val() + '"}',
+                contentType: "application/json; charset=utf-8",
+                dataType: "json",
+                success: function (r) {
+
+                    if (r.length > 4) {
+
+                        var rt = JSON.parse(r);
+
+                        for (i in rt) {
+
+                            var tBody = $("#tblReceivables > TBODY")[0];
+
+                            //Add Row.
+                            var row = tBody.insertRow(-1);
+                            row.setAttribute("onclick", "fnDetail('" + rt[i].Code + "')");
+
+                            //Add Type cell
+                            cell = $(row.insertCell(-1));
+                            cell.html(rt[i].Code);
+
+                            //Add Type cell
+                            cell = $(row.insertCell(-1));
+                            cell.html(rt[i].Name);
+
+                            //Add Type cell
+                            cell = $(row.insertCell(-1));
+                            cell.html(rt[i].total_Shelf);
+
+                        }
+
+                    }
+                }
+            });
+    }
+
+    function fnDetail(str_shlNo) {
+
+        if (@is_root== 1) {
+            window.location.href = "/SpaceMan/ShelfRoot?storeNo=" + str_shlNo;
+        } else if (@is_root== 2) {
+            window.location.href = "/SpaceMan/ShelfListScore?storeNo=" + str_shlNo;
+        }else {
+            window.location.href = "/SpaceMan/ShelfList?storeNo=" + str_shlNo;
+        }
+        
+    }
+
+    function fnReset(str_id) {
+        if ($('#' + str_id).val().length > 0) {
+
+            $('#' + str_id).val('');
+
+            $('#' + str_id).trigger("change");
+        }
+    }
+
+</script>

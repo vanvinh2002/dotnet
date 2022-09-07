@@ -1,0 +1,41 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+}
+
+@if (!Request.Browser.IsMobileDevice)
+{
+    <div style="width:100%; float:left;">
+        <div class="div-span">
+            <input type="button" class="form-control btn-primary btn-right" value="Danh sách kệ" />
+
+            <input type="button" class="form-control btn-primary btn-right" value="Sơ đồ quày kệ" />
+        </div>
+
+        <div class="div-span">
+            <div style="width:100%;float:left">
+                <div class="col25">
+                    <b style="float:left;">Sơ đồ quầy kệ</b>
+                </div>
+                <div class="col75">
+                    <input style="" type="text" class="form-control btn-right inp" placeholder="Nhập thông tin tìm kiếm" />
+                </div>
+            </div>
+            <br />
+            <div style="width:100%; float:left">
+                <div class="col25">
+                    <p>Ảnh mặt bằng</p>
+                    <p>Tải file Excel sơ đò mặt bằng</p>
+                </div>
+                <div class="col75">
+                    <img src="~/Content/images/bg-01.jpg" style="width:100%;"/>
+                </div>
+            </div>
+        </div>
+    </div>
+}
+else
+{
+<p>Layout for mobile</p>
+}
+

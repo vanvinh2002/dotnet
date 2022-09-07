@@ -1,0 +1,165 @@
+﻿
+@{
+    ViewBag.Title = "requirementScore";
+}
+
+
+    <div class="div-span">
+        <div class="row">
+            <div class="col-md-6">
+                @Html.ActionLink("Quay lại", "StoreCheckList", "ScoreStore", new { storeNo = @ViewBag.Store.Code }, new { @class = "btn btn-success btn-left" })
+            </div>
+
+            <div class="col-md-6">
+            </div>
+        </div>
+            <div class="row">
+                <div class="col-md-6">
+
+                    <div class="form-group">
+                        <h4>Cửa hàng : <b>@ViewBag.Store.Code - @ViewBag.Store.Name</b></h4>
+                    </div>
+
+                    <div class="form-group">
+                        <h4>Khối hạng mục:<b> @ViewBag.req.departmentCode - @ViewBag.req.departmentName </b> </h4>
+                    </div>
+
+                    <div class="form-group">
+                        <h4>Hạng mục: <b>@ViewBag.req.requirementCode - @ViewBag.req.requirementName </b></h4>
+                    </div>
+
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label for="sl_type">Trạng thái:</label>
+                        <select id="sl_type" class="form-control">
+                            <option value="0">Chọn trạng thái</option>
+                            <option value="1">Hoàn thành</option>
+                            <option value="-1">Không hoàn thành</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="txtDes">Mô tả thêm:</label>
+                        <textarea id="txtDes" class="form-control" placeholder="Nhập mô tả" rows="4" style="min-width: 100% "></textarea>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <input type="hidden" id="txt_srcImg" />
+                <img id="thum_img" src="~/Image/no-image.jpg" style="width:350px;min-height:300px" />
+
+                @*<a id="real_img" data-toggle="modal" onclick="fn_detail('');" data-target="#modalDetails">Ảnh thực tế</a>*@
+                <div class="row" style="margin: 10px 0px;">
+                    <!--<input type="button" class="form-control btn-primary div-shelf" value="Đăng ảnh mới" />-->
+                    <form id="upload" enctype="multipart/form-data" action="@Url.Action("uploadImg", "SpaceMan")" method="POST">
+                        <input type="file" style="width: 0.1px;height: 0.1px;opacity: 0;overflow: hidden;position: absolute;z-index: -1;" name="fileUpload" id="fileUpload" class="inputfile">
+                        <label class="btn btn-info box_inline" for="fileUpload" style="background-color: #A45D41 !important;border-color: #A45D41 !important;"><i class="fa fa-cloud-upload" aria-hidden="true"></i> Upload ảnh</label>
+                    </form>
+                    <a href="#" class="btn btn-success box_inline" onclick="fnSave();" style="background-color: #0F4C81 !important;border-color: #0F4C81 !important;"><i class="fa fa-floppy-o" aria-hidden="true"></i> Lưu thông tin</a>
+                </div>
+            </div>
+
+        </div>
+
+        <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
+        <script type="text/javascript" src="http://ajax.cdnjs.com/ajax/libs/json2/20110223/json2.js"></script>
+        <script type="text/javascript">
+
+    $(document).ready(function () {
+
+        $('#txtHead').html("ĐÁNH GIÁ CHẤT LƯỢNG");
+
+        $("#fileUpload").change(function () {
+            //fileErrorMessage.innerHTML = '';
+            var vtrUpload = $("#fileUpload").val().toLowerCase();
+            var regexVTRUpload = new RegExp("(.*?)\.(png|jpg|jpeg)$");
+            if (!(regexVTRUpload.test(vtrUpload))) {
+                $("#fileUpload").val("");
+
+                alert("file false");
+            } else {
+                UploadFile();
+            }
+        });
+
+    });
+
+    function UploadFile() {
+        var data = new FormData();
+        var files = $("#fileUpload").get(0).files;
+        if (files.length > 0) {
+            data.append("MyImages", files[0]);
+        }
+
+        $.ajax({
+            url: "/ScoreStore/uploadImg",
+            type: "POST",
+            processData: false,
+            contentType: false,
+            data: data,
+            success: function (data) {
+
+                console.log(data);
+
+                //var sub = JSON.parse(data);
+                console.log(data.link);
+
+                if (data.code == 0) {
+                    img_link = data.link;
+                    $('#txt_srcImg').val(data.link);
+
+                    $('#thum_img').attr("src", data.link);
+
+                    $('#real_img').attr("onclick", "fn_detail('" + data.link + "')");
+                }
+
+            },
+            error: function (er) {
+                alert("Thiết bị không hỗ trợ up ảnh từ camera. Chọn file từ bộ nhớ thiết bị !");
+
+                JSON.stringify
+            }
+
+        });
+
+    }
+
+    function fnSave() {
+
+        if ($('#txt_srcImg').val().length > 0) {
+
+            if ($('#sl_type').val()!= '0') {
+                var it_pdt = new Object();
+
+                it_pdt.requirementCode = '@ViewBag.req.requirementCode';
+                it_pdt.storeNo = '@ViewBag.Store.Code';
+                it_pdt.type = $('#sl_type').val();
+                it_pdt.description = $('#txtDes').val();
+                it_pdt.imageSource = $('#txt_srcImg').val();
+
+                $.ajax({
+                    type: "POST",
+                    url: "/ScoreStore/addRequirementScore",
+                    data: JSON.stringify(it_pdt),
+                    contentType: "application/json; charset=utf-8",
+                    dataType: "json",
+                    success: function (r1) {
+                        //var sub = JSON.parse(r1);
+                        if (r1.length > 0) {
+                            window.location.href = '/ScoreStore/StoreCheckList?storeNo=@ViewBag.Store.Code';
+                        } else {
+                            alert("Có lỗi xảy ra thử lại sau!");
+                        }
+                    }
+                });
+            }
+            else {
+                alert("Chọn trạng thái hoàn thành!");
+            }
+        } else {
+            alert("Chưa đăng ảnh thực tế!");
+        }
+    }
+        </script>
+

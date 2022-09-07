@@ -1,0 +1,313 @@
+﻿
+@{
+    ViewBag.Title = "ShelfDetail";
+}
+
+@if (Request.Browser.IsMobileDevice)
+{
+    <p>
+        layout for Mobile
+    </p>
+}
+else
+{
+    <style>
+        .td_header {
+            font-size: 2vh;
+            color: #223141;
+            background-color: #e4e4e4;
+            width: 100%;
+        }
+
+        .body-content {
+            padding: 0px !important;
+        }
+
+        .tb_detail thead {
+            color: #223141;
+            background-color: #e4e4e4;
+            text-align: center;
+        }
+
+        .pagination {
+            margin: 0px !important;
+        }
+
+        .btnAc {
+            width: 30%;
+            float: right;
+            border-radius: 10px;
+            margin-right: 10px;
+        }
+
+        .tblAct td, th {
+            padding: 15px 0px;
+        }
+
+        thead th{
+            text-align:center;
+        }
+
+        tbody td{
+            text-align:left;
+            width:25%;
+        }
+    </style>
+
+    <div style="width:100%;float:left">
+        <div class="td_header" style="width:100%; float:left;margin-top: 1vh; padding:1vh">
+            <b style="font-size:3vh">CHỌN NHÓM CHỨC NĂNG</b>
+        </div>
+    </div>
+
+    <hr style="width:100%;float:left;" />
+
+    <div class="" style="width:100%;float:left; padding:1%">
+        <div style="width:40%; float:left">
+            <table style="width:100%" class="tblAct">
+                <tr>
+                    <td>
+                        Mã kệ
+                    </td>
+                    <td>@ViewBag.shelf.shelfNo - @ViewBag.shelf.sub_id - @ViewBag.shelf.shelfName</td>
+                    @*<td>Miêu tả</td>*@
+                </tr>
+                <tr>
+                    <td>Nhóm chức năng</td>
+                    <td>
+                        @ViewBag.shelf.catNo - @ViewBag.shelf.catName
+                    </td>
+                    <td>
+                        <div>
+                            <input type="hidden" id="cID" />
+                            <input type="hidden" id="txt_srcImg" />
+                            <a data-toggle="modal" onclick="fn_detail('@ViewBag.shelf.img_link');" data-target="#modalDetails">Ảnh thực tế</a>
+                        </div>
+                    </td>
+                </tr>
+            </table>
+        </div>
+
+        <div style="width:40%; float:right">
+            <div style="width:100%; float:left">
+                
+            </div>
+            <div style="width:100%; float:left">
+                @if (ViewBag.role.accept_act == 1)
+                {
+                    <input type="button" class="form-control btn-primary btnAc" value="Xác nhận" onclick="fnSave(1)" />
+                    <input type="button" class="form-control btn-warning btnAc" value="Từ chối" onclick="fnSave(0)" />
+                }
+
+                @Html.ActionLink("Quay lại", "ShelfList", "StoreLayout", new { storeNo = ViewBag.storeNo }, new { @class = "form-control btn-toolbar btnAc" })
+            </div>
+        </div>
+</div>
+    <div style="width:100%; float:left">
+        <b style="font-size:2vh">DANH SÁCH SẢN PHẨM TRONG NHÓM CHỨC NĂNG</b>
+    </div>
+
+
+    <table width="100%" class="table text-center">
+        <tr>
+            <td>
+                <table id="tblReceivables" class="table table-striped tb_detail" border="1" style="width: 100%">
+                    <thead>
+                        <tr>
+                            <th>Mã sản phẩm</th>
+                            <th>Tên sản phẩm</th>
+                            <th>Giá bán</th>
+                            <th>Ảnh sản phẩm</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var i in ViewBag.ls_item)
+                        {
+                            <tr>
+                                <td>
+                                    @i.itemNo
+                                </td>
+                                <td>
+                                    @i.itemName
+                                </td>
+                                <td>
+                                    @i.site
+                                </td>
+                                <td>
+                                    @i.presentStock
+                                </td>
+                                <td>
+                                    <img src="@i.img_link" style="width:100%" />
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </td>
+        </tr>
+    </table>
+
+    <div class="modal fade bd-example-modal-lg" id="@string.Concat("modalDetails")" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="false">
+        <div class="modal-dialog modal-dialog modal-lg" role="document">
+            <div class="modal-content">
+                <h3 style="margin:15px;" class="modal-title" id="exampleModalLongTitle">Chi tiết báo cáo</h3>
+                <div class="modal-body">
+                    <img id="imgsrc" style="width:100%" src="" />
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Đóng</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
+    <script type="text/javascript" src="http://ajax.cdnjs.com/ajax/libs/json2/20110223/json2.js"></script>
+    <script type="text/javascript">
+        $(window).load(function () {
+            $('#txtSearch').val('@ViewBag.fillData');
+            loadItem('@ViewBag.shelf.catNo');
+        });
+
+
+        $(function () {
+            $('#txtSearch').keydown(function (e) {
+                if (e.keyCode == 13) {
+                    fnPagesize();
+                }
+            });
+        });
+
+        function fnPagesize() {
+            window.location.href = "/StoreLayout/StoreList?fillData="+$('#txtSearch').val();
+        }
+
+        function fnShelfList(str_stNo) {
+            window.location.href = "/StoreLayout/ShelfList?storeNo=" + str_stNo;
+        }
+
+        function fillPT() {
+
+            $('#cName').html($('#PT1 option:selected').text());
+
+            loadItem($('#PT1').val());
+        }
+
+        function fnSave(type) {
+
+            if (type == 0) {
+                var person = prompt("Nhập lý do từ chối (bắt buộc)", "");
+                if (person == null || person == "") {
+                    console.log("User cancelled the prompt.");
+                } else {
+                    var it_pdt = new Object();
+
+                    it_pdt.id = '@ViewBag.shelf.id';
+                    it_pdt.status = type;
+                    it_pdt.comment = person;
+
+                    $.ajax({
+                        type: "POST",
+                        url: "/StoreLayout/updateShelf",
+                        data: JSON.stringify(it_pdt),
+                        contentType: "application/json; charset=utf-8",
+                        dataType: "json",
+                        success: function (r1) {
+                            if (r1.length > 0) {
+                                window.location.href = '/StoreLayout/ShelfList?storeNo=@ViewBag.storeNo';
+                            } else {
+                                alert("Có lỗi xảy ra thử lại sau!");
+                            }
+                        }
+                    });
+                }
+            } else if (type == 1) {
+                var it_pdt = new Object();
+
+                it_pdt.id = '@ViewBag.shelf.id';
+                it_pdt.status = type;
+                it_pdt.comment = '';
+
+                $.ajax({
+                    type: "POST",
+                    url: "/StoreLayout/updateShelf",
+                    data: JSON.stringify(it_pdt),
+                    contentType: "application/json; charset=utf-8",
+                    dataType: "json",
+                    success: function (r1) {
+                        if (r1.length > 0) {
+                            window.location.href = '/StoreLayout/ShelfList?storeNo=@ViewBag.storeNo';
+                        } else {
+                            alert("Có lỗi xảy ra thử lại sau!");
+                        }
+                    }
+                });
+            }
+        }
+
+        function loadItem(str_cID) {
+            $("#tblReceivables > TBODY").html("");
+
+            $.ajax({
+                type: "POST",
+                url: "/StoreLayout/getProduct",
+                data: '{cID:"' + str_cID + '"}',
+                contentType: "application/json; charset=utf-8",
+                dataType: "json",
+                success: function (r) {
+                    if (r.length > 0) {
+
+                        $('#cID').val(str_cID);
+
+                        var rt = JSON.parse(r);
+
+                        for (var i in rt) {
+                            var tBody = $("#tblReceivables > TBODY")[0];
+
+                            //Add Row.
+                            var row = tBody.insertRow(-1);
+
+                            //Add Type cell
+                            cell = $(row.insertCell(-1));
+                            cell.html(rt[i].sku);
+
+                            //Add Type cell
+                            cell = $(row.insertCell(-1));
+                            cell.html(rt[i].name);
+
+                            //Add Type cell
+                            cell = $(row.insertCell(-1));
+                            cell.html(rt[i].price);
+
+                            //Add Type cell
+                            //cell = $(row.insertCell(-1));
+                            //cell.html(rt[i].image_link);
+
+                            //Add Button cell.
+                            cell = $(row.insertCell(-1));
+                            //var btnRemove = $("<a/>");
+                            //btnRemove.attr("data-toggle", "modal");
+                            //btnRemove.attr("onclick", "fn_detail('" + rt[i].image_link + "')");
+                            //btnRemove.attr("data-target", "#modalDetails");
+                            //btnRemove.html("Chi tiết");
+                            var btnRemove = $("<img/>")
+                            btnRemove.attr("src", rt[i].image_link);
+                            btnRemove.attr("style", "width:35%");
+                            cell.append(btnRemove);
+                        }
+
+                    } else {
+                        alert("Không tìm thấy dữ liệu phù hợp!");
+                    }
+                }
+            });
+        }
+
+        function fn_detail(str_img) {
+            $('#imgsrc').attr("src", str_img);
+        }
+
+    </script>
+}
+

@@ -1,0 +1,442 @@
+﻿@model  PagedList.IPagedList<ProductAllTool.Models.StoreLayout.storeShelf>
+@using PagedList.Mvc
+
+@{
+    ViewBag.Title = "ShelfList";
+}
+
+@if (Request.Browser.IsMobileDevice)
+{
+    <style>
+        .td_header {
+            font-size: 2vh;
+            color: #223141;
+            background-color: #e4e4e4;
+            width: 100%;
+        }
+
+        .body-content {
+            padding: 0px !important;
+        }
+
+        .tb_detail thead {
+            color: #223141;
+            background-color: #e4e4e4;
+            text-align: center;
+        }
+
+        .pagination {
+            margin: 0px !important;
+        }
+
+        .btnAc {
+            /*width: 15%;*/
+            float: right;
+            border-radius: 10px;
+            margin-right: 10px;
+        }
+
+        .tblAct td, th {
+            padding: 15px 0px;
+        }
+
+        thead th {
+            text-align: center;
+        }
+
+        tbody td {
+            text-align: left;
+        }
+    </style>
+
+    if (ViewBag.st_info != null)
+    {
+        <div style="width:100%;float:left">
+            <div class="td_header" style="width:100%; float:left;margin-top: 1vh; padding:1vh">
+                <b style="font-size:3vh; float:left">CHẤM THỰC TẾ CỬA HÀNG</b>
+
+                @Html.ActionLink("Quay lại", "ShelfList", "StoreLayout", new { storeNo = ViewBag.st_info.storeNo }, new { @class = "btn btn-primary btnAc" })
+            </div>
+        </div>
+
+        <hr style="width:100%;float:left;" />
+
+        <div style="width:100%; float:left">
+            <div style="width:50%; float:left">
+                <p><b> Cửa hàng: </b> @ViewBag.st_info.storeNo - @ViewBag.st_info.storeName</p>
+            </div>
+            <div style="width:50%; float:left">
+                <p><b>Số lượng kệ</b>: @ViewBag.st_info.countShelf</p>
+            </div>
+        </div>
+
+
+        <div class="text-center" style="width:100%;float:left; padding:1%">
+            <input id="txtSearch" type="text" class="form-control" style="border-radius:10px; float:right;padding-left:65px !important;" placeholder="Nhập giá trị tìm kiếm" />
+            <label style="float:right;transform: translateY(50%);">Tìm kiếm</label>
+        </div>
+    }
+
+
+
+
+    <table width="100%" class="table text-center">
+        <tr>
+            <td>
+                <table class="table table-striped tb_detail" border="1" style="width: 100%">
+                    <thead>
+                        <tr>
+                            <th>Mã kệ</th>
+                            <th>Ảnh</th>
+                            <th>Người tạo</th>
+                            <th colspan="2">Trạng thái</th>
+                            
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var item in Model)
+                        {
+                            if (item.status == 0)
+                            {
+                                <tr>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.shelfNo)
+                                    </td>
+                                    <td>
+                                        <a data-toggle="modal" onclick="fn_detail('@item.img_link');" data-target="#modalDetails">Ảnh</a>
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.createdBy)
+                                    </td>
+                                    <td>
+                                        
+                                        <input type="button" class="form-control btn-primary" value="Đạt" onclick="fnScore('@item.id',1)" />
+                                    </td>
+                                    <td>
+                                        <input type="button" class="form-control btn-warning" value="Không đạt" onclick="fnScore('@item.id',-1)" />
+                                    </td>
+                                </tr>
+                            }
+                            else
+                            {
+                                <tr>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.shelfNo)
+                                    </td>
+                                    <td>
+                                        <a data-toggle="modal" onclick="fn_detail('@item.img_link');" data-target="#modalDetails">Ảnh</a>
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.createdBy)
+                                    </td>
+                                    <td colspan="2">
+                                        @if (item.status == -1)
+                                        {
+                                        <p>Không hoàn thành</p>
+                                        }
+                                        else if (item.status == 1)
+                                        {
+                                        <p>Hoàn thành</p>
+                                        }
+                                        else
+                                        {
+                                        <p>@item.comment</p>
+                                        }
+
+                                    </td>
+                                </tr>
+                            }
+
+                        }
+                    </tbody>
+                </table>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <div>
+                    <div style="float:right; margin:0px !important; width:45%">
+                        @Html.PagedListPager(Model, page => Url.Action("ShelfList", new { page, fillData = ViewBag.fillData, storeNo = ViewBag.st_info.storeNo }),
+                       new PagedListRenderOptions
+                       {
+                           MaximumPageNumbersToDisplay = 3,
+                           DisplayLinkToFirstPage = PagedListDisplayMode.Never,
+                           DisplayLinkToLastPage = PagedListDisplayMode.Never,
+                           DisplayPageCountAndCurrentLocation = true
+                       })
+                    </div>
+                </div>
+            </td>
+        </tr>
+    </table>
+
+    <div class="modal fade bd-example-modal-lg" id="@string.Concat("modalDetails")" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="false">
+        <div class="modal-dialog modal-dialog modal-lg" role="document">
+            <div class="modal-content">
+                <h3 style="margin:15px;" class="modal-title" id="exampleModalLongTitle">Chi tiết báo cáo</h3>
+                <div class="modal-body">
+                    <img id="imgsrc" style="width:100%" src="" />
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Đóng</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+}
+else
+{
+    <style>
+        .td_header {
+            font-size: 2vh;
+            color: #223141;
+            background-color: #e4e4e4;
+            width: 100%;
+        }
+
+        .body-content {
+            padding: 0px !important;
+        }
+
+        .tb_detail thead {
+            color: #223141;
+            background-color: #e4e4e4;
+            text-align: center;
+        }
+
+        .pagination {
+            margin: 0px !important;
+        }
+
+        .btnAc {
+            width: 15%;
+            float: right;
+            border-radius: 10px;
+            margin-right: 10px;
+        }
+
+        .tblAct td, th {
+            padding: 15px 0px;
+        }
+
+        thead th {
+            text-align: center;
+        }
+
+        tbody td {
+            text-align: left;
+        }
+
+    </style>
+
+    if (ViewBag.st_info != null)
+    {
+        <div style="width:100%;float:left">
+            <div class="td_header" style="width:100%; float:left;margin-top: 1vh; padding:1vh">
+                <b style="font-size:3vh; float:left">CHẤM THỰC TẾ CỬA HÀNG</b>
+
+                @Html.ActionLink("Quay lại", "ShelfList", "StoreLayout", new { storeNo = ViewBag.st_info.storeNo }, new { @class = "btn btn-primary btnAc" })
+            </div>
+        </div>
+
+        <hr style="width:100%;float:left;" />
+
+        <div style="width:100%; float:left">
+            <div style="width:50%; float:left">
+                <p><b> Cửa hàng: </b> @ViewBag.st_info.storeNo - @ViewBag.st_info.storeName</p>
+            </div>
+            <div style="width:50%; float:left">
+                <p><b>Số lượng kệ</b>: @ViewBag.st_info.countShelf</p>
+            </div>
+        </div>
+
+
+        <div class="text-center" style="width:100%;float:left; padding:1%">
+            <input id="txtSearch" type="text" class="form-control" style="border-radius:10px; float:right;padding-left:65px !important;" placeholder="Nhập giá trị tìm kiếm" />
+            <label style="float:right;margin-right: 5vh;transform: translateY(50%);">Tìm kiếm</label>
+        </div>
+    }
+
+
+
+
+    <table width="100%" class="table text-center">
+        <tr>
+            <td>
+                <table class="table table-striped tb_detail" border="1" style="width: 100%">
+                    <thead>
+                        <tr>
+                            <th>Mã kệ</th>
+                            <th>Miêu tả</th>
+                            <th>Nhóm chức năng</th>
+                            <th>Ảnh</th>
+                            <th>Ngày tạo</th>
+                            <th style="width:30%">Trạng thái</th>
+                            <th>Người tạo</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var item in Model)
+                        {
+                            <tr>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.shelfNo)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.shelfName)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.catName)
+                                </td>
+                                <td>
+                                    <a data-toggle="modal" onclick="fn_detail('@item.img_link');" data-target="#modalDetails">Ảnh</a>
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.createdDate)
+                                </td>
+                                <td>
+                                    @if (item.status == 0)
+                                    {
+                                        <div style="width:100%; float:left">
+                                            <input type="button" style="width:40% !important" class="form-control btn-warning btnAc" value="Không đạt" onclick="fnScore('@item.id',-1)"/>
+                                            <input type="button" style="width:40% !important" class="form-control btn-primary btnAc" value="Đạt" onclick="fnScore('@item.id',1)"/>
+                                        </div>
+                                    }
+                                    else if (item.status == -1)
+                                    {
+                                        <p>Không hoàn thành</p>
+
+                                    }
+                                    else if (item.status == 1)
+                                    {
+                                        <p>Hoàn thành</p>
+                                    }
+                                    else
+                                    {
+                                        <p>@item.comment</p>
+                                    }
+
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.createdBy)
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <div>
+                    <div style="float:right; margin:0px !important; width:45%">
+                        @Html.PagedListPager(Model, page => Url.Action("ShelfList", new { page, fillData = ViewBag.fillData, storeNo = ViewBag.st_info.storeNo }),
+                       new PagedListRenderOptions
+                       {
+                           MaximumPageNumbersToDisplay = 3,
+                           DisplayLinkToFirstPage = PagedListDisplayMode.Never,
+                           DisplayLinkToLastPage = PagedListDisplayMode.Never,
+                           DisplayPageCountAndCurrentLocation = true
+                       })
+                    </div>
+                </div>
+            </td>
+        </tr>
+    </table>
+
+    <div class="modal fade bd-example-modal-lg" id="@string.Concat("modalDetails")" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="false">
+        <div class="modal-dialog modal-dialog modal-lg" role="document">
+            <div class="modal-content">
+                <h3 style="margin:15px;" class="modal-title" id="exampleModalLongTitle">Chi tiết báo cáo</h3>
+                <div class="modal-body">
+                    <img id="imgsrc" style="width:100%" src="" />
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Đóng</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+}
+
+<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
+<script type="text/javascript" src="http://ajax.cdnjs.com/ajax/libs/json2/20110223/json2.js"></script>
+<script type="text/javascript">
+        $(window).load(function () {
+            $('#txtSearch').val('@ViewBag.fillData');
+        });
+
+
+        $(function () {
+            $('#txtSearch').keydown(function (e) {
+                if (e.keyCode == 13) {
+                    fnPagesize();
+                }
+            });
+        });
+
+        function fnPagesize() {
+            window.location.href = "/StoreLayout/ScoreLayout?fillData=" + $('#txtSearch').val() +"&storeNo=@ViewBag.st_info.storeNo";
+        }
+
+        function fnScore(imgid, score) {
+
+            if (score == 1) {
+                var receivable = {};
+                receivable.id = imgid;
+                receivable.comment ='';
+                receivable.status = score;
+
+                $.ajax({
+                    type: "POST",
+                    url: "/StoreLayout/addScore",
+                    data: JSON.stringify(receivable),
+                    contentType: "application/json; charset=utf-8",
+                    dataType: "json",
+                    success: function (r) {
+                        if (r.length > 0) {
+                            window.location.href = "/StoreLayout/ScoreLayout?fillData=" + $('#txtSearch').val() +"&storeNo=@ViewBag.st_info.storeNo";
+                        } else {
+                            alert("Có lỗi sảy ra thử lại sau!");
+                        }
+                    }
+                });
+
+            } else if (score==-1) {
+                var comment = prompt("Nhập lý do(bắt buộc)", "");
+                if (comment == null || comment == "") {
+                    console.log("User cancelled the prompt.");
+                } else {
+                    var receivable = {};
+                    receivable.id = imgid;
+                    receivable.comment = comment;
+                    receivable.status = score;
+
+                    $.ajax({
+                        type: "POST",
+                        url: "/StoreLayout/addScore",
+                        data: JSON.stringify(receivable),
+                        contentType: "application/json; charset=utf-8",
+                        dataType: "json",
+                        success: function (r) {
+                            if (r.length > 0) {
+                                window.location.href = "/StoreLayout/ScoreLayout?fillData=" + $('#txtSearch').val() +"&storeNo=@ViewBag.st_info.storeNo";
+                            } else {
+                                alert("Có lỗi sảy ra thử lại sau!");
+                            }
+                        }
+                    });
+                }
+            }
+        }
+
+        function fn_detail(str_img) {
+
+            console.log(str_img);
+
+            $('#imgsrc').attr("src", str_img);
+        }
+
+</script>

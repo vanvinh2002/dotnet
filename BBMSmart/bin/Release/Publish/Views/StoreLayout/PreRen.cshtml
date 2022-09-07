@@ -1,0 +1,424 @@
+﻿@model IEnumerable<ProductAllTool.Models.StoreLayout.StoreRender>
+
+
+@{
+    ViewBag.Title = "PreRen";
+}
+
+@if (Request.Browser.IsMobileDevice)
+{
+    <p>
+        layout for Mobile
+    </p>
+}
+else
+{
+    <style>
+        .td_header {
+            font-size: 2vh;
+            color: #223141;
+            background-color: #e4e4e4;
+            width: 100%;
+        }
+
+        .body-content {
+            padding: 0px !important;
+        }
+
+        .tb_detail thead {
+            color: #223141;
+            background-color: #e4e4e4;
+            text-align: center;
+        }
+
+        .pagination {
+            margin: 0px !important;
+        }
+
+        .btnAc {
+            width: 15%;
+            float: right;
+            border-radius: 10px;
+            margin-right: 10px;
+        }
+
+        .tblAct td, th {
+            padding: 15px 0px;
+        }
+        thead th{
+            text-align:center;
+            width:25%;
+        }
+
+        tbody td{
+            /*text-align :left;*/
+        }
+    </style>
+
+    if (ViewBag.st_info != null)
+    {
+        <div style="width:100%;float:left">
+            <div class="td_header" style="width:100%; float:left;margin-top: 1vh; padding:1vh">
+                <b style="font-size:3vh; float:left">ẢNH 3D LAYOUT CỬA HÀNG</b>
+
+                @if (@ViewBag.role.edit_act == 1)
+                {
+                    <input type="button" class="btn btn-primary btnAc" id="btnSave" value="Lưu thay đổi" />
+                }
+
+                @Html.ActionLink("Quay lại", "ShelfList", "StoreLayout", new { storeNo = ViewBag.st_info.storeNo }, new { @class = "btn btn-primary btnAc" })
+            </div>
+
+        </div>
+
+        <hr style="width:100%;float:left;" />
+
+        <div style="width:100%; float:left">
+            <div style="width:50%; float:left">
+                <p><b> Cửa hàng: </b> @ViewBag.st_info.storeNo - @ViewBag.st_info.storeName</p>
+            </div>
+            <div style="width:50%; float:left">
+                <p><b>Số lượng kệ</b>: @ViewBag.st_info.countShelf</p>
+            </div>
+        </div>
+
+
+        @*<div class="text-center" style="width:100%;float:left; padding:1%">
+                <input id="txtSearch" type="text" class="form-control" style="border-radius:10px; float:right;padding-left:65px !important;" placeholder="Nhập giá trị tìm kiếm" />
+                <label style="float:right;margin-right: 5vh;transform: translateY(50%);">Tìm kiếm</label>
+            </div>*@
+    }
+
+
+    if (@ViewBag.role.edit_act == 1)
+    {
+        <table width="100%" class="table text-center">
+            <tr>
+                <td>
+                    <table id="tblReceivables" class="table table-striped tb_detail" border="1" style="width: 100%">
+                        <thead>
+                            <tr>
+                                <th>Mô tả/Tên ảnh</th>
+                                <th style="width: 60% !important;">Link ảnh/Ảnh</th>
+                                <th>Ngày tạo</th>
+                                <th>Người tạo</th>
+                                <th></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var item in Model)
+                            {
+                                <tr>
+                                    <td>
+                                        <input type="hidden" value="@item.id" />
+                                        <label>@item.name</label>
+                                    </td>
+                                    <td>
+                                        <input type="hidden" value="' + imgLink + '" />
+                                        <a data-toggle="modal" data-target="#modalDetails" onclick="fn_detail('@item.linkImage');"><img style="width:35%" src="@item.linkImage" /></a>
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.createdDate)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.createdBy)
+                                    </td>
+                                    <td>
+                                        <input class="btn btn-warning" type="button" value="Xóa" onclick="Remove(this)" />
+                                    </td>
+                                </tr>
+                            }
+                        </tbody>
+                        <tfoot>
+                            <tr>
+                                <td>
+                                    <input id="txtName" type="text" class="form-control" placeholder="Nhập tên ảnh" onkeyup="CltxtM2()"/>
+                                </td>
+                                <td>
+                                    <div style="width:100%; float:left">
+                                        <input type="hidden" value="" id="img_link" />
+                                        <a id="img_show" data-toggle="modal" data-target="#modalDetails"><img id="img_sh" style="width:35%" src="" /></a>
+                                    </div>
+                                </td>
+                                <td>
+                                    <form id="upload" enctype="multipart/form-data" action="@Url.Action("uploadImg", "StoreLayout")" method="POST">
+                                        <input type="file" style="width: 0.1px;height: 0.1px;opacity: 0;overflow: hidden;position: absolute;z-index: -1;" name="fileUpload" id="fileUpload" class="inputfile">
+                                        <label class="form-control btn-default btnAc" style="width:auto !important" for="fileUpload">Upload ảnh</label>
+                                    </form>
+                                </td>
+                                <td>
+                                    <input id="btnAdd" type="button" class="form-control btn-primary" value="Thêm" />
+                                </td>
+                            </tr>
+                        </tfoot>
+                    </table>
+                </td>
+            </tr>
+        </table>
+    }
+    else
+    {
+        <table width="100%" class="table text-center">
+            <tr>
+                <td>
+                    <table id="tblReceivables" class="table table-striped tb_detail" border="1" style="width: 100%">
+                        <thead>
+                            <tr>
+                                <th>Mô tả/Tên ảnh</th>
+                                <th style="width: 60% !important;">Link ảnh/Ảnh</th>
+                                <th>Ngày tạo</th>
+                                <th>Người tạo</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var item in Model)
+                            {
+                                <tr>
+                                    <td>
+                                        <input type="hidden" value="@item.id" />
+                                        <label>@item.name</label>
+                                    </td>
+                                    <td>
+                                        <input type="hidden" value="' + imgLink + '" />
+                                        <a data-toggle="modal" data-target="#modalDetails" onclick="fn_detail('@item.linkImage');"><img style="width:35%" src="@item.linkImage" /></a>
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.createdDate)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.createdBy)
+                                    </td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </td>
+            </tr>
+        </table>
+    }
+
+
+
+
+    <div class="modal fade bd-example-modal-lg" id="@string.Concat("modalDetails")" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="false">
+        <div class="modal-dialog modal-dialog modal-lg" role="document">
+            <div class="modal-content">
+                <h3 style="margin:15px;" class="modal-title" id="exampleModalLongTitle">Chi tiết báo cáo</h3>
+                <div class="modal-body">
+                    <img id="imgsrc" style="width:100%" src="" />
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Đóng</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
+    <script type="text/javascript" src="http://ajax.cdnjs.com/ajax/libs/json2/20110223/json2.js"></script>
+    <script type="text/javascript">
+        $(window).load(function () {
+
+        });
+
+
+        //Upload file
+        $(document).ready(function () {
+            //validating uploaded file whether it is Excel or not while uploading
+            $("#fileUpload").change(function () {
+                //fileErrorMessage.innerHTML = '';
+                var vtrUpload = $("#fileUpload").val().toLowerCase();
+                var regexVTRUpload = new RegExp("(.*?)\.(png|jpg|jpeg)$");
+                if (!(regexVTRUpload.test(vtrUpload))) {
+                    $("#fileUpload").val("");
+
+                    alert("file false");
+                } else {
+                    UploadFile();
+                }
+            });
+        });
+
+        function UploadFile() {
+            var data = new FormData();
+            var files = $("#fileUpload").get(0).files;
+            if (files.length > 0) {
+                data.append("MyImages", files[0]);
+            }
+
+            $.ajax({
+                url: "/StoreLayout/uploadImg",
+                type: "POST",
+                processData: false,
+                contentType: false,
+                data: data,
+                success: function (data) {
+
+                    console.log(data);
+
+                    //var sub = JSON.parse(data);
+                    console.log(data.link);
+                    if (data.code == 0) {
+
+                        $('#img_link').val(data.link);
+                        $('#img_sh').attr("src", data.link);
+                        $('#img_show').attr("onclick", "fn_detail('" + data.link + "')");
+
+                    }
+
+                },
+                error: function (er) {
+                    alert(er);
+                }
+
+            });
+
+        }
+
+        function fn_detail(str_img) {
+
+            console.log(str_img);
+
+            $('#imgsrc').attr("src", str_img);
+        }
+
+
+        $("body").on("click", "#btnAdd", function () {
+
+        //Reference the Name and Country TextBoxes.
+            var name = $('#txtName').val();
+            var imgLink = $('#img_link').val();
+
+            if (name.length == 0 || imgLink.length == 0) {
+            alert("Kiểm tra nhập các trường dữ liệu!!!");
+        } else {
+            //Get the reference of the Table's TBODY element.
+            var tBody = $("#tblReceivables > TBODY")[0];
+
+            //Add Row.
+            var row = tBody.insertRow(-1);
+
+            //Add Type cell
+                cell = $(row.insertCell(-1));
+                cell.html('<input type="hidden" value="0" /><label>' + name + '</label>');
+
+            //Add Type cell
+                cell = $(row.insertCell(-1));
+                cell.html('<input type = "hidden" value = "' + imgLink + '"/><a data-toggle="modal" data-target="#modalDetails" onclick="fn_detail("' + imgLink + '");"><img style="width:35%" src="' + imgLink + '" /></a>');
+
+            //Add Type cell
+            cell = $(row.insertCell(-1));
+            cell.html();
+
+            //Add Type cell
+            cell = $(row.insertCell(-1));
+            cell.html('@Session["uid"]');
+
+            //Add Button cell.
+            cell = $(row.insertCell(-1));
+            var btnRemove = $("<input />");
+            btnRemove.attr("class", "btn btn-warning");
+            btnRemove.attr("type", "button");
+            btnRemove.attr("onclick", "Remove(this);");
+            btnRemove.val("Xóa");
+            cell.append(btnRemove);
+
+            //Clear the TextBoxes.
+            $('#txtName').val("");
+                $('#img_link').val("");
+                $('#img_sh').removeAttr("src");
+        }
+
+    });
+
+    function Remove(button) {
+        //Determine the reference of the Row using the Button.
+        var row = $(button).closest("TR");
+        var name = $("TD", row).eq(0).find("label").eq(0).html();
+        if (confirm("Xóa: " + name+" ?")) {
+            //Get the reference of the Table.
+            var table = $("#tblReceivables")[0];
+
+            //Delete the Table row using it's Index.
+            table.deleteRow(row[0].rowIndex);
+        }
+    };
+
+    $("body").on("click", "#btnSave", function () {
+
+
+        // save BonusAgreement
+
+        var receivables = new Array();
+        $("#tblReceivables TBODY TR").each(function () {
+            var row = $(this);
+            var receivable = {};
+            receivable.id = row.find("TD").eq(0).find("input").eq(0).val();
+            receivable.storeNo = '@ViewBag.st_info.storeNo';
+            receivable.name = row.find("TD").eq(0).find("label").eq(0).html();
+            receivable.linkImage = row.find("TD").eq(1).find("input").eq(0).val();
+
+            receivables.push(receivable);
+        });
+
+        console.log(receivables);
+
+        if (receivables.length > 0) {
+            $.ajax({
+                type: "POST",
+                url: "/StoreLayout/saveRender",
+                data: JSON.stringify(receivables),
+                contentType: "application/json; charset=utf-8",
+                dataType: "json",
+                success: function (r) {
+                    if (r.length > 0) {
+                        window.location.href = "/StoreLayout/ShelfList?storeNo=@ViewBag.st_info.storeNo";
+                    } else {
+                        alert("Có lỗi sảy ra thử lại sau!");
+                    }
+                }
+            });
+        } else {
+            var r = confirm("Lưu lại với danh sách ảnh trống?");
+
+            if (r == true) {
+                $.ajax({
+                    type: "POST",
+                url: "/StoreLayout/saveRender",
+                data: JSON.stringify(receivables),
+                contentType: "application/json; charset=utf-8",
+                dataType: "json",
+                success: function (r) {
+                    if (r.length > 0) {
+                        window.location.href = "/StoreLayout/ShelfList?storeNo=@ViewBag.st_info.storeNo";
+                    } else {
+                        alert("Có lỗi sảy ra thử lại sau!");
+                    }
+                }
+                 });
+
+            }
+        }
+
+
+    });
+
+    function CltxtM2() {
+
+        var n = $('#txtName').val().replace(/[!#$&%^*+?^${}()|[\]\\;:'"<>]/g, '');
+        $('#txtName').val(n.toLocaleString());
+
+        //var n = parseFloat($('#txtM2').val().replace(/\D/g, '')) / 100;
+        //    if (n.toString() != "NaN") {
+        //        $('#txtM2').val(n.toLocaleString());
+        //    } else {
+        //        $('#txtM2').val("0");
+        //    }
+    };
+
+
+
+    </script>
+}
+

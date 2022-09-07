@@ -1,0 +1,595 @@
+﻿
+@{
+    ViewBag.Title = "Detail";
+}
+
+<div class="div-span">
+
+    @Html.ActionLink("Quay lại", "Index", "SourceProduct", new { }, new { @class = "btn btn-info" })
+
+</div>
+
+<style>
+    .box_inline {
+        float: left;
+        margin-right: 11px;
+    }
+</style>
+<div class="div-span">
+    <div class="row">
+        <div class="col-md-3">
+            <input id="txtID" type="hidden" value="@ViewBag.it.id" />
+            <div class="form-group">
+                <label for="txtSKU">Mã hàng : </label>
+                <input id="txtSKU" type="text" class="form-control" readonly="readonly" value="@ViewBag.it.sku" />
+            </div>
+
+            <div class="form-group">
+                <label for="txtName">Tên hàng <b style="color:red">*</b> : </label>
+                <input id="txtName" type="text" class="form-control" placeholder="Nhập tên hàng hóa" value="@ViewBag.it.name" />
+            </div>
+
+            <div class="form-group">
+                <label for="txtVendorName">Tên NCC : </label>
+                <input id="txtVendorName" type="text" class="form-control" placeholder="Nhập tên nhà cung" value="@ViewBag.it.vendorName" />
+            </div>
+            <div class="form-group">
+                <label for="txtCorePrice">Giá nhập (VNĐ): </label>
+                <input id="txtCorePrice" type="text" class="form-control" placeholder="Nhập giá" value="@ViewBag.it.corePrice" />
+            </div>
+            <div class="form-group">
+                <label for="txtPrice">Giá bán (VNĐ): </label>
+                <input id="txtPrice" type="text" class="form-control" placeholder="Nhập giá" value="@ViewBag.it.price" />
+            </div>
+            <div class="form-group">
+                <label for="txtUrl">Link sản phẩm : </label>
+                <input id="txtUrl" type="text" class="form-control" placeholder="Nhập link SP" value="@ViewBag.it.url_link" />
+            </div>
+        </div>
+
+        <div class="col-md-3">
+            <div class="form-group">
+                <label for="txtDivision">Division : </label>
+                <select id="sl_div" class="form-control" onchange="loadSub('sl_div', 'sl_cat', 'cat')">
+                    @foreach (var i in ViewBag.ls_div)
+                    {
+                        <option value="@i.Code">@i.Name</option>
+                    }
+                </select>
+
+            </div>
+
+            <div class="form-group">
+                <label for="sl_cat">Category: </label>
+                <select class="form-control" id="sl_cat" onchange="loadSub('sl_cat', 'sl_group', 'group')"></select>
+            </div>
+
+            <div class="form-group">
+                <label for="sl_group">Group: </label>
+                <select id="sl_group" class="form-control" onchange="loadSub('sl_group', 'sl_func', 'func')"></select>
+            </div>
+
+            <div class="form-group">
+                <label for="sl_func">Function: </label>
+                <select id="sl_func" class="form-control"></select>
+            </div>
+
+            <div class="form-group">
+                <label for="sl_UoM">Đơn vị tính: </label>
+                <select id="sl_UoM" class="form-control">
+                    <option value=""></option>
+                    @foreach (var i in ViewBag.ls_UoM)
+                    {
+                        <option value="@i">@i</option>
+                    }
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label for="txtDes">Mô tả thêm : </label>
+                <textarea id="txtDes" class="form-control" placeholder="Nhập mô tả" rows="4" style="min-width: 100% ">@ViewBag.it.descriptions</textarea>
+            </div>
+        </div>
+
+        <div class="col-md-2">
+            @if (((ProductAllTool.Models.SpaceMan.userRole)Session["u_Role"]).root_act == "1" && ((ProductAllTool.Models.SpaceMan.userRole)Session["u_Role"]).controlCode == "C002")
+            {
+                <div class="form-group">
+                    @*<label for="btn_div">Thêm Divison</label>*@
+                    <input id="btn_div" type="button" class="btn btn-warning box_inline" value="Thêm Division" data-toggle="modal" onclick="fn_detail('','div');" data-target="#modalDetails" style="margin-top:1.65em;" />
+                </div>
+
+                <div class="form-group">
+                    @*<label for="btn_cat">Thêm Category</label>*@
+                    <input id="btn_cat" type="button" class="btn btn-warning box_inline" value="Thêm Category" data-toggle="modal" onclick="fn_detail('div','cat');" data-target="#modalDetails" style="margin-top: 2.8em;" />
+                </div>
+
+                <div class="form-group">
+                    @*<label for="btn_group">Thêm Group</label>*@
+                    <input id="btn_group" type="button" class="btn btn-warning box_inline" value="Thêm Group" data-toggle="modal" onclick="fn_detail('cat','group');" data-target="#modalDetails" style="margin-top: 2.8em;" />
+                </div>
+
+                <div class="form-group">
+                    <label for="btn_func">@*Thêm Function*@</label>
+                    <input id="btn_func" type="button" class="btn btn-warning box_inline" value="Thêm Function" data-toggle="modal" onclick="fn_detail('group','func');" data-target="#modalDetails" style="margin-top:2.8em;" />
+                </div>
+            }
+        </div>
+        <div class="col-md-4">
+            <input type="hidden" id="txt_srcImg" value="@ViewBag.it.imgLink" />
+            <img id="thum_img" src="@ViewBag.it.imgLink" style="width:350px;min-height:300px" />
+
+            <a id="real_img" data-toggle="modal" onclick="fn_detail1('');" data-target="#modalDetails1">Ảnh thực tế</a>
+            <div class="row" style="margin: 10px 0px;">
+                <!--<input type="button" class="form-control btn-primary div-shelf" value="Đăng ảnh mới" />-->
+                <form id="upload" enctype="multipart/form-data" action="@Url.Action("uploadImg", "SpaceMan")" method="POST">
+                    <input type="file" style="width: 0.1px;height: 0.1px;opacity: 0;overflow: hidden;position: absolute;z-index: -1;" name="fileUpload" id="fileUpload" class="inputfile">
+                    <label class="btn btn-info box_inline" for="fileUpload"><i class="fa fa-cloud-upload" aria-hidden="true"></i> Upload ảnh</label>
+                </form>
+                <a href="#" class="btn btn-success box_inline" onclick="fnSave();"><i class="fa fa-floppy-o" aria-hidden="true"></i> Lưu thông tin</a>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        
+    </div>
+
+</div>
+
+
+<div class="modal fade bd-example-modal-lg" id="@string.Concat("modalDetails")" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="false">
+    <div class="modal-dialog modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <h3 style="margin:15px;" class="modal-title" id="exampleModalLongTitle">Chi tiết</h3>
+            <div class="modal-body">
+
+
+                <div class="div-span">
+
+                    <div class="row">
+                        <div class="col-md-6"><h4 id="h_cat">Division : <b id="b_cat"></b></h4></div>
+
+                        <div class="col-md-6">
+                            <h4 id="h_group">Category : <b id="b_group"></b></h4>
+                        </div>
+                        <div class="col-md-12">
+                            <h4 id="h_func">Group : <b id="b_func"></b></h4>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="form-group">
+                            <div class="col-md-5">
+                                <label for="txtCode">Nhập mã mới</label>
+                                <input type="text" id="txtCodeN" class="form-control" placeholder="Nhập mã" />
+                            </div>
+
+                            <div class="col-md-5">
+                                <label for="txtName">Nhập tên mới</label>
+                                <input type="text" id="txtNameN" class="form-control" placeholder="Nhập tên" />
+                            </div>
+                            <div class="col-md-2">
+                                <button id="btn_pop_Save" type="button" style="margin-top: 3vh;" class="btn btn-warning" onclick="fn_SaveMDS('')">Lưu</button>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <div class="row1">
+                                <div class="col-md-5">
+                                    <input type="text" style="margin-top:1em;" id="txt_fill_code" class="form-control" placeholder="Nhập mã muốn tìm" />
+                                </div>
+                                <div class="col-md-7">
+                                </div>
+
+                            </div>
+                        </div>
+
+                        <div style="padding: 16PX !important; margin-top: 8em !important;">
+                            <table id="tbl_Detail" class="table table-striped">
+                                <thead>
+                                    <tr>
+                                        <th>
+                                            Mã
+                                        </th>
+                                        <th>
+                                            Tên
+                                        </th>
+                                    </tr>
+                                </thead>
+                                <tbody></tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="modal-footer">
+                    @*<button id="btn_pop_Save" type="button" class="btn btn-secondary" onclick="fn_SaveMDS('')">Lưu</button>*@
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade bd-example-modal-lg" id="@string.Concat("modalDetails1")" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle1" aria-hidden="false">
+    <div class="modal-dialog modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <h3 style="margin:15px;" class="modal-title" id="exampleModalLongTitle">Chi tiết</h3>
+            <div class="modal-body">
+                <img id="imgsrc" style="width:100%" src="" />
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Đóng</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
+<script type="text/javascript" src="http://ajax.cdnjs.com/ajax/libs/json2/20110223/json2.js"></script>
+<script type="text/javascript">
+
+    var arr_sub;
+
+    $(document).ready(function () {
+
+        $('#txtHead').html("KHAI BÁO HÀNG MỚI");
+
+        $('#sl_div').val('@ViewBag.it.DivisionCode');
+        $('#sl_cat').val('@ViewBag.it.CategoryCode');
+        $('#sl_group').val('@ViewBag.it.GroupCode');
+        $('#sl_func').val('@ViewBag.it.FunctionCode');
+        $('#sl_UoM').val('@ViewBag.it.UoM');
+
+        //loadSub('sl_div', 'sl_cat', 'cat');
+
+        $("#fileUpload").change(function () {
+            //fileErrorMessage.innerHTML = '';
+            var vtrUpload = $("#fileUpload").val().toLowerCase();
+            var regexVTRUpload = new RegExp("(.*?)\.(png|jpg|jpeg)$");
+            if (!(regexVTRUpload.test(vtrUpload))) {
+                $("#fileUpload").val("");
+
+                alert("file false");
+            } else {
+                UploadFile();
+            }
+        });
+
+        $('#txt_fill_code').keydown(function (e) {
+            if (e.keyCode == 13) {
+                searchPop();
+            }
+        });
+
+        $('#txt_fill_name').keydown(function (e) {
+            if (e.keyCode == 13) {
+                searchPop();
+            }
+        });
+
+    });
+
+    function UploadFile() {
+        var data = new FormData();
+        var files = $("#fileUpload").get(0).files;
+        if (files.length > 0) {
+            data.append("MyImages", files[0]);
+        }
+
+        $.ajax({
+            url: "/SourceProduct/uploadImg",
+            type: "POST",
+            processData: false,
+            contentType: false,
+            data: data,
+            success: function (data) {
+
+                console.log(data);
+
+                //var sub = JSON.parse(data);
+                console.log(data.link);
+
+                if (data.code == 0) {
+                    img_link = data.link;
+                    $('#txt_srcImg').val(data.link);
+
+                    $('#thum_img').attr("src", data.link);
+
+                    $('#real_img').attr("onclick", "fn_detail1('" + data.link + "')");
+                }
+
+            },
+            error: function (er) {
+                alert("Thiết bị không hỗ trợ up ảnh từ camera. Chọn file từ bộ nhớ thiết bị !");
+            }
+
+        });
+
+    }
+
+    function fnSave() {
+
+        console.log($('#sl_div').val());
+
+        if ($('#txt_srcImg').val().length > 0) {
+
+            if ($('#txtName').val().length > 0) {
+                var it_pdt = new Object();
+
+                it_pdt.id = $('#txtID').val();
+                it_pdt.sku = $('#txtSKU').val();
+                it_pdt.name = $('#txtName').val();
+                it_pdt.vendorName = $('#txtVendorName').val();
+                it_pdt.descriptions = $('#txtDes').val();
+                it_pdt.imgLink = $('#txt_srcImg').val();
+                it_pdt.corePrice = $('#txtCorePrice').val();
+                it_pdt.price = $('#txtPrice').val();;
+                it_pdt.url_link = $('#txtUrl').val();
+                it_pdt.DivisionCode = $('#sl_div').val();
+                it_pdt.CategoryCode = $('#sl_cat').val();
+                it_pdt.GroupCode = $('#sl_group').val();
+                it_pdt.FunctionCode = $('#sl_func').val();
+                it_pdt.UoM = $('#sl_UoM').val();
+
+                $.ajax({
+                    type: "POST",
+                    url: "/SourceProduct/addItem",
+                    data: JSON.stringify(it_pdt),
+                    contentType: "application/json; charset=utf-8",
+                    dataType: "json",
+                    success: function (r1) {
+                        //var sub = JSON.parse(r1);
+                        if (r1.length > 0) {
+                            window.location.href = '/SourceProduct/Index';
+                        } else {
+                            alert("Có lỗi xảy ra thử lại sau!");
+                        }
+                    }
+                });
+            }
+            else {
+                alert("Nhập tên sản phẩm!");
+            }
+        } else {
+            alert("Chưa đăng ảnh thực tế!");
+        }
+    }
+
+    function fn_detail(strRoot, strSub) {
+
+        $('#b_cat').html($('#sl_div').val() + ' - ' + $('#sl_div option:selected').text());
+        $('#b_group').html($('#sl_cat').val() + ' - ' + $('#sl_cat option:selected').text());
+        $('#b_func').html($('#sl_group').val() + ' - ' + $('#sl_group option:selected').text());
+
+        $('#exampleModalLongTitle').html("Thêm mới Division");
+
+        //disable all div
+        $('#h_cat').attr("style", "display:none");
+        $('#h_group').attr("style", "display:none");
+        $('#h_func').attr("style", "display:none");
+
+        if (strSub == "cat") {
+            $('#h_cat').attr("style", "display:block");
+            $('#exampleModalLongTitle').html("Thêm mới Category");
+        }
+        if (strSub == "group") {
+            $('#h_cat').attr("style", "display:block");
+            $('#h_group').attr("style", "display:block");
+            $('#exampleModalLongTitle').html("Thêm mới Group");
+        }
+
+        if (strSub == "func") {
+            $('#h_cat').attr("style", "display:block");
+            $('#h_group').attr("style", "display:block");
+            $('#h_func').attr("style", "display:block");
+            $('#exampleModalLongTitle').html("Thêm mới Function");
+        }
+
+
+
+        $('#btn_pop_Save').attr("onclick", "fn_SaveMDS('" + strSub + "','" + strRoot + "')")
+
+        $("#tbl_Detail > TBODY").html("");
+
+        $.ajax({
+            type: "POST",
+            url: "/SourceProduct/getSubList",
+            data: '{code :\'' + strSub + '\',fillter:\'' + $('#sl_' + strRoot).val() + '\'}',
+            contentType: "application/json; charset=utf-8",
+            dataType: "json",
+            success: function (r) {
+
+                if (r != null) {
+
+                    //var rt = JSON.parse(r);
+
+                    arr_sub = r;
+
+                    for (i in r) {
+
+                        var tBody = $("#tbl_Detail > TBODY")[0];
+
+                        //Add Row.
+                        var row = tBody.insertRow(-1);
+
+                        //Add Type cell
+                        cell = $(row.insertCell(-1));
+                        cell.html(r[i].Code);
+
+                        //Add Type cell
+                        cell = $(row.insertCell(-1));
+                        cell.html(r[i].Name);
+
+                    }
+
+                    $('#sl_' + strRoot).trigger("change");
+
+                }
+            }
+        });
+    }
+
+    $("#txtPrice").on('keyup', function () {
+
+        //var n = $(this).val().replace(/[ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz!#$&%^*+?^${}()|[\]\\;:'"<>]/g, '');
+        //$(this).val(n.toLocaleString());
+
+        //if ($(this).val().length > 3) {
+        var n = parseInt($(this).val().replace(/\D/g, ''), 10);
+        if (n.toLocaleString() != 'NaN') {
+            $(this).val(n.toLocaleString());
+        } else {
+            $(this).val('0');
+        }
+        //}
+    });
+
+    $("#txtCorePrice").on('keyup', function () {
+
+        //var n = $(this).val().replace(/[ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz!#$&%^*+?^${}()|[\]\\;:'"<>]/g, '');
+        //$(this).val(n.toLocaleString());
+
+        //if ($(this).val().length > 3) {
+        var n = parseInt($(this).val().replace(/\D/g, ''), 10);
+        if (n.toLocaleString() != 'NaN') {
+            $(this).val(n.toLocaleString());
+        } else {
+            $(this).val('0');
+        }
+        //}
+    });
+
+    function loadSub(rootId, subId, type) {
+
+        $.ajax({
+            type: "POST",
+            url: "/SourceProduct/getSubList",
+            data: '{code:"' + type + '",fillter:"' + $('#' + rootId).val() + '"}',
+            contentType: "application/json; charset=utf-8",
+            dataType: "json",
+            success: function (r) {
+
+                console.log(r);
+                var bode = document.getElementById(subId);
+                bode.innerHTML = '';
+
+                if (r != null) {
+
+                    //var rt = JSON.parse(r);
+
+                    arr_sub = r;
+
+                    for (i in r) {
+
+                        option = document.createElement('option');
+                        option.value = r[i].Code;
+                        option.text = r[i].Name;
+                        bode.appendChild(option);
+
+                    }
+
+                    $('#sl_' + type).trigger("change");
+
+                }
+            }
+        });
+
+    }
+
+    function fn_SaveMDS(type, rootId) {
+
+        console.log($('#txtCodeN').val());
+        console.log($('#txtNameN').val());
+        console.log($('#sl_' + rootId).val());
+
+        if ($('#txtCodeN').val().length > 0 && $('#txtNameN').val().length > 0) {
+
+            //check code
+            //
+
+            $.ajax({
+                type: "POST",
+                url: "/SourceProduct/checkCodeExist",
+                data: '{code:\'' + type + '\',fillter:\'' + $('#txtCodeN').val() + '\'}',
+                contentType: "application/json; charset=utf-8",
+                dataType: "json",
+                success: function (r1) {
+
+                    if (r1.length > 0) {
+
+                        alert("Mã đã tồn tại, nhập mã khác!");
+
+                    } else {
+
+                        var obj = new Object();
+
+                        obj.type = type;
+                        obj.Code = $('#txtCodeN').val();
+                        obj.Name = $('#txtNameN').val();
+                        obj.ParentCode = $('#sl_' + rootId).val();
+
+                        $.ajax({
+                            type: "POST",
+                            url: "/SourceProduct/addMDS",
+                            data: JSON.stringify(obj),
+                            contentType: "application/json; charset=utf-8",
+                            dataType: "json",
+                            success: function (r) {
+
+                                $('#txtCodeN').val('');
+                                $('#txtNameN').val('');
+
+                                $('#modalDetails').modal('hide');
+
+                                if (r.length > 0) {
+                                    alert("Thêm thành công!");
+
+                                    if (type == 'div') {
+                                        loadSub('sl_div', 'sl_div', 'div');
+                                    } else {
+                                        $('#sl_' + rootId).trigger("change");
+                                    }
+                                } else {
+                                    alert("Có lỗi sảy ra thử lại sau!");
+                                }
+                            }
+                        });
+                    }
+                }
+            });
+        } else {
+            alert("Nhập đủ thông tin");
+        }
+    }
+
+    function searchPop() {
+
+        var cd = $('#txt_fill_code').val();
+
+        $("#tbl_Detail > TBODY").html("");
+
+
+        for (i in arr_sub) {
+
+            if (arr_sub[i].Code.toLowerCase().includes(cd.toLowerCase()) == true || arr_sub[i].Name.toLowerCase().includes(cd.toLowerCase()) == true) {
+                var tBody = $("#tbl_Detail > TBODY")[0];
+
+                //Add Row.
+                var row = tBody.insertRow(-1);
+
+                //Add Type cell
+                cell = $(row.insertCell(-1));
+                cell.html(arr_sub[i].Code);
+
+                //Add Type cell
+                cell = $(row.insertCell(-1));
+                cell.html(arr_sub[i].Name);
+            }
+        }
+    }
+
+    function fn_detail1(strImg) {
+        $('#imgsrc').attr("src", strImg);
+    }
+</script>

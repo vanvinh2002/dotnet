@@ -1,0 +1,410 @@
+﻿@{
+    ViewBag.Title = "Index";
+
+    var role = 0;
+
+    //role
+    if (((@ProductAllTool.Models.SpaceMan.userRole)@Session["u_Role"]).accept_act == "1" && ((@ProductAllTool.Models.SpaceMan.userRole)@Session["u_Role"]).controlCode == "C002")
+    {
+        role = 1;
+    }
+}
+<div class="div-span">
+    <div class="row">
+        <div class="col-md-4">
+            <textarea class="form-control" style="min-width:100%" rows="3" id="txare" placeholder="Nhập từ khóa tìm kiếm"></textarea>
+        </div>
+        <div class="col-md-6" style="margin-top:-1.5em">
+
+            <div class="div-span">
+                <div class="col-md-4 text-center"><label style="transform: translateY(0.5em);" for="sl_div">Division: </label></div>
+                <div class="col-md-8">
+                    <input list="divisions" name="sl_div" placeholder="Tất cả" class="form-control" id="sl_div" onfocus="fnReset('sl_div')" onchange="loadSub('sl_div', 'categories', 'cat')">
+                    <datalist id="divisions">
+                        @foreach (var i in ViewBag.ls_div)
+                        {
+                            <option value="@i.DivisionName">@i.DivisionName</option>
+                        }
+                    </datalist>
+                </div>
+            </div>
+
+
+            <div class="div-span">
+                <div class="col-md-4 text-center"><label style="transform: translateY(0.5em);" for="sl_cat">Category: </label></div>
+                <div class="col-md-8">
+                    <input list="categories" name="sl_cat" placeholder="Tất cả" class="form-control" id="sl_cat" onfocus="fnReset('sl_cat')" onchange="loadSub('sl_cat', 'groups', 'group')">
+                    <datalist id="categories">
+                        @foreach (var i in ViewBag.ls_cat)
+                        {
+                            <option value="@i.CategoryName">@i.CategoryName</option>
+                        }
+                    </datalist>
+                </div>
+            </div>
+
+
+
+
+            <div class="div-span">
+                <div class="col-md-4 text-center"><label style="transform: translateY(0.5em);" for="sl_group">Group: </label></div>
+                <div class="col-md-8">
+                    <input list="groups" name="sl_group" placeholder="Tất cả" class="form-control" id="sl_group" onfocus="fnReset('sl_group')" onchange="loadSub('sl_group', 'functions', 'func')">
+                    <datalist id="groups">
+                        @foreach (var i in ViewBag.ls_group)
+                        {
+                            <option value="@i.GroupName">@i.GroupName</option>
+                        }
+                    </datalist>
+                </div>
+            </div>
+
+            
+
+
+            <div class="div-span">
+                <div class="col-md-4 text-center"><label style="transform: translateY(0.5em);" for="sl_func">Function: </label></div>
+                <div class="col-md-8">
+                    <input list="functions" name="sl_func" id="sl_func" onfocus="fnReset('sl_func')" placeholder="Tất cả" class="form-control">
+                    <datalist id="functions">
+                        @foreach (var i in ViewBag.ls_func)
+                        {
+                            <option value="@i.FunctionName">@i.FunctionName</option>
+                        }
+                    </datalist>
+                </div>
+            </div>
+
+            
+
+        </div>
+            <div class="col-md-2">
+                <div class="row">
+                    <div class="col-md-12">
+
+                        <select class="form-control" id="selTypeFill">
+                            <option value="0">Tất cả</option>
+                            <option value="2">Đã duyệt</option>
+                            <option value="1">Chưa duyệt</option>
+                        </select>
+                        <br />
+                    </div>
+                    <div class="col-md-12">
+                        @*<input type="button" class="form-control btn-info" onclick="fnLoad()" value="Tìm kiếm" />*@
+                        <a href="#" class="btn btn-success button_action" onclick="fnLoad()" style="width:180px;margin-bottom:15px;"><i class="fa fa-search" aria-hidden="true"></i> Tìm kiếm</a>
+                        @*<input type="button" class="form-control btn-primary" style="margin-top:20px" onclick="window.location = '/SourceProduct/Create'" value="Tạo mới" />*@
+
+                        @if (((ProductAllTool.Models.SpaceMan.userRole)Session["u_Role"]).create_act == "1" && ((ProductAllTool.Models.SpaceMan.userRole)Session["u_Role"]).controlCode == "C002")
+                        {
+                            <a href="#" class="btn btn-warning button_action" onclick="window.location = '/SourceProduct/Create'" style="width:180px;margin-bottom:15px;"><i class="fa fa-plus-circle" aria-hidden="true"></i> Tạo mới</a>
+                        }
+
+                    </div>
+                </div>
+
+                <div class="row">
+
+                    <div class="col-md-12">
+                        <div id="divLoading" style="visibility:hidden" class="loader"></div>
+                        @*<input id="btnExport" type="button" class="form-control btn-primary" onclick="fnExport()" value="Xuất Excel" style="visibility:hidden;margin-top: 20%;" />*@
+                        <a id="btnExport" href="#" class="btn btn-info button_action" onclick="fnExport()" style="visibility:hidden;width:180px;"><i class="fa fa-file-excel-o" aria-hidden="true"></i> Xuất Excel</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+</div>
+
+@if (((ProductAllTool.Models.SpaceMan.userRole)Session["u_Role"]).accept_act == "1" && ((ProductAllTool.Models.SpaceMan.userRole)Session["u_Role"]).controlCode == "C002")
+{
+    <table id="tbl_Item" class="table table-bordered">
+        <thead>
+            <tr>
+                <th style="width:5%">
+                    Mã SP
+                </th>
+                <th style="width:20%">
+                    Tên sản phẩm
+                </th>
+                <th style="width:10%">
+                    Tên NCC
+                </th>
+                <th style="width:10%">
+                    Giá mua
+                </th>
+                <th style="width:10%">
+                    Giá bán
+                </th>
+                <th style="width:15%">
+                    Link SP
+                </th>
+                <th style="width:20%">
+                    Ảnh sản phẩm
+                </th>
+                <th style="width:10%">
+                    Duyệt
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+        </tbody>
+    </table>
+}
+else
+{
+    <table id="tbl_Item" class="table table-bordered">
+        <thead>
+            <tr>
+                <th style="width:5%">
+                    Mã SP
+                </th>
+                <th style="width:25%">
+                    Tên sản phẩm
+                </th>
+                <th style="width:10%">
+                    Tên NCC
+                </th>
+                <th style="width:10%">
+                    Giá mua
+                </th>
+                <th style="width:10%">
+                    Giá bán
+                </th>
+                <th style="width:20%">
+                    Link SP
+                </th>
+                <th style="width:20%">
+                    Ảnh sản phẩm
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+        </tbody>
+    </table>
+}
+
+
+
+
+<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
+<script type="text/javascript" src="http://ajax.cdnjs.com/ajax/libs/json2/20110223/json2.js"></script>
+<script type="text/javascript">
+
+    $(function () {
+
+        if (@role== 1) {
+            $('#txtHead').html("DUYỆT HÀNG MỚI");
+        } else {
+
+            $('#txtHead').html("ĐỀ XUẤT HÀNG MỚI");
+        }
+    });
+
+    function fnLoad() {
+
+        //if ($('#txare').val().length > 0) {
+
+
+        $("#tbl_Item > TBODY").html("");
+        document.getElementById('divLoading').style.visibility = "inherit";
+        document.getElementById('btnExport').style.visibility = "hidden";
+
+        var obj = new Object();
+
+        obj.descriptions = $('#txare').val();
+        obj.status = $('#selTypeFill').val();
+        obj.DivisionName = $('#sl_div').val();
+        obj.CategoryName = $('#sl_cat').val();
+        obj.GroupName = $('#sl_group').val();
+        obj.FunctionName = $('#sl_func').val();
+
+        console.log(JSON.stringify(obj));
+
+        $.ajax({
+            type: "POST",
+            url: "/SourceProduct/getData",
+            data: JSON.stringify(obj),
+            contentType: "application/json; charset=utf-8",
+            dataType: "json",
+            success: function (rt) {
+                if (rt.length>0) {
+
+                    console.log(JSON.stringify(rt));
+
+                    //var rt = JSON.parse(r);
+                    for (var i in rt) {
+                        var tBody = $("#tbl_Item > TBODY")[0];
+
+                        //Add Row.
+                        var row = tBody.insertRow(-1);
+                        //row.setAttribute("onclick", "window.location = '/SourceProduct/Detail?id=" + rt[i].id + "'");
+
+                        row.setAttribute("onclick", "window.open =('/SourceProduct/Detail?id=" + rt[i].id + "','')");
+
+                        //Add Type cell
+                        cell = $(row.insertCell(-1));
+                        cell.html(rt[i].sku);
+
+                        //Add Type cell
+                        var str_date = rt[i].date;
+
+                        cell = $(row.insertCell(-1));
+                        cell.html('<a href="/SourceProduct/Detail?id=' + rt[i].id + '" target="_blank">' + rt[i].name + '....</a> ');
+
+                        //Add Type cell
+                        cell = $(row.insertCell(-1));
+                        cell.html(rt[i].vendorName);
+
+                        //Add Type cell
+                        cell = $(row.insertCell(-1));
+                        cell.html(rt[i].corePrice);
+
+                        //Add Type cell
+                        cell = $(row.insertCell(-1));
+                        cell.html(rt[i].price);
+
+                        //Add Type cell
+                        cell = $(row.insertCell(-1));
+                        cell.html('<a href="' + rt[i].url_link + '" target="_blank">' + rt[i].url_link.substring(1, 20) + '....</a>');
+
+                        //Add Type cell
+                        cell = $(row.insertCell(-1));
+                        cell.html('<img src="' + rt[i].imgLink + '" style="width:50%;" class="thumbnail" />');
+
+
+                        if (@role == 1 && rt[i].status == "1") {
+
+                            cell = $(row.insertCell(-1));
+                            cell.html('<div style="width:100%;float:left"> <div style = "width:50%; float:left" > <img onclick="fnAccept(\'' + rt[i].id + '\',\'1\')" style="width:4vh;margin-top: 0.5vh;" src="/Image/Group 527.png" /> </div><div style="width:50%; float:right"> <img onclick="fnAccept(\'' + rt[i].id + '\',\'-1\')" style = "width:5vh" src = "/Image/icons8-close-window-96.png" /></div></div>');
+                        } else if (@role == 1 && rt[i].status != "1") {
+
+                            cell = $(row.insertCell(-1));
+                            cell.html("");
+                        }
+
+                        document.getElementById('btnExport').style.visibility = "inherit";
+                    }
+
+
+                } else {
+                    document.getElementById('divLoading').style.visibility = "hidden";
+                    document.getElementById('btnExport').style.visibility = "hidden";
+                    alert("Không tìm thấy thông tin thỏa mãn!");
+                }
+            }
+        });
+
+        //} else {
+        //   alert("Nhap it nhat 1 ma");
+        //}
+    }
+
+    function fnExport() {
+        document.getElementById('divLoading').style.visibility = "inherit";
+        window.location = '/SourceProduct/ExportExcel';
+        document.getElementById('divLoading').style.visibility = "hidden";
+    }
+
+    function fnAccept(str_id, type) {
+        if (type == '-1') {
+            var person = prompt("Nhập lý do từ chối (bắt buộc)", "");
+            if (person == null || person == "") {
+                console.log("User cancelled the prompt.");
+            } else {
+                var it_pdt = new Object();
+
+                it_pdt.id = str_id;
+                it_pdt.status = type;
+                it_pdt.descriptions = person;
+
+                $.ajax({
+                    type: "POST",
+                    url: "/SourceProduct/AcceptItem",
+                    data: JSON.stringify(it_pdt),
+                    contentType: "application/json; charset=utf-8",
+                    dataType: "json",
+                    success: function (r1) {
+                        if (r1.length > 0) {
+                            fnLoad();
+                        } else {
+                            alert("Có lỗi xảy ra thử lại sau!");
+                        }
+                    }
+                });
+            }
+        } else if (type==1) {
+            var it_pdt = new Object();
+
+            it_pdt.id = str_id;
+            it_pdt.status = type;
+            it_pdt.descriptions = ' ';
+
+            $.ajax({
+                type: "POST",
+                url: "/SourceProduct/AcceptItem",
+                data: JSON.stringify(it_pdt),
+                contentType: "application/json; charset=utf-8",
+                dataType: "json",
+                success: function (r1) {
+                    if (r1.length > 0) {
+                        fnLoad();
+                    } else {
+                        alert("Có lỗi xảy ra thử lại sau!");
+                    }
+                }
+            });
+        }
+    }
+
+    function loadSub(rootId, subId, type) {
+
+        $('#sl_' + type).val('');
+
+        $.ajax({
+            type: "POST",
+            url: "/SourceProduct/getSubList2",
+            data: '{code:"' + type + '",fillter:"' + $('#' + rootId).val() + '"}',
+            contentType: "application/json; charset=utf-8",
+            dataType: "json",
+            success: function (r) {
+
+                console.log(r);
+                var bode = document.getElementById(subId);
+                bode.innerHTML = '';
+
+                if (r != null) {
+
+                    //var rt = JSON.parse(r);
+
+
+                    for (i in r) {
+
+                        console.log(r[i].CategoryName);
+
+                        option = document.createElement('option');
+                        option.value = r[i].CategoryName;
+                        bode.appendChild(option);
+
+                    }
+
+                    //document.getElementById('sl_' + type).onchange();
+
+                    $('#sl_' + type).trigger("change");
+
+                }
+            }
+        });
+
+    }
+
+    function fnReset(str_id) {
+
+        if ($('#' + str_id).val().length > 0) {
+
+            $('#' + str_id).val('');
+
+            $('#' + str_id).trigger("change");
+        }
+
+    }
+</script>
+

@@ -1,0 +1,262 @@
+﻿@{
+    ViewBag.Title = "ShelfCreate";
+}
+<style>
+    .div-shelf {
+        height: 258px !important;
+    }
+</style>
+    <div>
+        <div class="row"> 
+            <div class="col-md-9"></div>
+            <div class="col-md-3">
+                @Html.ActionLink("Danh sách kệ", "ShelfList", "SpaceMan", new { storeNo = @ViewBag.shelf.storeNo }, new { @class = "btn btn-success" })
+                @Html.ActionLink("Sơ đồ quầy kệ", "LayoutStore", "SpaceMan", new { storeNo = @ViewBag.shelf.storeNo }, new { @class = "btn btn-warning" })
+            </div>
+        </div>
+        @if (@ViewBag.shelf.img_root.Length == 0)
+        {
+            <div class="div-span">
+                <div class="row">
+                    <div class="col-md-8">
+                        <h3><b>Thêm mới ảnh kệ</b></h3>
+                    </div>
+                    <div class="col-md-4">
+                        <div>Trạng thái: <b>@ViewBag.shelf.imgStatusName</b></div>
+                    </div>
+                </div>
+                <br />
+                <div class="row">
+                    <div class="col-md-9">
+                        <h4>Mã kệ: <b>@ViewBag.shelf.shelfName - @ViewBag.shelf.subCode</b></h4>
+                        <div style="overflow-x:auto;">
+                            <table class="table table-bordered">
+                                <thead>
+                                    <tr>
+                                        <th style="width:10%">Nhãn hàng</th>
+                                        <th style="width:5%">Xếp hạng nhãn</th>
+                                        <th style="width:10%">Mã SP</th>
+                                        <th style="width:30%">Tên hàng</th>
+                                        <th style="width:10%">Range</th>
+                                        <th style="width:15%">Ảnh sản phẩm</th>
+                                        <th style="width:10%">Tư thế trung bày</th>
+                                        <th style="width:10%">Số face trưng bày</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach (var i in ViewBag.ls_item)
+                                    {
+                                    <tr data-toggle="modal" data-target="#modalDetails" onclick="fn_detail('@i.img_link');">
+                                        <td>
+                                            @i.itemNo
+                                        </td>
+                                        <td>
+                                            @i.rate
+                                        </td>
+                                        <td>
+                                            @i.itemNo
+                                        </td>
+                                        <td>
+                                            @i.itemName
+                                        </td>
+                                        <td>
+                                            @i.range
+                                        </td>
+                                        <td>
+                                            <img src="@i.img_link" style="width:100%" />
+                                        </td>
+                                        <td>
+                                            @i.site
+                                        </td>
+                                        <td>
+                                            @i.presentStock
+                                        </td>
+                                    </tr>
+                                    }
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <h4>Ảnh thực tế</h4>
+                        <input type="hidden" id="txt_srcImg" />
+                        <img id="thum_img" src="~/Image/no-image.jpg" style="width:100%;min-height:200px"/>
+                        @*<a id="real_img" data-toggle="modal" onclick="fn_detail('');" data-target="#modalDetails">Ảnh thực tế</a>*@
+
+                        @if (((ProductAllTool.Models.SpaceMan.userRole)Session["u_Role"]).create_act == "1" && ((ProductAllTool.Models.SpaceMan.userRole)Session["u_Role"]).controlCode == "C001")
+                        {
+                            <form id="upload" enctype="multipart/form-data" action="@Url.Action("uploadImg", "SpaceMan")" method="POST">
+                                <input type="file" style="width: 0.1px;height: 0.1px;opacity: 0;overflow: hidden;position: absolute;z-index: -1;" name="fileUpload" id="fileUpload" class="inputfile">
+
+                                <label class="btn btn-success" for="fileUpload" style="width:100%;margin: 10px 0px;"><i class="fa fa-upload" aria-hidden="true"></i> Upload ảnh</label>
+                            </form>
+
+                            <input type="button" class="btn btn-info" value="Lưu ảnh" onclick="fnSave();" style="width: 100%;"/>
+                        }
+
+                    </div>
+                </div>
+            </div>
+        }
+        else
+        {
+            <div class="div-span">
+                <div style="width:100%;float:left">
+                    <div class="col50">
+                        <h3><b style="float:left;">Thêm mới ảnh kệ</b></h3>
+                    </div>
+                    <div class="col50">
+                        <div class="btn-right">Trạng thái:  <b>Trưng bày mới</b></div>
+                    </div>
+                </div>
+                <br />
+                <div style="width:100%; float:left">
+                    <div class="col50">
+                        <div class="text-center">Ảnh mẫu Spaceman</div>
+
+                        <img src="@ViewBag.shelf.img_root" style="width:100%;min-height:200px" />
+
+                        <div style="float:left">@ViewBag.shelf.Function</div> <b style="float:right">@ViewBag.shelf.shelfName</b>
+
+                    </div>
+
+                    <div class="col50">
+                        <div class="text-center">Ảnh thực tế</div>
+
+                        <input type="hidden" id="txt_srcImg" />
+
+                        <img id="thum_img" src="~/Content/images/bg-01.jpg" style="width:100%;min-height:200px" />
+
+                        <a id="real_img" data-toggle="modal" onclick="fn_detail('');" data-target="#modalDetails">Ảnh thực tế</a>
+
+                        @if (((ProductAllTool.Models.SpaceMan.userRole)Session["u_Role"]).create_act == "1" && ((ProductAllTool.Models.SpaceMan.userRole)Session["u_Role"]).controlCode == "C001" )
+                        {
+                            <div>
+                                <!--<input type="button" class="form-control btn-primary div-shelf" value="Đăng ảnh mới" />-->
+                                <form id="upload" enctype="multipart/form-data" action="@Url.Action("uploadImg", "SpaceMan")" method="POST">
+                                    <input type="file" style="width: 0.1px;height: 0.1px;opacity: 0;overflow: hidden;position: absolute;z-index: -1;" name="fileUpload" id="fileUpload" class="inputfile">
+                                    <label class="form-control btn-primary div-shelf btn-right" for="fileUpload">Upload ảnh</label>
+                                </form>
+
+                                <input type="button" class="form-control btn-primary div-shelf btn-right" value="Lưu ảnh" onclick="fnSave();" />
+                            </div>
+                        }
+
+                    </div>
+                </div>
+            </div>
+        }
+
+    </div>
+
+    <div class="modal fade bd-example-modal-lg" id="@string.Concat("modalDetails")" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="false">
+        <div class="modal-dialog modal-dialog modal-lg" role="document">
+            <div class="modal-content">
+                <h3 style="margin:15px;" class="modal-title" id="exampleModalLongTitle">Chi tiết</h3>
+                <div class="modal-body">
+                    <img id="imgsrc" style="width:100%" src="" />
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Đóng</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
+<script type="text/javascript" src="http://ajax.cdnjs.com/ajax/libs/json2/20110223/json2.js"></script>
+<script type="text/javascript">
+
+    //Upload file 
+    $(document).ready(function () {
+
+        $('#txtHead').html("QUẢN LÝ TRẢI NGHIỆM");
+
+            //validating uploaded file whether it is Excel or not while uploading
+            $("#fileUpload").change(function () {
+                //fileErrorMessage.innerHTML = '';
+                var vtrUpload = $("#fileUpload").val().toLowerCase();
+                var regexVTRUpload = new RegExp("(.*?)\.(png|jpg|jpeg)$");
+                if (!(regexVTRUpload.test(vtrUpload))) {
+                    $("#fileUpload").val("");
+
+                    alert("file false");
+                } else {
+                    UploadFile();
+                }
+            });
+        });
+
+        function UploadFile() {
+            var data = new FormData();
+            var files = $("#fileUpload").get(0).files;
+            if (files.length > 0) {
+                data.append("MyImages", files[0]);
+            }
+
+            $.ajax({
+                url: "/SpaceMan/uploadImg",
+                type: "POST",
+                processData: false,
+                contentType: false,
+                data: data,
+                success: function (data) {
+
+                    console.log(data);
+
+                    //var sub = JSON.parse(data);
+                    console.log(data.link);
+
+                    if (data.code == 0) {
+                        img_link = data.link;
+                        $('#txt_srcImg').val(data.link);
+
+                        $('#thum_img').attr("src", data.link);
+
+                        $('#real_img').attr("onclick", "fn_detail('" + data.link + "')");
+                    }
+
+                },
+                error: function (er) {
+                    alert("Thiết bị không hỗ trợ up ảnh từ camera. Chọn file từ bộ nhớ thiết bị !");
+                }
+
+            });
+
+        }
+
+        function fnSave() {
+
+            if ($('#txt_srcImg').val().length > 0) {
+                var it_pdt = new Object();
+
+                it_pdt.storeNo = '@ViewBag.shelf.storeNo';
+                it_pdt.shelfCode = '@ViewBag.shelf.shelfCode';
+                it_pdt.subCode = '@ViewBag.shelf.subCode';
+                it_pdt.img_link = $('#txt_srcImg').val();
+
+                $.ajax({
+                    type: "POST",
+                    url: "/SpaceMan/addShelf",
+                    data: JSON.stringify(it_pdt),
+                    contentType: "application/json; charset=utf-8",
+                    dataType: "json",
+                    success: function (r1) {
+                        //var sub = JSON.parse(r1);
+                        if (r1.length > 0) {
+                            window.location.href = '/SpaceMan/ShelfList?storeNo=@ViewBag.shelf.storeNo';
+                        } else {
+                            alert("Có lỗi xảy ra thử lại sau!");
+                        }
+                    }
+                });
+            } else {
+                alert("Chưa đăng ảnh thực tế tại cửa hàng!");
+            }
+        }
+
+        function fn_detail(str_img) {
+            $('#imgsrc').attr("src", str_img);
+        }
+</script>

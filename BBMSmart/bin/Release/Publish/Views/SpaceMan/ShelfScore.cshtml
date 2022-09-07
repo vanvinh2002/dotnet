@@ -1,0 +1,286 @@
+﻿
+@{
+    ViewBag.Title = "ShelfScore";
+}
+
+@if (!Request.Browser.IsMobileDevice)
+{
+
+    <div style="width:100%; float:left;">
+        <div class="div-span">
+
+            @if (((ProductAllTool.Models.SpaceMan.userRole)Session["u_Role"]).accept_act == "1" && ((ProductAllTool.Models.SpaceMan.userRole)Session["u_Role"]).controlCode == "C001")
+            {
+                @Html.ActionLink("Duyệt & Chấm trưng bày", "ShelfListScore", "SpaceMan", new { storeNo = @ViewBag.shelf.storeNo }, new { @class = "form-control btn-primary btn-right col25 text-center" })
+                @Html.ActionLink("Sơ đồ quầy kệ", "LayoutStore", "SpaceMan", new { storeNo = @ViewBag.shelf.storeNo }, new { @class = "form-control btn-primary btn-right col25 text-center" })
+            }
+
+            @if (((ProductAllTool.Models.SpaceMan.userRole)Session["u_Role"]).create_act == "1" && ((ProductAllTool.Models.SpaceMan.userRole)Session["u_Role"]).controlCode == "C001")
+            {
+                @Html.ActionLink("Danh sách kệ", "ShelfList", "SpaceMan", new { storeNo = @ViewBag.shelf.storeNo }, new { @class = "form-control btn-primary btn-right col25 text-center" })
+
+                @Html.ActionLink("Sơ đồ quầy kệ", "LayoutStore", "SpaceMan", new { storeNo = @ViewBag.shelf.storeNo }, new { @class = "form-control btn-primary btn-right col25 text-center" })
+            }
+
+        </div>
+
+        <div class="div-span">
+
+            @if (((ProductAllTool.Models.SpaceMan.userRole)Session["u_Role"]).create_act == "1")
+            {
+                <div style="width:100%;float:left">
+                    <div class="col25">
+                        <h3><b style="float:left;">Chi tiết kệ</b></h3>
+                    </div>
+                    <div class="col25">
+                        <div class="btn-right">Mã kệ: <b>@ViewBag.shelf.shelfName - @ViewBag.shelf.subCode</b></div>
+                    </div>
+
+                    <div class="col25">
+                        <div class="btn-right">Ngày đăng: <b>@ViewBag.shelf.createdDate</b></div>
+                    </div>
+
+                    <div class="col25">
+                        <div class="btn-right">Trạng thái: <b>@ViewBag.shelf.imgStatusName</b></div>
+                    </div>
+
+                    <label style="background-color:black; height:2px; min-width:100%"></label>
+                </div>
+            }
+            else
+            {
+                <div style="width:100%;float:left">
+                    <div class="col25">
+                        <h3><b style="float:left;">Chi tiết kệ</b></h3>
+                    </div>
+                    <div class="col25">
+                        <div class="btn-right">Mã kệ: <b>@ViewBag.shelf.shelfName - @ViewBag.shelf.subCode</b></div>
+                    </div>
+
+                    <div class="col25">
+                        <div class="btn-right">Cửa hàng: <b>@ViewBag.shelf.storeNo</b></div>
+                    </div>
+
+                    <div class="col25">
+                        <div class="btn-right">Trạng thái: <b>@ViewBag.shelf.imgStatusName</b></div>
+                    </div>
+
+                    <label style="background-color:black; height:2px; min-width:100%"></label>
+                </div>
+            }
+
+
+            <div style="width:100%; float:left">
+                <div class="col75">
+                    <div>
+                        <table class="table table-striped" border="1" style="min-width:100%">
+                            <thead>
+                                <tr>
+                                    <th style="width:10%">Nhãn hàng</th>
+                                    <th style="width:5%">Xếp hạng nhãn</th>
+                                    <th style="width:10%">Mã SP</th>
+                                    <th style="width:30%">Tên hàng</th>
+                                    <th style="width:10%">Range</th>
+                                    <th style="width:15%">Ảnh sản phẩm</th>
+                                    <th style="width:10%">Tư thế trung bày</th>
+                                    <th style="width:10%">Số face trưng bày</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach (var i in ViewBag.ls_item)
+                                {
+                                    <tr data-toggle="modal" data-target="#modalDetails" onclick="fn_detail('@i.img_link');">
+                                        <td>
+                                            @i.itemNo
+                                        </td>
+                                        <td>
+                                            @i.rate
+                                        </td>
+                                        <td>
+                                            @i.itemNo
+                                        </td>
+                                        <td>
+                                            @i.itemName
+                                        </td>
+                                        <td>
+                                            @i.range
+                                        </td>
+                                        <td>
+                                            <img src="@i.img_link" style="width:100%" />
+                                        </td>
+                                        <td>
+                                            @i.site
+                                        </td>
+                                        <td>
+                                            @i.presentStock
+                                        </td>
+                                    </tr>
+                                }
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <div class="col25">
+
+                    <img src="@ViewBag.shelf.img_link" style="width:100%;min-height:200px" />
+
+                    <a id="real_img" data-toggle="modal" data-target="#modalDetails" onclick="showPop('@ViewBag.shelf.shelfName', '@ViewBag.shelf.subCode', '@ViewBag.shelf.img_link', '@ViewBag.shelf.createdBy', '@ViewBag.shelf.createdDate', '@ViewBag.shelf.imgStatusName', '@ViewBag.shelf.Function');">Ảnh thực tế</a>
+
+                    @if (((ProductAllTool.Models.SpaceMan.userRole)Session["u_Role"]).accept_act == "1" && ((ProductAllTool.Models.SpaceMan.userRole)Session["u_Role"]).controlCode == "C001")
+                    {
+                        <div>
+                            <input type="button" class="form-control btn-primary btn-right" value="Đạt yêu cầu" onclick="fnAccept(1)" />
+                        </div>
+
+                        <div style="margin-top:3vh;">
+                            <input type="button" class="form-control btn-danger btn-right" value="Không đạt" onclick="fnAccept(-1)" />
+                        </div>
+                    }
+
+                </div>
+            </div>
+        </div>
+
+        <div style="width:100%;float:left">
+            <label style="background-color:black; height:2px; min-width:100%"></label>
+            <div>Gần đây</div>
+
+            @foreach (var ii in ViewBag.ls_img)
+            {
+                <div class="div-shelf" data-toggle="modal" data-target="#modalDetails" onclick="showPop('@ii.shelfName', '@ii.subCode', '@ii.img_link', '@ii.createdBy', '@ii.createdDate', '@ii.imgStatusName', '@ii.Function');">
+                    <img src="@ii.img_link" style="width:100%;" />
+                    <b class="text-center">@ii.createdDate</b>
+                </div>
+            }
+        </div>
+    </div>
+
+    @*<div class="modal fade bd-example-modal-lg" id="@string.Concat("modalDetails")" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="false">
+            <div class="modal-dialog modal-dialog modal-lg" role="document">
+                <div class="modal-content">
+                    <h3 style="margin:15px;" class="modal-title" id="exampleModalLongTitle">Chi tiết</h3>
+                    <div class="modal-body">
+                        <img id="imgsrc" style="width:100%" src="@ViewBag.shelf.img_link" />
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Đóng</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>*@
+
+
+    <div class="modal fade bd-example-modal-lg" id="@string.Concat("modalDetails")" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="false">
+        <div class="modal-dialog modal-dialog modal-lg" role="document">
+            <div class="modal-content">
+                <h3 style="margin:15px;" class="modal-title" id="exampleModalLongTitle">Chi tiết</h3>
+                <div class="modal-body">
+                    <img id="imgsrc" style="width:100%" src="@ViewBag.shelf.img_link" />
+                    <div style="width:100%;float:left">
+                        <div class="col50">
+                            <p id="lb_Func">@ViewBag.shelf.Function</p>
+                            <p id="lb_shelf">@ViewBag.shelf.shelfName - @ViewBag.shelf.subCode</p>
+                            <p id="lb_By">Người đăng : @ViewBag.shelf.createdBy</p>
+                            <p id="lb_ctDate">Ngày đăng: @ViewBag.shelf.createdDate</p>
+
+                        </div>
+                        <div class="col50">
+                            <p class="btn-right" id="lb_ttName">@ViewBag.shelf.imgStatusName</p>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Đóng</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+}
+else
+{
+    <p>Layout for mobile</p>
+}
+
+<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
+<script type="text/javascript" src="http://ajax.cdnjs.com/ajax/libs/json2/20110223/json2.js"></script>
+<script type="text/javascript">
+
+    $(function () {
+        $('#txtHead').html("QUẢN LÝ TRẢI NGHIỆM");
+    });
+    function fnAccept(int_type) {
+
+        if (int_type == -1) {
+            var person = prompt("Nhập lý do từ chối (bắt buộc)", "");
+            if (person == null || person == "") {
+                console.log("User cancelled the prompt.");
+            } else {
+                var it_pdt = new Object();
+
+                it_pdt.ImageID = '@ViewBag.shelf.imgID';
+                it_pdt.status = int_type;
+                it_pdt.description = person;
+
+                $.ajax({
+                    type: "POST",
+                    url: "/SpaceMan/pointShelf",
+                    data: JSON.stringify(it_pdt),
+                    contentType: "application/json; charset=utf-8",
+                    dataType: "json",
+                    success: function (r1) {
+                        if (r1.length > 0) {
+                            window.location.href = '/SpaceMan/ShelfListScore?storeNo=@ViewBag.shelf.storeNo';
+                        } else {
+                            alert("Có lỗi xảy ra thử lại sau!");
+                        }
+                    }
+                });
+            }
+        } else if (int_type == 1) {
+            var it_pdt = new Object();
+
+            it_pdt.ImageID = '@ViewBag.shelf.imgID';
+            it_pdt.status = int_type;
+            it_pdt.description = " ";
+
+                $.ajax({
+                    type: "POST",
+                    url: "/SpaceMan/pointShelf",
+                    data: JSON.stringify(it_pdt),
+                    contentType: "application/json; charset=utf-8",
+                    dataType: "json",
+                    success: function (r1) {
+                        if (r1.length > 0) {
+                            window.location.href = '/SpaceMan/ShelfListScore?storeNo=@ViewBag.shelf.storeNo';
+                        } else {
+                            alert("Có lỗi xảy ra thử lại sau!");
+                        }
+                    }
+                });
+            }
+    }
+
+    function showPop(shelfName, subCode, img_link, createdBy, createdDate, imgStatusName, Function) {
+
+        $('#imgsrc').attr("src", img_link);
+        $('#lb_Func').html(Function);
+        $('#lb_shelf').html(shelfName + '-' + subCode);
+        $('#lb_By').html('Người đăng: ' + createdBy);
+        $('#lb_ctDate').html("Ngày đăng: " + createdDate);
+        $('#lb_ttName').html('Trạng thái: ' + imgStatusName);
+    }
+
+    function fn_detail(str_img) {
+        $('#imgsrc').attr("src", str_img);
+
+        $('#lb_Func').html('');
+        $('#lb_shelf').html('');
+        $('#lb_By').html('');
+        $('#lb_ctDate').html('');
+        $('#lb_ttName').html('');
+    }
+
+
+</script>
+
