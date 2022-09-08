@@ -176,3 +176,23 @@ E:\BBS_THUCTAP\Lib.Utils.Package\obj\Debug\Lib.Utils.Package.csproj.CoreCompileI
 E:\BBS_THUCTAP\Lib.Utils.Package\obj\Debug\Lib.Utils.Package.csproj.CopyComplete
 E:\BBS_THUCTAP\Lib.Utils.Package\obj\Debug\Lib.Utils.Package.dll
 E:\BBS_THUCTAP\Lib.Utils.Package\obj\Debug\Lib.Utils.Package.pdb
+D:\OneDrive - Đại học FPT- FPT University\C#\BiBoMart\Lib.Utils.Package\bin\Debug\Lib.Utils.Package.dll
+D:\OneDrive - Đại học FPT- FPT University\C#\BiBoMart\Lib.Utils.Package\bin\Debug\Lib.Utils.Package.pdb
+D:\OneDrive - Đại học FPT- FPT University\C#\BiBoMart\Lib.Utils.Package\bin\Debug\ActiveUp.Net.Common.dll
+D:\OneDrive - Đại học FPT- FPT University\C#\BiBoMart\Lib.Utils.Package\bin\Debug\ActiveUp.Net.Dns.dll
+D:\OneDrive - Đại học FPT- FPT University\C#\BiBoMart\Lib.Utils.Package\bin\Debug\ActiveUp.Net.Groupware.dll
+D:\OneDrive - Đại học FPT- FPT University\C#\BiBoMart\Lib.Utils.Package\bin\Debug\ActiveUp.Net.Imap4.dll
+D:\OneDrive - Đại học FPT- FPT University\C#\BiBoMart\Lib.Utils.Package\bin\Debug\ActiveUp.Net.Mail.dll
+D:\OneDrive - Đại học FPT- FPT University\C#\BiBoMart\Lib.Utils.Package\bin\Debug\ActiveUp.Net.Nntp.dll
+D:\OneDrive - Đại học FPT- FPT University\C#\BiBoMart\Lib.Utils.Package\bin\Debug\ActiveUp.Net.OpenPGP.dll
+D:\OneDrive - Đại học FPT- FPT University\C#\BiBoMart\Lib.Utils.Package\bin\Debug\ActiveUp.Net.Pop3.dll
+D:\OneDrive - Đại học FPT- FPT University\C#\BiBoMart\Lib.Utils.Package\bin\Debug\ActiveUp.Net.Smtp.dll
+D:\OneDrive - Đại học FPT- FPT University\C#\BiBoMart\Lib.Utils.Package\bin\Debug\ActiveUp.Net.WhoIs.dll
+D:\OneDrive - Đại học FPT- FPT University\C#\BiBoMart\Lib.Utils.Package\bin\Debug\EPPlus.dll
+D:\OneDrive - Đại học FPT- FPT University\C#\BiBoMart\Lib.Utils.Package\bin\Debug\zxing.dll
+D:\OneDrive - Đại học FPT- FPT University\C#\BiBoMart\Lib.Utils.Package\bin\Debug\zxing.presentation.dll
+D:\OneDrive - Đại học FPT- FPT University\C#\BiBoMart\Lib.Utils.Package\obj\Debug\Lib.Utils.Package.csproj.AssemblyReference.cache
+D:\OneDrive - Đại học FPT- FPT University\C#\BiBoMart\Lib.Utils.Package\obj\Debug\Lib.Utils.Package.csproj.CoreCompileInputs.cache
+D:\OneDrive - Đại học FPT- FPT University\C#\BiBoMart\Lib.Utils.Package\obj\Debug\Lib.Utils.Package.csproj.CopyComplete
+D:\OneDrive - Đại học FPT- FPT University\C#\BiBoMart\Lib.Utils.Package\obj\Debug\Lib.Utils.Package.dll
+D:\OneDrive - Đại học FPT- FPT University\C#\BiBoMart\Lib.Utils.Package\obj\Debug\Lib.Utils.Package.pdb

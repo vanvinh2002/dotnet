@@ -333,6 +333,8 @@
     <Compile Include="Common\Constants.cs" />
     <Compile Include="Common\SystemFunctions.cs" />
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\DuyetBSTController.cs" />
+    <Compile Include="Controllers\GDMobileController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManagerUserController.cs" />
     <Compile Include="Controllers\NotificationController.cs" />
@@ -341,6 +343,8 @@
     <Compile Include="DataAccess\DataAccessHRM.cs" />
     <Compile Include="DataAccess\DataAccess.cs" />
     <Compile Include="DataAccess\DataAccessMetadata.cs" />
+    <Compile Include="DataAccess\DataAccessTT.cs" />
+    <Compile Include="DataAccess\DataAccessBST.cs" />
     <Compile Include="DataAccess\DataConnection\DBMySQLUtils.cs" />
     <Compile Include="DataAccess\DataConnection\DBUtils.cs" />
     <Compile Include="DataAccess\LogBuild.cs" />
@@ -349,11 +353,13 @@
     </Compile>
     <Compile Include="Models\Approve\newproductinfoApr.cs" />
     <Compile Include="Models\Approve\newproductinfoAprND.cs" />
+    <Compile Include="Models\CaLamViec\CaLV.cs" />
     <Compile Include="Models\comparePrice\compareAction.cs" />
     <Compile Include="Models\comparePrice\compareHeader.cs" />
     <Compile Include="Models\comparePrice\compareLine.cs" />
     <Compile Include="Models\comparePrice\RP_Accept_Item.cs" />
     <Compile Include="Models\comparePrice\Thongtindoithu.cs" />
+    <Compile Include="Models\DuyetBST\DuyetBST.cs" />
     <Compile Include="Models\ERP_API\Member\MemberItem.cs" />
     <Compile Include="Models\ERP_API\PushSales\OrderProductItem.cs" />
     <Compile Include="Models\ERP_API\PushSales\PushSalesOrder_Item.cs" />
@@ -3551,6 +3557,17 @@
     <Content Include="Views\ThucTap\Partial\__DieuChuyenNSCHDetail.cshtml" />
     <Content Include="Views\ThucTap\BalancedScorecard.cshtml" />
     <Content Include="Views\ThucTap\Partial\__BalancedScorecard.cshtml" />
+    <Content Include="Views\GDMobile\LayoutMobileTT3.cshtml" />
+    <Content Include="Views\GDMobile\Tabs\__DoiCaMobile.cshtml" />
+    <Content Include="Views\GDMobile\Tabs\__DuyetMobile.cshtml" />
+    <Content Include="Views\GDMobile\Tabs\__DuyetMobile1.cshtml" />
+    <Content Include="Views\GDMobile\Tabs\__LichCaMobile.cshtml" />
+    <Content Include="Views\GDMobile\Tabs\__XinNghiMobile1.cshtml" />
+    <Content Include="Views\GDMobile\Tabs\__XinNghiMobile.cshtml" />
+    <Content Include="Views\GDMobile\Tabs\__NhanCaMobile1.cshtml" />
+    <Content Include="Views\GDMobile\Tabs\__NhanCaMobile.cshtml" />
+    <Content Include="Views\DuyetBST\DuyetBST.cshtml" />
+    <Content Include="Views\DuyetBST\Table\__DuyetBST.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

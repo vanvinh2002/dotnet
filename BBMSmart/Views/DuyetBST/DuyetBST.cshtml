@@ -1,0 +1,320 @@
+﻿@using ProductAllTool.Models.ManageSales;
+@using ProductAllTool.Common
+@using System.Data
+@{
+    ViewBag.Title = "Duyệt bộ sưu tập";
+    Layout = "~/Views/Shared/_Layout_V2.cshtml";
+}
+<div class="row col-md-12">
+    <div class="col-md-6">
+        <div class="row">
+            <div class="col-md-6">
+                <div class="row">
+                    <div class="col-3">
+                        <label>Mã BST</label>
+                    </div>
+                    <input class="col-md-9 form-control" type="text" name="MaBST" />
+                </div>
+                <div class="row">
+                    <div class="col-3">
+                        <label>Tên BST</label>
+                    </div>
+                    <input class="col-md-9 form-control" type="text" name="TenBST" />
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div>
+                    <div class="col-md-3">
+                        <label>Category</label>
+                    </div>
+                    <div class="col-md-9" ondblclick="$('#Cate').val('').trigger('change')">
+                        <select id="Cate" class="form-control selectpicker" data-live-search="true" onchange="js_GetListDBST()">
+                            <option value="">--- Chọn Category ---</option>
+                            @if (ViewBag.lst_Cate != null)
+                            {
+                                foreach (objCombox box in (List<objCombox>)ViewBag.lst_Cate)
+                                {
+                                    <option value="@box.Code">@box.Name</option>
+                                }
+                            }
+                        </select>
+                    </div>
+                </div>
+                <div>
+                    <div class="col-md-3">
+                        <label>Group</label>
+                    </div>
+                    <div class="col-md-9" ondblclick="$('#Group').val('').trigger('change')">
+                        <select id="Group" class="form-control selectpicker" data-live-search="true" onchange="js_GetListDBST()">
+                            <option value="">--- Group của Cat ---</option>
+                            @if (ViewBag.lst_Group != null)
+                            {
+                                foreach (objCombox box in (List<objCombox>)ViewBag.lst_Group)
+                                {
+                                    <option value="@box.Code">@box.Name</option>
+                                }
+                            }
+                        </select>
+                    </div>
+                </div>
+                <div>
+                    <div class="col-md-3">
+                        <label>Function</label>
+                    </div>
+                    <div class="col-md-9" ondblclick="$('#Func').val('').trigger('change')">
+                        <select id="Func" class="form-control selectpicker" data-live-search="true" onchange="js_GetListDBST()">
+                            <option value="">--- Funtion của group ---</option>
+                            @if (ViewBag.lst_Func != null)
+                            {
+                                foreach (objCombox box in (List<objCombox>)ViewBag.lst_Func)
+                                {
+                                    <option value="@box.Code">@box.Name</option>
+                                }
+                            }
+                        </select>
+                    </div>
+                </div>
+                <div>
+                    <div class="col-md-3">
+                        <label>Range Review</label>
+                    </div>
+                    <div class="col-md-9" ondblclick="$('#RR').val('').trigger('change')">
+                        <select id="RR" class="form-control selectpicker" data-live-search="true" onchange="js_GetListDBST()">
+                            <option value="">--- Chọn RR ---</option>
+                            @if (ViewBag.lst_RR != null)
+                            {
+                                foreach (objCombox box in (List<objCombox>)ViewBag.lst_RR)
+                                {
+                                    <option value="@box.Code">@box.Name</option>
+                                }
+                            }
+                        </select>
+                    </div>
+                </div>
+                <div>
+                    <div class="col-md-3">
+                        <label>Brand</label>
+                    </div>
+                    <div class="col-md-9" ondblclick="$('#Brand').val('').trigger('change')">
+                        <select id="Brand" class="form-control selectpicker" data-live-search="true" onchange="js_GetListDBST()">
+                            <option value="">--- Brand của Func ---</option>
+                            @if (ViewBag.lst_Brand != null)
+                            {
+                                foreach (objCombox box in (List<objCombox>)ViewBag.lst_Brand)
+                                {
+                                    <option value="@box.Code">@box.Name</option>
+                                }
+                            }
+                        </select>
+                    </div>
+                </div>
+                <div>
+                    <div class="col-md-3">
+                        <label>Nguồn nhập</label>
+                    </div>
+                    <div class="col-md-9" ondblclick="$('#NguonNhap').val('').trigger('change')">
+                        <select id="NguonNhap" class="form-control selectpicker" data-live-search="true" onchange="js_GetListDBST()">
+                            <option value="">--- Nguồn của Fucn ---</option>
+                            @if (ViewBag.lst_NguonNhap != null)
+                            {
+                                foreach (objCombox box in (List<objCombox>)ViewBag.lst_NguonNhap)
+                                {
+                                    <option value="@box.Code">@box.Name</option>
+                                }
+                            }
+                        </select>
+                    </div>
+                </div>
+                <div>
+                    <div class="col-md-3">
+                        <label>Mùa vụ</label>
+                    </div>
+                    <div class="col-md-9" ondblclick="$('#MuaVu').val('').trigger('change')">
+                        <select id="MuaVu" class="form-control selectpicker" data-live-search="true" onchange="js_GetListDBST()">
+                            <option value="">--- Mùa vụ của Func ---</option>
+                            @if (ViewBag.lst_MuaVu != null)
+                            {
+                                foreach (objCombox box in (List<objCombox>)ViewBag.lst_MuaVu)
+                                {
+                                    <option value="@box.Code">@box.Name</option>
+                                }
+                            }
+                        </select>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row col-md-12 ">
+            <div class="col-md-6">
+                <div class="row">
+                    <div class="col-md-3">
+                        <label>Mã BST</label>
+                    </div>
+                    <div class="col-md-9">
+                        <span>01</span>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-3">
+                        <label>Tên BST</label>
+                    </div>
+                    <div class="col-md-9">
+                        <span>Sơ sinh</span>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-3">
+                        <label>Category</label>
+                    </div>
+                    <div class="col-md-9">
+                        <span>a</span>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-3">
+                        <label>Mùa vụ</label>
+                    </div>
+                    <div class="col-md-9">
+                        <span>a</span>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-3">
+                        <label>Đối tượng</label>
+                    </div>
+                    <div class="col-md-9">
+                        <span>a</span>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-3">
+                        <label>Giới tính</label>
+                    </div>
+                    <div class="col-md-9">
+                        <span>a</span>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-3">
+                        <label>Thu nhập</label>
+                    </div>
+                    <div class="col-md-9">
+                        <span>a</span>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-3">
+                        <label>USP</label>
+                    </div>
+                    <div class="col-md-9">
+                        <span>a</span>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-3">
+                        <label>Thông điệp</label>
+                    </div>
+                    <div class="col-md-9">
+                        <span>a</span>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="card">
+                    <img src="" title="Dung" />
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="row">
+                                    <div class="col-md-3">
+                                        <label>Mã hàng</label>
+                                    </div>
+                                    <div class="col-md-9">
+                                        <p>dug</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="row">
+                                    <div class="col-md-3">
+                                        <label>Tên hàng</label>
+                                    </div>
+                                    <div class="col-md-9">
+                                        <span>b</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="col-md-3"><label>Giá bán</label></div>
+                                <span>b</span>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="col-md-3"><label>Số lượng tồn</label></div>
+                                <span>b</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-6">
+        @Html.Partial("~/Views/DuyetBST/Table/__DuyetBST.cshtml")
+    </div>
+</div>
+<script type="text/javascript">
+    $(function () {
+        js_GetListDBST();
+    });
+    function js_ReloadTable() {
+        $('#tbl_Item')
+            .DataTable({
+                lengthMenu: [[20, 50, 70, 100, -1], [20, 50, 70, 100, 'All']],
+                "pageLength": -1,
+                fixedHeader: {
+                    headerOffset: 147
+                },
+                columnDefs: [
+                ],
+                "orderClasses": false,
+                "deferRender": true,
+
+                autoWidth: false,
+                bAutoWidth: false,
+                "searching": false,
+                responsive: false,
+                order: []
+            });
+    }
+
+    function js_GetListDBST() {
+        window.scrollTo(0, 0);
+        var Cate = $('#Cate').val();
+        var GroupCat = $('#Group').val();
+        var Func = $('#Func').val();
+        var RR = $('#RR').val();
+        var Brand = $('#Brand').val();
+        var NguonNhap = $('#NguonNhap').val();
+        var MuaVu = $('#MuaVu').val();
+
+        $.ajax({
+            url: '/DuyetBST/DataTableDBST',
+            type: 'POST',
+            data: JSON.stringify({ Cate: Cate, GroupCat: GroupCat, Func: Func, RR: RR, Brand: Brand, NguonNhap: NguonNhap, MuaVu: MuaVu }),
+            contentType: 'application/json, charset=utf-8',
+            beforeSend: function () {
+                js_Loading(true, 1);
+            },
+            success: function (data) {
+                $('#div-content-DuyetBST').html(data);
+                js_ReloadTable();
+                js_Loading(false, 1);
+            },
+            error: function () {
+                js_Loading(false, 1);
+            }
+        });
+    }
+</script>
