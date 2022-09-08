@@ -335,12 +335,14 @@
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManagerUserController.cs" />
+    <Compile Include="Controllers\MobileController.cs" />
     <Compile Include="Controllers\NotificationController.cs" />
     <Compile Include="Controllers\ThucTapController.cs" />
     <Compile Include="DataAccess\DataAccessNoti.cs" />
     <Compile Include="DataAccess\DataAccessHRM.cs" />
     <Compile Include="DataAccess\DataAccess.cs" />
     <Compile Include="DataAccess\DataAccessMetadata.cs" />
+    <Compile Include="DataAccess\DataAccessTT.cs" />
     <Compile Include="DataAccess\DataConnection\DBMySQLUtils.cs" />
     <Compile Include="DataAccess\DataConnection\DBUtils.cs" />
     <Compile Include="DataAccess\LogBuild.cs" />
@@ -3551,6 +3553,19 @@
     <Content Include="Views\ThucTap\Partial\__DieuChuyenNSCHDetail.cshtml" />
     <Content Include="Views\ThucTap\BalancedScorecard.cshtml" />
     <Content Include="Views\ThucTap\Partial\__BalancedScorecard.cshtml" />
+    <Content Include="Views\ThucTap\XayDungBST.cshtml" />
+    <Content Include="Views\ThucTap\Partial\_XayDungBST.cshtml" />
+    <Content Include="Views\Mobile\Mobile.cshtml" />
+    <Content Include="Views\Mobile\RegisterShift.cshtml" />
+    <Content Include="Views\Mobile\Mb\_AcceptInOutShift.cshtml" />
+    <Content Include="Views\Mobile\Mb\_AcceptTakeABreakShift.cshtml" />
+    <Content Include="Views\Mobile\Mb\_CalenderShift.cshtml" />
+    <Content Include="Views\Mobile\Mb\_RegisterInOutShift.cshtml" />
+    <Content Include="Views\Mobile\Mb\_RegisterShift.cshtml" />
+    <Content Include="Views\Mobile\Mb\_SupportShift.cshtml" />
+    <Content Include="Views\Mobile\Mb\_SwitchShift.cshtml" />
+    <Content Include="Views\Mobile\Mb\_SwitchShiftDetail.cshtml" />
+    <Content Include="Views\Mobile\Mb\_TakeABreakShift.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
