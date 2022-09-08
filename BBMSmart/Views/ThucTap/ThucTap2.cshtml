@@ -26,15 +26,21 @@
                 <label>NCC </label>
             </div>
             <div class="col-md-1 c2" ondblclick="$('#vendor').val('').trigger('change')">
-               
+
             </div>
             <div class="col-md-1 c3">
                 <label>Miền</label>
             </div>
             <div class="col-md-1 c4" ondblclick="$('#mien').val('').trigger('change')">
-                <select id="mien" class="form-control selectpicker" data-live-search="true" onchange="loadTinh(); js_GetListAR_Auto()">
+                <select id="mien" class="form-control selectpicker" data-live-search="true" onchange=" js_GetListAR_Auto()">
                     <option value="">--- Chọn Miền ---</option>
-                   
+                    @if (ViewBag.list_test2 != null)
+                    {
+                        foreach (objCombox box in (List<objCombox>)ViewBag.list_test2)
+                        {
+                            <option value="@box.Code">@box.Name</option>
+                        }
+                    }
                 </select>
             </div>
             <div class="col-md-1 c5">
@@ -47,22 +53,34 @@
                 <label>Brand</label>
             </div>
             <div class="col-md-1 c2" ondblclick="$('#brand').val('').trigger('change')">
-                <select id="brand" class="form-control selectpicker" data-live-search="true" onchange="js_GetListAR_Auto(); loadItem();">
+                <select id="brand" class="form-control selectpicker" data-live-search="true" onchange="js_GetListAR_Auto() ">
                     <option value="">--- Chọn Brand ---</option>
-                   
+                    @if (ViewBag.list_test != null)
+                    {
+                        foreach (objCombox box in (List<objCombox>)ViewBag.list_test)
+                        {
+                            <option value="@box.Code">@box.Name</option>
+                        }
+                    }
                 </select>
             </div>
             <div class="col-md-1 c3">
                 <label>Tỉnh thành</label>
             </div>
             <div class="col-md-1 c4" ondblclick="$('#tinh').val('').trigger('change')">
-                <select id="tinh" class="form-control selectpicker" data-live-search="true" onchange="js_GetListAR_Auto(); loadCuaHang();">
+                <select id="tinh" class="form-control selectpicker" data-live-search="true" onchange="js_GetListAR_Auto()">
                     <option value="">--- Chọn Tỉnh ---</option>
-                   
+                    @if (ViewBag.list_test3 != null)
+                    {
+                        foreach (objCombox box in (List<objCombox>)ViewBag.list_test3)
+                        {
+                            <option value="@box.Code">@box.Name</option>
+                        }
+                    }
                 </select>
             </div>
             <div class="col-md-1 c5">
-                <a href="#" onclick="js_approve()" class="form-control btn btn-info"><i class="fa fa-check" aria-hidden="true" style="margin-left: 6px;margin-top: 3px;"></i>Trình duyệt</a>
+                <a href="#" onclick="js_UpdateLyDo()" class="form-control btn btn-info"><i class="fa fa-check" aria-hidden="true" style="margin-left: 6px;margin-top: 3px;"></i>Trình duyệt</a>
 
             </div>
         </div>
@@ -73,21 +91,32 @@
             <div class="col-md-1 c2" ondblclick="$('#mahang').val('').trigger('change')">
                 <select id="mahang" class="form-control selectpicker" data-live-search="true" onchange="js_GetListAR_Auto()">
                     <option value="">--- Chọn Mã hàng ---</option>
-                  
+                    @if (ViewBag.list_test1 != null)
+                    {
+                        foreach (objCombox box in (List<objCombox>)ViewBag.list_test1)
+                        {
+                            <option value="@box.Code">@box.Name</option>
+                        }
+                    }
                 </select>
             </div>
             <div class="col-md-1 c3">
                 <label>Cửa hàng</label>
             </div>
-            <div class="col-md-1 c4" ondblclick="$('#cuahang').val('').trigger('change')">
+            <div class="col-md-1 c4" ondblclick="$('#CuaHang').val('').trigger('change')">
                 <select id="cuahang" class="form-control selectpicker" data-live-search="true" onchange="js_GetListAR_Auto()">
                     <option value="">--- Chọn Cửa hàng ---</option>
-                 
+                    @if (ViewBag.list_test4 != null)
+                    {
+                        foreach (objCombox box in (List<objCombox>)ViewBag.list_test4)
+                        {
+                            <option value="@box.Code">@box.Name</option>
+                        }
+                    }
+
                 </select>
             </div>
 
-            <div class="col-md-1 c5">
-            </div>
         </div>
         <div class="col-md-12">
             <div class="col-md-1 c1">
@@ -98,15 +127,20 @@
             <div class="col-md-1 c3">
                 <label>Kho chia</label>
             </div>
-            <div class="col-md-1 c4" ondblclick="$('#khochia').val('').trigger('change')">
+            <div class="col-md-1 c4" ondblclick="$('#KhoChia').val('').trigger('change')">
                 <select id="khochia" class="form-control selectpicker" data-live-search="true" onchange="js_GetListAR_Auto()">
                     <option value="">--- Chọn Kho chia ---</option>
-                   
+                    @if (ViewBag.list_test5 != null)
+                    {
+                        foreach (objCombox box in (List<objCombox>)ViewBag.list_test5)
+                        {
+                            <option value="@box.Code">@box.Name</option>
+                        }
+                    }
                 </select>
             </div>
 
-            <div class="col-md-1 c5">
-            </div>
+
         </div>
     </div>
 </div>
@@ -115,6 +149,7 @@
         <div class="card mb-4">
             <div class="card-body">
                 <div class="table-responsive" id="div-content">
+                    @Html.Partial("~/Views/ThucTap/Partial/__ThucTap2.cshtml")
                 </div>
             </div>
         </div>
@@ -123,8 +158,130 @@
 <script type="text/javascript">
     $(function () {
         $('#txtHead').html("Chia hàng ngoài AR tự động");
+        js_GetListAR_Auto();
     });
 
+
+    function js_ReloadTable() {
+        $('#tbl_Item')
+            .DataTable({
+                lengthMenu: [[20, 50, 70, 100, -1], [20, 50, 70, 100, 'All']],
+                "pageLength": -1,
+                fixedHeader: {
+                    headerOffset: 147
+                },
+                columnDefs: [
+                ],
+                "orderClasses": false,
+                "deferRender": true,
+
+                autoWidth: false,
+                bAutoWidth: false,
+                "searching": false,
+                reponsive: false,
+                order: []
+            });
+    }
+
+    function js_GetListAR_Auto() {
+
+        var Brand = $("#brand").val();
+        var MaHang = $("#mahang").val();
+        var Mien = $("#mien").val();
+        var Tinh = $("#tinh").val();
+        var CuaHang = $("#cuahang").val();
+        var KhoChia = $("#khochia").val();
+
+        $.ajax({
+            url: '/ThucTap/GetTable',
+            type: 'POST',
+            data: JSON.stringify({ brand: Brand, mahang: MaHang, mien: Mien, tinh: Tinh, cuahang: CuaHang, khochia: KhoChia }),
+            contentType: 'application/json, charset=utf-8',
+            beforeSend: function () {
+                js_Loading(true, 1);
+            },
+            success: function (data) {
+                $('#div-content').html(data);
+                js_ReloadTable();
+                js_Loading(false, 1);
+            },
+            error: function () {
+                js_Loading(false, 1);
+            }
+        });
+    }
+
+    function js_UpdateLyDo() {
+        // debugger;
+
+        var cboxes = document.getElementsByName('check[]');
+        var arrCheckbox = [];
+
+        //let TrangThai = false;
+        //var k = 0;
+        //for (var k = 0; k < cboxes.length; k++) {
+        //    if (cboxes[k].checked) {
+        //        try {
+        //            if ($('#LyDo' + cboxes[k].id).val().length <= 0) {
+        //                TrangThai = true
+        //            }
+        //        } catch (e) { }
+        //    }
+        //}
+
+        //if (TrangThai == true) {
+        //    alert("Vui lòng nhập lý do!");
+        //    return;
+        //}
+        var i = 0;
+        for (var i = 0; i < cboxes.length; i++) {
+            if (cboxes[i].checked) {
+                var dc = {};
+                dc.id = cboxes[i].value;
+                dc.LyDo = $('#LyDo' + cboxes[i].id).val();
+
+
+                console.log(dc);
+                arrCheckbox.push(dc);
+            }
+        }
+        console.log('1');
+
+        console.log(arrCheckbox);
+
+        if (arrCheckbox.length == 0) {
+            alert("Vui lòng chọn ít nhất 1 bản ghi.");
+            return;
+        }
+        console.log('2');
+
+        if (arrCheckbox.length > 0) {
+            $.ajax({
+                url: '/ThucTap/update',
+                type: 'POST',
+                data: JSON.stringify({ lst: arrCheckbox }),
+                contentType: 'application/json, charset=utf-8',
+                beforeSend: function () {
+                    js_Loading(true, 1);
+                    console.log('3');
+                },
+
+                success: function (data) {
+                    if (data == 1) {
+                        alert("Điều chỉnh thành công");
+                        $('#Detail_modal').modal('hide');
+                        js_GetListAR_Auto();
+                        js_Loading(false, 1);
+                    }
+                },
+                error: function () {
+                    js_Loading(false, 1);
+                }
+
+            });
+        }
+
+    }
 
 </script>
 

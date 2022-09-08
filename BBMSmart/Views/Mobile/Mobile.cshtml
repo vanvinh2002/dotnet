@@ -1,0 +1,433 @@
+﻿
+@{
+    ViewBag.Title = "Mobile";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+<div class="text-center">
+    <h2>Ca Làm Việc</h2>
+    <a>31/08/2022</a>
+    <br />
+    <a>VP-Văn Phòng</a>
+</div>
+<div class="col-sm-12 col-xs-12 col-md-12" style="font-size:15px; margin-top:10px; border:1px solid black">
+    <ul class="nav nav-tabs" id="myTab" role="tablist">
+        <li class="nav-item" style="padding-left:10px">
+            <a class="nav-link " id="lichca-tab" data-toggle="tab" href="#lichca" role="tab" aria-controls="lichca" aria-selected="true">Lịch Ca</a>
+        </li>
+        <li class="nav-item" style="padding-left:10px">
+            <a class="nav-link" id="nhanca-tab" data-toggle="tab" href="#nhanca" role="tab" aria-controls="nhanca" aria-selected="false">Nhận ca</a>
+        </li>
+        <li class="nav-item" style="padding-left:10px">
+            <a class="nav-link" id="doica-tab" data-toggle="tab" href="#doica" role="tab" aria-controls="doica" aria-selected="false">Đổi ca</a>
+        </li>
+        <li class="nav-item" style="padding-left:10px">
+            <a class="nav-link" id="xinnghi-tab" data-toggle="tab" href="#xinnghi" role="tab" aria-controls="xinnghi" aria-selected="false">Xin nghỉ</a>
+        </li>
+        <li class="nav-item" style="padding-left:10px">
+            <a class="nav-link" id="duyet-tab" data-toggle="tab" href="#duyet" role="tab" aria-controls="duyet" aria-selected="false">Duyệt</a>
+        </li>
+    </ul>
+    <div class="tab-content" id="myTabContent">
+        <div class="tab-pane fade  " id="lichca" role="tabpanel" aria-labelledby="lichca-tab">
+            <div class="row">
+                <div class="col-sm-12 col-xs-12 col-md-12 " style="margin-top:10px">
+                    <div class="col-sm-6 col-xs-6 col-md-12">
+                        <label>Từ ngày</label>
+                        <input class="form-control" type="date" />
+                    </div>
+                    <div class="col-sm-6 col-xs-6 col-md-12">
+                        <label>Đến ngày</label>
+                        <input class="form-control" type="date" />
+                    </div>
+                    <div class="col-sm-6 col-xs-6 col-md-12">
+                        <label>Ca</label>
+                        <select class="form-control">
+                            <option>Ca</option>
+                            <option></option>
+                            <option></option>
+                        </select>
+                    </div>
+                    <div class="col-sm-6 col-xs-6 col-md-12">
+                        <label>Nơi Làm</label>
+                        <select class="form-control">
+                            <option>Nơi Làm</option>
+                            <option></option>
+                            <option></option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+            <div class="col-mt-2">
+                <table class="table table-striped" border="1">
+                    <thead>
+                        <tr>
+                            <th>Ngày</th>
+                            <th>Nhân Viên</th>
+                            <th>Nơi Làm</th>
+                            <th>Ca</th>
+                            <th>Vị Trí</th>
+                        </tr>
+                    </thead>
+                </table>
+            </div>
+        </div>
+        <div class="tab-pane fade" id="nhanca" role="tabpanel" aria-labelledby="nhanca-tab">
+            <div class="col-mt-2">
+                <table class="table table-striped" border="1" style="margin-top:20px">
+                    <thead>
+                        <tr>
+                            <th>Loại ca</th>
+                            <th>Ngày</th>
+                            <th>Ca</th>
+                            <th>Nơi Làm</th>
+                            <th>Xin Nghỉ</th>
+                            <th>Duyệt</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <th></th>
+                            <th></th>
+                            <th></th>
+                            <th></th>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="row-mt-2">
+                <div class="col-sm-6 col-md-6 col-xs-6">
+                    <div class=" text-center">
+                        <button class="btn btn-primary">Xác Nhận</button>
+                    </div>
+                </div>
+                <div class="col-sm-6 col-md-6 col-xs-6">
+                    <div class=" text-center">
+                        <button class="btn btn-primary">Từ Chối</button>
+                    </div>
+                </div>
+            </div>
+            <hr />
+            <div class="row">
+                <div class="col-sm-12 col-xs-12 ">
+                    <div class="col-sm-6 col-xs-6">
+                        <label>Từ ngày</label>
+                        <input class="form-control" type="date" />
+                    </div>
+                    <div class="col-sm-6 col-xs-6">
+                        <label>Đến ngày</label>
+                        <input class="form-control" type="date" />
+                    </div>
+                </div>
+            </div>
+            <div class="col-mt-2">
+                <table class="table table-striped" border="1" style="margin-top:20px">
+                    <thead>
+                        <tr>
+                            <th>Loại ca</th>
+                            <th>Ngày</th>
+                            <th>Ca</th>
+                            <th>Nơi Làm</th>
+                            <th>Xin Nghỉ</th>
+                            <th>Duyệt</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <th></th>
+                            <th></th>
+                            <th></th>
+                            <th></th>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="row-mt-2">
+                <div class=" text-center">
+                    <button class="btn btn-primary">Xác Nhận</button>
+                </div>
+            </div>
+
+
+        </div>
+        <div class="tab-pane fade" id="doica" role="tabpanel" aria-labelledby="doica-tab">
+            <div class="row">
+                <div class="col-sm-12 col-xs-12 ">
+                    <div class="col-sm-6 col-xs-6">
+                        <label>Từ ngày</label>
+                        <input class="form-control" type="date" />
+                    </div>
+                    <div class="col-sm-6 col-xs-6">
+                        <label>Đến ngày</label>
+                        <input class="form-control" type="date" />
+                    </div>
+
+                </div>
+            </div>
+
+            <div class="col-mt-2">
+                <table class="table table-striped" border="1" style="margin-top:20px">
+                    <thead>
+                        <tr>
+                            <th>Ngày</th>
+                            <th>Nơi Làm</th>
+                            <th>Ca</th>
+                            <th>Vị Trí</th>
+                            <th>Đổi Ca</th>
+
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <th></th>
+                            <th></th>
+                            <th></th>
+                            <th></th>
+                            <th></th>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <div class="tab-pane fade" id="xinnghi" role="tabpanel" aria-labelledby="xinnghi-tab">
+            <div>
+                <div class="row">
+                    <div class="col-sm-12 col-xs-12 ">
+                        <div class="col-sm-6 col-xs-6">
+                            <label>Mã NV: 72427</label>
+                        </div>
+                        <div class="col-sm-6 col-xs-6">
+                            <label>Tên NV: NDH</label>
+                        </div>
+                        <div class="col-sm-6 col-xs-6">
+                            <label>Chức Danh:Lập Trình Viên</label>
+                        </div>
+                        <div class="col-sm-6 col-xs-6">
+                            <label>Bộ Phận:</label>
+                        </div>
+                        <div class="col-sm-6 col-xs-6">
+                            <label>Phòng Ban:</label>
+                        </div>
+                        <div class="col-sm-6 col-xs-6">
+                            <label>Ql trực tiếp:</label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <hr />
+            <div class="text-primary">
+                <h4>1.Đăng Ký Ngày Nghỉ</h4>
+            </div>
+            <div class="row">
+                <div class="col-sm-12 col-xs-12">
+                    <div class="col-sm-4 col-xs-4">
+                        <label>Thời Gian Nghỉ</label>
+                        <input class="form-control" type="date" />
+                        <input class="form-control" type="date" />
+                    </div>
+                    <div class="col-sm-4 col-xs-8">
+                        <label>Ngày Đi Làm Lại</label>
+                        <input class="form-control" type="date" />
+                    </div>
+                    <div class="col-sm-4 col-xs-8">
+                        <label>Loại</label>
+                        <select class="form-control">
+                            <option>Loại Ca</option>
+                            <option></option>
+                            <option></option>
+                        </select>
+                    </div>
+                    <div class="col-sm-4 col-xs-8">
+                        <label>Loại Nghỉ</label>
+                        <select class="form-control">
+                            <option>Loại Nghỉ</option>
+                            <option></option>
+                            <option></option>
+                        </select>
+                    </div>
+                    <div class="col-sm-4 col-xs-8">
+                        <label>Lý Do Nghỉ</label>
+                        <input class="form-control" type="text" />
+                    </div>
+
+                    <div class="col-sm-6 col-md-6 col-xs-6">
+                        <div class=" text-center">
+                            <button class="btn btn-primary ">Gửi Duyệt</button>
+                        </div>
+                    </div>
+                </div>
+                <hr />
+                <div class="text-primary">
+                    <h5>Danh sách ngày nghỉ</h5>
+                </div>
+                <div class="row">
+                    <div class="col-sm-12 col-xs-12 ">
+                        <div class="col-sm-6 col-xs-6">
+                            <label>Từ ngày</label>
+                            <input class="form-control" type="date" />
+                        </div>
+                        <div class="col-sm-6 col-xs-6">
+                            <label>Đến ngày</label>
+                            <input class="form-control" type="date" />
+                        </div>
+
+                    </div>
+                </div>
+                <div class="col-mt-2">
+                    <table class="table table-striped" border="1" style="margin-top:20px">
+                        <thead>
+                            <tr>
+
+                                <th>Loại Nghỉ</th>
+                                <th>Từ Ngày</th>
+                                <th>Đến Ngày</th>
+                                <th>Loại Công</th>
+                                <th>Số Giờ Nghỉ</th>
+                                <th>Trạng Thái</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <th></th>
+                                <th></th>
+                                <th></th>
+                                <th></th>
+                                <th></th>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+        <div class="tab-pane fade" id="duyet" role="tabpanel" aria-labelledby="duyet-tab">
+            <div class="text-primary">
+                <h4>1.Duyệt Ngày Nghỉ</h4>
+            </div>
+            <div class="row">
+                <div class="col-sm-12 col-xs-12 ">
+                    <div class="col-sm-6 col-xs-6">
+                        <label>Từ ngày</label>
+                        <input class="form-control" type="date" />
+                    </div>
+                    <div class="col-sm-6 col-xs-6">
+                        <label>Đến ngày</label>
+                        <input class="form-control" type="date" />
+                    </div>
+                    <div class="col-sm-6 col-xs-6">
+                        <label>Trạng Thái</label>
+                        <select class="form-control">
+                            <option>Trạng Thái</option>
+                            <option></option>
+                            <option></option>
+                        </select>
+                    </div>
+
+                </div>
+            </div>
+            <div class="col-mt-2">
+                <table class="table table-striped" border="1" style="margin-top:20px">
+                    <thead>
+                        <tr>
+                            <th>Nhân Viên</th>
+                            <th>Loại Nghỉ</th>
+                            <th>Từ</th>
+                            <th>Đến</th>
+                            <th>Số Giờ Nghỉ</th>
+                            <th>Trạng Thái</th>
+                            <th>Chọn</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <th></th>
+                            <th></th>
+                            <th></th>
+                            <th></th>
+                            <th></th>
+                            <th></th>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="row-mt-2">
+                <div class="col-sm-6 col-md-6 col-xs-6">
+                    <div class=" text-center">
+                        <button class="btn btn-primary">Duyệt</button>
+                    </div>
+                </div>
+                <div class="col-sm-6 col-md-6 col-xs-6">
+                    <div class=" text-center">
+                        <button class="btn btn-primary">Từ Chối</button>
+                    </div>
+                </div>
+            </div>
+            <hr />
+            <div class="text-primary">
+                <h4>1.Duyệt In- Out</h4>
+            </div>
+            <div class="row">
+                <div class="col-sm-12 col-xs-12 ">
+                    <div class="col-sm-6 col-xs-6">
+                        <label>Từ ngày</label>
+                        <input class="form-control" type="date" />
+                    </div>
+                    <div class="col-sm-6 col-xs-6">
+                        <label>Đến ngày</label>
+                        <input class="form-control" type="date" />
+                    </div>
+                    <div class="col-sm-6 col-xs-6">
+                        <label>Trạng Thái</label>
+                        <select class="form-control">
+                            <option>Trạng Thái</option>
+                            <option></option>
+                            <option></option>
+                        </select>
+                    </div>
+
+                </div>
+            </div>
+            <div class="col-mt-2">
+                <table class="table table-striped" border="1" style="margin-top:20px">
+                    <thead>
+                        <tr>
+                            <th>Nhân Viên</th>
+                            <th>Ngày</th>
+                            <th>Giờ</th>
+                            <th>Loại</th>
+                            <th>Ca</th>
+                            <th>Nơi Làm</th>
+                            <th>Trạng Thái</th>
+                            <th>Chọn</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <th></th>
+                            <th></th>
+                            <th></th>
+                            <th></th>
+                            <th></th>
+                            <th></th>
+                            <th></th>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="row-mt-2">
+                <div class="col-sm-6 col-md-6 col-xs-6">
+                    <div class=" text-center">
+                        <button class="btn btn-primary">Duyệt</button>
+                    </div>
+                </div>
+                <div class="col-sm-6 col-md-6 col-xs-6">
+                    <div class=" text-center">
+                        <button class="btn btn-primary">Từ Chối</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+

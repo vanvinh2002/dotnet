@@ -1,0 +1,140 @@
+﻿
+@using System.Data
+@{
+    ViewBag.Title = "Xây dựng BST";
+    Layout = "~/Views/Shared/_Layout_V2.cshtml";
+}
+
+
+<div class="text-center ">
+    <h3>XÂY DỰNG BỘ SƯU TẬP/COMBO</h3>
+</div>
+
+<div class="col-md-12">
+    <div class="col-md-6">
+        <div class="col-md-12">
+            <div class="col-md-6">
+                <div>
+                    <button type="button" class="btn btn-primary">Tạo Mới</button>
+                </div>
+                <div>
+                    <button type="button" class="btn btn-primary">Lưu </button>
+                </div>
+                <br />
+                <div class="col-md-12">
+                    <label>Mã BST:&nbsp;</label> <span id="MaBST" class="txtma"></span>
+                </div>
+                <div class="col-md-12">
+                    <label>Tên BST:&nbsp;</label> <span id="TenBST" class="txtten"></span>
+                </div>
+                <div class="col-md-12">
+                    <label>Category:&nbsp;</label> <span id="Category" class="txtcate"></span>
+                </div>
+                <div class="col-md-12">
+                    <label>Mùa vụ :&nbsp;</label> <span id="MuaVu" class="txtmuavu"></span>
+                </div>
+                <div class="col-md-12">
+                    <label>Đối Tượng:&nbsp;</label> <span id="DoiTuong" class="txtdoituong"></span>
+                </div>
+                <div class="col-md-12">
+                    <label>Giới Tính:&nbsp;</label> <span id="GioiYinh" class="txtgioitinh"></span>
+                </div>
+                <div class="col-md-12">
+                    <label>Thu Nhập:&nbsp;</label> <span id="ThuNhap" class="txtthunhap"></span>
+                </div>
+                <div class="col-md-12">
+                    <label>USP:&nbsp;</label> <span id="USP" class="txtusp"></span>
+                </div>
+                <div class="col-md-12">
+                    <label>Thông Điệp:&nbsp;</label> <span id="ThongDiep" class="txtthongdiep"></span>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="col-md-12">
+                    <label class="text text-primary">Mã BST :&nbsp;</label> <span id="MaBST" class="txtma"></span>
+                    <input id="MaBST" type="text" />
+                </div>
+                <div class="col-md-12">
+                    <label class="text text-primary">Tên BST:&nbsp;</label> <span id="TenBST" class="txtten"></span>
+                    <input id="TenBST" type="text" />
+                </div>
+                <br />
+                <br />
+                <div class="card" style="margin-left:auto ">
+                    <img src="~/Image/bg02.jpg" alt="anh" id="anh" width="200" height="250" />
+                    <input type="file" id="anh" required />
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-6">
+        <div class="col-12 stretch-card pl-0 pr-0">
+            <div class="card mb-4">
+                <div class="card-body">
+                    <div class="table-responsive" id="div-content">
+                        @Html.Partial("~/Views/ThucTap/Partial/_XayDungBST.cshtml")
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/timepicker.js/latest/timepicker.min.js"></script>
+<link href="https://cdn.jsdelivr.net/timepicker.js/latest/timepicker.min.css" rel="stylesheet" />
+
+<script type="text/javascript">
+    const anh = document.querySelector("#anh");
+    anh.addEventListener("change", (event) => {
+        const { files } = event.target;
+        console.log("files", files)
+    })
+    $(function () {
+        js_XayBST();
+    });
+    function js_ReloadTable() {
+        $('#tbl_Item_XayDungBST')
+            .DataTable({
+                lengthMenu: [[20, 50, 70, 100, -1], [20, 50, 70, 100, 'All']],
+                "pageLength": -1,
+                fixedHeader: {
+                    headerOffset: 147
+                },
+                columnDefs: [
+                ],
+                "orderClasses": false,
+                "deferRender": true,
+
+                autoWidth: false,
+                bAutoWidth: false,
+                "searching": false,
+                reponsive: false,
+                order: []
+            });
+    }
+    function js_XayBST() {
+
+
+        $.ajax({
+            url: '/ThucTap/XayBST',
+            type: 'POST',
+            data: JSON.stringify({}),
+            contentType: 'application/json, charset=utf-8',
+            beforeSend: function () {
+                js_Loading(true, 1);
+            },
+            success: function (data) {
+                $('#div-content-calendershift').html(data);
+                js_ReloadTable();
+                js_Loading(false, 1);
+            },
+            error: function () {
+                js_Loading(false, 1);
+            }
+        });
+    }
+</script>
+
+
+
+

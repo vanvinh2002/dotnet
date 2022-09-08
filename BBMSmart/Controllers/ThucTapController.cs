@@ -58,6 +58,25 @@ namespace ProductAllTool.Controllers
         {
             if (Session["uid"] != null && Session["uid"].ToString().Length > 0)
             {
+                var list_test = DataAccess.DataAccessTT.sp_Brand();
+                ViewBag.list_test = list_test;
+
+                var list_test1 = DataAccess.DataAccessTT.AR_MaHang();
+                ViewBag.list_test1 = list_test1;
+
+                var list_test2 = DataAccess.DataAccessTT.AR_MIEN();
+                ViewBag.list_test2 = list_test2;
+
+                var list_test3 = DataAccess.DataAccessTT.AR_Tinh();
+                ViewBag.list_test3 = list_test3;
+
+                var list_test4 = DataAccess.DataAccessTT.AR_CuaHang();
+                ViewBag.list_test4 = list_test4;
+
+                var list_test5 = DataAccess.DataAccessTT.AR_ChiaKho();
+                ViewBag.list_test5 = list_test5;
+
+
 
                 return View();
             }
@@ -66,6 +85,68 @@ namespace ProductAllTool.Controllers
                 SystemFunctions.SaveSession("ThucTap", "ThucTap2");
                 return RedirectToAction("Login", "Account");
             }
+        }
+        public ActionResult GetTable(string brand, string mahang, string mien, string tinh, string cuahang, string khochia)
+        {
+            if (Session["uid"] != null && Session["uid"].ToString().Length > 0)
+            {
+                DataTable table = DataAccess.DataAccessTT.sp_getTable(Session["uid"].ToString(), brand, mahang, mien, tinh, cuahang, khochia);
+
+                return PartialView("~/Views/ThucTap/Partial/__ThucTap2.cshtml", table);
+
+            }
+            return RedirectToAction("Login", "Account");
+        }
+        [HttpPost]
+        public ActionResult update(List<addlyDo> lst)
+        {
+            try
+            {
+                if (Session["uid"] != null && Session["uid"].ToString().Length > 0)
+                {
+                    foreach (addlyDo po in lst)
+                    {
+                        DataAccess.DataAccessTT.UpdateLyDo(Session["uid"].ToString(), po.ID, po.LyDo);
+                    }
+                    return Json(1);
+                }
+                return RedirectToAction("Login", "Account");
+            }
+            catch (Exception ex)
+            {
+                LogBuild.CreateLogger(JsonConvert.SerializeObject(ex), "update");
+                return Json(null);
+            }
+        }
+
+        #endregion
+
+        #region Xây dựng BST
+        public ActionResult XayDungBST()
+        {
+            if (Session["uid"] != null && Session["uid"].ToString().Length > 0)
+            {
+
+
+                return View();
+            }
+            else
+            {
+                SystemFunctions.SaveSession("ThucTap", "XayDungBST");
+                return RedirectToAction("Login", "Account");
+            }
+        }
+
+        public ActionResult XayBST()
+        {
+            if (Session["uid"] != null && Session["uid"].ToString().Length > 0)
+            {
+                DataTable table = DataAccess.DataAccessTT.tbl_XayBST(Session["uid"].ToString());
+
+                return PartialView("~/Views/ThucTap/Partial/_XayDungBST.cshtml", table);
+
+            }
+            return RedirectToAction("Login", "Account");
         }
 
         #endregion
