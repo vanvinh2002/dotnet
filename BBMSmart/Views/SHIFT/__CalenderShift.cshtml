@@ -1,0 +1,78 @@
+﻿@using System.Data
+@using ProductAllTool.Models.ManageSales;
+<link href="~/Resource/Content/css/thickbox.css" rel="stylesheet" />
+<script src="~/Resource/Scripts/thickbox.js"></script>
+<table id="" class="table table-bordered" style="width:99.9%">
+    <thead>
+        <tr>
+            <th class="text-left" style="vertical-align: top">
+                Ngày
+            </th>
+            <th class="text-left" style="vertical-align: top">
+                Nhân Viên
+            </th>
+            <th class="text-left" style="vertical-align: top">
+                Nơi Làm
+            </th>
+            <th class="text-left" style="vertical-align: top">
+                Ca
+            </th>
+            <th class="text-left" style="vertical-align: top">
+                Vị Trí
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+
+        @{
+            if (Model != null)
+            {
+                var dt = Model as DataTable;
+                if (dt.Rows.Count > 0)
+                {
+                    var i = 0;
+                    foreach (DataRow item in dt.Rows)
+                    {
+                        <tr id="row_@i">
+                            <td class="text-left">
+                                @item["Ngay"]
+                            </td>
+                            <td class="text-left">
+                                @item["TenNV"]
+                            </td>
+                            <td class="text-right">
+                                @item["NoiLam"]
+                            </td>
+                            <td class="text-left">
+                                @item["Ca"]
+                            </td>
+                            <td class="text-left">
+                                @item["TenPB"]
+                            </td>
+                        </tr>
+                        i++;
+                    }
+                }
+            }
+        }
+    </tbody>
+    <tfoot>
+    </tfoot>
+</table>
+<script>
+
+    function checkall() {
+        var cboxes = document.getElementsByName('check[]');
+        for (var i = 0; i < cboxes.length; i++) {
+            if ($('#checkall').is(":checked")) {
+                cboxes[i].checked = true;
+            }
+            else {
+                cboxes[i].checked = false;
+            }
+        }
+    }
+
+
+</script>
+

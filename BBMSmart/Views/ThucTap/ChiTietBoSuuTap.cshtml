@@ -1,0 +1,291 @@
+﻿@using ProductAllTool.Models.ManageSales;
+@using ProductAllTool.Common
+@{
+    ViewBag.Title = "ChiTietBoSuuTap";
+    Layout = "~/Views/Shared/_Layout_V2.cshtml";
+}
+<div class="AutoFix">
+    <div class="row" id="form_search">
+        <div class="text-center">
+            <h2>Chi Tiết Bộ Sưu Tập/COMBO</h2>
+        </div>
+        <div class="col-md-12">
+            <div class="col-md-6">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="col-md-6">
+                            <div class="col-md-4">
+                                <label class="redtext">Mã BST</label>
+                            </div>
+                            <div class="col-md-8">
+                                <input class="form-control" />
+                            </div>
+                            <div class="col-md-4">
+                                <label class="redtext">Tên BST</label>
+                            </div>
+                            <div class="col-md-8">
+                                <input class="form-control" />
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="col-md-4">
+                                <label class="redtext">Category *</label>
+                            </div>
+                            <div class="col-md-8" ondblclick="$('#cate').val('').trigger('change')">                                  
+                                <select id="cate" class="form-control selectpicker" data-live-search="true" onchange="js_GetListtt1()">
+                                    <option value="">--- Category ---</option>
+                                    @if (ViewBag.lst_cate != null)
+                                    {
+                                        foreach (objCombox box in (List<objCombox>)ViewBag.lst_cate)
+                                        {
+                                            <option value="@box.Code">@box.Name</option>
+                                        }
+                                    }
+                                </select>
+                            </div>
+                            <div class="col-md-4">
+                                <label class="redtext">Group * </label>
+                            </div>
+                            <div class="col-md-8" ondblclick="$('#group').val('').trigger('change')">
+                                <select id="group" class="form-control selectpicker" data-live-search="true" onchange="js_GetListtt1()">
+                                    <option value="">--- Group ---</option>
+                                    @if (ViewBag.lst_Group != null)
+                                    {
+                                        foreach (objCombox box in (List<objCombox>)ViewBag.lst_Group)
+                                        {
+                                            <option value="@box.Code">@box.Name</option>
+                                        }
+                                    }
+                                </select>
+                            </div>
+                            <div class="col-md-4">
+                                <label class="redtext">Function *</label>
+                            </div>
+                            <div class="col-md-8" ondblclick="$('#Func').val('').trigger('change')">                              
+                                <select id="Func" class="form-control selectpicker" data-live-search="true" onchange="js_GetListtt1()">
+                                    <option value="">--- Function ---</option>
+                                    @if (ViewBag.lst_Func != null)
+                                    {
+                                        foreach (objCombox box in (List<objCombox>)ViewBag.lst_Func)
+                                        {
+                                            <option value="@box.Code">@box.Name</option>
+                                        }
+                                    }
+                                </select>
+                            </div>
+                            <div class="col-md-4">
+                                <label class="redtext">Range Review</label>
+                            </div>
+                            <div class="col-md-8" ondblclick="$('#Range').val('').trigger('change')">
+                                <select id="Range" class="form-control selectpicker" data-live-search="true" onchange="js_GetListtt1()">
+                                    <option value="">--- Range Review ---</option>
+                                    @if (ViewBag.lst_RR != null)
+                                    {
+                                        foreach (objCombox box in (List<objCombox>)ViewBag.lst_RR)
+                                        {
+                                            <option value="@box.Code">@box.Name</option>
+                                        }
+                                    }
+                                </select>
+                            </div>
+                            <div class="col-md-4">
+                                <label class="redtext">Brand</label>
+                            </div>
+                            <div class="col-md-8" ondblclick="$('#bard').val('').trigger('change')">
+                                <select id="bard" class="form-control selectpicker" data-live-search="true" onchange="js_GetListtt1()">
+                                    <option value="">--- Brand ---</option>
+                                    @if (ViewBag.lst_brand != null)
+                                    {
+                                        foreach (objCombox box in (List<objCombox>)ViewBag.lst_brand)
+                                        {
+                                            <option value="@box.Code">@box.Name</option>
+                                        }
+                                    }
+                                </select>
+                            </div>
+                            <div class="col-md-4">
+                                <label class="redtext">Nguồn nhập</label>
+                            </div>
+                            <div class="col-md-8"ondblclick="$('#NN').val('').trigger('change')">
+                                <select id="NN" class="form-control selectpicker" data-live-search="true" onchange="js_GetListtt1()">
+                                    <option value="">--- Nguồn nhập ---</option>
+                                    @if (ViewBag.lst_NN != null)
+                                    {
+                                        foreach (objCombox box in (List<objCombox>)ViewBag.lst_NN)
+                                        {
+                                            <option value="@box.Code">@box.Name</option>
+                                        }
+                                    }
+                                </select>
+                            </div>
+                            <div class="col-md-4">
+                                <label class="redtext">Mùa vụ</label>
+                            </div>
+                            <div class="col-md-8" ondblclick="$('#MuaVu').val('').trigger('change')">
+                                <select id="MuaVu" class="form-control selectpicker" data-live-search="true" onchange="js_GetListtt1()">
+                                    <option value="">--- Mùa vụ ---</option>
+                                    @if (ViewBag.lst_MuaVu != null)
+                                    {
+                                        foreach (objCombox box in (List<objCombox>)ViewBag.lst_MuaVu)
+                                        {
+                                            <option value="@box.Code">@box.Name</option>
+                                        }
+                                    }
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row mt-4" style="margin-top: 10px;">
+                    <div class="col-md-12">
+                        <div class="col-md-6">
+                            <div class="col-md-12">
+                                <label>Mã BST: &nbsp;</label> <span id="MaBST" class="txtinfo"></span>
+                            </div>
+                            <div class="col-md-12">
+                                <label>Tên BST: &nbsp;</label> <span id="TenBST" class="txtinfo"></span>
+                            </div>
+                            <div class="col-md-12">
+                                <label>Category: &nbsp;</label> <span id="Category" class="txtinfo"></span>
+                            </div>
+                            <div class="col-md-12">
+                                <label>Mùa vụ: &nbsp;</label> <span id="Muavu" class="txtinfo"></span>
+                            </div>
+                            <div class="col-md-12">
+                                <label>Đối tượng: &nbsp;</label> <span id="Doituong" class="txtinfo"></span>
+                            </div>
+                            <div class="col-md-12">
+                                <label>Giới tính: &nbsp;</label> <span id="GioiTinh" class="txtinfo"></span>
+                            </div>
+                            <div class="col-md-12">
+                                <label>Thu nhập: &nbsp;</label> <span id="ThuNhap" class="txtinfo"></span>
+                            </div>
+                            <div class="col-md-12">
+                                <label>USP: &nbsp;</label> <span id="USP" class="txtinfo"></span>
+                            </div>
+                            <div class="col-md-12">
+                                <label>Thông điệp: &nbsp;</label> <span id="ThongDiep" class="txtinfo"></span>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="card" style="width: 18rem;">
+                                <img src="..." class="card-img-top" style="width: 240px; height:160px;">
+                            </div>
+                            <div class="col-md-6">
+                                <label>Mã hàng: &nbsp;</label> <span id="Mahang" class="txtinfo"></span>
+                            </div>
+                            <div class="col-md-6">
+                                <label>Tên hàng: &nbsp;</label> <span id="Tenhang" class="txtinfo"></span>
+                            </div>
+                            <div class="col-md-6">
+                                <label>Giá bán: &nbsp;</label> <span id="Giaban" class="txtinfo"></span>
+                            </div>
+                            <div class="col-md-6">
+                                <label>Số lượng tồn: &nbsp;</label> <span id="SLT" class="txtinfo"></span>
+                            </div>
+                            <div class="col-md-6">
+                                <label>>>> SP khác: &nbsp;</label> <span id="SPKhac" class="txtinfo"></span>
+                            </div>
+                            <div class="col-md-6 ">
+                                <button class="btn btn-primary">Add vào BST</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="table-responsive" id="div-content">
+                    @Html.Partial("~/Views/ThucTap/Partial/__ChiTietBoSuuTap.cshtml")
+                </div>
+                <div class="col-md-12" style="margin-top: 10px;">
+                    <div class="col-md-2">
+                        <div class="card" style="width: 18rem;">
+                            <img src="..." class="card-img-top" style="width: 60px; height: 60px; ">
+                        </div>
+                    </div>
+                    <div class="col-md-2">
+                        <div class="card" style="width: 18rem;">
+                            <img src="..." class="card-img-top" style="width: 60px; height: 60px; ">
+                        </div>
+                    </div>
+                    <div class="col-md-2">
+                        <div class="card" style="width: 18rem;">
+                            <img src="..." class="card-img-top" style="width: 60px; height: 60px; ">
+                        </div>
+                    </div>
+                    <div class="col-md-2">
+                        <div class="card" style="width: 18rem;">
+                            <img src="..." class="card-img-top" style="width: 60px; height: 60px; ">
+                        </div>
+                    </div>
+                    <div class="col-md-2">
+                        <div class="card" style="width: 18rem;">
+                            <img src="..." class="card-img-top" style="width: 60px; height: 60px; ">
+                        </div>
+                    </div>
+                    <div class="col-md-2">
+                        <div class="card" style="width: 18rem;">
+                            <img src="..." class="card-img-top" style="width: 60px; height: 60px; ">
+                        </div>
+                    </div>
+                </div>
+                <div class="" style="margin-top: 50px;">
+                    <button class="btn btn-primary">Cập nhật BST/Combo</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script type="text/javascript">
+    $(function () {
+        js_GetListtt1();
+    });
+    function js_ReloadTable() {
+        $('#tbl_CTBST')
+            .DataTable({
+                lengthMenu: [[20, 50, 70, 100, -1], [20, 50, 70, 100, 'All']],
+                "pageLength": -1,
+                fixedHeader: {
+                    headerOffset: 147
+                },
+                columnDefs: [],
+                "orderClasses": false,
+                "deferRender": true,
+
+                autoWidth: false,
+                bAutoWidth: false,
+                "searching": false,
+                responsive: false,
+                order: []
+            });
+    }
+
+    function js_GetListtt1() {
+
+        var cate = $("#cate").val();
+        var group = $("#group").val();
+        var Func = $("#Func").val();
+        var Range = $("#Range").val();
+        var bard = $("#bard").val();
+        var NN = $("#NN").val();
+        var MuaVu = $("#MuaVu").val();
+        $.ajax({
+            url: '/ThucTap/GetListCat',
+            type: 'POST',
+            data: JSON.stringify({ Category: cate, Group: group, Function: Func, RangeRieview: Range, Band: bard, NguonNhap: NN, MuaVu: MuaVu }),
+            contentType: 'application/json, charset=utf-8',
+            beforeSend: function () {
+                js_Loading(true, 1);
+            },
+            success: function (data) {
+                console.log(data);
+                $('#div-content').html(data);
+                js_ReloadTable();
+                js_Loading(false, 1);
+            },
+            error: function () {
+                js_Loading(false, 1);
+            }
+        });
+    }
+</script>

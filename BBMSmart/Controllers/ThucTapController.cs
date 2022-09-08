@@ -39,7 +39,18 @@ namespace ProductAllTool.Controllers
         {
             if (Session["uid"] != null && Session["uid"].ToString().Length > 0)
             {
-               
+
+                var lst_test1 = DataAccess.DataAccessTT.sp_Brand();
+                ViewBag.lsttest1 = lst_test1;
+
+                var lst_test2 = DataAccess.DataAccessTT.AR_MaHang();
+                ViewBag.lsttest2 = lst_test2;
+
+                var lst_test3 = DataAccess.DataAccessTT.AR_MIEN();
+                ViewBag.lsttest3 = lst_test3;
+
+                var lst_test4 = DataAccess.DataAccessTT.AR_Tinh();
+                ViewBag.lsttest4 = lst_test4;
 
                 return View();
             }
@@ -49,9 +60,88 @@ namespace ProductAllTool.Controllers
                 return RedirectToAction("Login", "Account");
             }
         }
+        public ActionResult getList(string brand, string mahang, string mien)
+        {
+            if (Session["uid"] != null && Session["uid"].ToString().Length > 0)
+            {
+                DataTable table = DataAccess.DataAccessTT.sp_getList(Session["uid"].ToString(), brand, mahang, mien);
 
+                return PartialView("~/Views/ThucTap/Partial/__ThucTap1.cshtml", table);
+
+            }
+            return RedirectToAction("Login", "Account");
+        }
+
+        [HttpPost]
+        public ActionResult UpdateTest(List<AddLydo> lst)
+        {
+            try
+            {
+                if (Session["uid"] != null && Session["uid"].ToString().Length > 0)
+                {
+                    foreach (AddLydo po in lst)
+                    {
+                        DataAccess.DataAccessTT.sp_lydo_update(Session["uid"].ToString(), po.ID, po.LyDo);
+                    }
+                    return Json(1);
+                }
+                return RedirectToAction("Login", "Account");
+            }
+            catch (Exception ex)
+            {
+                LogBuild.CreateLogger(JsonConvert.SerializeObject(ex), "UpdateTest");
+                return Json(null);
+            }
+        }
+
+        public ActionResult ChiTietBoSuuTap()
+        {
+            if (Session["uid"] != null && Session["uid"].ToString().Length > 0)
+            {
+
+                var lst_cate = DataAccess.DataAccessTT.cbo_Cate();
+                ViewBag.lst_cate = lst_cate;
+
+                var lst_Group = DataAccess.DataAccessTT.cbo_Group();
+                ViewBag.lst_Group = lst_Group;
+                
+                var lst_Func = DataAccess.DataAccessTT.cbo_Func();
+                ViewBag.lst_Func = lst_Func;
+
+                var lst_RR = DataAccess.DataAccessTT.cbo_RR();
+                ViewBag.lst_RR = lst_Func;
+
+                var lst_brand = DataAccess.DataAccessTT.cbo_Brand();
+                ViewBag.lst_brand = lst_brand;
+
+                var lst_NN = DataAccess.DataAccessTT.cbo_NguonNhap();
+                ViewBag.lst_NN = lst_NN;
+
+                var lst_MuaVu = DataAccess.DataAccessTT.cbo_MuaVu();
+                ViewBag.lst_MuaVu = lst_MuaVu;
+
+                return View();
+            }
+            else
+            {
+                SystemFunctions.SaveSession("ThucTap", "ChiTietBoSuuTap");
+                return RedirectToAction("Login", "Account");
+            }
+        }
+        public ActionResult GetListCat( string Category, string Group, string Function, string RangeRieview, string Band, string NguonNhap, string MuaVu)
+        {
+            if (Session["uid"] != null && Session["uid"].ToString().Length > 0)
+            {
+                DataTable table = DataAccess.DataAccessTT.cbo_Bang(Session["uid"].ToString(), Category, Group, Function, RangeRieview, Band, NguonNhap, MuaVu);
+
+                return PartialView("~/Views/ThucTap/Partial/__ChiTietBoSuuTap.cshtml", table);
+
+            }
+            return RedirectToAction("Login", "Account");
+        }
 
         #endregion
+
 
         #region Thuc tap 2
         public ActionResult ThucTap2()
@@ -94,19 +184,7 @@ namespace ProductAllTool.Controllers
                 return RedirectToAction("Login", "Account");
             }
         }
-        //get Balanced scorecard
-        [HttpPost]
-        public ActionResult GetListBalancedscorecard(string nam, string congty, string khoi, string sia)
-        {
-            if (Session["uid"] != null && Session["uid"].ToString().Length > 0)
-            {
-                DataTable table = DataAccess.DataAccessHRM.sp_bbs_get_sys_list_BalancedScoreCard(nam, congty, khoi, sia);
 
-                return PartialView("~/Views/HRM/Partial/__BalancedScorecard.cshtml", table);
-
-            }
-            return RedirectToAction("Login", "Account");
-        }
         #endregion
 
         #region Điều chuyển nhân sự cửa hàng

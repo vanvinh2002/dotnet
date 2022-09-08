@@ -99,12 +99,39 @@ namespace ProductAllTool.Models.HRM
         public string SLThieu { set; get; }
         public string LoaiDieuChuyen { set; get; }
     }
+    public class Add
+    {
+        public string MaNV { set; get; }
+        public string TenNV { set; get; }
+        public string ChucDanh { set; get; }
+        public string BoPhan { set; get; }
+        public string TenPB { set; get; }
+        public string NgayBD { set; get; }
+        public string NgayKT { set; get; }
+        public string NgayLamLai { set; get; }
+        public string LoaiCa { set; get; }
+        public string LoaiNghi { set; get; }
+        public string LyDoNghi { set; get; }
+        public string SoGioNghi { set; get; }
+
+
+    }
+    public class AddLydo
+    {
+        public int ID { set; get; }
+        public String LyDo { set; get; }
+    }
+    public class SetTT
+    {
+        public String Ca { set; get; }
+        public String type { set; get; }
+    }
 
 
     public class UpdateDuyetDSDieuChuyenNSCH
     {
         public string ID { set; get; }
-      
+
     }
 
 
@@ -241,22 +268,22 @@ namespace ProductAllTool.Models.HRM
     {
         public string ttcn_Ma_Nhan_Vien { set; get; }
         public string ttcn_Ho_Ten { set; get; }
-	    public string ttcn_Cong_Ty { set; get; }
-	    public string ttcn_Khoi { set; get; }
-	    public string ttcn_Phong_Ban { set; get; }
-	    public string ttcn_Bo_Phan { set; get; }
-	    public string ttcv_Chuc_Danh_Hien_Tai { set; get; }
-	    public string ttcv_Ngay_Bo_Nhiem { set; get; }
+        public string ttcn_Cong_Ty { set; get; }
+        public string ttcn_Khoi { set; get; }
+        public string ttcn_Phong_Ban { set; get; }
+        public string ttcn_Bo_Phan { set; get; }
+        public string ttcv_Chuc_Danh_Hien_Tai { set; get; }
+        public string ttcv_Ngay_Bo_Nhiem { set; get; }
         public string ttcv_Quyet_Dinh_Bo_Nhiem { set; get; }
-	    public string ttcv_Che_Do_Lam_Viec { set; get; }
-	    public string ttcv_Dia_Diem_Lam_Viec { set; get; }
-	    public string ttlv_Tinh_Trang_Lam_Viec { set; get; }
-	    public string ttlv_Ngay_Vao_Cong_Ty { set; get; }
-	    public string ttlv_Loai_Hd_Hien_Tai { set; get; }
-	    public string ttlv_Ngay_Het_Hd_Hien_Tai { set; get; }
-	    public string ttlv_Ngay_Nghi_Thai_San { set; get; }
-	    public string ttlv_Ngay_Di_Lam_Lai { set; get; }
-	    public decimal ltv_Luong_P1 { set; get; }
+        public string ttcv_Che_Do_Lam_Viec { set; get; }
+        public string ttcv_Dia_Diem_Lam_Viec { set; get; }
+        public string ttlv_Tinh_Trang_Lam_Viec { set; get; }
+        public string ttlv_Ngay_Vao_Cong_Ty { set; get; }
+        public string ttlv_Loai_Hd_Hien_Tai { set; get; }
+        public string ttlv_Ngay_Het_Hd_Hien_Tai { set; get; }
+        public string ttlv_Ngay_Nghi_Thai_San { set; get; }
+        public string ttlv_Ngay_Di_Lam_Lai { set; get; }
+        public decimal ltv_Luong_P1 { set; get; }
         public decimal ltv_Luong_P2 { set; get; }
         public decimal ltv_Luong_P3 { set; get; }
         public decimal ltv_Phu_Cap_Xang_Xe { set; get; }
@@ -270,71 +297,71 @@ namespace ProductAllTool.Models.HRM
         public decimal lct_Phu_Cap_Dien_Thoai { set; get; }
         public decimal lct_Phu_Cap_Khac { set; get; }
         public string tdl_So_Quyet_Dinh { set; get; }
-	    public string tdl_Ngay_Thay_Doi { set; get; }
-	    public string tdl_Ly_Do_Thay_Doi { set; get; }
-	    public decimal tdl_Luong_P1_Moi { set; get; }
+        public string tdl_Ngay_Thay_Doi { set; get; }
+        public string tdl_Ly_Do_Thay_Doi { set; get; }
+        public decimal tdl_Luong_P1_Moi { set; get; }
         public decimal tdl_Luong_P2_Moi { set; get; }
         public decimal tdl_Luong_P3_Moi { set; get; }
         public decimal tdl_Phu_Cap_Xang_Xe { set; get; }
         public decimal tdl_Phu_Cap_Dien_Thoai { set; get; }
         public decimal tdl_Phu_Cap_Khac { set; get; }
         public string tdct_So_Quyet_Dinh { set; get; }
-	    public string tdct_Ngay_Dieu_Chuyen { set; get; }
-	    public string tdct_Chuc_Danh_Cu { set; get; }
-	    public string tdct_Phong_Ban_Cu { set; get; }
-	    public string tdct_Bo_Phan_Cu { set; get; }
-	    public string tdct_Chuc_Danh_Moi { set; get; }
-	    public string tdct_Phong_Ban_Moi { set; get; }
-	    public string tdct_Bo_Phan_Moi { set; get; }
-	    public decimal tdct_Muc_Luong_Moi { set; get; }
+        public string tdct_Ngay_Dieu_Chuyen { set; get; }
+        public string tdct_Chuc_Danh_Cu { set; get; }
+        public string tdct_Phong_Ban_Cu { set; get; }
+        public string tdct_Bo_Phan_Cu { set; get; }
+        public string tdct_Chuc_Danh_Moi { set; get; }
+        public string tdct_Phong_Ban_Moi { set; get; }
+        public string tdct_Bo_Phan_Moi { set; get; }
+        public decimal tdct_Muc_Luong_Moi { set; get; }
         public string ltd_Tuyen_Moi { set; get; }
-	    public string ltd_Nghi_Quay_Lai { set; get; }
-	    public string ltd_Thai_San_Lam_Lai { set; get; }
-	    public string td_Trinh_Do { set; get; }
-	    public string td_Chuyen_Nganh { set; get; }
-	    public string td_Truong_Dao_Tao { set; get; }
-	    public decimal td_Nam_Tot_Nghiep { set; get; }
+        public string ltd_Nghi_Quay_Lai { set; get; }
+        public string ltd_Thai_San_Lam_Lai { set; get; }
+        public string td_Trinh_Do { set; get; }
+        public string td_Chuyen_Nganh { set; get; }
+        public string td_Truong_Dao_Tao { set; get; }
+        public decimal td_Nam_Tot_Nghiep { set; get; }
         public string cmnd_So_Cmnd_Cccd { set; get; }
-	    public string cmnd_Noi_Cap { set; get; }
-	    public string cmnd_Ngay_Cap { set; get; }
-	    public string cmnd_Dia_Chi_Tam_Tru { set; get; }
-	    public string cmnd_Dia_Chi_Thuong_Tru { set; get; }
-	    public string nlh_Ho_Ten { set; get; }
-	    public string nlh_So_Dien_Thoai { set; get; }
-	    public string nlh_Email { set; get; }
-	    public string Tinh_Trang_Hon_Nhan { set; get; }
-	    public string cc_Ho_Ten_Con_1 { set; get; }
-	    public string cc_Ngay_Sinh1 { set; get; }
-	    public string cc_Ho_Ten_Con_2 { set; get; }
-	    public string cc_Ngay_Sinh2 { set; get; }
-	    public string clhs_So_Yeu_Ly_Lich { set; get; }
-	    public string clhs_Cmnd_Cccd { set; get; }
-	    public string clhs_So_Ho_Khau { set; get; }
-	    public string clhs_Bang_Cap { set; get; }
-	    public string clhs_Giay_Kham_Suc_Khoe { set; get; }
-	    public string clhs_Luu_Quyen_So { set; get; }
-	    public string ttcl_So_Tai_Khoan_1 { set; get; }
-	    public string ttcl_Ngan_Hang_1 { set; get; }
-	    public string ttcl_So_Tai_Khoan_2 { set; get; }
-	    public string ttcl_Ngan_Hang_2 { set; get; }
-	    public string ttcl_So_Tai_Khoan_3 { set; get; }
-	    public string ttcl_Ngan_Hang_3 { set; get; }
-	    public string ttcl_Email_Chuyen_Luong { set; get; }
-	    public string ttcl_Ma_So_Thue_Tncn { set; get; }
-	    public string bhxh_So_So_Bhxh { set; get; }
-	    public decimal bhxh_So_Nguoi_Phu_Thuoc { set; get; }
+        public string cmnd_Noi_Cap { set; get; }
+        public string cmnd_Ngay_Cap { set; get; }
+        public string cmnd_Dia_Chi_Tam_Tru { set; get; }
+        public string cmnd_Dia_Chi_Thuong_Tru { set; get; }
+        public string nlh_Ho_Ten { set; get; }
+        public string nlh_So_Dien_Thoai { set; get; }
+        public string nlh_Email { set; get; }
+        public string Tinh_Trang_Hon_Nhan { set; get; }
+        public string cc_Ho_Ten_Con_1 { set; get; }
+        public string cc_Ngay_Sinh1 { set; get; }
+        public string cc_Ho_Ten_Con_2 { set; get; }
+        public string cc_Ngay_Sinh2 { set; get; }
+        public string clhs_So_Yeu_Ly_Lich { set; get; }
+        public string clhs_Cmnd_Cccd { set; get; }
+        public string clhs_So_Ho_Khau { set; get; }
+        public string clhs_Bang_Cap { set; get; }
+        public string clhs_Giay_Kham_Suc_Khoe { set; get; }
+        public string clhs_Luu_Quyen_So { set; get; }
+        public string ttcl_So_Tai_Khoan_1 { set; get; }
+        public string ttcl_Ngan_Hang_1 { set; get; }
+        public string ttcl_So_Tai_Khoan_2 { set; get; }
+        public string ttcl_Ngan_Hang_2 { set; get; }
+        public string ttcl_So_Tai_Khoan_3 { set; get; }
+        public string ttcl_Ngan_Hang_3 { set; get; }
+        public string ttcl_Email_Chuyen_Luong { set; get; }
+        public string ttcl_Ma_So_Thue_Tncn { set; get; }
+        public string bhxh_So_So_Bhxh { set; get; }
+        public decimal bhxh_So_Nguoi_Phu_Thuoc { set; get; }
         public string nv_Ngay_Nhan_Don { set; get; }
-	    public string nv_Nguon_Tiep_Nhan { set; get; }
-	    public string nv_Ly_Do_Nghi_Viec { set; get; }
-	    public string nv_Tinh_Trang_Ban_Giao { set; get; }
-	    public string nv_Ngay_Ra_Qdnv { set; get; }
-	    public string clnv_Don_Xin_Nghi_Viec { set; get; }
-	    public string clnv_Quan_Ly_Xac_Nhan { set; get; }
-	    public string clnv_Hanh_Chinh { set; get; }
-	    public string clnv_Ke_Toan { set; get; }
-	    public string clnv_Kiem_Soat_Noi_Bo { set; get; }
-	    public string clnv_Cntt { set; get; }
-	    public string clnv_Kiem_Ke { set; get; }
+        public string nv_Nguon_Tiep_Nhan { set; get; }
+        public string nv_Ly_Do_Nghi_Viec { set; get; }
+        public string nv_Tinh_Trang_Ban_Giao { set; get; }
+        public string nv_Ngay_Ra_Qdnv { set; get; }
+        public string clnv_Don_Xin_Nghi_Viec { set; get; }
+        public string clnv_Quan_Ly_Xac_Nhan { set; get; }
+        public string clnv_Hanh_Chinh { set; get; }
+        public string clnv_Ke_Toan { set; get; }
+        public string clnv_Kiem_Soat_Noi_Bo { set; get; }
+        public string clnv_Cntt { set; get; }
+        public string clnv_Kiem_Ke { set; get; }
 
     }
 

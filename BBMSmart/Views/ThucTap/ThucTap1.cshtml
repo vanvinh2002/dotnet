@@ -21,111 +21,229 @@
 </style>
 <div class="AutoFix">
     <div class="row" id="form_search">
-            <div class="col-md-12">
-                <div class="col-md-1 c1">
-                    <label>Brand - NCC </label>
-                </div>
-                <div class="col-md-1 c2" ondblclick="$('#vendor').val('').trigger('change')">
-                    <select id="vendor" class="form-control selectpicker" data-live-search="true" onchange="loadItem(); js_GetListAR()">
-                        <option value="">--- Chọn Brand - NCC ---</option>
-                        
-                    </select>
-                </div>
-                <div class="col-md-1 c3">
-                    <label>Miền</label>
-                </div>
-                <div class="col-md-1 c4" ondblclick="$('#mien').val('').trigger('change')">
-                    <select id="mien" class="form-control selectpicker" data-live-search="true" onchange="loadTinh(); js_GetListAR()">
-                        <option value="">--- Chọn Miền ---</option>
-                       
-                    </select>
-                </div>
-                <div class="col-md-1 c5">
-                    <a href="#" class="form-control btn btn-info" onclick="js_GetListAR()"><i class="fa fa-search" aria-hidden="true" style="margin-left: 6px;margin-top: 3px;"></i>Tìm kiếm</a>
-                </div>
+        <div class="col-md-12">
+            <div class="col-md-1 c1">
+                <label>Brand - NCC </label>
+            </div>
+            <div class="col-md-1 c2" ondblclick="$('#brand').val('').trigger('change')">
+                <select id="bard" class="form-control selectpicker" data-live-search="true" onchange="js_GetListtt1()">
+                    <option value="">--- Brand ---</option>
+                    @if (ViewBag.lsttest1 != null)
+                    {
+                        foreach (objCombox box in (List<objCombox>)ViewBag.lsttest1)
+                        {
+                            <option value="@box.Code">@box.Name</option>
+                        }
+                    }
+                </select>
+            </div>
+            <div class="col-md-1 c3">
+                <label>Miền</label>
+            </div>
+            <div class="col-md-1 c4" ondblclick="$('#mien').val('').trigger('change')">
+                <select id="mien" class="form-control selectpicker" data-live-search="true" onchange="js_GetListtt1()">
+                    <option value="">--- Chọn Miền ---</option>
+                    @if (ViewBag.lsttest3 != null)
+                    {
+                        foreach (objCombox box in (List<objCombox>)ViewBag.lsttest3)
+                        {
+                            <option value="@box.Code">@box.Name</option>
+                        }
+                    }
+                </select>
+            </div>
+            <div class="col-md-1 c5">
+                <a href="#" class="form-control btn btn-info" onclick="js_ReloadTable()"><i class="fa fa-search" aria-hidden="true" style="margin-left: 6px;margin-top: 3px;"></i>Tìm kiếm</a>
+            </div>
+
+        </div>
+        <div class="col-md-12">
+            <div class="col-md-1 c1">
+                <label>Mã hàng<span class="redtext">*</span></label>
+            </div>
+            <div class="col-md-1 c2" ondblclick="$('#mahang').val('').trigger('change')">
+                <select id="mahang" class="form-control selectpicker" data-live-search="true" onchange="js_GetListtt1()">
+                    <option value="">--- Chọn Mã hàng ---</option>
+                    @if (ViewBag.lsttest2 != null)
+                    {
+                        foreach (objCombox box in (List<objCombox>)ViewBag.lsttest2)
+                        {
+                            <option value="@box.Code">@box.Name</option>
+                        }
+                    }
+                </select>
+            </div>
+            <div class="col-md-1 c3">
+                <label>Tỉnh thành</label>
+            </div>
+            <div class="col-md-1 c4" ondblclick="$('#tinh').val('').trigger('change')">
+                <select id="tinh" class="form-control selectpicker" data-live-search="true" onchange="js_GetListtt1()">
+                    <option value="">--- Chọn Tỉnh ---</option>
+                    @if (ViewBag.lsttest4 != null)
+                    {
+                        foreach (objCombox box in (List<objCombox>)ViewBag.lsttest4)
+                        {
+                            <option value="@box.Code">@box.Name</option>
+                        }
+                    }
+                </select>
+            </div>
+            <div class="col-md-1 c5">
+                <a href="#" onclick="js_approve()" class="form-control btn btn-info"><i class="fa fa-check" aria-hidden="true" style="margin-left: 6px;margin-top: 3px;"></i>Post AR</a>
 
             </div>
-            <div class="col-md-12">
-                <div class="col-md-1 c1">
-                    <label>Mã hàng<span class="redtext">*</span></label>
-                </div>
-                <div class="col-md-1 c2" ondblclick="$('#mahang').val('').trigger('change')">
-                    <select id="mahang" class="form-control selectpicker" data-live-search="true" onchange="js_GetListAR()">
-                        <option value="">--- Chọn Mã hàng ---</option>
-                      
-                    </select>
-                </div>
-                <div class="col-md-1 c3">
-                    <label>Tỉnh thành</label>
-                </div>
-                <div class="col-md-1 c4" ondblclick="$('#tinh').val('').trigger('change')">
-                   
-                </div>
-                <div class="col-md-1 c5">
-                    <a href="#" onclick="js_save()" class="form-control btn btn-info"><i class="fa fa-check" aria-hidden="true" style="margin-left: 6px;margin-top: 3px;"></i>Post AR</a>
+        </div>
+        <div class="col-md-12">
+            <div class="col-md-1 c1">
 
-                </div>
             </div>
-            <div class="col-md-12">
-                <div class="col-md-1 c1">
-                    <label>Trạng thái</label>
-                </div>
-                <div class="col-md-1 c2" ondblclick="$('#trangthai').val('').trigger('change')">
-                    <select id="trangthai" class="form-control selectpicker" data-live-search="true" onchange="js_GetListAR()">
-                        <option value="">Tất cả</option>
-                        <option value="DACAI">Đã cài AR</option>
-                        <option value="CHUACAI">Chưa cài AR</option>
-                    </select>
-                </div>
-                <div class="col-md-1 c3">
-                    <label>Top sales</label>
-                </div>
-                <div class="col-md-1 c4">
-                    <input class="form-control" id="topsale" type="number" onchange="js_GetListAR()" />
-                </div>
-
-                <div class="col-md-1 c5">
-                    <a href="#" onclick="jAlert('Comming soon.')" class="form-control btn btn-info"><i class="fa fa-check" aria-hidden="true" style="margin-left: 6px;margin-top: 3px;"></i>Post ĐC</a>
-                </div>
+            <div class="col-md-1 c2">
+                <a style="max-width: 280px;text-align: center;" href="~/ManageSales/Index" class="form-control btn btn-info"><i class="fa fa-undo" aria-hidden="true" style="margin-top: 3px;"></i>Quản lý tăng trưởng doanh số &nbsp;&nbsp;&nbsp;&nbsp;</a>
             </div>
-            <div class="col-md-12">
-                <div class="col-md-1 c1">
+            <div class="col-md-1 c3">
 
-                </div>
-                <div class="col-md-1 c2">
-                    <a style="max-width: 280px;text-align: center;" href="~/ManageSales/Index" class="form-control btn btn-info"><i class="fa fa-undo" aria-hidden="true" style="margin-top: 3px;"></i>Quản lý tăng trưởng doanh số &nbsp;&nbsp;&nbsp;&nbsp;</a>
-                </div>
-                <div class="col-md-1 c3">
+            </div>
+            <div class="col-md-1 c4">
+                <a style="max-width: 280px;text-align: center;" href="~/Po2/ChiDinhCaiARAccept" class="form-control btn btn-info"><i class="fa fa-hand-point-right" aria-hidden="true" style="margin-top: 3px;"></i>Duyệt cài AR &nbsp;&nbsp;&nbsp;&nbsp;</a>
+            </div>
 
-                </div>
-                <div class="col-md-1 c4">
-                    <a style="max-width: 280px;text-align: center;" href="~/Po2/ChiDinhCaiARAccept" class="form-control btn btn-info"><i class="fa fa-hand-point-right" aria-hidden="true" style="margin-top: 3px;"></i>Duyệt cài AR &nbsp;&nbsp;&nbsp;&nbsp;</a>
-                </div>
-
-                <div class="col-md-1 c5">
-                    <a onclick="js_excel()" class="form-control btn btn-info"><i class="fa fa-file-excel" aria-hidden="true" style="margin-left: 6px;margin-top: 3px;"></i>Excel</a>
+            <div class="col-md-1 c5">
+                <a onclick="js_excel()" class="form-control btn btn-info"><i class="fa fa-file-excel" aria-hidden="true" style="margin-left: 6px;margin-top: 3px;"></i>Excel</a>
+            </div>
+        </div>
+    </div>
+</div>
+<div style="margin-top: 145px">
+    <div class="col-12 stretch-card pl-0 pr-0">
+        <div class="card mb-4">
+            <div class="card-body">
+                <div class="table-responsive" id="div-content">
+                    @Html.Partial("~/Views/ThucTap/Partial/__ThucTap1.cshtml")
                 </div>
             </div>
         </div>
     </div>
-    <div  style="margin-top: 145px">
-        <div class="col-12 stretch-card pl-0 pr-0">
-            <div class="card mb-4">
-                <div class="card-body">
-                    <div class="table-responsive" id="div-content">
-                        @Html.Partial("~/Views/Po2/Partial/__ThucTap1.cshtml")
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
+</div>
 <script type="text/javascript">
     $(function () {
         $('#txtHead').html("Chỉ định cài AR");
-
+        js_GetListtt1();
     });
+    function js_ReloadTable() {
+        $('#tbl_Item')
+            .DataTable({
+                lengthMenu: [[20, 50, 70, 100, -1], [20, 50, 70, 100, 'All']],
+                "pageLength": -1,
+                fixedHeader: {
+                    headerOffset: 147
+                },
+                columnDefs: [ ],
+                "orderClasses": false,
+                "deferRender": true,
 
- 
+                autoWidth: false,
+                bAutoWidth: false,
+                "searching": false,
+                responsive: false,
+                order: []
+            });
+    }
+
+    function js_GetListtt1() {
+
+        var brand = $("#brand").val();
+        var mien = $("#mien").val();
+        var mahang = $("#mahang").val();
+        $.ajax({
+            url: '/ThucTap/getList',
+            type: 'POST',
+            data: JSON.stringify({ brand: brand, mien: mien, mahang: mahang }),
+            contentType: 'application/json, charset=utf-8',
+            beforeSend: function () {
+                js_Loading(true, 1);
+            },
+            success: function (data) {
+                console.log(data);
+                $('#div-content').html(data);
+                js_ReloadTable();
+                js_Loading(false, 1);
+            },
+            error: function () {
+                js_Loading(false, 1);
+            }
+        });
+    }
+    function js_approve() {
+        // debugger;
+
+        var cboxes = document.getElementsByName('check[]');
+        var arrCheckbox = [];
+@*
+        let TrangThai = false;
+        var k = 0;
+        for (var k = 0; k < cboxes.length; k++) {
+            if (cboxes[k].checked) {
+                try {
+                    if ($('#SLThieu' + cboxes[k].id).val().length <= 0) {
+                        TrangThai = true
+                    }
+                } catch (e) { }
+            }
+        }
+
+        if (TrangThai == true) {
+            alert("Vui lòng nhập số lượng thiếu!");
+            return;
+        }*@
+        var i = 0;
+        for (var i = 0; i < cboxes.length; i++) {
+            if (cboxes[i].checked) {
+                var dc = {};
+                dc.id = cboxes[i].value;
+                dc.LyDo = $('#LyDo' + cboxes[i].id).val();
+
+
+                console.log(dc);
+                arrCheckbox.push(dc);
+            }
+        }
+        console.log('1');
+
+        console.log(arrCheckbox);
+
+        if (arrCheckbox.length == 0) {
+            alert("Vui lòng chọn ít nhất 1 bản ghi.");
+            return;
+        }
+        console.log('2');
+
+        if (arrCheckbox.length > 0) {
+            $.ajax({
+                url: '/ThucTap/UpdateTest',
+                type: 'POST',
+                data: JSON.stringify({ lst: arrCheckbox }),
+                contentType: 'application/json, charset=utf-8',
+                beforeSend: function () {
+                    js_Loading(true, 1);
+                },
+                success: function (data) {
+                    if (data == 1) {
+                        alert("Điều chỉnh thành công");
+                        $('#Detail_modal').modal('hide');
+                        js_GetListtt1();
+                        js_Loading(false, 1);
+                    }
+                },
+                error: function () {
+                    js_Loading(false, 1);
+                }
+
+            });
+        }
+
+    }
+
+
 </script>
 
 

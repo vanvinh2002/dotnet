@@ -27,11 +27,8 @@
                         <td class="text-right" style="border: none !important;"></td>
                         <td class="text-right" style="border: none !important;"></td>
                         <td class="text-right" style="border: none !important;"></td>
-                        <td class="text-right" style="border: none !important;">@dt.Rows[0]["sumSlTon"]</td>
-                        <td class="text-right" style="border: none !important;">@dt.Rows[0]["sumSLD30"]</td>
-                        @*<td class="text-right" style="border: none !important;">@dt.Rows[0]["sumDTD30"]</td>
-                        <td class="text-right" style="border: none !important;">@dt.Rows[0]["sumGPD30"]</td>*@
-                        <td class="text-right" style="border: none !important;"><span id="sumSLDat">@dt.Rows[0]["sumSLDat"]</span></td>
+                        <td class="text-right" style="border: none !important;"></td>
+                        <td class="text-right" style="border: none !important;"></td>
                         <td class="text-right" style="border: none !important;"></td>
                         <td class="text-right" style="border: none !important;"></td>
                         <td class="text-right" style="border: none !important;"></td>
@@ -49,6 +46,9 @@
             </th>
             <th class="text-left" style="vertical-align: top">
                 CH TSF
+            </th>
+            <th class="text-left" style="vertical-align: top">
+                Brand
             </th>
             <th class="text-left" style="vertical-align: top">
                 Miền
@@ -86,20 +86,21 @@
             <th class="text-left" style="vertical-align: top">
                 SL Đặt
             </th>
-            <th class="text-left" style="vertical-align: top">
-                PS mới<br />
-                <input id="psmoiall" type="text" class="form-control" style="width:40px" onchange="js_psmoiall()" />
-            </th>
             <th class="text-left" style="vertical-align: top;">
                 Từ ngày<br />
-                <input type="date" class="form-control" id="fromall" onchange="fromall()" />
+                @*<input type="date" class="form-control" id="fromall" onchange="fromall()" />*@
             </th>
             <th class="text-left" style="vertical-align: top">
                 Đến ngày<br />
-                <input type="date" class="form-control" id="toall" onchange="toall()" />
+                @*<input type="date" class="form-control" id="toall" onchange="toall()" />*@
             </th>
             <th class="text-left" style="vertical-align: top">
-                <input type="checkbox" id="checkall" onchange="checkall()" />
+                Lý do <br />
+
+            </th>
+            <th class="text-left" style="vertical-align: top">
+                Chọn <br />
+                <input type="checkbox" id="checkall" class="text-center" onchange="checkall()" />
             </th>
         </tr>
     </thead>
@@ -114,77 +115,73 @@
                     var i = 0;
                     foreach (DataRow item in dt.Rows)
                     {
-        <tr>
-            <td class="text-left" style="width:65px; max-width: 65px;  overflow: hidden;white-space: nowrap">
-                @item["NguonNhap"]
-            </td>
-            <td class="text-left" style="width: 100px; max-width: 100px;  overflow: hidden;white-space: nowrap">
-                @item["Function"]
-            </td>
-            <td class="text-right" style="width: 40px;">
-                <span id="tsf_@i">@item["TSF"]</span>
-            </td>
-            <td class="text-left" style="width: 40px; max-width: 40px;  overflow: hidden;white-space: nowrap">
-                @item["Mien"]
-            </td>
-            <td class="text-left" style="width: 40px;">
-                @item["MaTinhCode"]
-            </td>
-            <td class="text-left" style="width: 40px;">
-                <span id="mch_@i">@item["MaCH"]</span>
-            </td>
-            <td class="text-left" style="max-width: 150px;  overflow: hidden;white-space: nowrap">
-                @item["TenCH"]
-            </td>
-            <td class="text-left" style="width: 40px;">
-                <span id="mh_@i">@item["MaHang"]</span>
-            </td>
-            <td class="text-left" style="  overflow: hidden;white-space: nowrap">
-                @item["TenHang"]
-            </td>
-            <td class="text-right" style="width: 50px;">
-                <span id="ps_@i">@item["PS_ERP"]</span>
-</td>
-            <td class="text-right" style="width: 50px;">
-                <span id="ds_@i" style="color:@item["colorDS"]">@item["DailySalesErp"]</span>
-            </td>
-            <td class="text-right"  style="width: 50px;">
-                <span id="min_@i">@item["MinPSFunction"]</span>
-</td>
-            <td class="text-right"  style="width: 50px;">
-                <span id="slt_@i">@item["SlTon"]</span>
-</td>
-            <td class="text-right"  style="width: 50px;">
-                <span id="slb_@i">@item["SLD30"]</span>
-</td>
-            @*<td class="text-right">
-            @item["DTD30"]
-        </td>
-        <td class="text-right">
-            @item["GPD30"]
-        </td>*@
-            <td class="text-right"  style="width: 50px;">
-                <span id="sld_@i" name="soluongdat">@item["SLDat"]</span>
-               
-            </td>
-            <td class="text-left"  style="width: 50px;">
-                <input id="psmoi_@i" name="psmoi" type="text" class="form-control" value="@item["PSMoi"]" style="width:40px" onchange="js_cal('@i')" />
-            </td>
-            <td class="text-left"  style="width: 110px;">
-                <input id="from_@i" name="from" type="date" class="form-control" value="@item["Fromdate"]" onchange="fnSaveBak('@i')"/>
-            </td>
-            <td class="text-left" style="width: 110px;">
-                <input id="to_@i" name="to" type="date" class="form-control" value="@item["Todate"]" onchange="fnSaveBak('@i')" />
-            </td>
-            <td class="text-left">
-                <input id="_@i" name="check" type="checkbox" onchange="fnSaveBak('@i')" />
-                <span id="dsmoi_@i" style="display:none">@item["DailySalesErpBQ"]</span>
-                <span id="frlt_@i" style="display:none">@item["FRLT"]</span>
-                <span id="hdd_@i" style="display:none">@item["HangDiDuong"]</span>
-            </td>
+                        <tr id="row_@i">
+                            <td class="text-left" style="width:65px; max-width: 65px;  overflow: hidden;white-space: nowrap">
+                                @item["ID"]
+                            </td>
+                            <td class="text-left" style="width: 100px; max-width: 100px;  overflow: hidden;white-space: nowrap">
+                                @item["KhoChiaCode"]
+                            </td>
+                            <td class="text-right" style="width: 40px;">
+                                @item["CHTSF"]
+                            </td>
+                            <td class="text-left" style="width: 40px; max-width: 40px;  overflow: hidden;white-space: nowrap">
+                                @item["Brand"]
+                            </td>
+                            <td class="text-left" style="width: 40px; max-width: 40px;  overflow: hidden;white-space: nowrap">
+                                @item["Mien"]
+                            </td>
+                            <td class="text-left" style="width: 40px;">
+                                @item["Tinh"]
+                            </td>
+                            <td class="text-left" style="width: 40px;">
+                                @item["StoreCode"]
+                            </td>
+                            <td class="text-left" style="max-width: 150px;  overflow: hidden;white-space: nowrap">
+                                @item["StoreName"]
+                            </td>
+                            <td class="text-left" style="max-width: 150px;  overflow: hidden;white-space: nowrap">
+                                @item["ItemCode"]
+                            </td>
+                            <td class="text-left" style="max-width: 150px;  overflow: hidden;white-space: nowrap">
+                                @item["ItemName"]
+                            </td>
+                            <td class="text-left" style="width: 40px;">
+                                @item["PSERP"]
+                            </td>
+                            <td class="text-left" style="  overflow: hidden;white-space: nowrap">
+                                @item["ERP"]
+                            </td>
+                            <td class="text-right" style="width: 50px;">
+                                @item["PSF"]
+                            </td>
+                            <td class="text-right" style="width: 50px;">
+                                @item["SLTon"]
+                            </td>
+                            <td class="text-right" style="width: 50px;">
+                                @item["SLBanD30"]
+                            </td>
+
+                            <td class="text-right" style="width: 50px;">
+                                @item["SLDuyet"]
+
+                            </td>
+
+                            <td class="text-left" style="width: 110px;">
+                                @item["Createdate"]
+                            </td>
+                            <td class="text-left" style="width: 110px;">
+                                @item["Aprovedate"]
+                            </td>
+                            <td class="text-left" style="width: 110px;">
+                                <input type="text" id="LyDo_@i" value="@item["LyDo"]" />
+                            </td>
+                            <td class="text-left">
+                                <input id="_@i" class="text-center" name="check[]" type="checkbox" value="@item["ID"]" />
+                            </td>
 
 
-        </tr>
+                        </tr>
                         i++;
                     }
                 }
@@ -196,14 +193,26 @@
 </table>
 <script>
 
+    function checkinput() {
+        var n1 = document.getElementById("input");
+        if (n1.value != "") {
+            return true;
+        } else {
+
+        }
+    }
+    alert("Dư liệu không được để trống, không được giống nhau");
+    return false;
+    }
+
     function js_psmoiall() {
-       
+
         var cboxes = document.getElementsByName('psmoi');
         var psmoiall = $('#psmoiall').val();
         for (var i = 0; i < cboxes.length; i++) {
             $('#' + cboxes[i].id).val(psmoiall).trigger('change');
         }
-        
+
     }
 
     function fromall() {
@@ -223,11 +232,14 @@
     }
 
     function checkall() {
-        var cboxes = document.getElementsByName('check');
-        var ischeck = $('#checkall').is(":checked");
+        var cboxes = document.getElementsByName('check[]');
         for (var i = 0; i < cboxes.length; i++) {
-            cboxes[i].checked = ischeck;
-            $('#' + cboxes[i].id).trigger('change');
+            if ($('#checkall').is(":checked")) {
+                cboxes[i].checked = true;
+            }
+            else {
+                cboxes[i].checked = false;
+            }
         }
     }
 
@@ -267,7 +279,7 @@
     }
 
     function fnSaveBak(strID) {
-        
+
         var ar = {};
         ar.mahang = $('#mh_' + strID).html();
         ar.mach = $('#mch_' + strID).html();
@@ -280,7 +292,7 @@
 
         $.ajax({
             type: "POST",
-            url: "/Po2/aron_edit",
+            url: "/Po2/AddTest",
             data: JSON.stringify(ar),
             contentType: "application/json; charset=utf-8",
             dataType: "json",

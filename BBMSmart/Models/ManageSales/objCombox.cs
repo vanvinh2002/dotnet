@@ -25,6 +25,18 @@ namespace ProductAllTool.Models.ManageSales
         public string Name { set; get; }
 
     }
+    public class ThongTinNV4
+    {
+        public string MaNv { set; get; }
+        public string TenNv { set; get; }
+        public string ChucDanh { set; get; }
+        public string BoPhan { set; get; }
+        public string NoiLam { set; get; }
+        public string TenPB { set; get; }
+
+
+
+    }
 
     public class ThongTinDTPost
     {

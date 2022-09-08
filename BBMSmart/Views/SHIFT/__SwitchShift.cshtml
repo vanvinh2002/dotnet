@@ -1,0 +1,63 @@
+﻿@using System.Data
+@using ProductAllTool.Models.ManageSales;
+<link href="~/Resource/Content/css/thickbox.css" rel="stylesheet" />
+<script src="~/Resource/Scripts/thickbox.js"></script>
+<table id="" class="table table-bordered" style="width:99.9%">
+    <thead>
+        <tr>
+            <th class="text-left" style="vertical-align: top">
+                Ngày
+            </th>
+            <th class="text-left" style="vertical-align: top">
+                Ca
+            </th>
+            <th class="text-left" style="vertical-align: top">
+                Nơi Làm
+            </th>
+            <th class="text-left" style="vertical-align: top">
+                Vị Trí
+            </th>
+            <th class="text-left" style="vertical-align: top">
+                Đổi Ca
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+
+        @{
+            if (Model != null)
+            {
+                var dt = Model as DataTable;
+                if (dt.Rows.Count > 0)
+                {
+                    var i = 0;
+                    foreach (DataRow item in dt.Rows)
+                    {
+                        <tr id="row_@i">
+                            <td class="text-left" style="width:65px; max-width: 65px;  overflow: hidden;white-space: nowrap">
+                                @item["Ngay"]
+                            </td>
+                            <td class="text-left" style="width: 40px; max-width: 100px; overflow: hidden; white-space: nowrap">
+                                @item["Ca"]
+                            </td>
+                            <td class="text-right" style="width:65px; max-width: 65px;  overflow: hidden;white-space: nowrap">
+                                @item["NoiLam"]
+                            </td>
+                            <td class="text-left" style="width: 40px; max-width: 40px;  overflow: hidden;white-space: nowrap">
+                                @item["TenPB"]
+                            </td>
+                            <td class="text-left" style="width: 40px; max-width: 40px;  overflow: hidden;white-space: nowrap">
+                                @item["DoiCa"]
+                            </td>
+                        </tr>
+                        i++;
+                    }
+                }
+            }
+        }
+    </tbody>
+    <tfoot>
+    </tfoot>
+</table>
+
+

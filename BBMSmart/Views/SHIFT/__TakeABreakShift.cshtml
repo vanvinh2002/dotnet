@@ -1,0 +1,70 @@
+﻿@using System.Data
+@using ProductAllTool.Models.ManageSales;
+
+<link href="~/Resource/Content/css/thickbox.css" rel="stylesheet" />
+<script src="~/Resource/Scripts/thickbox.js"></script>
+<table id="tbl_Item" class="table table-bordered" style="width:99.9%">
+    <thead>
+        <tr>
+            <th class="text-left" style="vertical-align: top">
+                Loại nghỉ
+            </th>
+            <th class="text-left" style="vertical-align: top">
+                Từ ngày
+            </th>
+            <th class="text-left" style="vertical-align: top">
+                Đến ngày
+            </th>
+            <th class="text-left" style="vertical-align: top">
+                Loại công
+            </th>
+            <th class="text-left" style="vertical-align: top">
+                Số giờ nghỉ
+            </th>
+            <th class="text-left" style="vertical-align: top">
+                Trạng thái
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+
+        @{
+            if (Model != null)
+            {
+                var dt = Model as DataTable;
+                if (dt.Rows.Count > 0)
+                {
+                    var i = 0;
+                    foreach (DataRow item in dt.Rows)
+                    {
+                        <tr id="row_@i">
+                            <td class="text-left" style="width:65px; max-width: 65px;  overflow: hidden;white-space: nowrap">
+                                @item["LoaiNghi"]
+                            </td>
+                            <td class="text-left" style="width: 100px; max-width: 100px;  overflow: hidden;white-space: nowrap">
+                                @item["NgayBD"]
+                            </td>
+                            <td class="text-left" style="width: 40px; max-width: 40px;  overflow: hidden;white-space: nowrap">
+                                @item["NgayKT"]
+                            </td>
+                            <td class="text-left" style="width: 40px; max-width: 40px;  overflow: hidden;white-space: nowrap">
+                                @item["LoaiCong"]
+                            </td>
+                            <td class="text-left" style="width: 40px; max-width: 40px;  overflow: hidden;white-space: nowrap">
+                                @item["SoGioNghi"]
+                            </td>
+                            <td class="text-left" style="width: 40px; max-width: 40px;  overflow: hidden;white-space: nowrap">
+                                @item["TrangThaiDuyet"]
+                            </td>
+                        </tr>
+                        i++;
+                    }
+                }
+            }
+        }
+    </tbody>
+    <tfoot>
+    </tfoot>
+</table>
+
+

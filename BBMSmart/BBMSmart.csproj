@@ -333,6 +333,7 @@
     <Compile Include="Common\Constants.cs" />
     <Compile Include="Common\SystemFunctions.cs" />
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\GiaoDienController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManagerUserController.cs" />
     <Compile Include="Controllers\NotificationController.cs" />
@@ -341,6 +342,7 @@
     <Compile Include="DataAccess\DataAccessHRM.cs" />
     <Compile Include="DataAccess\DataAccess.cs" />
     <Compile Include="DataAccess\DataAccessMetadata.cs" />
+    <Compile Include="DataAccess\DataAccessTT.cs" />
     <Compile Include="DataAccess\DataConnection\DBMySQLUtils.cs" />
     <Compile Include="DataAccess\DataConnection\DBUtils.cs" />
     <Compile Include="DataAccess\LogBuild.cs" />
@@ -3551,6 +3553,16 @@
     <Content Include="Views\ThucTap\Partial\__DieuChuyenNSCHDetail.cshtml" />
     <Content Include="Views\ThucTap\BalancedScorecard.cshtml" />
     <Content Include="Views\ThucTap\Partial\__BalancedScorecard.cshtml" />
+    <Content Include="Views\GiaoDien\RegisterShift.cshtml" />
+    <Content Include="Views\SHIFT\__AcceptInOutShift.cshtml" />
+    <Content Include="Views\SHIFT\__AcceptTakeABreakShift.cshtml" />
+    <Content Include="Views\SHIFT\__CalenderShift.cshtml" />
+    <Content Include="Views\SHIFT\__RegisterShift.cshtml" />
+    <Content Include="Views\SHIFT\__SupportShift.cshtml" />
+    <Content Include="Views\SHIFT\__SwitchShift.cshtml" />
+    <Content Include="Views\SHIFT\__TakeABreakShift.cshtml" />
+    <Content Include="Views\ThucTap\ChiTietBoSuuTap.cshtml" />
+    <Content Include="Views\ThucTap\Partial\__ChiTietBoSuuTap.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

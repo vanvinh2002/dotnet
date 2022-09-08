@@ -1,0 +1,82 @@
+﻿@using System.Data
+@using ProductAllTool.Models.ManageSales;
+
+<link href="~/Resource/Content/css/thickbox.css" rel="stylesheet" />
+<script src="~/Resource/Scripts/thickbox.js"></script>
+<table id="tbl_CTBST" class="table table-bordered" style="width:99.9%">
+    <thead>
+        <tr class="bg-primary">
+            <th class="text-left " style="vertical-align: top">
+                Category
+            </th>
+            <th class="text-left" style="vertical-align: top">
+                Group
+            </th>
+            <th class="text-left" style="vertical-align: top">
+                Function
+            </th>
+            <th class="text-left" style="vertical-align: top">
+                STT
+            </th>
+            <th class="text-left" style="vertical-align: top">
+                Mã hàng
+            </th>
+            <th class="text-left" style="vertical-align: top">
+                Tên hàng
+            </th>
+            <th class="text-left" style="vertical-align: top">
+                Giá bán
+            </th>
+            <th class="text-left" style="vertical-align: top">
+                SL combo
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+
+        @{
+            if (Model != null)
+            {
+                var dt = Model as DataTable;
+                if (dt.Rows.Count > 0)
+                {
+                    var i = 0;
+                    foreach (DataRow item in dt.Rows)
+                    {
+                        <tr id="row_@i">
+                            <td class="text-left" style="width: 40px; max-width: 40px;  overflow: hidden;white-space: nowrap">
+                                @item["Ten"]
+                            </td>
+                            <td class="text-left" style="width: 40px; max-width: 40px;  overflow: hidden;white-space: nowrap">
+                                @item["GroupCat"]
+                            </td>
+                            <td class="text-left" style="width: 40px; max-width: 40px;  overflow: hidden;white-space: nowrap">
+                                @item["Func"]
+                            </td>
+                            <td class="text-left" style="width: 40px; max-width: 40px;  overflow: hidden;white-space: nowrap">
+                                @item["STT"]
+                            </td>
+                            <td class="text-left" style="width: 40px; max-width: 40px;  overflow: hidden;white-space: nowrap">
+                                @item["MaHang"]
+                            </td>
+                            <td class="text-left" style="width: 40px; max-width: 40px;  overflow: hidden;white-space: nowrap">
+                                @item["TenHang"]
+                            </td>
+                            <td class="text-left" style="width: 40px; max-width: 40px;  overflow: hidden;white-space: nowrap">
+                                @item["GiaBan"]
+                            </td>
+                            <td class="text-left" style="width: 40px; max-width: 40px;  overflow: hidden;white-space: nowrap">
+                                @item["SLCombo"]
+                            </td>
+                        </tr>
+                        i++;
+                    }
+                }
+            }
+        }
+    </tbody>
+    <tfoot>
+    </tfoot>
+</table>
+
+
