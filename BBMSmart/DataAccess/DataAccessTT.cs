@@ -473,7 +473,7 @@ namespace ProductAllTool.DataAccess
             }
         }
 
-        public static DataTable cbo_Bang(string userid, string Category, string Group, string Function, string RangeRieview, string Band, string NguonNhap, string MuaVu)
+        public static DataTable cbo_Bang(string userid, string Category, string MaBST, string TenBST, string Group, string Function, string RangeRieview, string Band, string NguonNhap, string MuaVu)
         {
             DataSet ds = new DataSet();
             try
@@ -486,6 +486,8 @@ namespace ProductAllTool.DataAccess
                     cmd.CommandTimeout = 30000;
                     cmd.Parameters.Add(new SqlParameter("userid", userid));
                     cmd.Parameters.Add(new SqlParameter("Category", Category));
+                    cmd.Parameters.Add(new SqlParameter("MaBST", MaBST));
+                    cmd.Parameters.Add(new SqlParameter("TenBST", TenBST));
                     cmd.Parameters.Add(new SqlParameter("Group", Group));
                     cmd.Parameters.Add(new SqlParameter("Function", Function));
                     cmd.Parameters.Add(new SqlParameter("RangeRieview", RangeRieview));
@@ -504,6 +506,49 @@ namespace ProductAllTool.DataAccess
             {
                 LogBuild.CreateLogger(JsonConvert.SerializeObject(ex), "cbo_Bang");
                 return ds.Tables[0];
+            }
+        }
+
+        public static List<ThongTinBST> TK_BSTT(string userid, string MaBST, string TenBST)
+        {
+            List<ThongTinBST> it_r = new List<ThongTinBST>();
+            using (var con = new SqlConnection(strConntt))
+            {
+                con.Open();
+                try
+                {
+                    SqlCommand cmd = new SqlCommand("TK_BSTT", con);
+                    cmd.CommandType = CommandType.StoredProcedure;
+                    cmd.Parameters.Add(new SqlParameter("userid", userid));
+                    cmd.Parameters.Add(new SqlParameter("MaBST", MaBST));
+                    cmd.Parameters.Add(new SqlParameter("TenBST", TenBST));
+                    var reader = cmd.ExecuteReader();
+
+                    while (reader.Read())
+                    {
+                        ThongTinBST it_ = new ThongTinBST
+                        {
+                            Code = reader["Code"].ToString(),
+                            Name = reader["Name"].ToString(),
+                            Category = reader["Category"].ToString(),
+                            MuaVu = reader["MuaVu"].ToString(),
+                            DoiTuong = reader["DoiTuong"].ToString(),
+                            GioiTinh = reader["GioiTinh"].ToString(),
+                            ThuNhap = reader["ThuNhap"].ToString(),
+                            USP = reader["USP"].ToString(),
+                            ThongDiep = reader["ThongDiep"].ToString(),
+                        };
+                        it_r.Add(it_);
+                    }
+                    con.Close();
+                    return it_r;
+                }
+                catch (Exception ex)
+                {
+                    con.Close();
+                    LogBuild.CreateLogger(JsonConvert.SerializeObject(ex), "TK_BSTT");
+                    return it_r;
+                }
             }
         }
 

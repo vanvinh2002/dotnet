@@ -17,14 +17,14 @@
                             <div class="col-md-4">
                                 <label class="redtext">Mã BST</label>
                             </div>
-                            <div class="col-md-8">
-                                <input class="form-control" />
+                            <div class="col-md-8"ondblclick="$('#MaBST').val('').trigger('change')">
+                                <input class="form-control" id="MaBST" onchange="js_GetListtt1(); js_list2()"/>
                             </div>
                             <div class="col-md-4">
                                 <label class="redtext">Tên BST</label>
                             </div>
-                            <div class="col-md-8">
-                                <input class="form-control" />
+                            <div class="col-md-8"ondblclick="$('#TenBST').val('').trigger('change')">
+                                <input class="form-control" id="TenBST" onchange="js_GetListtt1(); js_list2()"/>
                             </div>
                         </div>
                         <div class="col-md-6">
@@ -139,64 +139,71 @@
                 <div class="row mt-4" style="margin-top: 10px;">
                     <div class="col-md-12">
                         <div class="col-md-6">
-                            <div class="col-md-12">
-                                <label>Mã BST: &nbsp;</label> <span id="MaBST" class="txtinfo"></span>
+                                <div class="col-md-12">
+                                <label>Mã BST: &nbsp;</label> <span id="Ma" class="txtinfo"></span>
+                                </div>
+                                <div class="col-md-12">
+                                    <label>Tên BST: &nbsp;</label> <span id="Ten" class="txtinfo"></span>
+                                </div>
+                                <div class="col-md-12">
+                                    <label>Category: &nbsp;</label> <span id="Category" class="txtinfo"></span>
+                                </div>
+                                <div class="col-md-12">
+                                    <label>Mùa vụ: &nbsp;</label> <span id="Muavu" class="txtinfo"></span>
+                                </div>
+                                <div class="col-md-12">
+                                    <label>Đối tượng: &nbsp;</label> <span id="Doituong" class="txtinfo"></span>
+                                </div>
+                                <div class="col-md-12">
+                                    <label>Giới tính: &nbsp;</label> <span id="GioiTinh" class="txtinfo"></span>
+                                </div>
+                                <div class="col-md-12">
+                                    <label>Thu nhập: &nbsp;</label> <span id="ThuNhap" class="txtinfo"></span>
+                                </div>
+                                <div class="col-md-12">
+                                    <label>USP: &nbsp;</label> <span id="USP" class="txtinfo"></span>
+                                </div>
+                                <div class="col-md-12">
+                                    <label>Thông điệp: &nbsp;</label> <span id="ThongDiep" class="txtinfo"></span>
+                                </div>
                             </div>
-                            <div class="col-md-12">
-                                <label>Tên BST: &nbsp;</label> <span id="TenBST" class="txtinfo"></span>
-                            </div>
-                            <div class="col-md-12">
-                                <label>Category: &nbsp;</label> <span id="Category" class="txtinfo"></span>
-                            </div>
-                            <div class="col-md-12">
-                                <label>Mùa vụ: &nbsp;</label> <span id="Muavu" class="txtinfo"></span>
-                            </div>
-                            <div class="col-md-12">
-                                <label>Đối tượng: &nbsp;</label> <span id="Doituong" class="txtinfo"></span>
-                            </div>
-                            <div class="col-md-12">
-                                <label>Giới tính: &nbsp;</label> <span id="GioiTinh" class="txtinfo"></span>
-                            </div>
-                            <div class="col-md-12">
-                                <label>Thu nhập: &nbsp;</label> <span id="ThuNhap" class="txtinfo"></span>
-                            </div>
-                            <div class="col-md-12">
-                                <label>USP: &nbsp;</label> <span id="USP" class="txtinfo"></span>
-                            </div>
-                            <div class="col-md-12">
-                                <label>Thông điệp: &nbsp;</label> <span id="ThongDiep" class="txtinfo"></span>
-                            </div>
-                        </div>
-                        <div class="col-md-6">
-                            <div class="card" style="width: 18rem;">
-                                <img src="..." class="card-img-top" style="width: 240px; height:160px;">
-                            </div>
-                            <div class="col-md-6">
-                                <label>Mã hàng: &nbsp;</label> <span id="Mahang" class="txtinfo"></span>
-                            </div>
-                            <div class="col-md-6">
-                                <label>Tên hàng: &nbsp;</label> <span id="Tenhang" class="txtinfo"></span>
-                            </div>
-                            <div class="col-md-6">
-                                <label>Giá bán: &nbsp;</label> <span id="Giaban" class="txtinfo"></span>
-                            </div>
-                            <div class="col-md-6">
-                                <label>Số lượng tồn: &nbsp;</label> <span id="SLT" class="txtinfo"></span>
-                            </div>
-                            <div class="col-md-6">
-                                <label>>>> SP khác: &nbsp;</label> <span id="SPKhac" class="txtinfo"></span>
-                            </div>
-                            <div class="col-md-6 ">
-                                <button class="btn btn-primary">Add vào BST</button>
+                           <div class="col-md-6">
+                                <div class="card" style="width: 18rem;">
+                                    <img src="..." class="card-img-top" style="width: 240px; height:160px;">
+                                </div>
+                                <div class="col-md-6">
+                                    <label>Mã hàng: &nbsp;</label> <span id="Mahang" class="txtinfo"></span>
+                                </div>
+                                <div class="col-md-6">
+                                    <label>Tên hàng: &nbsp;</label> <span id="Tenhang" class="txtinfo"></span>
+                                </div>
+                                <div class="col-md-6">
+                                    <label>Giá bán: &nbsp;</label> <span id="Giaban" class="txtinfo"></span>
+                                </div>
+                                <div class="col-md-6">
+                                    <label>Số lượng tồn: &nbsp;</label> <span id="SLT" class="txtinfo"></span>
+                                </div>
+                                <div class="col-md-6">
+                                    <label>>>> SP khác: &nbsp;</label> <span id="SPKhac" class="txtinfo"></span>
+                                </div>
+                                <div class="col-md-6 ">
+                                    <button class="btn btn-primary">Add vào BST</button>
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
-            </div>
+           
             <div class="col-md-6">
-                <div class="table-responsive" id="div-content">
-                    @Html.Partial("~/Views/ThucTap/Partial/__ChiTietBoSuuTap.cshtml")
-                </div>
+                    <div class="col-12 stretch-card pl-0 pr-0">
+                        <div class="card mb-4">
+                            <div class="card-body">
+                                <div class="table-responsive" id="div-content">
+                                    @Html.Partial("~/Views/ThucTap/Partial/__ChiTietBoSuuTap.cshtml")
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 <div class="col-md-12" style="margin-top: 10px;">
                     <div class="col-md-2">
                         <div class="card" style="width: 18rem;">
@@ -238,31 +245,27 @@
 </div>
 <script type="text/javascript">
     $(function () {
+        $('#txtHead').html("Chi Tiết Bộ sưu tập");
         js_GetListtt1();
+        js_list2();
     });
     function js_ReloadTable() {
-        $('#tbl_CTBST')
+        $('#tbl_Item')
             .DataTable({
-                lengthMenu: [[20, 50, 70, 100, -1], [20, 50, 70, 100, 'All']],
-                "pageLength": -1,
-                fixedHeader: {
-                    headerOffset: 147
-                },
+                lengthMenu: [[5, 10, 50, 70, 100, -1], [5, 10, 50, 70, 100]],
                 columnDefs: [],
-                "orderClasses": false,
-                "deferRender": true,
-
                 autoWidth: false,
-                bAutoWidth: false,
                 "searching": false,
-                responsive: false,
-                order: []
+                order: [[0, "desc"]],
+                "pageLength": 5
             });
     }
 
     function js_GetListtt1() {
 
         var cate = $("#cate").val();
+        var MaBST = $("#MaBST").val();
+        var TenBST = $("#TenBST").val();
         var group = $("#group").val();
         var Func = $("#Func").val();
         var Range = $("#Range").val();
@@ -272,7 +275,7 @@
         $.ajax({
             url: '/ThucTap/GetListCat',
             type: 'POST',
-            data: JSON.stringify({ Category: cate, Group: group, Function: Func, RangeRieview: Range, Band: bard, NguonNhap: NN, MuaVu: MuaVu }),
+            data: JSON.stringify({ Category: cate, MaBST: MaBST, TenBST: TenBST, Group: group, Function: Func, RangeRieview: Range, Band: bard, NguonNhap: NN, MuaVu: MuaVu }),
             contentType: 'application/json, charset=utf-8',
             beforeSend: function () {
                 js_Loading(true, 1);
@@ -282,6 +285,35 @@
                 $('#div-content').html(data);
                 js_ReloadTable();
                 js_Loading(false, 1);
+            },
+            error: function () {
+                js_Loading(false, 1);
+            }
+        });
+    }
+    function js_list2() {
+        var MaBST = $("#MaBST").val();
+        var TenBST = $("#TenBST").val();
+        $.ajax({
+            url: '/ThucTap/getListTK_BSTT',
+            type: 'POST',
+            data: JSON.stringify({ MaBST: MaBST, TenBST: TenBST}),
+            contentType: 'application/json, charset=utf-8',
+            beforeSend: function () {
+                js_Loading(true, 1);
+            },
+            success: function (data) {
+                $('#Ma').html(data[0].Code);
+                $('#Ten').html(data[0].Name);
+                $('#Category').html(data[0].Category);
+                $('#Muavu').html(data[0].MuaVu);
+                $('#Doituong').html(data[0].DoiTuong);
+                $('#GioiTinh').html(data[0].GioiTinh);
+                $('#ThuNhap').html(data[0].ThuNhap);
+                $('#USP').html(data[0].USP);
+                $('#ThongDiep').html(data[0].ThongDiep);
+                js_Loading(false, 1);
+
             },
             error: function () {
                 js_Loading(false, 1);

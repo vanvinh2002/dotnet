@@ -109,7 +109,7 @@ namespace ProductAllTool.Controllers
                 ViewBag.lst_Func = lst_Func;
 
                 var lst_RR = DataAccess.DataAccessTT.cbo_RR();
-                ViewBag.lst_RR = lst_Func;
+                ViewBag.lst_RR = lst_RR;
 
                 var lst_brand = DataAccess.DataAccessTT.cbo_Brand();
                 ViewBag.lst_brand = lst_brand;
@@ -128,13 +128,25 @@ namespace ProductAllTool.Controllers
                 return RedirectToAction("Login", "Account");
             }
         }
-        public ActionResult GetListCat( string Category, string Group, string Function, string RangeRieview, string Band, string NguonNhap, string MuaVu)
+        public ActionResult GetListCat( string Category, string MaBST, string TenBST,string Group, string Function, string RangeRieview, string Band, string NguonNhap, string MuaVu)
         {
             if (Session["uid"] != null && Session["uid"].ToString().Length > 0)
             {
-                DataTable table = DataAccess.DataAccessTT.cbo_Bang(Session["uid"].ToString(), Category, Group, Function, RangeRieview, Band, NguonNhap, MuaVu);
+                DataTable table = DataAccess.DataAccessTT.cbo_Bang(Session["uid"].ToString(), Category, MaBST, TenBST, Group, Function, RangeRieview, Band, NguonNhap, MuaVu);
 
                 return PartialView("~/Views/ThucTap/Partial/__ChiTietBoSuuTap.cshtml", table);
+
+            }
+            return RedirectToAction("Login", "Account");
+        }
+
+        public ActionResult getListTK_BSTT(string MaBST, string TenBST)
+        {
+            if (Session["uid"] != null && Session["uid"].ToString().Length > 0)
+            {
+                List<ThongTinBST> listBST = DataAccess.DataAccessTT.TK_BSTT(Session["uid"].ToString(), MaBST, TenBST);
+
+                return Json(listBST);
 
             }
             return RedirectToAction("Login", "Account");

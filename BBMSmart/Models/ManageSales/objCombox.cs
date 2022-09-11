@@ -37,7 +37,22 @@ namespace ProductAllTool.Models.ManageSales
 
 
     }
+    
+    public class ThongTinBST
+    {
+        public string Code { set; get; }
+        public string Name { set; get; }
+        public string Category { set; get; }
+        public string MuaVu { set; get; }
+        public string DoiTuong { set; get; }
+        public string GioiTinh { set; get; }
+        public string ThuNhap { set; get; }
+        public string USP { set; get; }
+        public string ThongDiep { set; get; }
 
+
+
+    }
     public class ThongTinDTPost
     {
         public string ID { set; get; }
