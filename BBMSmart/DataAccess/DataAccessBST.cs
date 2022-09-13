@@ -1,4 +1,6 @@
 ﻿using Newtonsoft.Json;
+using ProductAllTool.Models.CaLamViec;
+using ProductAllTool.Models.DuyetBST;
 using ProductAllTool.Models.ManageSales;
 using System;
 using System.Collections.Generic;
@@ -289,6 +291,125 @@ namespace ProductAllTool.DataAccess
             {
                 LogBuild.CreateLogger(JsonConvert.SerializeObject(ex), "BST_getListDuyet");
                 return ds.Tables[0];
+            }
+        }
+
+        public static List<ListSP> BST_getListDuyet1(string userid, string Cate, string GroupCat, string Func, string RR, string Brand, string NguonNhap, string MuaVu)
+        {
+            List<ListSP> it_r = new List<ListSP>();
+
+            using (var con = new SqlConnection(strConnTHUCTAP))
+            {
+                con.Open();
+                try
+                {
+                    SqlCommand cmd = new SqlCommand("BST_getListDuyet", con);
+                    cmd.CommandType = CommandType.StoredProcedure;
+                    cmd.Parameters.Add(new SqlParameter("userid", userid));
+                    cmd.Parameters.Add(new SqlParameter("Cate", Cate));
+                    cmd.Parameters.Add(new SqlParameter("GroupCat", GroupCat));
+                    cmd.Parameters.Add(new SqlParameter("Func", Func));
+                    cmd.Parameters.Add(new SqlParameter("RR", RR));
+                    cmd.Parameters.Add(new SqlParameter("Brand", Brand));
+                    cmd.Parameters.Add(new SqlParameter("NguonNhap", NguonNhap));
+                    cmd.Parameters.Add(new SqlParameter("MuaVu", MuaVu));
+                    var reader = cmd.ExecuteReader();
+
+                    while (reader.Read())
+                    {
+                        ListSP it_ = new ListSP
+                        {
+                            MaHang = reader["MaHang"].ToString(),
+                            TenHang = reader["TenHang"].ToString(),
+                            price = reader["price"].ToString(),
+                            slcombo = reader["slcombo"].ToString(),
+                            imglink = reader["imglink"].ToString()
+                        };
+
+                        it_r.Add(it_);
+                    }
+                    con.Close();
+
+                    return it_r;
+                }
+                catch (Exception ex)
+                {
+                    con.Close();
+                    LogBuild.CreateLogger(JsonConvert.SerializeObject(ex), "BST_getListDuyet1");
+                    return it_r;
+                }
+            }
+        }
+
+        public static List<DuyetBST> BST_GetBST(string userid, string MaBST, string TenBST)
+        {
+            List<DuyetBST> it_r = new List<DuyetBST>();
+
+            using (var con = new SqlConnection(strConnTHUCTAP))
+            {
+                con.Open();
+                try
+                {
+                    SqlCommand cmd = new SqlCommand("BST_GetBST", con);
+                    cmd.CommandType = CommandType.StoredProcedure;
+                    cmd.Parameters.Add(new SqlParameter("userid", userid));
+                    cmd.Parameters.Add(new SqlParameter("MaBST", MaBST));
+                    cmd.Parameters.Add(new SqlParameter("TenBST", TenBST));
+                    var reader = cmd.ExecuteReader();
+
+                    while (reader.Read())
+                    {
+                        DuyetBST it_ = new DuyetBST
+                        {
+                            MaBST = reader["MaBST"].ToString(),
+                            TenBST = reader["TenBST"].ToString(),
+                            Cate = reader["Cate"].ToString(),
+                            MuaVu = reader["MuaVu"].ToString(),
+                            DoiTuong = reader["DoiTuong"].ToString(),
+                            GioiTinh = reader["GioiTinh"].ToString(),
+                            ThuNhap = reader["ThuNhap"].ToString(),
+                            USP = reader["USP"].ToString(),
+                            ThongDiep = reader["ThongDiep"].ToString(),
+                        };
+
+                        it_r.Add(it_);
+                    }
+                    con.Close();
+
+                    return it_r;
+                }
+                catch (Exception ex)
+                {
+                    con.Close();
+                    LogBuild.CreateLogger(JsonConvert.SerializeObject(ex), "BST_GetBST");
+                    return it_r;
+                }
+            }
+        }
+
+        public static int BST_GetSPDetail(string userid, string ID)
+        {
+            DataSet ds = new DataSet();
+            try
+            {
+                using (var con = new SqlConnection(strConnTHUCTAP))
+                {
+                    con.Open();
+                    SqlCommand cmd = new SqlCommand("BST_GetSPDetail", con);
+                    cmd.CommandType = CommandType.StoredProcedure;
+                    cmd.CommandTimeout = 30000;
+                    cmd.Parameters.Add(new SqlParameter("userid", userid));
+                    cmd.Parameters.Add(new SqlParameter("ID", ID));
+                    cmd.ExecuteNonQuery();
+
+                    con.Close();
+                    return 1;
+                }
+            }
+            catch (Exception ex)
+            {
+                LogBuild.CreateLogger(JsonConvert.SerializeObject(ex), "BST_GetSPDetail");
+                return 0;
             }
         }
     }

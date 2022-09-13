@@ -1,11 +1,18 @@
 ﻿@using ProductAllTool.Models.ManageSales;
 @using ProductAllTool.Common
 @using System.Data
+@using ProductAllTool.Models.DuyetBST
 @{
     ViewBag.Title = "Duyệt bộ sưu tập";
     Layout = "~/Views/Shared/_Layout_V2.cshtml";
+    //string getsrc(byte[] img)
+    //{
+    //    var base64 = Convert.ToBase64String(img);
+    //    var imgSrc = String.Format("data:image/gif;base64,{0}", base64);
+    //    return imgSrc;
+    //}
 }
-<div class="row col-md-12">
+<div class="row col-md-12 AutoFix">
     <div class="col-md-6">
         <div class="row">
             <div class="col-md-6">
@@ -13,13 +20,13 @@
                     <div class="col-3">
                         <label>Mã BST</label>
                     </div>
-                    <input class="col-md-9 form-control" type="text" name="MaBST" />
+                    <input class="col-md-9 form-control" id="MaBST" type="text" name="MaBST" onkeydown="js_GetTakeAbreakInfo(); js_GetListDBST()" />
                 </div>
                 <div class="row">
                     <div class="col-3">
                         <label>Tên BST</label>
                     </div>
-                    <input class="col-md-9 form-control" type="text" name="TenBST" />
+                    <input class="col-md-9 form-control" id="TenBST" type="text" name="TenBST" onkeydown="js_GetTakeAbreakInfo(); js_GetListDBST()" />
                 </div>
             </div>
             <div class="col-md-6">
@@ -146,148 +153,136 @@
         </div>
         <div class="row col-md-12 ">
             <div class="col-md-6">
-                <div class="row">
-                    <div class="col-md-3">
-                        <label>Mã BST</label>
-                    </div>
-                    <div class="col-md-9">
-                        <span>01</span>
-                    </div>
+                <div class="col-md-12">
+                    <label>Mã BST: &nbsp;</label> <span id="MaBST1" class="txtinfo"></span>
                 </div>
-                <div class="row">
-                    <div class="col-md-3">
-                        <label>Tên BST</label>
-                    </div>
-                    <div class="col-md-9">
-                        <span>Sơ sinh</span>
-                    </div>
+                <div class="col-md-12">
+                    <label>Tên BST: &nbsp;</label> <span id="TenBST1" class="txtinfo"></span>
                 </div>
-                <div class="row">
-                    <div class="col-md-3">
-                        <label>Category</label>
-                    </div>
-                    <div class="col-md-9">
-                        <span>a</span>
-                    </div>
+                <div class="col-md-12">
+                    <label>Category: &nbsp;</label> <span id="Cate1" class="txtinfo"></span>
                 </div>
-                <div class="row">
-                    <div class="col-md-3">
-                        <label>Mùa vụ</label>
-                    </div>
-                    <div class="col-md-9">
-                        <span>a</span>
-                    </div>
+                <div class="col-md-12">
+                    <label>Mùa vụ: &nbsp;</label> <span id="MuaVu1" class="txtinfo"></span>
                 </div>
-                <div class="row">
-                    <div class="col-md-3">
-                        <label>Đối tượng</label>
-                    </div>
-                    <div class="col-md-9">
-                        <span>a</span>
-                    </div>
+                <div class="col-md-12">
+                    <label>Đối tượng: &nbsp;</label> <span id="DoiTuong" class="txtinfo"></span>
                 </div>
-                <div class="row">
-                    <div class="col-md-3">
-                        <label>Giới tính</label>
-                    </div>
-                    <div class="col-md-9">
-                        <span>a</span>
-                    </div>
+                <div class="col-md-12">
+                    <label>Giới tính: &nbsp;</label> <span id="GioiTinh" class="txtinfo"></span>
                 </div>
-                <div class="row">
-                    <div class="col-md-3">
-                        <label>Thu nhập</label>
-                    </div>
-                    <div class="col-md-9">
-                        <span>a</span>
-                    </div>
+                <div class="col-md-12">
+                    <label>Thu nhập: &nbsp;</label> <span id="ThuNhap" class="txtinfo"></span>
                 </div>
-                <div class="row">
-                    <div class="col-md-3">
-                        <label>USP</label>
-                    </div>
-                    <div class="col-md-9">
-                        <span>a</span>
-                    </div>
+                <div class="col-md-12">
+                    <label>USP: &nbsp;</label> <span id="USP" class="txtinfo"></span>
                 </div>
-                <div class="row">
-                    <div class="col-md-3">
-                        <label>Thông điệp</label>
-                    </div>
-                    <div class="col-md-9">
-                        <span>a</span>
-                    </div>
+                <div class="col-md-12">
+                    <label>Thông điệp: &nbsp;</label> <span id="ThongDiep" class="txtinfo"></span>
                 </div>
             </div>
             <div class="col-md-6">
-                <div class="card">
-                    <img src="" title="Dung" />
-                    <div class="card-body">
-                        <div class="row">
-                            <div class="col-md-6">
-                                <div class="row">
-                                    <div class="col-md-3">
-                                        <label>Mã hàng</label>
-                                    </div>
-                                    <div class="col-md-9">
-                                        <p>dug</p>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-md-6">
-                                <div class="row">
-                                    <div class="col-md-3">
-                                        <label>Tên hàng</label>
-                                    </div>
-                                    <div class="col-md-9">
-                                        <span>b</span>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-md-6">
-                                <div class="col-md-3"><label>Giá bán</label></div>
-                                <span>b</span>
-                            </div>
-                            <div class="col-md-6">
-                                <div class="col-md-3"><label>Số lượng tồn</label></div>
-                                <span>b</span>
-                            </div>
-                        </div>
-                    </div>
+                <div class="card" style="width: 18rem;">
+                    <img src="..." id="img1" class="card-img-top" style="width: 240px; height:160px;">
+                </div>
+                <div class="col-md-6">
+                    <label>Mã hàng: &nbsp;</label> <span id="Mahang1" class="txtinfo"></span>
+                </div>
+                <div class="col-md-6">
+                    <label>Tên hàng: &nbsp;</label> <span id="Tenhang1" class="txtinfo"></span>
+                </div>
+                <div class="col-md-6">
+                    <label>Giá bán: &nbsp;</label> <span id="price1" class="txtinfo"></span>
+                </div>
+                <div class="col-md-6">
+                    <label>Số lượng tồn: &nbsp;</label> <span id="slcombo1" class="txtinfo"></span>
+                </div>
+                <div class="col-md-6">
+                    <label>>>> SP khác: &nbsp;</label> <span id="SPKhac" class="txtinfo"></span>
+                </div>
+                <div class="col-md-6 ">
+                    <button class="btn btn-primary">Add vào BST</button>
                 </div>
             </div>
         </div>
     </div>
     <div class="col-md-6">
-        @Html.Partial("~/Views/DuyetBST/Table/__DuyetBST.cshtml")
+        <div class="table-responsive" id="div-content">
+            @Html.Partial("~/Views/DuyetBST/Table/__DuyetBST.cshtml")
+        </div>
+        <div class="col-md-12 col-xs-12 half_col ">
+            <p>nguyen vawn a</p>
+            @if (ViewBag.lst != null)
+            {
+                foreach (ListSP lst in (List<ListSP>)ViewBag.lst)
+                {
+                    <img src="@lst.imglink" />
+                }
+            }
+        </div>
     </div>
 </div>
 <script type="text/javascript">
     $(function () {
         js_GetListDBST();
+        js_GetTakeAbreakInfo();
     });
     function js_ReloadTable() {
         $('#tbl_Item')
             .DataTable({
-                lengthMenu: [[20, 50, 70, 100, -1], [20, 50, 70, 100, 'All']],
-                "pageLength": -1,
-                fixedHeader: {
-                    headerOffset: 147
-                },
-                columnDefs: [
-                ],
-                "orderClasses": false,
-                "deferRender": true,
-
+                lengthMenu: [[5, 10, 50, 70, 100, -1], [5, 10, 50, 70, 100]],
+                columnDefs: [],
                 autoWidth: false,
-                bAutoWidth: false,
                 "searching": false,
-                responsive: false,
-                order: []
+                order: [[0, "desc"]],
+                "pageLength": 5
             });
     }
+    //function js_GetSPDetail() {
+
+    //    var cboxes = document.getElementsByName('check[]');
+    //    var LoaiDieuChuyen = "";
+    //    var i = 0;
+    //    for (var i = 0; i < cboxes.length; i++) {
+    //        if (cboxes[i].checked) {
+    //            ID = cboxes[i].value;
+    //            $('#MaHang1').val($('#MaHang' + cboxes[i].id).html());
+    //            $('#Tenhang1').val($('#Tenhang' + cboxes[i].id).html());
+    //            $('#price1').val($('#price' + cboxes[i].id).html());
+    //            $('#imglink1').val($('#imglink' + cboxes[i].id).html());
+    //            break;
+    //        }
+    //    }
+    //    console.log('1');
+
+    //    console.log(LoaiDieuChuyen);
+
+    //    if (LoaiDieuChuyen == '') {
+    //        alert("Vui lòng chọn ít nhất 1 bản ghi.");
+    //        return;
+    //    }
+
+    //    console.log('2');
+
+    //    $.ajax({
+    //        url: '/DuyetBST/getSPDetail',
+    //        type: 'POST',
+    //        data: JSON.stringify({ LoaiDieuChuyen: LoaiDieuChuyen }),
+    //        contentType: 'application/json, charset=utf-8',
+    //        beforeSend: function () {
+    //            js_Loading(true, 1);
+    //        },
+    //        success: function (data) {
+    //            $('#div-content-detail').html(data);
+    //            js_ReloadTableDetail();
+    //            js_Loading(false, 1);
+    //        },
+    //        error: function () {
+    //            js_Loading(false, 1);
+    //        }
+    //    });
+
+    //}
 
     function js_GetListDBST() {
         window.scrollTo(0, 0);
@@ -298,7 +293,6 @@
         var Brand = $('#Brand').val();
         var NguonNhap = $('#NguonNhap').val();
         var MuaVu = $('#MuaVu').val();
-
         $.ajax({
             url: '/DuyetBST/DataTableDBST',
             type: 'POST',
@@ -308,9 +302,87 @@
                 js_Loading(true, 1);
             },
             success: function (data) {
-                $('#div-content-DuyetBST').html(data);
+                console.log(data);
+                $('#div-content').html(data);
                 js_ReloadTable();
                 js_Loading(false, 1);
+            },
+            error: function () {
+                js_Loading(false, 1);
+            }
+        });
+    }
+    function search() {
+        var query_value = $('input#search').val();
+        $('b#search-string').html(query_value);
+        if (query_value !== '') {
+            $.ajax({
+                type: "POST",
+                url: "search_st.php",
+                data: { query: query_value },
+                cache: false,
+                success: function (html) {
+                    $("ul#results").html(html);
+
+                }
+            });
+        } return false;
+    }
+    function js_GetLstImg() {
+        var Cate = $('#Cate').val();
+        var GroupCat = $('#Group').val();
+        var Func = $('#Func').val();
+        var RR = $('#RR').val();
+        var Brand = $('#Brand').val();
+        var NguonNhap = $('#NguonNhap').val();
+        var MuaVu = $('#MuaVu').val();
+        $.ajax({
+            url: '/DuyetBST/BSTGetListDuyet1',
+            type: 'POST',
+            data: JSON.stringify({ Cate: Cate, GroupCat: GroupCat, Func: Func, RR: RR, Brand: Brand, NguonNhap: NguonNhap, MuaVu: MuaVu }),
+            contentType: 'application/json, charset=utf-8',
+            beforeSend: function () {
+                js_Loading(true, 1);
+            },
+            success: function (data) {
+                $('#MaHang1').html(data[0].MaHang);
+                $('#TenHang1').html(data[0].TenHang);
+                $('#price1').html(data[0].price);
+                $('#slcombo1').html(data[0].slcombo);
+                $('#img1').html(data[0].imglink);
+
+                js_Loading(false, 1);
+
+            },
+            error: function () {
+                js_Loading(false, 1);
+            }
+        });
+    }
+    function js_GetTakeAbreakInfo() {
+        var MaBST = $('#MaBST').val();
+        var TenBST = $('#TenBST').val();
+        $.ajax({
+            url: '/DuyetBST/GetBST',
+            type: 'POST',
+            data: JSON.stringify({ MaBST: MaBST, TenBST: TenBST }),
+            contentType: 'application/json, charset=utf-8',
+            beforeSend: function () {
+                js_Loading(true, 1);
+            },
+            success: function (data) {
+                $('#MaBST1').html(data[0].MaBST);
+                $('#TenBST1').html(data[0].TenBST);
+                $('#Cate1').html(data[0].Cate);
+                $('#MuaVu1').html(data[0].MuaVu);
+                $('#DoiTuong').html(data[0].DoiTuong);
+                $('#GioiTinh').html(data[0].GioiTinh);
+                $('#ThuNhap').html(data[0].ThuNhap);
+                $('#USP').html(data[0].USP);
+                $('#ThongDiep').html(data[0].ThongDiep);
+
+                js_Loading(false, 1);
+
             },
             error: function () {
                 js_Loading(false, 1);
