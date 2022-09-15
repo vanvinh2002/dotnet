@@ -8,9 +8,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>@ViewBag.Title - BiboSmart</title>
 
-    @*<link href="~/Resource/bootstrap-5.2.0/css/bootstrap.min.css" rel="stylesheet" />
-        <link href="/Resource/assets/vendors/font-awesome/css/font-awesome.min.css" rel="stylesheet" />
-        <link href="/Resource/assets/vendors/themify-icons/css/themify-icons.css" rel="stylesheet" />*@
+    @*<link href="~/Resource/bootstrap-5.2.0/css/bootstrap.min.css" rel="stylesheet" />*@
+    @*<link href="/Resource/assets/vendors/font-awesome/css/font-awesome.min.css" rel="stylesheet" />*@
+    @*<link href="/Resource/assets/vendors/themify-icons/css/themify-icons.css" rel="stylesheet" />*@
 
     <link href="/Resource/assets/vendors/jvectormap/jquery-jvectormap-2.0.3.css" rel="stylesheet" />
     <link href="~/Resource/assets/css/main.min.css" rel="stylesheet" />
@@ -139,56 +139,6 @@
         <!-- START SIDEBAR-->
         <nav class="page-sidebar" id="sidebar">
             <div id="sidebar-collapse">
-                <ul class="side-menu metismenu">
-                    @if (lstper.Count() > 0)
-                    {
-                        foreach (var item in lstper)
-                        {
-                            if (item.flevel == -1)
-                            {
-                                if (item.vcount > 0)
-                                {
-                                    <li>
-                                        <a href="">
-                                            <i class="sidebar-item-icon fa fa-sitemap"></i>
-                                            <img class="sidebar-item-icon" src="~/Resource/images/@{@item.fcode}.svg" />
-                                            <span class="nav-label"> @item.fname </span><i class="fa fa-angle-left arrow"></i>
-                                        </a>
-                                        <ul class="nav-2-level collapse">
-                                            @foreach (var item2 in lstper)
-                                            {
-                                                if (item2.flevel == 0 && item2.menu == item.fcode)
-                                                {
-                                                    <li>
-                                                        <a href="">
-
-                                                            <span class="nav-label">‣ @item2.fname</span><i class="fa fa-angle-left arrow"></i>
-                                                        </a>
-                                                        <ul class="nav-3-level collapse">
-                                                            @foreach (var item3 in lstper)
-                                                            {
-                                                                if (item3.flevel == 1 && item3.parentcode == item2.fcode)
-                                                                {
-                                                                    <li>
-
-                                                                        <a href="/@item3.controller/@item3.action">
-                                                                            @item3.fname
-                                                                        </a>
-                                                                    </li>
-                                                                }
-                                                            }
-                                                        </ul>
-                                                    </li>
-                                                }
-                                            }
-                                        </ul>
-                                    </li>
-                                }
-                            }
-
-                        }
-                    }
-                </ul>
             </div>
         </nav>
         <div class="body-content V2boby">

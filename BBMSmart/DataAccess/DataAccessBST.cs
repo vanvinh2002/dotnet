@@ -294,6 +294,105 @@ namespace ProductAllTool.DataAccess
             }
         }
 
+        public static List<ListSP> BST_GetNextAndPreviousSP(string userid, string Cate, string GroupCat, string Func, string RR, string Brand, string NguonNhap, string MuaVu, string mahang, string ID)
+        {
+            List<ListSP> it_r = new List<ListSP>();
+
+            using (var con = new SqlConnection(strConnTHUCTAP))
+            {
+                con.Open();
+                try
+                {
+                    SqlCommand cmd = new SqlCommand("[BST_GetNextAndPreviousSP]", con);
+                    cmd.CommandType = CommandType.StoredProcedure;
+                    cmd.Parameters.Add(new SqlParameter("userid", userid));
+                    cmd.Parameters.Add(new SqlParameter("Cate", Cate));
+                    cmd.Parameters.Add(new SqlParameter("GroupCat", GroupCat));
+                    cmd.Parameters.Add(new SqlParameter("Func", Func));
+                    cmd.Parameters.Add(new SqlParameter("RR", RR));
+                    cmd.Parameters.Add(new SqlParameter("Brand", Brand));
+                    cmd.Parameters.Add(new SqlParameter("NguonNhap", NguonNhap));
+                    cmd.Parameters.Add(new SqlParameter("MuaVu", MuaVu));
+                    cmd.Parameters.Add(new SqlParameter("mahang", mahang));
+                    cmd.Parameters.Add(new SqlParameter("ID", ID));
+                    var reader = cmd.ExecuteReader();
+
+                    while (reader.Read())
+                    {
+                        ListSP it_ = new ListSP
+                        {
+                            ID = reader["ID"].ToString(),
+                            Code = reader["Code"].ToString(),
+                            Name = reader["Name"].ToString(),
+                            GiaBanAll = reader["GiaBanAll"].ToString(),
+                            SLTon = reader["SLTon"].ToString(),
+                            hinhanh = reader["hinhanh"].ToString()
+                        };
+
+                        it_r.Add(it_);
+                    }
+                    con.Close();
+
+                    return it_r;
+                }
+                catch (Exception ex)
+                {
+                    con.Close();
+                    LogBuild.CreateLogger(JsonConvert.SerializeObject(ex), "BST_GetNextAndPreviousSP");
+                    return it_r;
+                }
+            }
+        }
+
+        public static List<ListSP> BST_getNextSP(string userid, string Cate, string GroupCat, string Func, string RR, string Brand, string NguonNhap, string MuaVu, string mahang)
+        {
+            List<ListSP> it_r = new List<ListSP>();
+
+            using (var con = new SqlConnection(strConnTHUCTAP))
+            {
+                con.Open();
+                try
+                {
+                    SqlCommand cmd = new SqlCommand("[BST_getListDuyet]", con);
+                    cmd.CommandType = CommandType.StoredProcedure;
+                    cmd.Parameters.Add(new SqlParameter("userid", userid));
+                    cmd.Parameters.Add(new SqlParameter("Cate", Cate));
+                    cmd.Parameters.Add(new SqlParameter("GroupCat", GroupCat));
+                    cmd.Parameters.Add(new SqlParameter("Func", Func));
+                    cmd.Parameters.Add(new SqlParameter("RR", RR));
+                    cmd.Parameters.Add(new SqlParameter("Brand", Brand));
+                    cmd.Parameters.Add(new SqlParameter("NguonNhap", NguonNhap));
+                    cmd.Parameters.Add(new SqlParameter("MuaVu", MuaVu));
+                    cmd.Parameters.Add(new SqlParameter("mahang", mahang));
+                    var reader = cmd.ExecuteReader();
+
+                    while (reader.Read())
+                    {
+                        ListSP it_ = new ListSP
+                        {
+                            ID = reader["ID"].ToString(),
+                            Code = reader["Code"].ToString(),
+                            Name = reader["Name"].ToString(),
+                            GiaBanAll = reader["GiaBanAll"].ToString(),
+                            SLTon = reader["SLTon"].ToString(),
+                            hinhanh = reader["hinhanh"].ToString()
+                        };
+
+                        it_r.Add(it_);
+                    }
+                    con.Close();
+
+                    return it_r;
+                }
+                catch (Exception ex)
+                {
+                    con.Close();
+                    LogBuild.CreateLogger(JsonConvert.SerializeObject(ex), "BST_getNextSP");
+                    return it_r;
+                }
+            }
+        }
+
         public static List<ListSP> BST_getListDuyet1(string userid, string Cate, string GroupCat, string Func, string RR, string Brand, string NguonNhap, string MuaVu)
         {
             List<ListSP> it_r = new List<ListSP>();
@@ -303,7 +402,7 @@ namespace ProductAllTool.DataAccess
                 con.Open();
                 try
                 {
-                    SqlCommand cmd = new SqlCommand("BST_getListDuyet", con);
+                    SqlCommand cmd = new SqlCommand("[BST_getListDuyet]", con);
                     cmd.CommandType = CommandType.StoredProcedure;
                     cmd.Parameters.Add(new SqlParameter("userid", userid));
                     cmd.Parameters.Add(new SqlParameter("Cate", Cate));
@@ -319,11 +418,12 @@ namespace ProductAllTool.DataAccess
                     {
                         ListSP it_ = new ListSP
                         {
-                            MaHang = reader["MaHang"].ToString(),
-                            TenHang = reader["TenHang"].ToString(),
-                            price = reader["price"].ToString(),
-                            slcombo = reader["slcombo"].ToString(),
-                            imglink = reader["imglink"].ToString()
+                            ID = reader["ID"].ToString(),
+                            Code = reader["Code"].ToString(),
+                            Name = reader["Name"].ToString(),
+                            GiaBanAll = reader["GiaBanAll"].ToString(),
+                            SLTon = reader["SLTon"].ToString(),
+                            hinhanh = reader["hinhanh"].ToString()
                         };
 
                         it_r.Add(it_);
@@ -409,6 +509,138 @@ namespace ProductAllTool.DataAccess
             catch (Exception ex)
             {
                 LogBuild.CreateLogger(JsonConvert.SerializeObject(ex), "BST_GetSPDetail");
+                return 0;
+            }
+        }
+
+        public static int BST_UpdateStatusCollect(string userid, string type, string Code)
+        {
+            DataSet ds = new DataSet();
+            try
+            {
+                using (var con = new SqlConnection(strConnTHUCTAP))
+                {
+                    con.Open();
+                    SqlCommand cmd = new SqlCommand("BST_UpdateStatusCollect", con);
+                    cmd.CommandType = CommandType.StoredProcedure;
+                    cmd.CommandTimeout = 30000;
+                    cmd.Parameters.Add(new SqlParameter("userid", userid));
+                    cmd.Parameters.Add(new SqlParameter("type", type));
+                    cmd.Parameters.Add(new SqlParameter("Code", Code));
+                    cmd.ExecuteNonQuery();
+
+                    con.Close();
+                    return 1;
+                }
+            }
+            catch (Exception ex)
+            {
+                LogBuild.CreateLogger(JsonConvert.SerializeObject(ex), "BST_UpdateStatusCollect");
+                return 0;
+            }
+        }
+
+        public static int BST_UpdateStatusCollectDetail(string userid, string type)
+        {
+            DataSet ds = new DataSet();
+            try
+            {
+                using (var con = new SqlConnection(strConnTHUCTAP))
+                {
+                    con.Open();
+                    SqlCommand cmd = new SqlCommand("BST_UpdateStatusCollect", con);
+                    cmd.CommandType = CommandType.StoredProcedure;
+                    cmd.CommandTimeout = 30000;
+                    cmd.Parameters.Add(new SqlParameter("userid", userid));
+                    cmd.Parameters.Add(new SqlParameter("userid", type));
+                    cmd.ExecuteNonQuery();
+
+                    con.Close();
+                    return 1;
+                }
+            }
+            catch (Exception ex)
+            {
+                LogBuild.CreateLogger(JsonConvert.SerializeObject(ex), "BST_UpdateStatusCollect");
+                return 0;
+            }
+        }
+
+        public static int BST_SetRunCollect(string userid, string Code)
+        {
+            DataSet ds = new DataSet();
+            try
+            {
+                using (var con = new SqlConnection(strConnTHUCTAP))
+                {
+                    con.Open();
+                    SqlCommand cmd = new SqlCommand("BST_SetRunCollect", con);
+                    cmd.CommandType = CommandType.StoredProcedure;
+                    cmd.CommandTimeout = 30000;
+                    cmd.Parameters.Add(new SqlParameter("userid", userid));
+                    cmd.Parameters.Add(new SqlParameter("Code", Code));
+                    cmd.ExecuteNonQuery();
+
+                    con.Close();
+                    return 1;
+                }
+            }
+            catch (Exception ex)
+            {
+                LogBuild.CreateLogger(JsonConvert.SerializeObject(ex), "BST_SetRunCollect");
+                return 0;
+            }
+        }
+
+        public static int BST_CreateBST(string userid, string cateid)
+        {
+            DataSet ds = new DataSet();
+            try
+            {
+                using (var con = new SqlConnection(strConnTHUCTAP))
+                {
+                    con.Open();
+                    SqlCommand cmd = new SqlCommand("BST_CreateBST", con);
+                    cmd.CommandType = CommandType.StoredProcedure;
+                    cmd.CommandTimeout = 300;
+                    cmd.Parameters.Add(new SqlParameter("userid", userid));
+                    cmd.Parameters.Add(new SqlParameter("cateid", cateid));
+                    cmd.ExecuteNonQuery();
+
+                    con.Close();
+                    return 1;
+                }
+            }
+            catch (Exception ex)
+            {
+                LogBuild.CreateLogger(JsonConvert.SerializeObject(ex), "BST_CreateBST");
+                return 0;
+            }
+        }
+
+        public static int BST_updateSP(string userid, int id, string slton)
+        {
+            DataSet ds = new DataSet();
+            try
+            {
+                using (var con = new SqlConnection(strConnTHUCTAP))
+                {
+                    con.Open();
+                    SqlCommand cmd = new SqlCommand("BST_updateSP", con);
+                    cmd.CommandType = CommandType.StoredProcedure;
+                    cmd.CommandTimeout = 30000;
+                    cmd.Parameters.Add(new SqlParameter("userid", userid));
+                    cmd.Parameters.Add(new SqlParameter("id", id));
+                    cmd.Parameters.Add(new SqlParameter("slton", slton));
+                    cmd.ExecuteNonQuery();
+
+                    con.Close();
+                    return 1;
+                }
+            }
+            catch (Exception ex)
+            {
+                LogBuild.CreateLogger(JsonConvert.SerializeObject(ex), "BST_updateSP");
                 return 0;
             }
         }

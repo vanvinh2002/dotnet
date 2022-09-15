@@ -5,28 +5,74 @@
 @{
     ViewBag.Title = "Duyệt bộ sưu tập";
     Layout = "~/Views/Shared/_Layout_V2.cshtml";
-    //string getsrc(byte[] img)
-    //{
-    //    var base64 = Convert.ToBase64String(img);
-    //    var imgSrc = String.Format("data:image/gif;base64,{0}", base64);
-    //    return imgSrc;
-    //}
 }
-<div class="row col-md-12 AutoFix">
-    <div class="col-md-6">
-        <div class="row">
+<style>
+
+    .swiper {
+        width: 100%;
+        height: 100%;
+    }
+
+    .swiper-slide {
+        text-align: center;
+        font-size: 18px;
+        background: #fff;
+        /* Center slide text vertically */
+        display: -webkit-box;
+        display: -ms-flexbox;
+        display: -webkit-flex;
+        display: flex;
+        -webkit-box-pack: center;
+        -ms-flex-pack: center;
+        -webkit-justify-content: center;
+        justify-content: center;
+        -webkit-box-align: center;
+        -ms-flex-align: center;
+        -webkit-align-items: center;
+        align-items: center;
+    }
+
+        .swiper-slide img {
+            display: block;
+            width: 100px;
+            height: 100px;
+            object-fit: cover;
+        }
+
+    .txtinfo {
+        font-size: 13px;
+    }
+
+    .swiper-button-prev {
+        left: -2 !important
+    }
+
+    .swiper-button-next {
+        right: -3 !important
+    }
+
+    .swiper-slide {
+        margin-right: 20px !important;
+        width: 15% !important
+    }
+</style>
+
+@*@Html.Partial("~/Views/Shared/_sidebar.cshtml")*@
+<div class="row col-12">
+    <div class="col-md-5">
+        <div class=" row col-md-12">
             <div class="col-md-6">
                 <div class="row">
                     <div class="col-3">
                         <label>Mã BST</label>
                     </div>
-                    <input class="col-md-9 form-control" id="MaBST" type="text" name="MaBST" onkeydown="js_GetTakeAbreakInfo(); js_GetListDBST()" />
+                    <input class="col-md-9 form-control" data-live-search="true" id="MaBST" type="text" name="MaBST" onchange="js_GetTakeAbreakInfo();" />
                 </div>
                 <div class="row">
                     <div class="col-3">
                         <label>Tên BST</label>
                     </div>
-                    <input class="col-md-9 form-control" id="TenBST" type="text" name="TenBST" onkeydown="js_GetTakeAbreakInfo(); js_GetListDBST()" />
+                    <input class="col-md-9 form-control" data-live-search="true" id="TenBST" type="text" name="TenBST" onchange="js_GetTakeAbreakInfo();" />
                 </div>
             </div>
             <div class="col-md-6">
@@ -68,8 +114,8 @@
                     <div class="col-md-3">
                         <label>Function</label>
                     </div>
-                    <div class="col-md-9" ondblclick="$('#Func').val('').trigger('change')">
-                        <select id="Func" class="form-control selectpicker" data-live-search="true" onchange="js_GetListDBST()">
+                    <div class="col-md-9" ondblclick="$('#Func').val('').trigger('change');js_GetLstImg()">
+                        <select id="Func" class="form-control selectpicker" data-live-search="true" onchange="js_GetListDBST();js_GetLstImg()">
                             <option value="">--- Funtion của group ---</option>
                             @if (ViewBag.lst_Func != null)
                             {
@@ -85,8 +131,8 @@
                     <div class="col-md-3">
                         <label>Range Review</label>
                     </div>
-                    <div class="col-md-9" ondblclick="$('#RR').val('').trigger('change')">
-                        <select id="RR" class="form-control selectpicker" data-live-search="true" onchange="js_GetListDBST()">
+                    <div class="col-md-9" ondblclick="$('#RR').val('').trigger('change');js_GetLstImg()">
+                        <select id="RR" class="form-control selectpicker" data-live-search="true" onchange="js_GetListDBST();js_GetLstImg()">
                             <option value="">--- Chọn RR ---</option>
                             @if (ViewBag.lst_RR != null)
                             {
@@ -102,8 +148,8 @@
                     <div class="col-md-3">
                         <label>Brand</label>
                     </div>
-                    <div class="col-md-9" ondblclick="$('#Brand').val('').trigger('change')">
-                        <select id="Brand" class="form-control selectpicker" data-live-search="true" onchange="js_GetListDBST()">
+                    <div class="col-md-9" ondblclick="$('#Brand').val('').trigger('change');js_GetLstImg()">
+                        <select id="Brand" class="form-control selectpicker" data-live-search="true" onchange="js_GetListDBST();js_GetLstImg()">
                             <option value="">--- Brand của Func ---</option>
                             @if (ViewBag.lst_Brand != null)
                             {
@@ -119,8 +165,8 @@
                     <div class="col-md-3">
                         <label>Nguồn nhập</label>
                     </div>
-                    <div class="col-md-9" ondblclick="$('#NguonNhap').val('').trigger('change')">
-                        <select id="NguonNhap" class="form-control selectpicker" data-live-search="true" onchange="js_GetListDBST()">
+                    <div class="col-md-9" ondblclick="$('#NguonNhap').val('').trigger('change');js_GetLstImg()">
+                        <select id="NguonNhap" class="form-control selectpicker" data-live-search="true" onchange="js_GetListDBST();js_GetLstImg()">
                             <option value="">--- Nguồn của Fucn ---</option>
                             @if (ViewBag.lst_NguonNhap != null)
                             {
@@ -136,8 +182,8 @@
                     <div class="col-md-3">
                         <label>Mùa vụ</label>
                     </div>
-                    <div class="col-md-9" ondblclick="$('#MuaVu').val('').trigger('change')">
-                        <select id="MuaVu" class="form-control selectpicker" data-live-search="true" onchange="js_GetListDBST()">
+                    <div class="col-md-9" ondblclick="$('#MuaVu').val('').trigger('change');js_GetLstImg()">
+                        <select id="MuaVu" class="form-control selectpicker" data-live-search="true" onchange="js_GetListDBST();js_GetLstImg()">
                             <option value="">--- Mùa vụ của Func ---</option>
                             @if (ViewBag.lst_MuaVu != null)
                             {
@@ -152,7 +198,7 @@
             </div>
         </div>
         <div class="row col-md-12 ">
-            <div class="col-md-6">
+            <div class="col-md-4">
                 <div class="col-md-12">
                     <label>Mã BST: &nbsp;</label> <span id="MaBST1" class="txtinfo"></span>
                 </div>
@@ -181,51 +227,119 @@
                     <label>Thông điệp: &nbsp;</label> <span id="ThongDiep" class="txtinfo"></span>
                 </div>
             </div>
-            <div class="col-md-6">
-                <div class="card" style="width: 18rem;">
-                    <img src="..." id="img1" class="card-img-top" style="width: 240px; height:160px;">
+            <div class="col-md-8" id="form">
+                <div class="Upload_img" style="margin-top:170px">
+                    <input class="form-control" type="hidden" id="imgLink">
+                    <div id="wp_thum_img" style="width:90%; height:189px;object-fit:contain; border:solid 1px #d3d3d3;background-color:#ffff;text-align:center;margin-top:-158px;margin-left:15px">
+                        <div class="img_src" style="">
+                            <img id="thum_img" for="fileUpload" src="" />
+                            <div id="upload_theme" style="margin-top:88px">
+                                <p style="">Ảnh BST/combo</p>
+                            </div>
+                        </div>
+                    </div>
+                    <form id="upload" enctype="multipart/form-data" action="@Url.Action(" uploadImg", "Po" )" method="POST" style="display:none">
+                        <input type="file" style="width: 0.1px;height: 0.1px;opacity: 0;overflow: hidden;position: absolute;z-index: -1;" name="fileUpload" id="fileUpload" class="inputfile">
+
+                        <label class="btn btn-success" for="fileUpload" style="width:100%;margin: 10px 0px;font-size:12px"><i class="fa fa-upload" aria-hidden="true"></i>upload</label>
+                    </form>
                 </div>
-                <div class="col-md-6">
-                    <label>Mã hàng: &nbsp;</label> <span id="Mahang1" class="txtinfo"></span>
+                <div class="row">
+                    <div class="col-md-4">
+                        <label>Mã hàng: &nbsp;</label> <span id="item_codeinfo" class="txtinfo"></span>
+                    </div>
+                    <div class="col-md-8">
+                        <label>Tên hàng: &nbsp;</label> <span id="item_nameinfo" class="txtinfo"></span>
+                    </div>
                 </div>
-                <div class="col-md-6">
-                    <label>Tên hàng: &nbsp;</label> <span id="Tenhang1" class="txtinfo"></span>
+                <div class="row">
+                    <div class="col-md-4">
+                        <label>Giá bán: &nbsp;</label> <span id="price_info" class="txtinfo"></span>
+                    </div>
+                    <div class="col-md-8">
+                        <label>Số lượng tồn: &nbsp;</label> <span id="slton_info" class="txtinfo"></span>
+                    </div>
                 </div>
-                <div class="col-md-6">
-                    <label>Giá bán: &nbsp;</label> <span id="price1" class="txtinfo"></span>
-                </div>
-                <div class="col-md-6">
-                    <label>Số lượng tồn: &nbsp;</label> <span id="slcombo1" class="txtinfo"></span>
-                </div>
-                <div class="col-md-6">
-                    <label>>>> SP khác: &nbsp;</label> <span id="SPKhac" class="txtinfo"></span>
-                </div>
-                <div class="col-md-6 ">
-                    <button class="btn btn-primary">Add vào BST</button>
+                <div class="row">
+                    <div class="col-md-6">
+                        <a id="btnspkhac" href="#" onclick="js_nextSP()" class="form-control btn btn-info next1" style="max-width:100px;"><i class="fas fa-angle-double-right" aria-hidden="true" style="float: right; margin-left: 6px; margin-top: 3px;"></i>SP khác </a>
+                    </div>
+                    <div class="col-md-6 ">
+                        <a id="btnAdd" href="#" onclick="js_createbst()" class="form-control btn btn-info" style="max-width:100px;float:right"><i class="fas fa-plus" aria-hidden="true" style="float: left; margin-left: 6px; margin-top: 3px;"></i>Add BST </a>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
-    <div class="col-md-6">
-        <div class="table-responsive" id="div-content">
+    <div class="col-md-7">
+        <div class="table-responsive" id="div-content" style="height: 300px;width:825px; overflow-y:auto">
             @Html.Partial("~/Views/DuyetBST/Table/__DuyetBST.cshtml")
         </div>
-        <div class="col-md-12 col-xs-12 half_col ">
-            <p>nguyen vawn a</p>
-            @if (ViewBag.lst != null)
-            {
-                foreach (ListSP lst in (List<ListSP>)ViewBag.lst)
-                {
-                    <img src="@lst.imglink" />
-                }
-            }
+        <div class="col-md-12">
+            <!-- Swiper -->
+            <div class="swiper-button-next showicon col-1" style="display:none"></div>
+            <div class="swiper mySwiper mySwiper1 col-9" style="width:515px;height:200px">
+                <div class="swiper-wrapper" id="productcurrent">
+                </div>
+                <div class="swiper-pagination" style="display:none"></div>
+            </div>
+            <div class="swiper-button-prev showicon col-1" style="display:none"></div>
+            <div class="col-1"></div>
+        </div>
+
+        <div class="col-md-12 showbuton" style="text-align:center;margin-top:120px">
+            <a id="btnAdds" href="#" onclick="js_updatecollectdetail('2')" class="form-control btn btn-info" style="max-width:150px;text-align:center"><i class="fas fa-download" aria-hidden="true" style="float: left; margin-left: 6px; margin-top: 3px;"></i>Duyệt BST/combo</a>
+
+            <a id="btnstops" href="#" onclick="js_updatecollectdetail('3')" class="form-control btn btn-info" style="max-width:150px;text-align:center"><i class="fas fa-download" aria-hidden="true" style="float: left; margin-left: 6px; margin-top: 3px;"></i>Dừng BST/combo</a>
         </div>
     </div>
 </div>
+
+<input id="IDparent" type="hidden" class="form-control" />
+<link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css" />
+<script src="~/Resource/js/swiper-bundle.min.js"></script>
+<script>
+
+    var swiper = new Swiper(".mySwiper", {
+        slidesPerView: 5,
+        spaceBetween: 30,
+        slidesPerGroup: 1,
+        loop: true,
+        loopFillGroupWithBlank: true,
+        pagination: {
+            el: ".swiper-pagination",
+            clickable: true,
+        },
+        navigation: {
+            nextEl: ".swiper-button-next",
+            prevEl: ".swiper-button-prev",
+        },
+
+    });
+
+    var swiper1 = new Swiper(".mySwiper1", {
+        slidesPerView: 5,
+        spaceBetween: 30,
+        slidesPerGroup: 1,
+        loop: true,
+        loopFillGroupWithBlank: true,
+        pagination: {
+            el: ".swiper-pagination",
+            clickable: true,
+        },
+
+        navigation: {
+            nextEl: ".next1",
+            prevEl: ".prev1",
+
+        },
+    });
+</script>
 <script type="text/javascript">
     $(function () {
         js_GetListDBST();
         js_GetTakeAbreakInfo();
+        //js_GetLstImg();
     });
     function js_ReloadTable() {
         $('#tbl_Item')
@@ -238,51 +352,6 @@
                 "pageLength": 5
             });
     }
-    //function js_GetSPDetail() {
-
-    //    var cboxes = document.getElementsByName('check[]');
-    //    var LoaiDieuChuyen = "";
-    //    var i = 0;
-    //    for (var i = 0; i < cboxes.length; i++) {
-    //        if (cboxes[i].checked) {
-    //            ID = cboxes[i].value;
-    //            $('#MaHang1').val($('#MaHang' + cboxes[i].id).html());
-    //            $('#Tenhang1').val($('#Tenhang' + cboxes[i].id).html());
-    //            $('#price1').val($('#price' + cboxes[i].id).html());
-    //            $('#imglink1').val($('#imglink' + cboxes[i].id).html());
-    //            break;
-    //        }
-    //    }
-    //    console.log('1');
-
-    //    console.log(LoaiDieuChuyen);
-
-    //    if (LoaiDieuChuyen == '') {
-    //        alert("Vui lòng chọn ít nhất 1 bản ghi.");
-    //        return;
-    //    }
-
-    //    console.log('2');
-
-    //    $.ajax({
-    //        url: '/DuyetBST/getSPDetail',
-    //        type: 'POST',
-    //        data: JSON.stringify({ LoaiDieuChuyen: LoaiDieuChuyen }),
-    //        contentType: 'application/json, charset=utf-8',
-    //        beforeSend: function () {
-    //            js_Loading(true, 1);
-    //        },
-    //        success: function (data) {
-    //            $('#div-content-detail').html(data);
-    //            js_ReloadTableDetail();
-    //            js_Loading(false, 1);
-    //        },
-    //        error: function () {
-    //            js_Loading(false, 1);
-    //        }
-    //    });
-
-    //}
 
     function js_GetListDBST() {
         window.scrollTo(0, 0);
@@ -304,6 +373,7 @@
             success: function (data) {
                 console.log(data);
                 $('#div-content').html(data);
+                js_GetLstImg();
                 js_ReloadTable();
                 js_Loading(false, 1);
             },
@@ -312,23 +382,8 @@
             }
         });
     }
-    function search() {
-        var query_value = $('input#search').val();
-        $('b#search-string').html(query_value);
-        if (query_value !== '') {
-            $.ajax({
-                type: "POST",
-                url: "search_st.php",
-                data: { query: query_value },
-                cache: false,
-                success: function (html) {
-                    $("ul#results").html(html);
-
-                }
-            });
-        } return false;
-    }
     function js_GetLstImg() {
+
         var Cate = $('#Cate').val();
         var GroupCat = $('#Group').val();
         var Func = $('#Func').val();
@@ -336,28 +391,52 @@
         var Brand = $('#Brand').val();
         var NguonNhap = $('#NguonNhap').val();
         var MuaVu = $('#MuaVu').val();
-        $.ajax({
-            url: '/DuyetBST/BSTGetListDuyet1',
-            type: 'POST',
-            data: JSON.stringify({ Cate: Cate, GroupCat: GroupCat, Func: Func, RR: RR, Brand: Brand, NguonNhap: NguonNhap, MuaVu: MuaVu }),
-            contentType: 'application/json, charset=utf-8',
-            beforeSend: function () {
-                js_Loading(true, 1);
-            },
-            success: function (data) {
-                $('#MaHang1').html(data[0].MaHang);
-                $('#TenHang1').html(data[0].TenHang);
-                $('#price1').html(data[0].price);
-                $('#slcombo1').html(data[0].slcombo);
-                $('#img1').html(data[0].imglink);
 
-                js_Loading(false, 1);
+        if (Cate.length > 0 || GroupCat.length > 0 || Func.length > 0) {
 
-            },
-            error: function () {
-                js_Loading(false, 1);
-            }
-        });
+            $.ajax({
+                url: '/DuyetBST/BSTGetListDuyet1',
+                type: 'POST',
+                data: JSON.stringify({ Cate: Cate, GroupCat: GroupCat, Func: Func, RR: RR, Brand: Brand, NguonNhap: NguonNhap, MuaVu: MuaVu }),
+                contentType: 'application/json, charset=utf-8',
+                beforeSend: function () {
+                    js_Loading(true, 1);
+                },
+                success: function (data) {
+
+                    if (data instanceof Object && data !== null && data.length) {
+                        var i = 1;
+                        let str0 = '';
+                        $('#item_codeinfo').html(data[0].Code);
+                        $('#item_nameinfo').html(data[0].Name);
+                        $('#price_info').html(data[0].GiaBanAll);
+                        $('#slton_info').html(data[0].SLTon);
+                        $('#imgLink').val(data[0].hinhanh);
+                        $('#upload_theme').hide();
+                        $('.showicon').show();
+                        $('#thum_img').css({ "width": "100%", "object-fit": "contain", "height": "180px" });
+                        $('#thum_img').attr("src", data[0].hinhanh);
+                        $('#thum_img').show();
+
+                        $.each(data, (index, value) => {
+                            let tr =
+                                `<div class="swiper-slide Thutu` + i + `" ><img onclick ="js_nextSP01(` + value.Code + `)" src="` + value.hinhanh + `" /><input id="MaHang" type="hidden" value="` + value.Code + `" /></div>`;
+                            str0 += tr;
+                            i++;
+                        });
+
+                        $('#productcurrent').empty().html(str0);
+                    } else {
+                        $('#productcurrent').empty();
+                    }
+                    js_Loading(false, 1);
+                },
+                error: function () {
+                    js_Loading(false, 1);
+                }
+            });
+        }
+
     }
     function js_GetTakeAbreakInfo() {
         var MaBST = $('#MaBST').val();
@@ -388,5 +467,243 @@
                 js_Loading(false, 1);
             }
         });
+    }
+    function js_nextSP() {
+        var active = $('.swiper-pagination-bullet-active').data('ID');
+        var MaHangnext = $('.Thutu' + active + ' #MaHang').val();
+        //alert(MaHangnext);
+
+        $.ajax({
+            url: '/DuyetBST/BSTGetNextSP',
+            type: 'POST',
+            data: JSON.stringify({ mahang: MaHangnext }),
+            contentType: 'application/json, charset=utf-8',
+            beforeSend: function () {
+                js_Loading(true, 1);
+            },
+            success: function (data) {
+                console.log(data);
+                $('#item_codeinfo').html(data[0].Code);
+                $('#item_nameinfo').html(data[0].Name);
+                $('#price_info').html(data[0].GiaBanAll);
+                $('#slton_info').html(data[0].SLTon);
+                $('#imgLink').val(data[0].hinhanh);
+
+                $('#upload_theme').hide();
+                $('#thum_img').css({ "width": "100%", "object-fit": "contain", "height": "180px" });
+                $('#thum_img').attr("src", data[0].hinhanh);
+                $('#thum_img').show();
+
+                js_Loading(false, 1);
+
+            },
+            error: function () {
+                js_Loading(false, 1);
+            }
+        });
+    }
+    function js_nextSP01(Code) {
+
+        $.ajax({
+            url: '/DuyetBST/BSTGetNextSP',
+            type: 'POST',
+            data: JSON.stringify({ mahang: Code }),
+            contentType: 'application/json, charset=utf-8',
+            beforeSend: function () {
+                js_Loading(true, 1);
+            },
+            success: function (data) {
+                console.log(data);
+                $('#item_codeinfo').html(data[0].Code);
+                $('#item_nameinfo').html(data[0].Name);
+                $('#price_info').html(data[0].GiaBanAll);
+                $('#slton_info').html(data[0].SLTon);
+                $('#imgLink').val(data[0].hinhanh);
+
+                $('#upload_theme').hide();
+                $('#thum_img').css({ "width": "100%", "object-fit": "contain", "height": "180px" });
+                $('#thum_img').attr("src", data[0].hinhanh);
+                $('#thum_img').show();
+
+                js_Loading(false, 1);
+
+            },
+            error: function () {
+                js_Loading(false, 1);
+            }
+        });
+
+    }
+    function Getjs_update() {
+        //debugger;
+        Sourceupdate = [];
+        let trs = $("#tbl_Item tbody tr");
+        if (trs.length) {
+            trs.each((index, tr) => {
+                let stt = String($(' #stt' + tr.id).val()).trim();
+                let slcombo = String($('#slcombo' + tr.id).val()).trim();
+                Sourceupdate.push({
+                    "stt": stt,
+                    "slcombo": slcombo,
+                });
+            });
+
+        }
+    }
+    function js_createbst() {
+        var CodebstNew = $('#CodebstNew').val();
+        var NamebstNew = $('#NamebstNew').val();
+        var IDparentnew = $('#IDparent').val();
+        var bst = {};
+        bst.ID = $('#IDparent').val();
+        bst.mahang = $("#item_codeinfo").html();
+
+        $.ajax({
+            url: '/DuyetBST/BSTCreateBST',
+            type: 'POST',
+            data: JSON.stringify({ info: bst }),
+            contentType: 'application/json, charset=utf-8',
+            beforeSend: function () {
+                js_Loading(true, 1);
+            },
+            success: function (data) {
+                if (data) {
+                    js_GetListCollectAcceptDetail(CodebstNew, NamebstNew, IDparentnew, '1');
+                    $('#upload_theme').hide();
+                } else {
+                    alert("Có lỗi xảy ra");
+                }
+                js_Loading(false, 1);
+            },
+            error: function () {
+                js_Loading(false, 1);
+            }
+        });
+    }
+    function js_updatecollectdetail(type) {
+        Getjs_update();
+        var CodeD = $("#MaBST1").val();
+        var arr = [];
+        var po = {};
+        po.MaBST = CodeD;
+        console.log(po);
+        arr.push(po);
+        console.log('1');
+        console.log(arr);
+        $.ajax({
+            url: '/DuyetBST/setRUN',
+            type: 'POST',
+            data: JSON.stringify({ lst: arr, type: type, Code: CodeD }),
+            contentType: 'application/json, charset=utf-8',
+            beforeSend: function () {
+                js_Loading(true, 1);
+            },
+            success: function (data) {
+                if (type == '2' && data == 1) {
+                    jAlert('Duyệt thành công.', 'Thông báo');
+                    js_GetTakeAbreakInfo();
+                    location.reload();
+                    js_Loading(false, 1);
+                }
+                if (type == '3' && data == 1) {
+                    jAlert('Từ chối thành công.', 'Thông báo');
+                    js_GetTakeAbreakInfo();
+                    location.reload();
+                    js_Loading(false, 1);
+                }
+                //alert("Thành công");
+                //$('#Detail_modal').modal('hide');
+                //js_GetListCollectionAccept();
+                //location.reload();
+                //js_Loading(false, 1);
+            },
+            error: function () {
+                js_Loading(false, 1);
+            }
+
+        });
+
+    }
+
+    function Getjs_update() {
+        //debugger;
+        Sourceupdate = [];
+        let trs = $("#tbl_Item tbody td");
+        if (trs.length) {
+            trs.each((index, td) => {
+                let stt = String($('#STT' + td.id).val()).trim();
+                let slcombo = String($('#slcombo' + td.id).val()).trim();
+                Sourceupdate.push({
+                    "ID": stt,
+                    "slcombo": slcombo,
+                });
+            });
+
+        }
+        console.log(Sourceupdate);
+        if (Sourceupdate.length > 0) {
+            $.ajax({
+                url: '/DuyetBST/BSTUpdateSP',
+                type: 'POST',
+                data: JSON.stringify({ lst: Sourceupdate }),
+                contentType: 'application/json, charset=utf-8',
+                beforeSend: function () {
+                    js_Loading(true, 1);
+                },
+                success: function (data) {
+                    if (data == 1) {
+                        alert("Điều chỉnh thành công");
+                        $('#Detail_modal').modal('hide');
+                        js_GetListDBST();
+                        js_Loading(false, 1);
+                    }
+                },
+                error: function () {
+                    js_Loading(false, 1);
+                }
+
+            });
+        }
+    }
+    function js_approve() {
+
+        var text = document.getElementById('check');
+
+        var dc = {};
+        dc.id = text.value;
+        dc.slcombo = $('#slcombo' + text.id).val();
+
+        console.log(dc);
+
+        console.log('so1');
+
+        console.log(arrCheckbox);
+
+        console.log('2');
+
+        if (arrCheckbox.length > 0) {
+            $.ajax({
+                url: '/DuyetBST/BSTUpdateSP',
+                type: 'POST',
+                data: JSON.stringify({ lst: dc }),
+                contentType: 'application/json, charset=utf-8',
+                beforeSend: function () {
+                    js_Loading(true, 1);
+                },
+                success: function (data) {
+                    if (data == 1) {
+                        alert("Điều chỉnh thành công");
+                        $('#Detail_modal').modal('hide');
+                        js_GetListDBST();
+                        js_Loading(false, 1);
+                    }
+                },
+                error: function () {
+                    js_Loading(false, 1);
+                }
+
+            });
+        }
+
     }
 </script>

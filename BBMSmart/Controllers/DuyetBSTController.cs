@@ -65,6 +65,28 @@ namespace ProductAllTool.Controllers
             return RedirectToAction("Login", "Account");
         }
 
+        public ActionResult BSTGetNextAndPreviousSP(string Cate, string GroupCat, string Func, string RR, string Brand, string NguonNhap, string MuaVu, string mahang, string ID)
+        {
+            if (Session["uid"] != null && Session["uid"].ToString().Length > 0)
+            {
+                List<ListSP> lstSP = DataAccess.DataAccessBST.BST_GetNextAndPreviousSP(Session["uid"].ToString(), Cate, GroupCat, Func, RR, Brand, NguonNhap, MuaVu, mahang, ID);
+                Console.WriteLine(lstSP);
+                return Json(lstSP, JsonRequestBehavior.AllowGet);
+            }
+            return RedirectToAction("Login", "Account");
+        }
+
+        public ActionResult BSTGetNextSP(string Cate, string GroupCat, string Func, string RR, string Brand, string NguonNhap, string MuaVu, string mahang)
+        {
+            if (Session["uid"] != null && Session["uid"].ToString().Length > 0)
+            {
+                List<ListSP> lstSP = DataAccess.DataAccessBST.BST_getNextSP(Session["uid"].ToString(), Cate, GroupCat, Func, RR, Brand, NguonNhap, MuaVu, mahang);
+                Console.WriteLine(lstSP);
+                return Json(lstSP, JsonRequestBehavior.AllowGet);
+            }
+            return RedirectToAction("Login", "Account");
+        }
+
         public ActionResult GetBST(string MaBST, string TenBST)
         {
             if (Session["uid"] != null && Session["uid"].ToString().Length > 0)
@@ -74,6 +96,27 @@ namespace ProductAllTool.Controllers
                 return Json(lstBST, JsonRequestBehavior.AllowGet);
             }
             return RedirectToAction("Login", "Account");
+        }
+
+        public ActionResult setDuyetBST(List<SetDuyetBST1> lst)
+        {
+            try
+            {
+                if (Session["uid"] != null && Session["uid"].ToString().Length > 0)
+                {
+                    foreach (SetDuyetBST1 po in lst)
+                    {
+                        DataAccess.DataAccessBST.BST_UpdateStatusCollect(Session["uid"].ToString(), po.type, po.Code);
+                    }
+                    return Json(1);
+                }
+                return RedirectToAction("Login", "Account");
+            }
+            catch (Exception ex)
+            {
+                LogBuild.CreateLogger(JsonConvert.SerializeObject(ex), "setDuyetBST");
+                return Json(null);
+            }
         }
 
         public ActionResult getSPDetail(List<ListSP> lst)
@@ -93,6 +136,72 @@ namespace ProductAllTool.Controllers
             catch (Exception ex)
             {
                 LogBuild.CreateLogger(JsonConvert.SerializeObject(ex), "getSPDetail");
+                return Json(null);
+            }
+        }
+
+        [HttpPost]
+        public ActionResult setRUN(List<setRun> lst)
+        {
+            try
+            {
+                if (Session["uid"] != null && Session["uid"].ToString().Length > 0)
+                {
+                    foreach (setRun po in lst)
+                    {
+                        DataAccess.DataAccessBST.BST_SetRunCollect(Session["uid"].ToString(), po.Code);
+                    }
+                    return Json(1);
+                }
+                return RedirectToAction("Login", "Account");
+            }
+            catch (Exception ex)
+            {
+                LogBuild.CreateLogger(JsonConvert.SerializeObject(ex), "setTuChoi");
+                return Json(null);
+            }
+        }
+
+        [HttpPost]
+        public ActionResult BSTCreateBST(List<addBST> info)
+        {
+            try
+            {
+                if (Session["uid"] != null && Session["uid"].ToString().Length > 0)
+                {
+                    foreach (addBST po in info)
+                    {
+                        DataAccess.DataAccessBST.BST_CreateBST(Session["uid"].ToString(), po.cateid);
+                    }
+                    return Json(1);
+                }
+                return RedirectToAction("Login", "Account");
+            }
+            catch (Exception ex)
+            {
+                LogBuild.CreateLogger(JsonConvert.SerializeObject(ex), "BSTCreateBST");
+                return Json(null);
+            }
+        }
+
+        [HttpPost]
+        public ActionResult BSTUpdateSP(List<UpdateSP> lst)
+        {
+            try
+            {
+                if (Session["uid"] != null && Session["uid"].ToString().Length > 0)
+                {
+                    foreach (UpdateSP po in lst)
+                    {
+                        DataAccess.DataAccessBST.BST_updateSP(Session["uid"].ToString(), po.ID, po.SLTon);
+                    }
+                    return Json(1);
+                }
+                return RedirectToAction("Login", "Account");
+            }
+            catch (Exception ex)
+            {
+                LogBuild.CreateLogger(JsonConvert.SerializeObject(ex), "BSTUpdateSP");
                 return Json(null);
             }
         }

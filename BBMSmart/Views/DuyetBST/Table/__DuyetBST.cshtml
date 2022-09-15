@@ -3,7 +3,7 @@
 
 <link href="~/Resource/Content/css/thickbox.css" rel="stylesheet" />
 <script src="~/Resource/Scripts/thickbox.js"></script>
-<table id="tbl_Item" class="table table-bordered" style="width:99.9%">
+<table id="tbl_Item" class="table table-bordered" style="width:69.9%">
     <thead>
         <tr>
             <th class="text-left" style="vertical-align: top">
@@ -28,10 +28,10 @@
                 Đơn Giá
             </th>
             <th class="text-left" style="vertical-align: top">
-                Đơn Giá
+                Số lượng combo
             </th>
             <th class="text-left" style="vertical-align: top">
-                Đơn Giá
+                Thao tác
             </th>
         </tr>
     </thead>
@@ -47,32 +47,33 @@
                     foreach (DataRow item in dt.Rows)
                     {
                         <tr id="row_@i">
-                            <td class="text-left" style="width: 40px; max-width: 40px;  overflow: hidden;white-space: nowrap">
-                                @item["catname"]
+                            <td class="text-left" style=" overflow: hidden; white-space: nowrap">
+                                <span class="">@item["catname"]</span>
                             </td>
-                            <td class="text-left" style="width: 40px; max-width: 40px;  overflow: hidden;white-space: nowrap">
+                            <td class="text-left" style=" overflow: hidden; white-space: nowrap">
                                 @item["groupname"]
                             </td>
-                            <td class="text-left" style="width: 40px; max-width: 40px;  overflow: hidden;white-space: nowrap">
+                            <td class="text-left" style=" overflow: hidden; white-space: nowrap">
                                 @item["functname"]
                             </td>
-                            <td class="text-left" style="width: 40px; max-width: 40px;  overflow: hidden;white-space: nowrap">
-                                @item["ID"]
+                            <td class="text-left" style=" overflow: hidden; white-space: nowrap" id="id_@i">
+                                @item["STT"]
                             </td>
-                            <td class="text-left" style="width: 40px; max-width: 40px;  overflow: hidden;white-space: nowrap">
-                                @item["MaHang"]
+                            <td class="text-left" style=" overflow: hidden; white-space: nowrap">
+                                @item["Code"]
                             </td>
-                            <td class="text-left" style="width: 40px; max-width: 40px;  overflow: hidden;white-space: nowrap">
-                                @item["TenHang"]
+                            <td class="text-left" style="width: 50px; max-width: 50px; overflow: hidden; white-space: nowrap">
+                                @item["Name"]
                             </td>
-                            <td class="text-left" style="width: 40px; max-width: 40px;  overflow: hidden;white-space: nowrap">
-                                @item["price"]
+                            <td class="text-left" style="  overflow: hidden;white-space: nowrap">
+                                @item["GiaBanAll"]
                             </td>
-                            <td class="text-left" style="width: 40px; max-width: 40px;  overflow: hidden;white-space: nowrap">
-                                <img src="@item["imglink"]" />
+                            <td class="text-left" style="  overflow: hidden;white-space: nowrap">
+                                <input class="form-control" value="@item["slcombo"]" id="slcombo_@i" />
                             </td>
-                            <td class="text-left" style="width: 40px; max-width: 40px;  overflow: hidden;white-space: nowrap">
-                                <button class="btn btn-danger" @item["ID"] onchange="js_GetSPDetail()">View</button>
+                            <td class="text-left" style="  overflow: hidden;white-space: nowrap" name="check" id="_@i">
+                                <button class="btn btn-primary" onchange="Getjs_update()">Update</button>
+                                <button class="btn btn-danger">Delete</button>
                             </td>
                         </tr>
                         i++;

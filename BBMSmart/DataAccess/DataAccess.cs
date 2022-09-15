@@ -39,7 +39,7 @@ using ProductAllTool.Models.Report;
 namespace ProductAllTool.DataAccess
 {
     /// <summary>
-    /// 
+    ///
     /// </summary>
     public class DataAccess
     {
@@ -47,10 +47,8 @@ namespace ProductAllTool.DataAccess
         private static string strConn1101 = ConfigurationManager.AppSettings.Get("strConn1.101");
         private static string strConnDWH = ConfigurationManager.AppSettings.Get("strConnDWH");
 
-
         //public static List<ItemPushSales> SP_BBMSMART_PO_GETLIST_PUSHSALES_HANGTANG_Mobile(string uid, decimal SumTotalPushSales, string ItemCode, string Type)
         //{
-
         //    List<ItemPushSales> it_r = new List<ItemPushSales>();
         //    using (var con = new SqlConnection(strCon))
         //    {
@@ -73,7 +71,6 @@ namespace ProductAllTool.DataAccess
         //            dr["NextStep"] = "Push Sale";
         //            dt.Rows.Add(dr);
 
-
         //            //dt.Rows.Add("100023", 405000, 1, "FALSE");
         //            //dt.Rows.Add("114544", 140000, 1, "Push Sale");
 
@@ -87,7 +84,6 @@ namespace ProductAllTool.DataAccess
         //            SqlParameter dtparam = cmd.Parameters.AddWithValue("@ProductArr", dt);
         //            dtparam.SqlDbType = SqlDbType.Structured;
         //            var reader = cmd.ExecuteReader();
-
 
         //            while (reader.Read())
         //            {
@@ -192,7 +188,6 @@ namespace ProductAllTool.DataAccess
                 con.Open();
                 try
                 {
-
                     SqlCommand cmd = new SqlCommand("SP_BIBOSMART_MS_ChangeStatusMarcom", con);
                     cmd.CommandType = CommandType.StoredProcedure;
 
@@ -212,6 +207,7 @@ namespace ProductAllTool.DataAccess
                 }
             }
         }
+
         public static DataTable SP_BIBOSMART_MS_GetListApproveMarcom(string chiendich, string LoaiHinh, string NhomKH, string CTKM, string NgayGui, string Status)
         {
             DataSet ds = new DataSet();
@@ -244,6 +240,7 @@ namespace ProductAllTool.DataAccess
                 return ds.Tables[0];
             }
         }
+
         public static DataTable SP_BIBOSMART_MS_GetListMarcom(string chiendich, string LoaiHinh, string NhomKH, string CTKM, string TuNgay, string Status, string DenNgay)
         {
             DataSet ds = new DataSet();
@@ -334,6 +331,7 @@ namespace ProductAllTool.DataAccess
                 }
             }
         }
+
         public static bool sp_BBM_SMART_MS_UPDATE_MaCTKM_Marcom(string MaChienDich, string codeKM)
         {
             using (var con = new SqlConnection(strCon))
@@ -401,7 +399,6 @@ namespace ProductAllTool.DataAccess
         string SoTienCoupon,
         string NgayKetThucCoupon,
 
-
         //Case
         string TypeCase,
         string TypePopup,
@@ -414,7 +411,6 @@ namespace ProductAllTool.DataAccess
 
         string TitleAction,
         string PositionAction
-
 
            )
         {
@@ -489,9 +485,6 @@ namespace ProductAllTool.DataAccess
                     cmd.Parameters.Add(new SqlParameter("WeeklyTime", WeeklyTime));
                     cmd.Parameters.Add(new SqlParameter("TanSuat", TanSuat));
 
-
-
-
                     cmd.Parameters.Add(new SqlParameter("CouponCode", CouponCode));
                     cmd.Parameters.Add(new SqlParameter("TongCoupon", decimal.Parse(TongCoupon != "" ? TongCoupon : "0")));
                     cmd.Parameters.Add(new SqlParameter("SoTienCoupon", decimal.Parse(SoTienCoupon != "" ? SoTienCoupon : "0")));
@@ -516,7 +509,6 @@ namespace ProductAllTool.DataAccess
                     cmd.Parameters.Add(new SqlParameter("TitleAction", TitleAction));
                     cmd.Parameters.Add(new SqlParameter("PositionAction", PositionAction));
 
-
                     var reader = cmd.ExecuteNonQuery();
                     con.Close();
                     return true;
@@ -529,6 +521,7 @@ namespace ProductAllTool.DataAccess
                 }
             }
         }
+
         public static bool sp_BBM_SMART_MS_INSERT_CampaignMarcom(
         string MaChienDich,
         string NhomKH,
@@ -569,7 +562,6 @@ namespace ProductAllTool.DataAccess
         string TongCoupon,
         string SoTienCoupon,
         string NgayKetThucCoupon,
-
 
         //Case
         string TypeCase,
@@ -858,6 +850,7 @@ namespace ProductAllTool.DataAccess
                 return ds.Tables[0];
             }
         }
+
         public static List<objCombox> sp_BBSmart_GetList_Combobox(string procedure)
         {
             List<objCombox> it_r = new List<objCombox>();
@@ -891,7 +884,6 @@ namespace ProductAllTool.DataAccess
             }
         }
 
-
         public static List<objCombox> sp_BBSmart_GetList_Item()
         {
             List<objCombox> it_r = new List<objCombox>();
@@ -924,6 +916,7 @@ namespace ProductAllTool.DataAccess
                 }
             }
         }
+
         public static List<objCombox> sp_BBSmart_GetList_Item_filter()
         {
             List<objCombox> it_r = new List<objCombox>();
@@ -989,6 +982,7 @@ namespace ProductAllTool.DataAccess
                 }
             }
         }
+
         public static List<objCombox> sp_qlkd_getMahang_View()
         {
             List<objCombox> it_r = new List<objCombox>();
@@ -1054,6 +1048,7 @@ namespace ProductAllTool.DataAccess
                 }
             }
         }
+
         public static List<objComboxKhuVuc> sp_BBSmart_GetList_KhuVuc()
         {
             List<objComboxKhuVuc> it_r = new List<objComboxKhuVuc>();
@@ -1124,7 +1119,8 @@ namespace ProductAllTool.DataAccess
             }
         }
 
-        #endregion
+        #endregion QLVH
+
         #region QLNCC
 
         public static DataTable SP_BBSMART_QLNCC_GETLIST_QLNCC_02(string NguonNhapCode, string functionCode, string Division, string VendorNo, string productNo, string Brand, string hanhdong)
@@ -1153,7 +1149,6 @@ namespace ProductAllTool.DataAccess
                     }
                     con.Close();
                     return ds.Tables[0];
-
                 }
             }
             catch (Exception ex)
@@ -1274,7 +1269,6 @@ namespace ProductAllTool.DataAccess
                 con.Open();
                 try
                 {
-
                     SqlCommand cmd = new SqlCommand("SP_BBSMART_QLNCC_GETLIST_Product", con);
                     cmd.CommandType = CommandType.StoredProcedure;
                     cmd.CommandTimeout = 300;
@@ -1313,7 +1307,6 @@ namespace ProductAllTool.DataAccess
                 con.Open();
                 try
                 {
-
                     SqlCommand cmd = new SqlCommand("SP_BBSMART_QLNCC_GETLIST_Brand", con);
                     cmd.CommandType = CommandType.StoredProcedure;
                     cmd.CommandTimeout = 300;
@@ -1441,9 +1434,11 @@ namespace ProductAllTool.DataAccess
                 }
             }
         }
-        #endregion
+
+        #endregion QLNCC
 
         #region ProductIMG_v1
+
         public static List<ItemWeb> getProduct(string typeFill, string lsSku)
         {
             List<ItemWeb> lts = new List<ItemWeb>();
@@ -1518,7 +1513,8 @@ ORDER BY FIELD(" + typeFill + @"," + lsSku + @")";
                 }
 
                 conn.Close();
-                #endregion
+
+                #endregion get all data from database
 
                 LogBuild.CreateLogger(JsonConvert.SerializeObject(lts), "getProduct");
 
@@ -1531,9 +1527,10 @@ ORDER BY FIELD(" + typeFill + @"," + lsSku + @")";
                 return lts;
             }
         }
-        #endregion
-        #region ProductIMG_v2
 
+        #endregion ProductIMG_v1
+
+        #region ProductIMG_v2
 
         //run data all fk
         public static List<ItemWeb> getProduct_v2(string typeFill, string dataFill)
@@ -1595,7 +1592,6 @@ ORDER BY FIELD(" + typeFill + @"," + lsSku + @")";
             {
                 con.Open();
 
-
                 SqlCommand cmd = new SqlCommand("sp_ProductTool_ProductIMG_get_sku", con);
                 cmd.CommandType = CommandType.StoredProcedure;
                 cmd.Parameters.Add(new SqlParameter("typeFill", typeFill));
@@ -1603,7 +1599,6 @@ ORDER BY FIELD(" + typeFill + @"," + lsSku + @")";
 
                 try
                 {
-
                     var reader = cmd.ExecuteReader();
                     while (reader.Read())
                     {
@@ -1629,11 +1624,10 @@ ORDER BY FIELD(" + typeFill + @"," + lsSku + @")";
                     return it_s;
                 }
             }
-
         }
 
         //crawl web
-        public async static Task<ItemWeb> crawl_info_Mag(string sku)
+        public static async Task<ItemWeb> crawl_info_Mag(string sku)
         {
             ItemWeb it = new ItemWeb();
 
@@ -1651,7 +1645,6 @@ ORDER BY FIELD(" + typeFill + @"," + lsSku + @")";
                 {
                     LogBuild.CreateLogger(response.StatusCode.ToString(), "crawl_info_Mag");
                     return it;
-
                 }
                 else
                 {
@@ -1673,7 +1666,6 @@ ORDER BY FIELD(" + typeFill + @"," + lsSku + @")";
                         }
                     }
 
-
                     return it;
                 }
             }
@@ -1685,7 +1677,7 @@ ORDER BY FIELD(" + typeFill + @"," + lsSku + @")";
             }
         }
 
-        #endregion
+        #endregion ProductIMG_v2
 
         #region NoHope
 
@@ -1698,7 +1690,6 @@ ORDER BY FIELD(" + typeFill + @"," + lsSku + @")";
                 {
                     SqlCommand cmd = new SqlCommand("sp_ProductTool_Competeoffline_update", con);
                     cmd.CommandType = CommandType.StoredProcedure;
-
 
                     cmd.Parameters.Add(new SqlParameter("MaHang", item.MaHang));
                     cmd.Parameters.Add(new SqlParameter("MaCH", item.MaCH));
@@ -1748,7 +1739,6 @@ ORDER BY FIELD(" + typeFill + @"," + lsSku + @")";
             }
         }
 
-
         public static bool sp_ProductTool_Competeoffline_Insert(string createBy, int type, objCompeteOffline item)
         {
             using (var con = new SqlConnection(strCon))
@@ -1758,7 +1748,6 @@ ORDER BY FIELD(" + typeFill + @"," + lsSku + @")";
                 {
                     SqlCommand cmd = new SqlCommand("sp_ProductTool_Competeoffline_Insert", con);
                     cmd.CommandType = CommandType.StoredProcedure;
-
 
                     cmd.Parameters.Add(new SqlParameter("MaHang", item.MaHang));
                     cmd.Parameters.Add(new SqlParameter("MaCH", item.MaCH));
@@ -1846,6 +1835,7 @@ ORDER BY FIELD(" + typeFill + @"," + lsSku + @")";
                 }
             }
         }
+
         public static List<objCombox> sp_qlkd_Sub_Range2()
         {
             List<objCombox> it_r = new List<objCombox>();
@@ -1878,6 +1868,7 @@ ORDER BY FIELD(" + typeFill + @"," + lsSku + @")";
                 }
             }
         }
+
         public static List<objCombox> sp_HistoryPriceAll_TuNgay()
         {
             List<objCombox> it_r = new List<objCombox>();
@@ -1970,6 +1961,7 @@ ORDER BY FIELD(" + typeFill + @"," + lsSku + @")";
                 }
             }
         }
+
         public static List<objCombox> sp_bbs_getfilter_CampaignMarcom_Store()
         {
             List<objCombox> it_r = new List<objCombox>();
@@ -2141,7 +2133,6 @@ ORDER BY FIELD(" + typeFill + @"," + lsSku + @")";
             }
         }
 
-
         public static List<filterMarcomProvinStore> sp_bbs_getfilter_CampaignMarcom_Provin_Store(string NhomKH)
         {
             List<filterMarcomProvinStore> it_r = new List<filterMarcomProvinStore>();
@@ -2165,7 +2156,6 @@ ORDER BY FIELD(" + typeFill + @"," + lsSku + @")";
                             MaTinh = reader["MaTinh"].ToString(),
                             TenTinh = reader["TenTinh"].ToString(),
                             NhomKH = reader["NhomKH"].ToString(),
-
                         };
                         it_r.Add(it);
                     }
@@ -2180,7 +2170,6 @@ ORDER BY FIELD(" + typeFill + @"," + lsSku + @")";
                 }
             }
         }
-
 
         public static List<objCombox> ShowNameBrand(string Brand)
         {
@@ -2216,6 +2205,7 @@ ORDER BY FIELD(" + typeFill + @"," + lsSku + @")";
                 }
             }
         }
+
         public static List<objCombox> ShowNameFunction(string Function)
         {
             List<objCombox> it_r = new List<objCombox>();
@@ -2285,6 +2275,7 @@ ORDER BY FIELD(" + typeFill + @"," + lsSku + @")";
                 }
             }
         }
+
         public static List<objCombox> ShowNameStore(string store)
         {
             List<objCombox> it_r = new List<objCombox>();
@@ -2319,7 +2310,6 @@ ORDER BY FIELD(" + typeFill + @"," + lsSku + @")";
                 }
             }
         }
-
 
         public static List<objCombox> sp_FunErp_CampaignMarcom(string NhomKH, string Brand)
         {
@@ -2406,7 +2396,6 @@ ORDER BY FIELD(" + typeFill + @"," + lsSku + @")";
                 }
             }
         }
-
 
         public static List<objCombox> sp_store_CampaignMarcom(string MaTinh)
         {
@@ -2509,6 +2498,7 @@ ORDER BY FIELD(" + typeFill + @"," + lsSku + @")";
                 }
             }
         }
+
         public static List<objCombox> sp_qlkd_Sub_BrandErp()
         {
             List<objCombox> it_r = new List<objCombox>();
@@ -2541,6 +2531,7 @@ ORDER BY FIELD(" + typeFill + @"," + lsSku + @")";
                 }
             }
         }
+
         public static List<objCombox> sp_qlkd_Sub_BrandErp_filter()
         {
             List<objCombox> it_r = new List<objCombox>();
@@ -2573,6 +2564,7 @@ ORDER BY FIELD(" + typeFill + @"," + lsSku + @")";
                 }
             }
         }
+
         public static List<objTonKho> getListPopupItemPS(string itemNo, string storeNo)
         {
             List<objTonKho> it_r = new List<objTonKho>();
@@ -2677,6 +2669,7 @@ ORDER BY FIELD(" + typeFill + @"," + lsSku + @")";
                 }
             }
         }
+
         public static List<objCombox> sp_qlkd_getVendor_View()
         {
             List<objCombox> it_r = new List<objCombox>();
@@ -2842,6 +2835,7 @@ ORDER BY FIELD(" + typeFill + @"," + lsSku + @")";
                 }
             }
         }
+
         public static List<objCombox> sp_VendorTool_MD_Sub_get()
         {
             List<objCombox> it_r = new List<objCombox>();
@@ -2874,6 +2868,7 @@ ORDER BY FIELD(" + typeFill + @"," + lsSku + @")";
                 }
             }
         }
+
         public static List<objCombox> sp_bbs_getlistCH()
         {
             List<objCombox> it_r = new List<objCombox>();
@@ -2906,6 +2901,7 @@ ORDER BY FIELD(" + typeFill + @"," + lsSku + @")";
                 }
             }
         }
+
         public static List<objCombox> sp_bbs_getlistCH_filter()
         {
             List<objCombox> it_r = new List<objCombox>();
@@ -2938,6 +2934,7 @@ ORDER BY FIELD(" + typeFill + @"," + lsSku + @")";
                 }
             }
         }
+
         public static List<objCombox> sp_bbs_getlistCH_User(string userid)
         {
             List<objCombox> it_r = new List<objCombox>();
@@ -3103,6 +3100,7 @@ ORDER BY FIELD(" + typeFill + @"," + lsSku + @")";
                 }
             }
         }
+
         public static List<objCombox> sp_BBSmart_GetList_Function_NOIDIA_v2()
         {
             List<objCombox> it_r = new List<objCombox>();
@@ -3176,7 +3174,6 @@ ORDER BY FIELD(" + typeFill + @"," + lsSku + @")";
 
                             SoNgaySuDung1SP = decimal.Parse(reader["SoNgaySuDung1SP"].ToString()),
                             SoNgayQuaHan = int.Parse(reader["SoNgayQuaHan"].ToString())
-
                         };
                         it_s.Add(it);
                     }
@@ -3190,10 +3187,6 @@ ORDER BY FIELD(" + typeFill + @"," + lsSku + @")";
                 return it_s;
             }
         }
-
-
-
-
 
         public static List<objCompeteOffline> sp_GetListAcceptCompeteOffline(string FunctionCode, string nguonnhapCode, string HHKG, string maNCC, string BrandCode, string Range, string mahang, string tenhang, string strMahang)
         {
@@ -3248,7 +3241,6 @@ ORDER BY FIELD(" + typeFill + @"," + lsSku + @")";
                 return it_s;
             }
         }
-
 
         public static List<objCompeteOnline> sp_GetListCompeteOnline_excel(string FunctionCode, string nguonnhapCode, string HHKG, string maNCC, string BrandCode, string Range, string mahang, string tenhang, string strMahang)
         {
@@ -3514,6 +3506,7 @@ ORDER BY FIELD(" + typeFill + @"," + lsSku + @")";
                 return ds.Tables[0];
             }
         }
+
         public static DataTable sp_GetListManageSales(string userid, string kenhban, string nguonnhap, string brand, string maNCC, string storeLocation, string Nhom, string StoreNo, string mahang)
         {
             DataSet ds = new DataSet();
@@ -3537,9 +3530,7 @@ ORDER BY FIELD(" + typeFill + @"," + lsSku + @")";
 
                     using (SqlDataAdapter sda = new SqlDataAdapter(cmd))
                     {
-
                         sda.Fill(ds);
-
                     }
 
                     con.Close();
@@ -3578,9 +3569,7 @@ ORDER BY FIELD(" + typeFill + @"," + lsSku + @")";
 
                     using (SqlDataAdapter sda = new SqlDataAdapter(cmd))
                     {
-
                         sda.Fill(ds);
-
                     }
 
                     con.Close();
@@ -3634,10 +3623,7 @@ ORDER BY FIELD(" + typeFill + @"," + lsSku + @")";
             }
         }
 
-
-
-
-        #endregion
+        #endregion NoHope
 
         #region ComparePrice
 
@@ -3761,7 +3747,6 @@ ORDER BY FIELD(" + typeFill + @"," + lsSku + @")";
                     SqlCommand cmd = new SqlCommand("sp_ProductTool_ComparePrice_get_RP_v2", con);
                     cmd.CommandTimeout = 30000;
 
-
                     cmd.CommandType = CommandType.StoredProcedure;
                     cmd.Parameters.Add(new SqlParameter("sku", it.sku));
 
@@ -3777,7 +3762,6 @@ ORDER BY FIELD(" + typeFill + @"," + lsSku + @")";
                     {
                         compareLine its = new compareLine
                         {
-
                             lineNo = reader["lineNo"].ToString(),
                             compareCode = reader["compareCode"].ToString(),
                             compareName = reader["compareName"].ToString(),
@@ -3835,7 +3819,6 @@ ORDER BY FIELD(" + typeFill + @"," + lsSku + @")";
                     SqlCommand cmd = new SqlCommand("sp_ProductTool_ComparePrice_get_RP_Accept", con);
                     cmd.CommandTimeout = 30000;
 
-
                     cmd.CommandType = CommandType.StoredProcedure;
                     cmd.Parameters.Add(new SqlParameter("sku", it.sku));
 
@@ -3854,7 +3837,6 @@ ORDER BY FIELD(" + typeFill + @"," + lsSku + @")";
                     {
                         RP_Accept_Item its = new RP_Accept_Item
                         {
-
                             lineNo = reader["lineNo"].ToString(),
                             compareCode = reader["compareCode"].ToString(),
                             compareName = reader["compareName"].ToString(),
@@ -3919,7 +3901,6 @@ ORDER BY FIELD(" + typeFill + @"," + lsSku + @")";
                     SqlCommand cmd = new SqlCommand("sp_ProductTool_ComparePrice_get_ProductInfo", con);
                     cmd.CommandTimeout = 30000;
 
-
                     cmd.CommandType = CommandType.StoredProcedure;
                     cmd.Parameters.Add(new SqlParameter("sku", sku));
 
@@ -3928,7 +3909,6 @@ ORDER BY FIELD(" + typeFill + @"," + lsSku + @")";
                     {
                         sourceItem its = new sourceItem
                         {
-
                             sku = reader["sku"].ToString(),
                             name = reader["name"].ToString(),
                             url_link = reader["url_link"].ToString(),
@@ -3959,7 +3939,6 @@ ORDER BY FIELD(" + typeFill + @"," + lsSku + @")";
                     con.Open();
                     SqlCommand cmd = new SqlCommand("sp_ProductTool_ComparePrice_get_CPType", con);
                     cmd.CommandTimeout = 30000;
-
 
                     cmd.CommandType = CommandType.StoredProcedure;
 
@@ -3999,7 +3978,6 @@ ORDER BY FIELD(" + typeFill + @"," + lsSku + @")";
                     SqlCommand cmd = new SqlCommand("sp_ProductTool_ComparePrice_ActionType_get", con);
                     cmd.CommandTimeout = 30000;
 
-
                     cmd.CommandType = CommandType.StoredProcedure;
 
                     var reader = cmd.ExecuteReader();
@@ -4023,25 +4001,20 @@ ORDER BY FIELD(" + typeFill + @"," + lsSku + @")";
                     LogBuild.CreateLogger(JsonConvert.SerializeObject(ex), "sp_ProductTool_ComparePrice_ActionType_get");
                     return it_s;
                 }
-
             }
         }
 
-
-        #endregion
-
+        #endregion get Data
 
         #region Action Data
 
         public static bool sp_ProductTool_ComparePrice_disable_Line(string link)
         {
-
             using (var con = new SqlConnection(strCon))
             {
                 con.Open();
                 try
                 {
-
                     SqlCommand cmd = new SqlCommand("sp_ProductTool_ComparePrice_disable_Line", con);
                     cmd.CommandType = CommandType.StoredProcedure;
                     cmd.Parameters.Add(new SqlParameter("link", link));
@@ -4059,7 +4032,6 @@ ORDER BY FIELD(" + typeFill + @"," + lsSku + @")";
                     return false;
                 }
             }
-
         }
 
         public static bool sp_ProductTool_ComparePrice_add_Line(string uid, compareLine it)
@@ -4103,7 +4075,6 @@ ORDER BY FIELD(" + typeFill + @"," + lsSku + @")";
                     SqlCommand cmd = new SqlCommand("sp_ProductTool_ComparePrice_Action_add", con);
                     cmd.CommandType = CommandType.StoredProcedure;
 
-
                     cmd.Parameters.Add(new SqlParameter("uid", uid));
                     cmd.Parameters.Add(new SqlParameter("type", type));
 
@@ -4139,7 +4110,6 @@ ORDER BY FIELD(" + typeFill + @"," + lsSku + @")";
                     SqlCommand cmd = new SqlCommand("sp_ProductTool_ComparePrice_Request_Wait_add", con);
                     cmd.CommandType = CommandType.StoredProcedure;
 
-
                     cmd.Parameters.Add(new SqlParameter("uid", uid));
                     cmd.Parameters.Add(new SqlParameter("sku", sku));
 
@@ -4158,9 +4128,9 @@ ORDER BY FIELD(" + typeFill + @"," + lsSku + @")";
             }
         }
 
-        #endregion
+        #endregion Action Data
 
-        #endregion
+        #endregion ComparePrice
 
         #region loginAllWay
 
@@ -4186,7 +4156,6 @@ ORDER BY FIELD(" + typeFill + @"," + lsSku + @")";
                     flag = false;
                 }
             }
-
 
             return flag;
         }
@@ -4245,14 +4214,14 @@ ORDER BY FIELD(" + typeFill + @"," + lsSku + @")";
             //}
         }
 
-
-        #endregion
+        #endregion loginAllWay
 
         #region StoreLayout
 
         #region DataAction
 
         #region getData
+
         public static List<Models.StoreLayout.userRole> sp_ProductTool_get_UserRole(string uid)
         {
             List<Models.StoreLayout.userRole> it_r = new List<Models.StoreLayout.userRole>();
@@ -4287,7 +4256,6 @@ ORDER BY FIELD(" + typeFill + @"," + lsSku + @")";
                         };
 
                         it_r.Add(it);
-
                     }
                     con.Close();
 
@@ -4298,16 +4266,13 @@ ORDER BY FIELD(" + typeFill + @"," + lsSku + @")";
                     con.Close();
                     LogBuild.CreateLogger(JsonConvert.SerializeObject(ex), "sp_ProductTool_get_UserRole");
                     return it_r;
-
                 }
             }
-
         }
 
         public static List<storeShelf> sp_ProductTool_get_UserStoreShelf(int type, string uid, string storeNo, string id)
         {
             List<storeShelf> it_r = new List<storeShelf>();
-
 
             using (var con = new SqlConnection(strCon))
             {
@@ -4357,13 +4322,11 @@ ORDER BY FIELD(" + typeFill + @"," + lsSku + @")";
                     return it_r;
                 }
             }
-
         }
 
         public static List<storeShelf_v2> sp_ProductTool_get_UserStoreShelf_v2(int type, string uid, string storeNo, string id)
         {
             List<storeShelf_v2> it_r = new List<storeShelf_v2>();
-
 
             using (var con = new SqlConnection(strCon))
             {
@@ -4400,7 +4363,6 @@ ORDER BY FIELD(" + typeFill + @"," + lsSku + @")";
                             createdBy = reader["createdBy"].ToString(),
                             modifyDate = reader["modifyDate"].ToString(),
                             modifyBy = reader["modifyBy"].ToString()
-
                         };
 
                         it_r.Add(it);
@@ -4416,13 +4378,11 @@ ORDER BY FIELD(" + typeFill + @"," + lsSku + @")";
                     return it_r;
                 }
             }
-
         }
 
         public static List<shelf_Possession> sp_ProductTool_get_ShelfPossession(string userID, string shelfCode)
         {
             List<shelf_Possession> it_r = new List<shelf_Possession>();
-
 
             using (var con = new SqlConnection(strCon))
             {
@@ -4447,7 +4407,6 @@ ORDER BY FIELD(" + typeFill + @"," + lsSku + @")";
                             depth = decimal.Parse(reader["depth"].ToString()),
                             level = int.Parse(reader["level"].ToString()),
                             P_height = decimal.Parse(reader["P_height"].ToString()),
-
                         };
 
                         it_r.Add(it);
@@ -4463,13 +4422,11 @@ ORDER BY FIELD(" + typeFill + @"," + lsSku + @")";
                     return it_r;
                 }
             }
-
         }
 
         public static List<MagentoCategory> sp_ProductTool_get_MagentoCategory()
         {
             List<MagentoCategory> it_r = new List<MagentoCategory>();
-
 
             using (var con = new SqlConnection(strCon))
             {
@@ -4505,13 +4462,11 @@ ORDER BY FIELD(" + typeFill + @"," + lsSku + @")";
                     return it_r;
                 }
             }
-
         }
 
         public static List<MagentoProduct> sp_ProductTool_get_MagentoProduct(string catID)
         {
             List<MagentoProduct> it_r = new List<MagentoProduct>();
-
 
             using (var con = new SqlConnection(strCon))
             {
@@ -4549,13 +4504,11 @@ ORDER BY FIELD(" + typeFill + @"," + lsSku + @")";
                     return it_r;
                 }
             }
-
         }
 
         public static List<MagentoProduct_v2> sp_ProductTool_get_MagentoProduct_v2(string catID)
         {
             List<MagentoProduct_v2> it_r = new List<MagentoProduct_v2>();
-
 
             using (var con = new SqlConnection(strCon))
             {
@@ -4592,19 +4545,16 @@ ORDER BY FIELD(" + typeFill + @"," + lsSku + @")";
                 }
                 catch (Exception ex)
                 {
-
                     con.Close();
                     LogBuild.CreateLogger(JsonConvert.SerializeObject(ex), "sp_ProductTool_get_MagentoProduct_v2");
                     return it_r;
                 }
             }
-
         }
 
         public static List<StoreRender> sp_ProductTool_Img_get_StoreRender(int type, string uid, string storeNo, string id)
         {
             List<StoreRender> it_r = new List<StoreRender>();
-
 
             using (var con = new SqlConnection(strCon))
             {
@@ -4648,13 +4598,11 @@ ORDER BY FIELD(" + typeFill + @"," + lsSku + @")";
                     return it_r;
                 }
             }
-
         }
 
         public static List<storeShelf> sp_ProductTool_get_ScoreLayout(string uid, string storeNo)
         {
             List<storeShelf> it_r = new List<storeShelf>();
-
 
             using (var con = new SqlConnection(strCon))
             {
@@ -4698,13 +4646,11 @@ ORDER BY FIELD(" + typeFill + @"," + lsSku + @")";
                     return it_r;
                 }
             }
-
         }
 
         public static List<scoreItem> sp_ProductTool_ScoreLayout_RP(string uid, string dateFill, string dataFill)
         {
             List<scoreItem> it_r = new List<scoreItem>();
-
 
             using (var con = new SqlConnection(strCon))
             {
@@ -4712,7 +4658,6 @@ ORDER BY FIELD(" + typeFill + @"," + lsSku + @")";
 
                 try
                 {
-
                     SqlCommand cmd = new SqlCommand("sp_ProductTool_ScoreLayout_RP", con);
                     cmd.CommandType = CommandType.StoredProcedure;
 
@@ -4738,7 +4683,6 @@ ORDER BY FIELD(" + typeFill + @"," + lsSku + @")";
                             points = int.Parse(reader["points"].ToString()),
                             pointBy = reader["pointBy"].ToString(),
                             pointDate = reader["pointDate"].ToString()
-
                         };
 
                         it_r.Add(it);
@@ -4746,8 +4690,6 @@ ORDER BY FIELD(" + typeFill + @"," + lsSku + @")";
                     con.Close();
 
                     return it_r;
-
-
                 }
                 catch (Exception ex)
                 {
@@ -4756,11 +4698,12 @@ ORDER BY FIELD(" + typeFill + @"," + lsSku + @")";
                     return it_r;
                 }
             }
-
         }
-        #endregion
+
+        #endregion getData
 
         #region actionData
+
         public static bool sp_ProductTool_Add_ImgStoreShelf(string uid, storeShelf it)
         {
             try
@@ -4956,11 +4899,12 @@ ORDER BY FIELD(" + typeFill + @"," + lsSku + @")";
                 return false;
             }
         }
-        #endregion
 
-        #endregion
+        #endregion actionData
 
-        #endregion
+        #endregion DataAction
+
+        #endregion StoreLayout
 
         #region SpaceMan
 
@@ -4973,7 +4917,6 @@ ORDER BY FIELD(" + typeFill + @"," + lsSku + @")";
                 con.Open();
                 try
                 {
-
                     SqlCommand cmd = new SqlCommand("sp_ProductTool_SpaceMan_StoreList_get", con);
                     cmd.CommandType = CommandType.StoredProcedure;
                     cmd.CommandTimeout = 30000;
@@ -5005,7 +4948,6 @@ ORDER BY FIELD(" + typeFill + @"," + lsSku + @")";
                     return it_r;
                 }
             }
-
         }
 
         public static List<ItemList> sp_SpaceMan_ShelfItem_get(string uid, ItemList it)
@@ -5021,7 +4963,6 @@ ORDER BY FIELD(" + typeFill + @"," + lsSku + @")";
                     SqlCommand cmd = new SqlCommand("sp_ProductTool_SpaceMan_ShelfItem_get", con);
                     cmd.CommandType = CommandType.StoredProcedure;
                     cmd.CommandTimeout = 3000;
-
 
                     cmd.Parameters.Add(new SqlParameter("uid", uid));
                     cmd.Parameters.Add(new SqlParameter("storeNo", it.storeNo));
@@ -5059,22 +5000,18 @@ ORDER BY FIELD(" + typeFill + @"," + lsSku + @")";
                     LogBuild.CreateLogger(JsonConvert.SerializeObject(ex), "sp_SpaceMan_ShelfItem_get");
                     return it_r;
                 }
-
             }
         }
-
 
         public static List<ShelfList> sp_SpaceMan_Store_shelfList_get(string uid, string storeNo, int type)
         {
             List<ShelfList> it_r = new List<ShelfList>();
-
 
             using (var con = new SqlConnection(strCon))
             {
                 con.Open();
                 try
                 {
-
                     SqlCommand cmd = new SqlCommand("sp_ProductTool_SpaceMan_Store_shelfList_get", con);
                     cmd.CommandType = CommandType.StoredProcedure;
                     cmd.CommandTimeout = 3000;
@@ -5118,12 +5055,10 @@ ORDER BY FIELD(" + typeFill + @"," + lsSku + @")";
                     return it_r;
                 }
             }
-
         }
 
         public static List<Models.SpaceMan.userRole> sp_qlkd_UserRole_get(string uid)
         {
-
             List<Models.SpaceMan.userRole> it_s = new List<Models.SpaceMan.userRole>();
             using (var con = new SqlConnection(strCon))
             {
@@ -5171,7 +5106,6 @@ ORDER BY FIELD(" + typeFill + @"," + lsSku + @")";
 
         public static List<Models.SpaceMan.userRole> sp_ProductTool_SpaceMan_UserRole_get(string uid)
         {
-
             List<Models.SpaceMan.userRole> it_s = new List<Models.SpaceMan.userRole>();
             using (var con = new SqlConnection(strCon))
             {
@@ -5214,12 +5148,10 @@ ORDER BY FIELD(" + typeFill + @"," + lsSku + @")";
                     return it_s;
                 }
             }
-
         }
 
         public static bool sp_SpaceMan_Img_StoreShelf_add(string uid, ShelfList it)
         {
-
             using (var con = new SqlConnection(strCon))
             {
                 con.Open();
@@ -5234,7 +5166,6 @@ ORDER BY FIELD(" + typeFill + @"," + lsSku + @")";
                     cmd.Parameters.Add(new SqlParameter("sub_id", it.subCode));
                     cmd.Parameters.Add(new SqlParameter("img_link", it.img_link));
 
-
                     var reader = cmd.ExecuteNonQuery();
 
                     con.Close();
@@ -5247,10 +5178,6 @@ ORDER BY FIELD(" + typeFill + @"," + lsSku + @")";
                     return false;
                 }
             }
-
-
-
-
         }
 
         public static bool sp_SpaceMan_Img_StoreShelf_update(string uid, ShelfList it)
@@ -5274,7 +5201,6 @@ ORDER BY FIELD(" + typeFill + @"," + lsSku + @")";
                 }
 
                 return true;
-
             }
             catch (Exception ex)
             {
@@ -5302,14 +5228,12 @@ ORDER BY FIELD(" + typeFill + @"," + lsSku + @")";
                     cmd.Parameters.Add(new SqlParameter("site", it.site));
                     cmd.Parameters.Add(new SqlParameter("rate", it.rate));
 
-
                     var reader = cmd.ExecuteNonQuery();
 
                     con.Close();
                 }
 
                 return true;
-
             }
             catch (Exception ex)
             {
@@ -5333,14 +5257,12 @@ ORDER BY FIELD(" + typeFill + @"," + lsSku + @")";
                     cmd.Parameters.Add(new SqlParameter("shelfCode", it.shelfCode));
                     cmd.Parameters.Add(new SqlParameter("subCode", it.subCode));
 
-
                     var reader = cmd.ExecuteNonQuery();
 
                     con.Close();
                 }
 
                 return true;
-
             }
             catch (Exception ex)
             {
@@ -5353,7 +5275,6 @@ ORDER BY FIELD(" + typeFill + @"," + lsSku + @")";
         {
             List<StoreLayout_Line> it_r = new List<StoreLayout_Line>();
 
-
             using (var con = new SqlConnection(strCon))
             {
                 con.Open();
@@ -5362,7 +5283,6 @@ ORDER BY FIELD(" + typeFill + @"," + lsSku + @")";
                     SqlCommand cmd = new SqlCommand("sp_ProductTool_SpaceMan_StoreLayout_Line_get", con);
                     cmd.CommandType = CommandType.StoredProcedure;
                     cmd.CommandTimeout = 3000;
-
 
                     cmd.Parameters.Add(new SqlParameter("uid", uid));
                     cmd.Parameters.Add(new SqlParameter("storeNo", storeNo));
@@ -5391,7 +5311,6 @@ ORDER BY FIELD(" + typeFill + @"," + lsSku + @")";
                     return it_r;
                 }
             }
-
         }
 
         public static bool sp_ProductTool_SpaceMan_StoreLayout_Line_add(string uid, StoreLayout_Line it)
@@ -5409,14 +5328,12 @@ ORDER BY FIELD(" + typeFill + @"," + lsSku + @")";
                     cmd.Parameters.Add(new SqlParameter("SL_Code", it.SL_Code));
                     cmd.Parameters.Add(new SqlParameter("link", it.link));
 
-
                     var reader = cmd.ExecuteNonQuery();
 
                     con.Close();
                 }
 
                 return true;
-
             }
             catch (Exception ex)
             {
@@ -5440,14 +5357,12 @@ ORDER BY FIELD(" + typeFill + @"," + lsSku + @")";
                     cmd.Parameters.Add(new SqlParameter("description", it.description));
                     cmd.Parameters.Add(new SqlParameter("status", it.status));
 
-
                     var reader = cmd.ExecuteNonQuery();
 
                     con.Close();
                 }
 
                 return true;
-
             }
             catch (Exception ex)
             {
@@ -5472,14 +5387,12 @@ ORDER BY FIELD(" + typeFill + @"," + lsSku + @")";
                     cmd.Parameters.Add(new SqlParameter("subCode", it.subCode));
                     cmd.Parameters.Add(new SqlParameter("img_root", it.img_root));
 
-
                     var reader = cmd.ExecuteNonQuery();
 
                     con.Close();
                 }
 
                 return true;
-
             }
             catch (Exception ex)
             {
@@ -5492,14 +5405,12 @@ ORDER BY FIELD(" + typeFill + @"," + lsSku + @")";
         {
             List<ImgRoot> it_r = new List<ImgRoot>();
 
-
             using (var con = new SqlConnection(strCon))
             {
                 con.Open();
 
                 try
                 {
-
                     SqlCommand cmd = new SqlCommand("sp_ProductTool_SpaceMan_Store_Shelf_ImgRoot_get", con);
                     cmd.CommandType = CommandType.StoredProcedure;
                     cmd.CommandTimeout = 3000;
@@ -5517,7 +5428,6 @@ ORDER BY FIELD(" + typeFill + @"," + lsSku + @")";
                             subCode = reader["subCode"].ToString(),
                             img_root = reader["img_root"].ToString(),
                             status = reader["status"].ToString(),
-
                         };
 
                         it_r.Add(its);
@@ -5533,13 +5443,11 @@ ORDER BY FIELD(" + typeFill + @"," + lsSku + @")";
                     return it_r;
                 }
             }
-
         }
 
         public static List<ShelfList> sp_ProductTool_SpaceMan_Img_StoreShelf_getAll(string uid, ShelfList it)
         {
             List<ShelfList> it_r = new List<ShelfList>();
-
 
             using (var con = new SqlConnection(strCon))
             {
@@ -5585,19 +5493,16 @@ ORDER BY FIELD(" + typeFill + @"," + lsSku + @")";
                 }
                 catch (Exception ex)
                 {
-
                     con.Close();
                     LogBuild.CreateLogger(JsonConvert.SerializeObject(ex), "sp_ProductTool_SpaceMan_Img_StoreShelf_getAll");
                     return it_r;
                 }
             }
-
         }
 
         public static List<ShelfList> sp_ProductTool_SpaceMan_Store_Shelf_ImgRoot_getAll(string uid, ShelfList it)
         {
             List<ShelfList> it_r = new List<ShelfList>();
-
 
             using (var con = new SqlConnection(strCon))
             {
@@ -5605,7 +5510,6 @@ ORDER BY FIELD(" + typeFill + @"," + lsSku + @")";
 
                 try
                 {
-
                     SqlCommand cmd = new SqlCommand("sp_ProductTool_SpaceMan_Store_Shelf_ImgRoot_getAll", con);
                     cmd.CommandType = CommandType.StoredProcedure;
                     cmd.CommandTimeout = 3000;
@@ -5640,13 +5544,11 @@ ORDER BY FIELD(" + typeFill + @"," + lsSku + @")";
                     return it_r;
                 }
             }
-
         }
 
         public static List<StoreLayout_Line> sp_ProductTool_SpaceMan_StoreLayout_Line_getAll(string uid, string storeNo)
         {
             List<StoreLayout_Line> it_r = new List<StoreLayout_Line>();
-
 
             using (var con = new SqlConnection(strCon))
             {
@@ -5654,7 +5556,6 @@ ORDER BY FIELD(" + typeFill + @"," + lsSku + @")";
 
                 try
                 {
-
                     SqlCommand cmd = new SqlCommand("sp_ProductTool_SpaceMan_StoreLayout_Line_getAll", con);
                     cmd.CommandType = CommandType.StoredProcedure;
                     cmd.CommandTimeout = 3000;
@@ -5685,13 +5586,11 @@ ORDER BY FIELD(" + typeFill + @"," + lsSku + @")";
                     return it_r;
                 }
             }
-
         }
 
         public static List<RateNew> sp_ProductTool_SpaceMan_RP_RateNew(string uid, string fromDate, string toDate)
         {
             List<RateNew> it_r = new List<RateNew>();
-
 
             using (var con = new SqlConnection(strCon))
             {
@@ -5730,13 +5629,11 @@ ORDER BY FIELD(" + typeFill + @"," + lsSku + @")";
                     return it_r;
                 }
             }
-
         }
 
         public static List<FQ_Score> sp_ProductTool_SpaceMan_RP_FQ(string uid, string year, string month)
         {
             List<FQ_Score> it_r = new List<FQ_Score>();
-
 
             using (var con = new SqlConnection(strCon))
             {
@@ -5744,7 +5641,6 @@ ORDER BY FIELD(" + typeFill + @"," + lsSku + @")";
 
                 try
                 {
-
                     SqlCommand cmd = new SqlCommand("sp_ProductTool_SpaceMan_RP_FQ", con);
                     cmd.CommandType = CommandType.StoredProcedure;
 
@@ -5780,13 +5676,11 @@ ORDER BY FIELD(" + typeFill + @"," + lsSku + @")";
                     return it_r;
                 }
             }
-
         }
 
         public static List<Adv_Header> sp_ProductTool_SpaceMan_Adv_Header_get(string uid)
         {
             List<Adv_Header> it_r = new List<Adv_Header>();
-
 
             using (var con = new SqlConnection(strCon))
             {
@@ -5820,13 +5714,11 @@ ORDER BY FIELD(" + typeFill + @"," + lsSku + @")";
                     return it_r;
                 }
             }
-
         }
 
         public static List<Adv_Line> sp_ProductTool_SpaceMan_Adv_Line_get(string uid, string storeNo)
         {
             List<Adv_Line> it_r = new List<Adv_Line>();
-
 
             using (var con = new SqlConnection(strCon))
             {
@@ -5865,13 +5757,11 @@ ORDER BY FIELD(" + typeFill + @"," + lsSku + @")";
                 }
                 catch (Exception ex)
                 {
-
                     con.Close();
                     LogBuild.CreateLogger(JsonConvert.SerializeObject(ex), "sp_ProductTool_SpaceMan_Adv_Line_get");
                     return it_r;
                 }
             }
-
         }
 
         public static bool sp_ProductTool_SpaceMan_Adv_Line_add(string uid, Adv_Line it)
@@ -5901,7 +5791,6 @@ ORDER BY FIELD(" + typeFill + @"," + lsSku + @")";
                 return false;
             }
         }
-
 
         public static bool sp_ProductTool_SpaceMan_Adv_Line_update(string uid, Adv_Line it)
         {
@@ -5935,7 +5824,6 @@ ORDER BY FIELD(" + typeFill + @"," + lsSku + @")";
         {
             List<LayoutItem> it_r = new List<LayoutItem>();
 
-
             using (var con = new SqlConnection(strCon))
             {
                 con.Open();
@@ -5961,7 +5849,6 @@ ORDER BY FIELD(" + typeFill + @"," + lsSku + @")";
                 }
                 catch (Exception ex)
                 {
-
                     con.Close();
                     LogBuild.CreateLogger(JsonConvert.SerializeObject(ex), "sp_ProductTool_SpaceMan_LayoutType_get");
                     return it_r;
@@ -5969,11 +5856,9 @@ ORDER BY FIELD(" + typeFill + @"," + lsSku + @")";
             }
         }
 
-
         public static List<LayoutItem> sp_ProductTool_SpaceMan_OutdoorType_get()
         {
             List<LayoutItem> it_r = new List<LayoutItem>();
-
 
             using (var con = new SqlConnection(strCon))
             {
@@ -6000,7 +5885,6 @@ ORDER BY FIELD(" + typeFill + @"," + lsSku + @")";
                 }
                 catch (Exception ex)
                 {
-
                     con.Close();
                     LogBuild.CreateLogger(JsonConvert.SerializeObject(ex), "sp_ProductTool_SpaceMan_OutdoorType_get");
                     return it_r;
@@ -6011,7 +5895,6 @@ ORDER BY FIELD(" + typeFill + @"," + lsSku + @")";
         public static List<LayoutItem> sp_ProductTool_SpaceMan_Syn3DType_get()
         {
             List<LayoutItem> it_r = new List<LayoutItem>();
-
 
             using (var con = new SqlConnection(strCon))
             {
@@ -6038,7 +5921,6 @@ ORDER BY FIELD(" + typeFill + @"," + lsSku + @")";
                 }
                 catch (Exception ex)
                 {
-
                     con.Close();
                     LogBuild.CreateLogger(JsonConvert.SerializeObject(ex), "sp_ProductTool_SpaceMan_Syn3DType_get");
                     return it_r;
@@ -6049,7 +5931,6 @@ ORDER BY FIELD(" + typeFill + @"," + lsSku + @")";
         public static List<LayoutLine> sp_ProductTool_SpaceMan_Layout_Line_get(string uid, LayoutLine it)
         {
             List<LayoutLine> it_r = new List<LayoutLine>();
-
 
             using (var con = new SqlConnection(strCon))
             {
@@ -6081,7 +5962,6 @@ ORDER BY FIELD(" + typeFill + @"," + lsSku + @")";
                             createdBy = reader["createdBy"].ToString(),
                             modifyDate = reader["modifyDate"].ToString(),
                             modifyBy = reader["modifyBy"].ToString(),
-
                         };
 
                         it_r.Add(its);
@@ -6092,14 +5972,12 @@ ORDER BY FIELD(" + typeFill + @"," + lsSku + @")";
                 }
                 catch (Exception ex)
                 {
-
                     con.Close();
                     LogBuild.CreateLogger(JsonConvert.SerializeObject(ex), "sp_ProductTool_SpaceMan_Layout_Line_get");
                     return it_r;
                 }
             }
         }
-
 
         public static bool sp_ProductTool_SpaceMan_Layout_Line_add(string uid, LayoutLine it)
         {
@@ -6127,7 +6005,6 @@ ORDER BY FIELD(" + typeFill + @"," + lsSku + @")";
                 }
                 catch (Exception ex)
                 {
-
                     con.Close();
                     LogBuild.CreateLogger(JsonConvert.SerializeObject(ex), "sp_ProductTool_SpaceMan_Layout_Line_add");
                     return false;
@@ -6135,14 +6012,13 @@ ORDER BY FIELD(" + typeFill + @"," + lsSku + @")";
             }
         }
 
-        #endregion
+        #endregion SpaceMan
 
         #region SourceProduct
 
         public static List<sourceItem> sp_ProductTool_SourceProduct_Info_get(string uid, string str_fillter, string status)
         {
             List<sourceItem> it_r = new List<sourceItem>();
-
 
             using (var con = new SqlConnection(strCon))
             {
@@ -6201,7 +6077,6 @@ ORDER BY FIELD(" + typeFill + @"," + lsSku + @")";
                     return it_r;
                 }
             }
-
         }
 
         public static bool sp_ProductTool_SourceProduct_Info_add(string uid, sourceItem it)
@@ -6229,8 +6104,6 @@ ORDER BY FIELD(" + typeFill + @"," + lsSku + @")";
                     cmd.Parameters.Add(new SqlParameter("GroupProduct", it.GroupCode));
                     cmd.Parameters.Add(new SqlParameter("FunctionProduct", it.FunctionCode));
                     cmd.Parameters.Add(new SqlParameter("UoM", it.UoM));
-
-
 
                     var reader = cmd.ExecuteNonQuery();
 
@@ -6279,7 +6152,6 @@ ORDER BY FIELD(" + typeFill + @"," + lsSku + @")";
         {
             List<DivCatGroupFunc> it_r = new List<DivCatGroupFunc>();
 
-
             using (var con = new SqlConnection(strCon))
             {
                 con.Open();
@@ -6320,18 +6192,13 @@ ORDER BY FIELD(" + typeFill + @"," + lsSku + @")";
                     return it_r;
                 }
             }
-
         }
-
-
 
         public static List<MDS_DivCatGroupFunc> sp_ProductTool_MDS_DivCatGroupFunc_get(string uid, string type, string fillter)
         {
-
             // div-cat-group-func
 
             List<MDS_DivCatGroupFunc> it_r = new List<MDS_DivCatGroupFunc>();
-
 
             using (var con = new SqlConnection(strCon))
             {
@@ -6339,7 +6206,6 @@ ORDER BY FIELD(" + typeFill + @"," + lsSku + @")";
 
                 try
                 {
-
                     SqlCommand cmd = new SqlCommand("sp_ProductTool_MDS_DivCatGroupFunc_get", con);
                     cmd.CommandType = CommandType.StoredProcedure;
 
@@ -6362,7 +6228,6 @@ ORDER BY FIELD(" + typeFill + @"," + lsSku + @")";
                     con.Close();
 
                     return it_r;
-
                 }
                 catch (Exception ex)
                 {
@@ -6371,7 +6236,6 @@ ORDER BY FIELD(" + typeFill + @"," + lsSku + @")";
                     return it_r;
                 }
             }
-
         }
 
         public static bool sp_ProductTool_MDS_DivCatGroupFunc_add(string uid, string type, string Code, string Name, string ParentCode)
@@ -6389,7 +6253,6 @@ ORDER BY FIELD(" + typeFill + @"," + lsSku + @")";
                     cmd.Parameters.Add(new SqlParameter("Code", Code));
                     cmd.Parameters.Add(new SqlParameter("Name", Name));
                     cmd.Parameters.Add(new SqlParameter("ParentCode", ParentCode != null ? ParentCode : ""));
-
 
                     var reader = cmd.ExecuteNonQuery();
 
@@ -6409,14 +6272,12 @@ ORDER BY FIELD(" + typeFill + @"," + lsSku + @")";
         {
             List<DivCatGroupFunc> it_r = new List<DivCatGroupFunc>();
 
-
             using (var con = new SqlConnection(strCon))
             {
                 con.Open();
 
                 try
                 {
-
                     SqlCommand cmd = new SqlCommand("sp_ProductTool_SourceProduct_DivCatGroupFunc_v2_get", con);
                     cmd.CommandType = CommandType.StoredProcedure;
 
@@ -6436,7 +6297,6 @@ ORDER BY FIELD(" + typeFill + @"," + lsSku + @")";
                             GroupName = reader["GroupName"].ToString(),
                             FunctionCode = reader["FunctionCode"].ToString(),
                             FunctionName = reader["FunctionName"].ToString(),
-
                         };
 
                         it_r.Add(it);
@@ -6444,7 +6304,6 @@ ORDER BY FIELD(" + typeFill + @"," + lsSku + @")";
                     con.Close();
 
                     return it_r;
-
                 }
                 catch (Exception ex)
                 {
@@ -6453,8 +6312,8 @@ ORDER BY FIELD(" + typeFill + @"," + lsSku + @")";
                     return it_r;
                 }
             }
-
         }
+
         public static List<DivCatGroupFunc> sp_SourceProduct_DivCatGroupFunc_v2_get_ProNew()
         {
             List<DivCatGroupFunc> it_r = new List<DivCatGroupFunc>();
@@ -6479,7 +6338,6 @@ ORDER BY FIELD(" + typeFill + @"," + lsSku + @")";
                             GroupName = reader["GroupName"].ToString(),
                             FunctionCode = reader["FunctionCode"].ToString(),
                             FunctionName = reader["FunctionName"].ToString(),
-
                         };
 
                         it_r.Add(it);
@@ -6487,7 +6345,6 @@ ORDER BY FIELD(" + typeFill + @"," + lsSku + @")";
                     con.Close();
 
                     return it_r;
-
                 }
                 catch (Exception ex)
                 {
@@ -6496,12 +6353,11 @@ ORDER BY FIELD(" + typeFill + @"," + lsSku + @")";
                     return it_r;
                 }
             }
-
         }
+
         public static List<DivCatGroupFunc> sp_bbs_DivCatGroupFunc_KM(string uid)
         {
             List<DivCatGroupFunc> it_r = new List<DivCatGroupFunc>();
-
 
             using (var con = new SqlConnection(strCon))
             {
@@ -6509,7 +6365,6 @@ ORDER BY FIELD(" + typeFill + @"," + lsSku + @")";
 
                 try
                 {
-
                     SqlCommand cmd = new SqlCommand("sp_bbs_DivCatGroupFunc_KM", con);
                     cmd.CommandType = CommandType.StoredProcedure;
 
@@ -6529,7 +6384,6 @@ ORDER BY FIELD(" + typeFill + @"," + lsSku + @")";
                             GroupName = reader["GroupName"].ToString(),
                             FunctionCode = reader["FunctionCode"].ToString(),
                             FunctionName = reader["FunctionName"].ToString(),
-
                         };
 
                         it_r.Add(it);
@@ -6537,7 +6391,6 @@ ORDER BY FIELD(" + typeFill + @"," + lsSku + @")";
                     con.Close();
 
                     return it_r;
-
                 }
                 catch (Exception ex)
                 {
@@ -6546,10 +6399,9 @@ ORDER BY FIELD(" + typeFill + @"," + lsSku + @")";
                     return it_r;
                 }
             }
-
         }
 
-        #endregion
+        #endregion SourceProduct
 
         #region ScoreStore
 
@@ -6562,7 +6414,6 @@ ORDER BY FIELD(" + typeFill + @"," + lsSku + @")";
                 con.Open();
                 try
                 {
-
                     SqlCommand cmd = new SqlCommand("sp_ProductTool_ScoreStore_StoreList_get", con);
                     cmd.CommandType = CommandType.StoredProcedure;
 
@@ -6593,14 +6444,11 @@ ORDER BY FIELD(" + typeFill + @"," + lsSku + @")";
                     return it_r;
                 }
             }
-
         }
-
 
         public static List<ScoreStoreHeader> sp_ProductTool_ScoreStore_Header_get(string uid)
         {
             List<ScoreStoreHeader> it_r = new List<ScoreStoreHeader>();
-
 
             using (var con = new SqlConnection(strCon))
             {
@@ -6608,7 +6456,6 @@ ORDER BY FIELD(" + typeFill + @"," + lsSku + @")";
 
                 try
                 {
-
                     SqlCommand cmd = new SqlCommand("sp_ProductTool_ScoreStore_Header_get", con);
                     cmd.CommandType = CommandType.StoredProcedure;
 
@@ -6634,7 +6481,6 @@ ORDER BY FIELD(" + typeFill + @"," + lsSku + @")";
                     con.Close();
 
                     return it_r;
-
                 }
                 catch (Exception ex)
                 {
@@ -6643,13 +6489,11 @@ ORDER BY FIELD(" + typeFill + @"," + lsSku + @")";
                     return it_r;
                 }
             }
-
         }
 
         public static List<ScoreStoreHeader> sp_ProductTool_ScoreStore_Header_get_v2(string uid, string storeNo)
         {
             List<ScoreStoreHeader> it_r = new List<ScoreStoreHeader>();
-
 
             using (var con = new SqlConnection(strCon))
             {
@@ -6657,7 +6501,6 @@ ORDER BY FIELD(" + typeFill + @"," + lsSku + @")";
 
                 try
                 {
-
                     SqlCommand cmd = new SqlCommand("sp_ProductTool_ScoreStore_Header_get_v2", con);
                     cmd.CommandType = CommandType.StoredProcedure;
 
@@ -6692,13 +6535,11 @@ ORDER BY FIELD(" + typeFill + @"," + lsSku + @")";
                     return it_r;
                 }
             }
-
         }
 
         public static List<reportItem> sp_ProductTool_ScoreStore_Report(string uid, string storeNo, string fromDate, string toDate)
         {
             List<reportItem> it_r = new List<reportItem>();
-
 
             using (var con = new SqlConnection(strCon))
             {
@@ -6706,7 +6547,6 @@ ORDER BY FIELD(" + typeFill + @"," + lsSku + @")";
 
                 try
                 {
-
                     SqlCommand cmd = new SqlCommand("sp_ProductTool_ScoreStore_Report", con);
                     cmd.CommandType = CommandType.StoredProcedure;
 
@@ -6722,10 +6562,6 @@ ORDER BY FIELD(" + typeFill + @"," + lsSku + @")";
                     {
                         cmd.Parameters.Add(new SqlParameter("toDate", toDate));
                     }
-
-
-
-
 
                     var reader = cmd.ExecuteReader();
 
@@ -6750,7 +6586,6 @@ ORDER BY FIELD(" + typeFill + @"," + lsSku + @")";
                     con.Close();
 
                     return it_r;
-
                 }
                 catch (Exception ex)
                 {
@@ -6759,7 +6594,6 @@ ORDER BY FIELD(" + typeFill + @"," + lsSku + @")";
                     return it_r;
                 }
             }
-
         }
 
         public static bool sp_ProductTool_ScoreStore_Header_add(string uid, ScoreStoreHeader it)
@@ -6823,7 +6657,8 @@ ORDER BY FIELD(" + typeFill + @"," + lsSku + @")";
                 return false;
             }
         }
-        #endregion
+
+        #endregion ScoreStore
 
         #region toDoList
 
@@ -6836,7 +6671,6 @@ ORDER BY FIELD(" + typeFill + @"," + lsSku + @")";
                 con.Open();
                 try
                 {
-
                     SqlCommand cmd = new SqlCommand("sp_ProductTool_ToDoList_Header_get", con);
                     cmd.CommandType = CommandType.StoredProcedure;
 
@@ -6871,7 +6705,6 @@ ORDER BY FIELD(" + typeFill + @"," + lsSku + @")";
             }
         }
 
-
         public static List<permissioninfo> sp_ProductTool_getPermissionforAdmin(string uid)
         {
             List<permissioninfo> it_r = new List<permissioninfo>();
@@ -6881,7 +6714,6 @@ ORDER BY FIELD(" + typeFill + @"," + lsSku + @")";
                 con.Open();
                 try
                 {
-
                     SqlCommand cmd = new SqlCommand("sp_ProductTool_getPermissionAdmin", con);
                     cmd.CommandType = CommandType.StoredProcedure;
 
@@ -6893,13 +6725,11 @@ ORDER BY FIELD(" + typeFill + @"," + lsSku + @")";
                     {
                         permissioninfo it = new permissioninfo
                         {
-
                             fcode = reader["fcode"].ToString(),
                             fname = reader["fname"].ToString(),
                             paname = reader["paname"].ToString(),
 
                             vcount = int.Parse(reader["ischeck"].ToString()),
-
                         };
 
                         it_r.Add(it);
@@ -6924,7 +6754,6 @@ ORDER BY FIELD(" + typeFill + @"," + lsSku + @")";
                 con.Open();
                 try
                 {
-
                     SqlCommand cmd = new SqlCommand("sp_ProductTool_updatePermission", con);
                     cmd.CommandType = CommandType.StoredProcedure;
                     string fcode = String.Join("|", lst.Where(x => x.vcount == 1).Select(x => x.fcode));
@@ -6954,7 +6783,6 @@ ORDER BY FIELD(" + typeFill + @"," + lsSku + @")";
                 con.Open();
                 try
                 {
-
                     SqlCommand cmd = new SqlCommand("sp_ProductTool_getPermissionAdminBBS", con);
                     cmd.CommandType = CommandType.StoredProcedure;
 
@@ -6966,7 +6794,6 @@ ORDER BY FIELD(" + typeFill + @"," + lsSku + @")";
                     {
                         permissioninfo it = new permissioninfo
                         {
-
                             fcode = reader["fcode"].ToString(),
                             flevel = int.Parse(reader["flevel"].ToString()),
                             fname = reader["fname"].ToString(),
@@ -6974,7 +6801,6 @@ ORDER BY FIELD(" + typeFill + @"," + lsSku + @")";
                             parentcode = reader["parentcode"].ToString(),
                             reportpath = reader["reportpath"].ToString(),
                             vcount = int.Parse(reader["ischeck"].ToString()),
-
                         };
 
                         it_r.Add(it);
@@ -7001,7 +6827,6 @@ ORDER BY FIELD(" + typeFill + @"," + lsSku + @")";
                 con.Open();
                 try
                 {
-
                     SqlCommand cmd = new SqlCommand("sp_bbs_getFunctionbyGroup", con);
                     cmd.CommandType = CommandType.StoredProcedure;
 
@@ -7013,7 +6838,6 @@ ORDER BY FIELD(" + typeFill + @"," + lsSku + @")";
                     {
                         permissioninfo it = new permissioninfo
                         {
-
                             fcode = reader["fcode"].ToString(),
                             flevel = int.Parse(reader["flevel"].ToString()),
                             fname = reader["fname"].ToString(),
@@ -7021,7 +6845,6 @@ ORDER BY FIELD(" + typeFill + @"," + lsSku + @")";
                             parentcode = reader["parentcode"].ToString(),
                             reportpath = reader["reportpath"].ToString(),
                             vcount = int.Parse(reader["ischeck"].ToString()),
-
                         };
 
                         it_r.Add(it);
@@ -7039,7 +6862,6 @@ ORDER BY FIELD(" + typeFill + @"," + lsSku + @")";
             }
         }
 
-
         public static List<groupinfo> sp_bbs_getGroupbyUser(string userID)
         {
             List<groupinfo> it_r = new List<groupinfo>();
@@ -7049,7 +6871,6 @@ ORDER BY FIELD(" + typeFill + @"," + lsSku + @")";
                 con.Open();
                 try
                 {
-
                     SqlCommand cmd = new SqlCommand("sp_bbs_getGroupbyUser", con);
                     cmd.CommandType = CommandType.StoredProcedure;
 
@@ -7061,7 +6882,6 @@ ORDER BY FIELD(" + typeFill + @"," + lsSku + @")";
                     {
                         groupinfo it = new groupinfo
                         {
-
                             gcode = reader["groupcode"].ToString(),
                             gname = reader["groupname"].ToString(),
                             vcount = int.Parse(reader["ischeck"].ToString()),
@@ -7089,7 +6909,6 @@ ORDER BY FIELD(" + typeFill + @"," + lsSku + @")";
                 con.Open();
                 try
                 {
-
                     SqlCommand cmd = new SqlCommand("sp_ProductTool_updatePermissionBBS", con);
                     cmd.CommandType = CommandType.StoredProcedure;
                     string fcode = String.Join("|", lst.Where(x => x.vcount == 1).Select(x => x.fcode));
@@ -7118,7 +6937,6 @@ ORDER BY FIELD(" + typeFill + @"," + lsSku + @")";
                 con.Open();
                 try
                 {
-
                     SqlCommand cmd = new SqlCommand("sp_bbs_updatePermissionGroup", con);
                     cmd.CommandType = CommandType.StoredProcedure;
                     string fcode = String.Join("|", lst.Where(x => x.vcount == 1).Select(x => x.fcode));
@@ -7146,7 +6964,6 @@ ORDER BY FIELD(" + typeFill + @"," + lsSku + @")";
                 con.Open();
                 try
                 {
-
                     SqlCommand cmd = new SqlCommand("sp_bbs_updateGroupUser", con);
                     cmd.CommandType = CommandType.StoredProcedure;
                     string gcode = String.Join("|", lst.Where(x => x.vcount == 1).Select(x => x.gcode));
@@ -7167,7 +6984,6 @@ ORDER BY FIELD(" + typeFill + @"," + lsSku + @")";
             }
         }
 
-
         public static List<permissioninfo> sp_ProductTool_getPermissionbyUser(string uid)
         {
             List<permissioninfo> it_r = new List<permissioninfo>();
@@ -7177,7 +6993,6 @@ ORDER BY FIELD(" + typeFill + @"," + lsSku + @")";
                 con.Open();
                 try
                 {
-
                     SqlCommand cmd = new SqlCommand("sp_ProductTool_getPermissionbyUser", con);
                     cmd.CommandType = CommandType.StoredProcedure;
 
@@ -7197,7 +7012,6 @@ ORDER BY FIELD(" + typeFill + @"," + lsSku + @")";
                             controller = reader["controller"].ToString(),
                             reportpath = reader["reportpath"].ToString(),
                             vcount = int.Parse(reader["vcount"].ToString()),
-
                         };
 
                         it_r.Add(it);
@@ -7214,7 +7028,6 @@ ORDER BY FIELD(" + typeFill + @"," + lsSku + @")";
                 }
             }
         }
-
 
         public static List<permissioninfo> sp_ProductTool_getPermissionbyUserBBS(string uid)
         {
@@ -7291,12 +7104,10 @@ ORDER BY FIELD(" + typeFill + @"," + lsSku + @")";
                     LogBuild.CreateLogger(JsonConvert.SerializeObject(ex), "sp_ProductTool_ToDoList_Lines_add");
                     return false;
                 }
-
             }
         }
 
-
-        #endregion
+        #endregion toDoList
 
         #region POtong
 
@@ -7735,7 +7546,8 @@ ORDER BY FIELD(" + typeFill + @"," + lsSku + @")";
                 }
             }
         }
-        #endregion
+
+        #endregion POtong
 
         #region Trainghiem
 
@@ -7748,7 +7560,6 @@ ORDER BY FIELD(" + typeFill + @"," + lsSku + @")";
                 con.Open();
                 try
                 {
-
                     SqlCommand cmd = new SqlCommand("sp_BBSmart_GetListTraiNghiem", con);
                     cmd.CommandType = CommandType.StoredProcedure;
                     cmd.Parameters.Add(new SqlParameter("userid", userid));
@@ -7795,7 +7606,6 @@ ORDER BY FIELD(" + typeFill + @"," + lsSku + @")";
                 con.Open();
                 try
                 {
-
                     SqlCommand cmd = new SqlCommand("sp_bbs_GetListCustomerAutoDetail", con);
                     cmd.CommandType = CommandType.StoredProcedure;
                     cmd.Parameters.Add(new SqlParameter("userid", userid));
@@ -7833,7 +7643,6 @@ ORDER BY FIELD(" + typeFill + @"," + lsSku + @")";
                 con.Open();
                 try
                 {
-
                     SqlCommand cmd = new SqlCommand("sp_BBSmart_deleteTraiNghiem", con);
                     cmd.CommandType = CommandType.StoredProcedure;
 
@@ -7920,7 +7729,6 @@ ORDER BY FIELD(" + typeFill + @"," + lsSku + @")";
                 con.Open();
                 try
                 {
-
                     SqlCommand cmd = new SqlCommand("sp_bbs_UpdateCustomerAuto", con);
                     cmd.CommandType = CommandType.StoredProcedure;
 
@@ -7945,9 +7753,10 @@ ORDER BY FIELD(" + typeFill + @"," + lsSku + @")";
             }
         }
 
-        #endregion
+        #endregion Trainghiem
 
         #region box lọc phân quyền
+
         public static List<StoreItem> SP_BBM_ManageUse_Store_get(string uid)
         {
             List<StoreItem> it_r = new List<StoreItem>();
@@ -7957,7 +7766,6 @@ ORDER BY FIELD(" + typeFill + @"," + lsSku + @")";
                 con.Open();
                 try
                 {
-
                     SqlCommand cmd = new SqlCommand("SP_BBM_ManageUse_Store_get", con);
                     cmd.CommandType = CommandType.StoredProcedure;
                     cmd.CommandTimeout = 300;
@@ -7998,7 +7806,6 @@ ORDER BY FIELD(" + typeFill + @"," + lsSku + @")";
                 con.Open();
                 try
                 {
-
                     SqlCommand cmd = new SqlCommand("SP_BBM_ManageUse_getTinh", con);
                     cmd.CommandType = CommandType.StoredProcedure;
                     cmd.CommandTimeout = 300;
@@ -8039,7 +7846,6 @@ ORDER BY FIELD(" + typeFill + @"," + lsSku + @")";
                 con.Open();
                 try
                 {
-
                     SqlCommand cmd = new SqlCommand("SP_BBM_ManageUse_getVung", con);
                     cmd.CommandType = CommandType.StoredProcedure;
                     cmd.CommandTimeout = 300;
@@ -8079,7 +7885,6 @@ ORDER BY FIELD(" + typeFill + @"," + lsSku + @")";
                 con.Open();
                 try
                 {
-
                     SqlCommand cmd = new SqlCommand("SP_BBM_ManageUse_Header_getDivison", con);
                     cmd.CommandType = CommandType.StoredProcedure;
                     cmd.CommandTimeout = 300;
@@ -8117,7 +7922,6 @@ ORDER BY FIELD(" + typeFill + @"," + lsSku + @")";
                 con.Open();
                 try
                 {
-
                     SqlCommand cmd = new SqlCommand("SP_BBM_ManageUse_Header_getDepartment", con);
                     cmd.CommandType = CommandType.StoredProcedure;
                     cmd.CommandTimeout = 300;
@@ -8145,6 +7949,7 @@ ORDER BY FIELD(" + typeFill + @"," + lsSku + @")";
                 }
             }
         }
+
         public static List<ManagerUserModel> SP_BBM_ManageUse_ListUser(string Division_Code, string Deparment)
         {
             List<ManagerUserModel> it_r = new List<ManagerUserModel>();
@@ -8154,7 +7959,6 @@ ORDER BY FIELD(" + typeFill + @"," + lsSku + @")";
                 con.Open();
                 try
                 {
-
                     SqlCommand cmd = new SqlCommand("SP_BBM_ManageUse_get_list_user", con);
                     cmd.CommandType = CommandType.StoredProcedure;
                     cmd.Parameters.Add(new SqlParameter("DivisionCode", Division_Code));
@@ -8195,7 +7999,6 @@ ORDER BY FIELD(" + typeFill + @"," + lsSku + @")";
                 con.Open();
                 try
                 {
-
                     SqlCommand cmd = new SqlCommand("SP_BBM_ManageUse_ListPosition", con);
                     cmd.CommandType = CommandType.StoredProcedure;
                     cmd.CommandTimeout = 300;
@@ -8235,7 +8038,6 @@ ORDER BY FIELD(" + typeFill + @"," + lsSku + @")";
                 con.Open();
                 try
                 {
-
                     SqlCommand cmd = new SqlCommand("SP_BBM_ManageUse_Header_getuser", con);
                     cmd.CommandType = CommandType.StoredProcedure;
                     cmd.CommandTimeout = 300;
@@ -8265,6 +8067,7 @@ ORDER BY FIELD(" + typeFill + @"," + lsSku + @")";
                 }
             }
         }
+
         public static List<BiboSmartMenu> SP_BBM_ManageUse_getNghiepVu()
         {
             List<BiboSmartMenu> it_r = new List<BiboSmartMenu>();
@@ -8274,7 +8077,6 @@ ORDER BY FIELD(" + typeFill + @"," + lsSku + @")";
                 con.Open();
                 try
                 {
-
                     SqlCommand cmd = new SqlCommand("SP_BBM_ManageUse_getNghiepVu", con);
                     cmd.CommandType = CommandType.StoredProcedure;
                     cmd.CommandTimeout = 3000;
@@ -8314,7 +8116,6 @@ ORDER BY FIELD(" + typeFill + @"," + lsSku + @")";
                 con.Open();
                 try
                 {
-
                     SqlCommand cmd = new SqlCommand("SP_BBM_ManageUse_Header_getDepartment", con);
                     cmd.CommandType = CommandType.StoredProcedure;
                     cmd.CommandTimeout = 3000;
@@ -8353,7 +8154,6 @@ ORDER BY FIELD(" + typeFill + @"," + lsSku + @")";
                 con.Open();
                 try
                 {
-
                     SqlCommand cmd = new SqlCommand("SP_BBM_ManageUse_Header_get", con);
                     cmd.CommandType = CommandType.StoredProcedure;
                     cmd.CommandTimeout = 30000;
@@ -8469,7 +8269,6 @@ ORDER BY FIELD(" + typeFill + @"," + lsSku + @")";
                 con.Open();
                 try
                 {
-
                     SqlCommand cmd = new SqlCommand("SP_BBM_ManageUse_Header_get_E_Section", con);
                     cmd.CommandType = CommandType.StoredProcedure;
                     cmd.CommandTimeout = 300;
@@ -8500,9 +8299,10 @@ ORDER BY FIELD(" + typeFill + @"," + lsSku + @")";
             }
         }
 
-        #endregion
+        #endregion box lọc phân quyền
 
         #region PQ -- QLPQ
+
         public static DataTable sp_bbs_get_sys_list_user_function_QLPhanQuyen(string fcode, string fChildCode, string user_div, string user_dep, string user_pos, string userid)
         {
             DataSet ds = new DataSet();
@@ -8533,6 +8333,7 @@ ORDER BY FIELD(" + typeFill + @"," + lsSku + @")";
                 return ds.Tables[0];
             }
         }
+
         public static DataTable sp_bbs_get_sys_list_user_function(string fcode, string fChildCode, string user_div, string user_dep, string user_pos, string userid)
         {
             DataSet ds = new DataSet();
@@ -8571,7 +8372,6 @@ ORDER BY FIELD(" + typeFill + @"," + lsSku + @")";
                 con.Open();
                 try
                 {
-
                     SqlCommand cmd = new SqlCommand("sp_bbs_sys_update_user_permission", con);
                     cmd.CommandType = CommandType.StoredProcedure;
                     cmd.Parameters.Add(new SqlParameter("userid", uid));
@@ -8592,7 +8392,8 @@ ORDER BY FIELD(" + typeFill + @"," + lsSku + @")";
                 }
             }
         }
-        #endregion
+
+        #endregion PQ -- QLPQ
 
         #region Đề xuất phân quyền
 
@@ -8626,9 +8427,11 @@ ORDER BY FIELD(" + typeFill + @"," + lsSku + @")";
                 return ds.Tables[0];
             }
         }
-        #endregion
+
+        #endregion Đề xuất phân quyền
 
         #region Duyệt phân quyền (1)
+
         public static DataTable sp_bbs_get_sys_list_user_function_PermissionAccept01(string fcode, string fChildCode, string user_div, string user_dep, string user_pos, string userid)
         {
             DataSet ds = new DataSet();
@@ -8659,9 +8462,11 @@ ORDER BY FIELD(" + typeFill + @"," + lsSku + @")";
                 return ds.Tables[0];
             }
         }
-        #endregion
+
+        #endregion Duyệt phân quyền (1)
 
         #region Duyệt phân quyền (2)
+
         public static DataTable sp_bbs_get_sys_list_user_function_PermissionAccept02(string fcode, string fChildCode, string user_div, string user_dep, string user_pos, string userid)
         {
             DataSet ds = new DataSet();
@@ -8692,9 +8497,10 @@ ORDER BY FIELD(" + typeFill + @"," + lsSku + @")";
                 return ds.Tables[0];
             }
         }
-        #endregion
 
-        #region Xây dựng bộ sưu tập 
+        #endregion Duyệt phân quyền (2)
+
+        #region Xây dựng bộ sưu tập
 
         public static List<itemBST> sp_BBSmart_GetListThuongHieu(string uid)
         {
@@ -8744,7 +8550,6 @@ ORDER BY FIELD(" + typeFill + @"," + lsSku + @")";
                 con.Open();
                 try
                 {
-
                     SqlCommand cmd = new SqlCommand("sp_BBSmart_GetListDoTuoi", con);
                     cmd.CommandType = CommandType.StoredProcedure;
                     cmd.CommandTimeout = 30000;
@@ -8784,7 +8589,6 @@ ORDER BY FIELD(" + typeFill + @"," + lsSku + @")";
                 con.Open();
                 try
                 {
-
                     SqlCommand cmd = new SqlCommand("sp_bbs_collection_GetLstCodeBST", con);
                     cmd.CommandType = CommandType.StoredProcedure;
                     cmd.CommandTimeout = 30000;
@@ -8822,7 +8626,6 @@ ORDER BY FIELD(" + typeFill + @"," + lsSku + @")";
                 con.Open();
                 try
                 {
-
                     SqlCommand cmd = new SqlCommand("sp_bbs_collection_GetLstNameBST", con);
                     cmd.CommandType = CommandType.StoredProcedure;
                     cmd.CommandTimeout = 30000;
@@ -8860,7 +8663,6 @@ ORDER BY FIELD(" + typeFill + @"," + lsSku + @")";
                 con.Open();
                 try
                 {
-
                     SqlCommand cmd = new SqlCommand("sp_bbs_collection_getrangereview", con);
                     cmd.CommandType = CommandType.StoredProcedure;
                     cmd.CommandTimeout = 30000;
@@ -8898,7 +8700,6 @@ ORDER BY FIELD(" + typeFill + @"," + lsSku + @")";
                 con.Open();
                 try
                 {
-
                     SqlCommand cmd = new SqlCommand("sp_bbs_collection_lstNguonNhap", con);
                     cmd.CommandType = CommandType.StoredProcedure;
                     cmd.CommandTimeout = 30000;
@@ -8936,7 +8737,6 @@ ORDER BY FIELD(" + typeFill + @"," + lsSku + @")";
                 con.Open();
                 try
                 {
-
                     SqlCommand cmd = new SqlCommand("sp_bbs_collection_lstMuaVu", con);
                     cmd.CommandType = CommandType.StoredProcedure;
                     cmd.CommandTimeout = 30000;
@@ -8974,7 +8774,6 @@ ORDER BY FIELD(" + typeFill + @"," + lsSku + @")";
                 con.Open();
                 try
                 {
-
                     SqlCommand cmd = new SqlCommand("sp_bbs_collection_lstbrand", con);
                     cmd.CommandType = CommandType.StoredProcedure;
                     cmd.CommandTimeout = 30000;
@@ -9012,7 +8811,6 @@ ORDER BY FIELD(" + typeFill + @"," + lsSku + @")";
                 con.Open();
                 try
                 {
-
                     SqlCommand cmd = new SqlCommand("sp_bbs_collection_getbrand", con);
                     cmd.CommandType = CommandType.StoredProcedure;
                     cmd.CommandTimeout = 3000;
@@ -9051,7 +8849,6 @@ ORDER BY FIELD(" + typeFill + @"," + lsSku + @")";
                 con.Open();
                 try
                 {
-
                     SqlCommand cmd = new SqlCommand("sp_bbs_collection_getMuaVu", con);
                     cmd.CommandType = CommandType.StoredProcedure;
                     cmd.CommandTimeout = 3000;
@@ -9090,7 +8887,6 @@ ORDER BY FIELD(" + typeFill + @"," + lsSku + @")";
                 con.Open();
                 try
                 {
-
                     SqlCommand cmd = new SqlCommand("sp_bbs_collection_getNguonNhap", con);
                     cmd.CommandType = CommandType.StoredProcedure;
                     cmd.CommandTimeout = 3000;
@@ -9124,14 +8920,12 @@ ORDER BY FIELD(" + typeFill + @"," + lsSku + @")";
         {
             List<DivCatGroupFuncollect> it_r = new List<DivCatGroupFuncollect>();
 
-
             using (var con = new SqlConnection(strCon))
             {
                 con.Open();
 
                 try
                 {
-
                     SqlCommand cmd = new SqlCommand("sp_collection_SourceProduct_DivCatGroupFunc_v2_get", con);
                     cmd.CommandType = CommandType.StoredProcedure;
 
@@ -9151,7 +8945,6 @@ ORDER BY FIELD(" + typeFill + @"," + lsSku + @")";
                             GroupName = reader["GroupName"].ToString(),
                             FunctionCode = reader["FunctionCode"].ToString(),
                             FunctionName = reader["FunctionName"].ToString()
-
                         };
 
                         it_r.Add(it);
@@ -9159,7 +8952,6 @@ ORDER BY FIELD(" + typeFill + @"," + lsSku + @")";
                     con.Close();
 
                     return it_r;
-
                 }
                 catch (Exception ex)
                 {
@@ -9168,7 +8960,6 @@ ORDER BY FIELD(" + typeFill + @"," + lsSku + @")";
                     return it_r;
                 }
             }
-
         }
 
         public static DataTable sp_bbs_collection_GetLstproductImg(string userid, string cat, string group, string funct, string range, string brand, string nguonnhap, string muavu)
@@ -9213,7 +9004,6 @@ ORDER BY FIELD(" + typeFill + @"," + lsSku + @")";
                 con.Open();
                 try
                 {
-
                     SqlCommand cmd = new SqlCommand("sp_bbs_collection_GetLstproduct", con);
                     cmd.CommandType = CommandType.StoredProcedure;
                     cmd.Parameters.Add(new SqlParameter("userid", userid));
@@ -9259,7 +9049,7 @@ ORDER BY FIELD(" + typeFill + @"," + lsSku + @")";
             }
         }
 
-        #endregion
+        #endregion Xây dựng bộ sưu tập
 
         #region StockTransfer
 
@@ -9278,7 +9068,6 @@ ORDER BY FIELD(" + typeFill + @"," + lsSku + @")";
                     SqlCommand cmd = new SqlCommand("sp_BBM_SMART_stockTransfer_itemTransfer_get", con);
                     cmd.CommandType = CommandType.StoredProcedure;
                     cmd.CommandTimeout = 3000;
-
 
                     cmd.Parameters.Add(new SqlParameter("uid", uid));
                     var reader = cmd.ExecuteReader();
@@ -9311,7 +9100,6 @@ ORDER BY FIELD(" + typeFill + @"," + lsSku + @")";
                     LogBuild.CreateLogger(JsonConvert.SerializeObject(ex), "sp_BBM_SMART_stockTransfer_itemTransfer_get");
                     return it_r;
                 }
-
             }
         }
 
@@ -9328,7 +9116,6 @@ ORDER BY FIELD(" + typeFill + @"," + lsSku + @")";
                     SqlCommand cmd = new SqlCommand("sp_BBM_SMART_stockTransfer_packHeader_get", con);
                     cmd.CommandType = CommandType.StoredProcedure;
                     cmd.CommandTimeout = 300;
-
 
                     cmd.Parameters.Add(new SqlParameter("uid", uid));
                     cmd.Parameters.Add(new SqlParameter("type", type));
@@ -9382,7 +9169,6 @@ ORDER BY FIELD(" + typeFill + @"," + lsSku + @")";
                     LogBuild.CreateLogger(JsonConvert.SerializeObject(ex), "sp_BBM_SMART_stockTransfer_packHeader_get");
                     return it_r;
                 }
-
             }
         }
 
@@ -9399,7 +9185,6 @@ ORDER BY FIELD(" + typeFill + @"," + lsSku + @")";
                     SqlCommand cmd = new SqlCommand("sp_BBM_SMART_stockTransfer_transRouter_get", con);
                     cmd.CommandType = CommandType.StoredProcedure;
                     cmd.CommandTimeout = 3000;
-
 
                     cmd.Parameters.Add(new SqlParameter("uid", uid));
 
@@ -9428,7 +9213,6 @@ ORDER BY FIELD(" + typeFill + @"," + lsSku + @")";
                     LogBuild.CreateLogger(JsonConvert.SerializeObject(ex), "sp_BBM_SMART_stockTransfer_transRouter_get");
                     return it_r;
                 }
-
             }
         }
 
@@ -9445,7 +9229,6 @@ ORDER BY FIELD(" + typeFill + @"," + lsSku + @")";
                     SqlCommand cmd = new SqlCommand("sp_BBM_SMART_stockTransfer_transferType_get", con);
                     cmd.CommandType = CommandType.StoredProcedure;
                     cmd.CommandTimeout = 3000;
-
 
                     cmd.Parameters.Add(new SqlParameter("uid", uid));
 
@@ -9470,7 +9253,6 @@ ORDER BY FIELD(" + typeFill + @"," + lsSku + @")";
                     LogBuild.CreateLogger(JsonConvert.SerializeObject(ex), "sp_BBM_SMART_stockTransfer_transferType_get");
                     return it_r;
                 }
-
             }
         }
 
@@ -9487,7 +9269,6 @@ ORDER BY FIELD(" + typeFill + @"," + lsSku + @")";
                     SqlCommand cmd = new SqlCommand("sp_BBM_SMART_stockTransfer_boxType_get", con);
                     cmd.CommandType = CommandType.StoredProcedure;
                     cmd.CommandTimeout = 3000;
-
 
                     cmd.Parameters.Add(new SqlParameter("uid", uid));
 
@@ -9515,7 +9296,6 @@ ORDER BY FIELD(" + typeFill + @"," + lsSku + @")";
                     LogBuild.CreateLogger(JsonConvert.SerializeObject(ex), "sp_BBM_SMART_stockTransfer_boxType_get");
                     return it_r;
                 }
-
             }
         }
 
@@ -9533,7 +9313,6 @@ ORDER BY FIELD(" + typeFill + @"," + lsSku + @")";
                     cmd.CommandType = CommandType.StoredProcedure;
                     cmd.CommandTimeout = 3000;
 
-
                     cmd.Parameters.Add(new SqlParameter("uid", uid));
 
                     var reader = cmd.ExecuteReader();
@@ -9548,7 +9327,6 @@ ORDER BY FIELD(" + typeFill + @"," + lsSku + @")";
                             backName = reader["backName"].ToString(),
                             backLink = reader["backLink"].ToString(),
                             isMobile = int.Parse(reader["isMobile"].ToString()),
-
                         };
 
                         it_r.Add(its);
@@ -9563,7 +9341,6 @@ ORDER BY FIELD(" + typeFill + @"," + lsSku + @")";
                     LogBuild.CreateLogger(JsonConvert.SerializeObject(ex), "sp_BBM_SMART_stockTransfer_backLink_get");
                     return it_r;
                 }
-
             }
         }
 
@@ -9580,7 +9357,6 @@ ORDER BY FIELD(" + typeFill + @"," + lsSku + @")";
                     SqlCommand cmd = new SqlCommand("sp_BBM_SMART_stockTransfer_Transporter_get", con);
                     cmd.CommandType = CommandType.StoredProcedure;
                     cmd.CommandTimeout = 3000;
-
 
                     cmd.Parameters.Add(new SqlParameter("uid", uid));
 
@@ -9605,7 +9381,6 @@ ORDER BY FIELD(" + typeFill + @"," + lsSku + @")";
                     LogBuild.CreateLogger(JsonConvert.SerializeObject(ex), "sp_BBM_SMART_stockTransfer_Transporter_get");
                     return it_r;
                 }
-
             }
         }
 
@@ -9622,7 +9397,6 @@ ORDER BY FIELD(" + typeFill + @"," + lsSku + @")";
                     SqlCommand cmd = new SqlCommand("sp_BBM_SMART_stockTransfer_packLine_get", con);
                     cmd.CommandType = CommandType.StoredProcedure;
                     cmd.CommandTimeout = 3000;
-
 
                     cmd.Parameters.Add(new SqlParameter("uid", uid));
                     cmd.Parameters.Add(new SqlParameter("headerCode", headerCode));
@@ -9650,7 +9424,6 @@ ORDER BY FIELD(" + typeFill + @"," + lsSku + @")";
                     LogBuild.CreateLogger(JsonConvert.SerializeObject(ex), "sp_BBM_SMART_stockTransfer_packLine_get");
                     return it_r;
                 }
-
             }
         }
 
@@ -9690,7 +9463,6 @@ ORDER BY FIELD(" + typeFill + @"," + lsSku + @")";
                             Code = reader["Code"].ToString(),
                             transFrom = reader["transFrom"].ToString(),
                             transTo = reader["transTo"].ToString(),
-
                         };
 
                         it_r = its;
@@ -9705,7 +9477,6 @@ ORDER BY FIELD(" + typeFill + @"," + lsSku + @")";
                     LogBuild.CreateLogger(JsonConvert.SerializeObject(ex), "sp_BBM_SMART_stockTransfer_packHeader_add");
                     return it_r;
                 }
-
             }
         }
 
@@ -9741,7 +9512,6 @@ ORDER BY FIELD(" + typeFill + @"," + lsSku + @")";
                     LogBuild.CreateLogger(JsonConvert.SerializeObject(ex), "sp_BBM_SMART_stockTransfer_packHeader_get");
                     return false;
                 }
-
             }
         }
 
@@ -9756,7 +9526,6 @@ ORDER BY FIELD(" + typeFill + @"," + lsSku + @")";
                     SqlCommand cmd = new SqlCommand("sp_BBM_SMART_stockTransfer_packHeader_update", con);
                     cmd.CommandType = CommandType.StoredProcedure;
                     cmd.CommandTimeout = 3000;
-
 
                     cmd.Parameters.Add(new SqlParameter("uid", uid));
 
@@ -9776,12 +9545,13 @@ ORDER BY FIELD(" + typeFill + @"," + lsSku + @")";
                     LogBuild.CreateLogger(JsonConvert.SerializeObject(ex), "sp_BBM_SMART_stockTransfer_packHeader_update");
                     return false;
                 }
-
             }
         }
-        #endregion
+
+        #endregion StockTransfer
 
         #region KPIDepartment
+
         public static DataTable sp_bbs_get_KPIDepartment(string Department, string khoi)
         {
             DataSet ds = new DataSet();
@@ -9809,6 +9579,7 @@ ORDER BY FIELD(" + typeFill + @"," + lsSku + @")";
                 return ds.Tables[0];
             }
         }
+
         public static List<objCombox> sp_KPI_Chi_Tieu_khoi()
         {
             List<objCombox> it_r = new List<objCombox>();
@@ -9841,6 +9612,7 @@ ORDER BY FIELD(" + typeFill + @"," + lsSku + @")";
                 }
             }
         }
+
         public static List<KPITieuChi> GetListKPITieuChi(string KPIChiTieuTrial)
         {
             List<KPITieuChi> it_r = new List<KPITieuChi>();
@@ -9903,6 +9675,7 @@ ORDER BY FIELD(" + typeFill + @"," + lsSku + @")";
                 }
             }
         }
+
         public static bool DeleteKPIDepartment(string ID)
         {
             using (var con = new SqlConnection(strCon))
@@ -9966,6 +9739,7 @@ ORDER BY FIELD(" + typeFill + @"," + lsSku + @")";
                 }
             }
         }
+
         public static List<User_Member> SP_get_User_Member(string IDThanhVien)
         {
             List<User_Member> it_r = new List<User_Member>();
@@ -10037,9 +9811,11 @@ ORDER BY FIELD(" + typeFill + @"," + lsSku + @")";
                 }
             }
         }
-        #endregion
+
+        #endregion KPIDepartment
 
         #region HRMJob
+
         public static List<objCombox> SP_HR_BoPhan(string Phongban)
         {
             List<objCombox> it_r = new List<objCombox>();
@@ -10074,10 +9850,12 @@ ORDER BY FIELD(" + typeFill + @"," + lsSku + @")";
             }
         }
 
-        #endregion
+        #endregion HRMJob
 
         #region Report
-        #region Kinh doanh nhãn hàng new 
+
+        #region Kinh doanh nhãn hàng new
+
         public static List<objCombox> SP_BBM_Report_Brand()
         {
             List<objCombox> it_r = new List<objCombox>();
@@ -10226,7 +10004,6 @@ ORDER BY FIELD(" + typeFill + @"," + lsSku + @")";
                     cmd.Parameters.Add(new SqlParameter("nhanhang", nhanhang));
                     cmd.Parameters.Add(new SqlParameter("chuongtrinh", chuongtrinh));
 
-
                     using (SqlDataAdapter sda = new SqlDataAdapter(cmd))
                     { sda.Fill(ds); }
 
@@ -10270,7 +10047,7 @@ ORDER BY FIELD(" + typeFill + @"," + lsSku + @")";
             }
         }
 
-        #endregion
+        #endregion Kinh doanh nhãn hàng new
 
         public static List<objCombox> SP_BBM_Report_Thang_get()
         {
@@ -10304,6 +10081,7 @@ ORDER BY FIELD(" + typeFill + @"," + lsSku + @")";
                 }
             }
         }
+
         public static List<objCombox> SP_BBM_Report_Tuan_get(string Thang)
         {
             List<objCombox> it_r = new List<objCombox>();
@@ -10374,6 +10152,7 @@ ORDER BY FIELD(" + typeFill + @"," + lsSku + @")";
                 }
             }
         }
+
         public static List<Obj_BaoCaoKinhDoanh> SP_BBM_Report_Fitter_Tuan_get(string Thang, string Tuan)
         {
             List<Obj_BaoCaoKinhDoanh> it_r = new List<Obj_BaoCaoKinhDoanh>();
@@ -10485,6 +10264,7 @@ ORDER BY FIELD(" + typeFill + @"," + lsSku + @")";
                 }
             }
         }
+
         //Tuần
         public static List<Obj_BaoCaoKinhDoanh_TopKinhDoanhOnline> Get_BaoCaoKinhDoanh_TopDoanhSo(string Thang, string Tuan, string nhanhang)
         {
@@ -10524,7 +10304,6 @@ ORDER BY FIELD(" + typeFill + @"," + lsSku + @")";
                 }
             }
         }
-
 
         public static List<Obj_BaoCaoKinhDoanh_TopNhanVien> Get_BaoCaoKinhDoanh_TopSieuThi(string Tuan, string nhanhang)
         {
@@ -10636,7 +10415,9 @@ ORDER BY FIELD(" + typeFill + @"," + lsSku + @")";
                 }
             }
         }
-        #endregion
+
+        #endregion Report
+
         //
         public static List<notiinfo> sp_bbs_getNotiApprove(string userid)
         {
@@ -10647,7 +10428,6 @@ ORDER BY FIELD(" + typeFill + @"," + lsSku + @")";
                 con.Open();
                 try
                 {
-
                     SqlCommand cmd = new SqlCommand("sp_bbs_getNotiApprove", con);
                     cmd.CommandType = CommandType.StoredProcedure;
 
@@ -10664,7 +10444,6 @@ ORDER BY FIELD(" + typeFill + @"," + lsSku + @")";
                             action = reader["action"].ToString(),
                             controller = reader["controller"].ToString(),
                             waiting = int.Parse(reader["waiting"].ToString()),
-
                         };
 
                         it_r.Add(it);
@@ -10683,6 +10462,7 @@ ORDER BY FIELD(" + typeFill + @"," + lsSku + @")";
         }
 
         #region Thúc đẩy doanh số nhân viên
+
         public static List<objCombox> sp_bbs_ThucDayDSNV_getlstCH()
         {
             List<objCombox> it_r = new List<objCombox>();
@@ -10810,9 +10590,11 @@ ORDER BY FIELD(" + typeFill + @"," + lsSku + @")";
                 return ds.Tables[0];
             }
         }
-        #endregion
+
+        #endregion Thúc đẩy doanh số nhân viên
 
         #region THÚC ĐẨY DOANH SỐ NHÃN HÀNG
+
         public static DataTable GetListBrandSales(string Vung, string Brand, string KhuVuc, string StoreNo, string NgayBatDau, string NgayKetThuc)
         {
             DataSet ds = new DataSet();
@@ -10844,9 +10626,11 @@ ORDER BY FIELD(" + typeFill + @"," + lsSku + @")";
                 return ds.Tables[0];
             }
         }
-        #endregion
+
+        #endregion THÚC ĐẨY DOANH SỐ NHÃN HÀNG
 
         #region HistoryCoins
+
         public static List<objCombox> SP_BBMSMART_HistoryCoins_GetInfoCustomer(string SoDienThoai)
         {
             List<objCombox> it_r = new List<objCombox>();
@@ -10879,6 +10663,7 @@ ORDER BY FIELD(" + typeFill + @"," + lsSku + @")";
                 }
             }
         }
+
         public static List<Obj_HistoryCoins> SP_BBMSMART_HistoryCoins_GetInfoCustomer_MemberCard(string SoDienThoai)
         {
             List<Obj_HistoryCoins> it_r = new List<Obj_HistoryCoins>();
@@ -10916,6 +10701,7 @@ ORDER BY FIELD(" + typeFill + @"," + lsSku + @")";
                 }
             }
         }
+
         public static DataTable HistoryCoins_GetList(string Membercard, string userid)
         {
             DataSet ds = new DataSet();
@@ -10984,6 +10770,7 @@ ORDER BY FIELD(" + typeFill + @"," + lsSku + @")";
                 }
             }
         }
+
         public static List<Obj_CustomersChange> HistoryCoins_GetInfoCustomer_Phone_MemberCard_Change(string SoDienThoai)
         {
             List<Obj_CustomersChange> it_r = new List<Obj_CustomersChange>();
@@ -11061,8 +10848,8 @@ ORDER BY FIELD(" + typeFill + @"," + lsSku + @")";
                     return false;
                 }
             }
-
         }
+
         public static DataTable sp_ApproveCustomersChange_Get(string Status, string StoreId)
         {
             DataSet ds = new DataSet();
@@ -11131,6 +10918,7 @@ ORDER BY FIELD(" + typeFill + @"," + lsSku + @")";
                 }
             }
         }
+
         public static List<objCombox> GetInfoCustomer_MemberCard_TonBiXu(string MemberCard)
         {
             List<objCombox> it_r = new List<objCombox>();
@@ -11165,7 +10953,6 @@ ORDER BY FIELD(" + typeFill + @"," + lsSku + @")";
             }
         }
 
-
         public static List<objCombox> ApproveCustomersChange_Detail_Store()
         {
             List<objCombox> it_r = new List<objCombox>();
@@ -11198,6 +10985,7 @@ ORDER BY FIELD(" + typeFill + @"," + lsSku + @")";
                 }
             }
         }
+
         public static bool Update_Status_ApproveCustomers(string ID, string HanhDong, string uid)
         {
             string[] Value = ID.Split('-');
@@ -11223,6 +11011,7 @@ ORDER BY FIELD(" + typeFill + @"," + lsSku + @")";
                 }
             }
         }
+
         public static bool Update_Status_ApproveCustomers_ERP(string ID, string HanhDong, string ContenERP, string uid)
         {
             string[] Value = ID.Split('-');
@@ -11250,6 +11039,7 @@ ORDER BY FIELD(" + typeFill + @"," + lsSku + @")";
                 }
             }
         }
+
         public static bool Delete_ApproveCustomers(string ID)
         {
             string[] Value = ID.Split('-');
@@ -11273,7 +11063,8 @@ ORDER BY FIELD(" + typeFill + @"," + lsSku + @")";
                 }
             }
         }
-        #endregion
+
+        #endregion HistoryCoins
 
         public static List<objCombox> SP_BBMSMART_MarCom_GetFullMonth(string TuNgay, string DenNgay, string Weeks)
         {
@@ -11311,6 +11102,7 @@ ORDER BY FIELD(" + typeFill + @"," + lsSku + @")";
         }
 
         #region CampaignFlashSale
+
         public static List<objCombox> CampaignFlashSale_Images_Price(string ItemNo)
         {
             List<objCombox> it_r = new List<objCombox>();
@@ -11343,6 +11135,7 @@ ORDER BY FIELD(" + typeFill + @"," + lsSku + @")";
                 }
             }
         }
+
         public static List<objCombox> CampaignFlashSale_MAAUTO()
         {
             List<objCombox> it_r = new List<objCombox>();
@@ -11461,6 +11254,7 @@ ORDER BY FIELD(" + typeFill + @"," + lsSku + @")";
                 }
             }
         }
+
         public static bool Save_CampaignFlashSale_Line(CampaignFlashSale_Line info, string MaChienDich, string CreateBy)
         {
             using (var con = new SqlConnection(strCon))
@@ -11496,6 +11290,7 @@ ORDER BY FIELD(" + typeFill + @"," + lsSku + @")";
                 }
             }
         }
+
         public static List<CampaignFlashSale_Header> CampaignFlashSale_Edit(string MaChienDich)
         {
             List<CampaignFlashSale_Header> it_r = new List<CampaignFlashSale_Header>();
@@ -11540,6 +11335,7 @@ ORDER BY FIELD(" + typeFill + @"," + lsSku + @")";
                 }
             }
         }
+
         public static List<CampaignFlashSale_Header> CampaignFlashSale_MaChienDich_Detail(string MaChienDich)
         {
             List<CampaignFlashSale_Header> it_r = new List<CampaignFlashSale_Header>();
@@ -11683,6 +11479,7 @@ ORDER BY FIELD(" + typeFill + @"," + lsSku + @")";
                 return ds.Tables[0];
             }
         }
+
         public static bool CampaignFlashSale_Delete(string MaChienDich)
         {
             using (var con = new SqlConnection(strCon))
@@ -11764,12 +11561,11 @@ ORDER BY FIELD(" + typeFill + @"," + lsSku + @")";
                     return it_r;
                 }
             }
-
         }
-        #endregion
 
+        #endregion CampaignFlashSale
 
-        public static DataTable sp_bbs_GetList_TangTruongDSCH(string userid, string RSMCode, string ASMCode, string MaTinh, string MaCH, string ThoigianHD,string kenhban)
+        public static DataTable sp_bbs_GetList_TangTruongDSCH(string userid, string RSMCode, string ASMCode, string MaTinh, string MaCH, string ThoigianHD, string kenhban)
         {
             DataSet ds = new DataSet();
             try
@@ -11811,7 +11607,6 @@ ORDER BY FIELD(" + typeFill + @"," + lsSku + @")";
                 con.Open();
                 try
                 {
-
                     SqlCommand cmd = new SqlCommand("sp_getlist_HanhDongQTNS", con);
                     cmd.CommandType = CommandType.StoredProcedure;
                     var reader = cmd.ExecuteReader();
@@ -11840,6 +11635,7 @@ ORDER BY FIELD(" + typeFill + @"," + lsSku + @")";
         }
 
         #region QuanLyPhanQuyen_VENDORS_NV
+
         public static List<objCombox> getFunctionParent_Vendor()
         {
             List<objCombox> it_r = new List<objCombox>();
@@ -11872,6 +11668,7 @@ ORDER BY FIELD(" + typeFill + @"," + lsSku + @")";
                 }
             }
         }
+
         public static List<ManagerUserModel> getFunctionchild_Vendor(string menu)
         {
             List<ManagerUserModel> it_r = new List<ManagerUserModel>();
@@ -11881,7 +11678,6 @@ ORDER BY FIELD(" + typeFill + @"," + lsSku + @")";
                 con.Open();
                 try
                 {
-
                     SqlCommand cmd = new SqlCommand("SP_Vendor_ManageUse_Header_get", con);
                     cmd.CommandType = CommandType.StoredProcedure;
                     cmd.CommandTimeout = 30000;
@@ -11910,6 +11706,7 @@ ORDER BY FIELD(" + typeFill + @"," + lsSku + @")";
                 }
             }
         }
+
         public static DataTable sp_VENDOR_get_sys_list_user_function(string fcode, string fChildCode, string user_div, string user_dep, string user_pos, string userid)
         {
             DataSet ds = new DataSet();
@@ -11940,6 +11737,7 @@ ORDER BY FIELD(" + typeFill + @"," + lsSku + @")";
                 return ds.Tables[0];
             }
         }
+
         public static bool sp_Verdor_sys_update_user_permission(string uid, string fcode, string functionCode, string ModifyBy, int isChecked)
         {
             using (var con = new SqlConnection(strCon))
@@ -11947,7 +11745,6 @@ ORDER BY FIELD(" + typeFill + @"," + lsSku + @")";
                 con.Open();
                 try
                 {
-
                     SqlCommand cmd = new SqlCommand("sp_Verdor_sys_update_user_permission", con);
                     cmd.CommandType = CommandType.StoredProcedure;
                     cmd.Parameters.Add(new SqlParameter("userid", uid));
@@ -11969,6 +11766,7 @@ ORDER BY FIELD(" + typeFill + @"," + lsSku + @")";
                 }
             }
         }
+
         public static DataTable sp_VENDOR_get_sys_list_user_function_NCC(string fcode, string fPhongBan)
         {
             DataSet ds = new DataSet();
@@ -11995,9 +11793,9 @@ ORDER BY FIELD(" + typeFill + @"," + lsSku + @")";
                 return ds.Tables[0];
             }
         }
+
         public static bool sp_Verdor_sys_update_user_permission_NCC(string functionCode, string PhongBans, string fcode, string TypePhongBan, string ModifyBy, string PhongBan)
         {
-
             using (var con = new SqlConnection(strCon))
             {
                 con.Open();
@@ -12024,9 +11822,9 @@ ORDER BY FIELD(" + typeFill + @"," + lsSku + @")";
                 }
             }
         }
+
         public static bool sp_Verdor_sys_update_user_permission_NCC_Update(string Phongban)
         {
-
             using (var con = new SqlConnection(strCon))
             {
                 con.Open();
@@ -12049,6 +11847,7 @@ ORDER BY FIELD(" + typeFill + @"," + lsSku + @")";
                 }
             }
         }
+
         public static List<BiboSmartMenu> SP_getway_PhongBan()
         {
             List<BiboSmartMenu> it_r = new List<BiboSmartMenu>();
@@ -12058,7 +11857,6 @@ ORDER BY FIELD(" + typeFill + @"," + lsSku + @")";
                 con.Open();
                 try
                 {
-
                     SqlCommand cmd = new SqlCommand("SP_getway_PhongBan", con);
                     cmd.CommandType = CommandType.StoredProcedure;
                     cmd.CommandTimeout = 3000;
@@ -12087,7 +11885,8 @@ ORDER BY FIELD(" + typeFill + @"," + lsSku + @")";
                 }
             }
         }
-        #endregion
+
+        #endregion QuanLyPhanQuyen_VENDORS_NV
 
         #region index
 
@@ -12100,7 +11899,6 @@ ORDER BY FIELD(" + typeFill + @"," + lsSku + @")";
                 con.Open();
                 try
                 {
-
                     SqlCommand cmd = new SqlCommand("sp_index_getMotaCV", con);
                     cmd.CommandType = CommandType.StoredProcedure;
 
@@ -12140,7 +11938,6 @@ ORDER BY FIELD(" + typeFill + @"," + lsSku + @")";
                 con.Open();
                 try
                 {
-
                     SqlCommand cmd = new SqlCommand("sp_index_getSieusaoKPI", con);
                     cmd.CommandType = CommandType.StoredProcedure;
 
@@ -12182,7 +11979,6 @@ ORDER BY FIELD(" + typeFill + @"," + lsSku + @")";
                 con.Open();
                 try
                 {
-
                     SqlCommand cmd = new SqlCommand("sp_index_getSieusaoDoanhthu", con);
                     cmd.CommandType = CommandType.StoredProcedure;
 
@@ -12224,7 +12020,6 @@ ORDER BY FIELD(" + typeFill + @"," + lsSku + @")";
                 con.Open();
                 try
                 {
-
                     SqlCommand cmd = new SqlCommand("sp_index_getBonus", con);
                     cmd.CommandType = CommandType.StoredProcedure;
 
@@ -12265,7 +12060,6 @@ ORDER BY FIELD(" + typeFill + @"," + lsSku + @")";
                 con.Open();
                 try
                 {
-
                     SqlCommand cmd = new SqlCommand("sp_index_getBantin", con);
                     cmd.CommandType = CommandType.StoredProcedure;
 
@@ -12297,9 +12091,7 @@ ORDER BY FIELD(" + typeFill + @"," + lsSku + @")";
                 }
             }
         }
-        #endregion
 
-
-        
+        #endregion index
     }
 }
