@@ -35,6 +35,7 @@ namespace ProductAllTool.Models.DuyetBST
     public class setRun
     {
         public string Code { get; set; }
+        public int type { get; set; }
     }
 
     public class ListSP
@@ -50,7 +51,7 @@ namespace ProductAllTool.Models.DuyetBST
     public class UpdateSP
     {
         public int ID { get; set; }
-        public string SLTon { get; set; }
+        public string slcombo { get; set; }
     }
 
     public class addBST

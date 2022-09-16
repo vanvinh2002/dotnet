@@ -149,7 +149,7 @@ namespace ProductAllTool.Controllers
                 {
                     foreach (setRun po in lst)
                     {
-                        DataAccess.DataAccessBST.BST_SetRunCollect(Session["uid"].ToString(), po.Code);
+                        DataAccess.DataAccessBST.BST_SetRunCollect(Session["uid"].ToString(), po.Code, po.type);
                     }
                     return Json(1);
                 }
@@ -157,7 +157,7 @@ namespace ProductAllTool.Controllers
             }
             catch (Exception ex)
             {
-                LogBuild.CreateLogger(JsonConvert.SerializeObject(ex), "setTuChoi");
+                LogBuild.CreateLogger(JsonConvert.SerializeObject(ex), "setRUN");
                 return Json(null);
             }
         }
@@ -185,7 +185,7 @@ namespace ProductAllTool.Controllers
         }
 
         [HttpPost]
-        public ActionResult BSTUpdateSP(List<UpdateSP> lst)
+        public ActionResult BST_updateSPP(List<UpdateSP> lst)
         {
             try
             {
@@ -193,7 +193,7 @@ namespace ProductAllTool.Controllers
                 {
                     foreach (UpdateSP po in lst)
                     {
-                        DataAccess.DataAccessBST.BST_updateSP(Session["uid"].ToString(), po.ID, po.SLTon);
+                        DataAccess.DataAccessBST.BST_updateSP(Session["uid"].ToString(), po.ID, po.slcombo);
                     }
                     return Json(1);
                 }
@@ -201,7 +201,29 @@ namespace ProductAllTool.Controllers
             }
             catch (Exception ex)
             {
-                LogBuild.CreateLogger(JsonConvert.SerializeObject(ex), "BSTUpdateSP");
+                LogBuild.CreateLogger(JsonConvert.SerializeObject(ex), "BST_updateSPP");
+                return Json(null);
+            }
+        }
+
+        [HttpPost]
+        public ActionResult BSTDeleteSP(List<UpdateSP> lst)
+        {
+            try
+            {
+                if (Session["uid"] != null && Session["uid"].ToString().Length > 0)
+                {
+                    foreach (UpdateSP po in lst)
+                    {
+                        DataAccess.DataAccessBST.BST_DeleteSP(Session["uid"].ToString(), po.ID);
+                    }
+                    return Json(1);
+                }
+                return RedirectToAction("Login", "Account");
+            }
+            catch (Exception ex)
+            {
+                LogBuild.CreateLogger(JsonConvert.SerializeObject(ex), "BSTDeleteSP");
                 return Json(null);
             }
         }

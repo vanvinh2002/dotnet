@@ -566,7 +566,7 @@ namespace ProductAllTool.DataAccess
             }
         }
 
-        public static int BST_SetRunCollect(string userid, string Code)
+        public static int BST_SetRunCollect(string userid, string Code, int type)
         {
             DataSet ds = new DataSet();
             try
@@ -579,6 +579,7 @@ namespace ProductAllTool.DataAccess
                     cmd.CommandTimeout = 30000;
                     cmd.Parameters.Add(new SqlParameter("userid", userid));
                     cmd.Parameters.Add(new SqlParameter("Code", Code));
+                    cmd.Parameters.Add(new SqlParameter("type", type));
                     cmd.ExecuteNonQuery();
 
                     con.Close();
@@ -618,7 +619,33 @@ namespace ProductAllTool.DataAccess
             }
         }
 
-        public static int BST_updateSP(string userid, int id, string slton)
+        public static int BST_DeleteSP(string userid, int id)
+        {
+            DataSet ds = new DataSet();
+            try
+            {
+                using (var con = new SqlConnection(strConnTHUCTAP))
+                {
+                    con.Open();
+                    SqlCommand cmd = new SqlCommand("BST_DeleteSP", con);
+                    cmd.CommandType = CommandType.StoredProcedure;
+                    cmd.CommandTimeout = 30000;
+                    cmd.Parameters.Add(new SqlParameter("userid", userid));
+                    cmd.Parameters.Add(new SqlParameter("id", id));
+                    cmd.ExecuteNonQuery();
+
+                    con.Close();
+                    return 1;
+                }
+            }
+            catch (Exception ex)
+            {
+                LogBuild.CreateLogger(JsonConvert.SerializeObject(ex), "BST_DeleteSP");
+                return 0;
+            }
+        }
+
+        public static int BST_updateSP(string userid, int ID, string slcombo)
         {
             DataSet ds = new DataSet();
             try
@@ -630,8 +657,8 @@ namespace ProductAllTool.DataAccess
                     cmd.CommandType = CommandType.StoredProcedure;
                     cmd.CommandTimeout = 30000;
                     cmd.Parameters.Add(new SqlParameter("userid", userid));
-                    cmd.Parameters.Add(new SqlParameter("id", id));
-                    cmd.Parameters.Add(new SqlParameter("slton", slton));
+                    cmd.Parameters.Add(new SqlParameter("ID", ID));
+                    cmd.Parameters.Add(new SqlParameter("slcombo", slcombo));
                     cmd.ExecuteNonQuery();
 
                     con.Close();

@@ -31,7 +31,8 @@
                 Số lượng combo
             </th>
             <th class="text-left" style="vertical-align: top">
-                Thao tác
+                Thao tác <br />
+                <input type="checkbox" id="checkall" name="check" onchange="checkall()" />
             </th>
         </tr>
     </thead>
@@ -56,7 +57,7 @@
                             <td class="text-left" style=" overflow: hidden; white-space: nowrap">
                                 @item["functname"]
                             </td>
-                            <td class="text-left" style=" overflow: hidden; white-space: nowrap" id="id_@i">
+                            <td class="text-left" style=" overflow: hidden; white-space: nowrap">
                                 @item["STT"]
                             </td>
                             <td class="text-left" style=" overflow: hidden; white-space: nowrap">
@@ -69,11 +70,12 @@
                                 @item["GiaBanAll"]
                             </td>
                             <td class="text-left" style="  overflow: hidden;white-space: nowrap">
-                                <input class="form-control" value="@item["slcombo"]" id="slcombo_@i" />
+                                <input type="text" id="slcombo_@i" value="@item["slcombo"]" />
                             </td>
-                            <td class="text-left" style="  overflow: hidden;white-space: nowrap" name="check" id="_@i">
-                                <button class="btn btn-primary" onchange="Getjs_update()">Update</button>
-                                <button class="btn btn-danger">Delete</button>
+                            <td class="text-left" style="  overflow: hidden;white-space: nowrap">
+                                <input id="_@i" class="text-center" name="check[]" type="checkbox" value="@item["ID"]" />
+                                @*<button class="btn btn-primary" onchange="js_approve()">Update</button>*@
+                                @*<button class="btn btn-danger">Delete</button>*@
                             </td>
                         </tr>
                         i++;
@@ -85,3 +87,16 @@
     <tfoot>
     </tfoot>
 </table>
+<script>
+    function checkall() {
+        var cboxes = document.getElementsByName('check[]');
+        for (var i = 0; i < cboxes.length; i++) {
+            if ($('#checkall').is(":checked")) {
+                cboxes[i].checked = true;
+            }
+            else {
+                cboxes[i].checked = false;
+            }
+        }
+    }
+</script>
