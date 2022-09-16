@@ -129,11 +129,11 @@ namespace ProductAllTool.Controllers
                 return RedirectToAction("Login", "Account");
             }
         }
-        public ActionResult GetListCat( string Category,string Group, string Function, string RangeRieview, string Band, string NguonNhap, string MuaVu)
+        public ActionResult GetListCat( string Category,string Group)
         {
             if (Session["uid"] != null && Session["uid"].ToString().Length > 0)
             {
-                DataTable table = DataAccess.DataAccessTT.cbo_Bang(Session["uid"].ToString(), Category, Group, Function, RangeRieview, Band, NguonNhap, MuaVu);
+                DataTable table = DataAccess.DataAccessTT.cbo_Bang(Session["uid"].ToString(), Category, Group);
 
                 return PartialView("~/Views/ThucTap/Partial/__ChiTietBoSuuTap.cshtml", table);
 
@@ -153,11 +153,11 @@ namespace ProductAllTool.Controllers
             }
             return RedirectToAction("Login", "Account");
         }
-        public ActionResult getListIMG(string Category, string Group, string Function, string RangeRieview, string Band, string NguonNhap, string MuaVu)
+        public ActionResult getListIMG(string Function, string RangeRieview, string Band, string NguonNhap, string MuaVu)
         {
             if (Session["uid"] != null && Session["uid"].ToString().Length > 0)
             {
-                var listIMG = DataAccess.DataAccessTT.cbo_getListIMG(Session["uid"].ToString(), Category, Group, Function, RangeRieview, Band, NguonNhap, MuaVu);
+                var listIMG = DataAccess.DataAccessTT.cbo_getListIMG(Session["uid"].ToString(),Function, RangeRieview, Band, NguonNhap, MuaVu);
                 
 
                 return this.Json(listIMG, JsonRequestBehavior.AllowGet);
@@ -187,7 +187,7 @@ namespace ProductAllTool.Controllers
                 {
                     foreach (updateSL po in lst)
                     {
-                        DataAccess.DataAccessTT.sp_lydo_update(Session["uid"].ToString(), po.ID, po.slcombo);
+                        DataAccess.DataAccessTT.cbo_updateSL(Session["uid"].ToString(), po.ID, po.slcombo);
                     }
                     return Json(1);
                 }
@@ -195,7 +195,28 @@ namespace ProductAllTool.Controllers
             }
             catch (Exception ex)
             {
-                LogBuild.CreateLogger(JsonConvert.SerializeObject(ex), "UpdateTest");
+                LogBuild.CreateLogger(JsonConvert.SerializeObject(ex), "UpdateSL");
+                return Json(null);
+            }
+        }
+        [HttpPost]
+        public ActionResult addBST(List<add_BST> lst)
+        {
+            try
+            {
+                if (Session["uid"] != null && Session["uid"].ToString().Length > 0)
+                {
+                    foreach (add_BST po in lst)
+                    {
+                        DataAccess.DataAccessTT.CBO_ADDBST(Session["uid"].ToString(), po.catcode, po.catname, po.groupcode, po.groupname, po.functcode, po.functname,  po.MaHang, po.TenHang, po.price, po.imglink, po.slcombo);
+                    }
+                    return Json(1);
+                }
+                return RedirectToAction("Login", "Account");
+            }
+            catch (Exception ex)
+            {
+                LogBuild.CreateLogger(JsonConvert.SerializeObject(ex), "addBST");
                 return Json(null);
             }
         }

@@ -105,8 +105,8 @@
                                 <label class="redtext">Category *</label>
                             </div>
                             <div class="col-md-8" ondblclick="$('#cate').val('').trigger('change');js_loadcurrent();">
-                                <select id="cate" class="form-control selectpicker" data-live-search="true" onchange="js_GetListtt1();js_loadcurrent()">
-                                    <option value="">--- Category ---</option>
+                                <select id="cate" class="form-control selectpicker" data-live-search="true" onchange="js_GetListtt1()">
+                                    <option  >--- Category ---</option>
                                     @if (ViewBag.lst_cate != null)
                                     {
                                         foreach (objCombox box in (List<objCombox>)ViewBag.lst_cate)
@@ -120,7 +120,7 @@
                                 <label class="redtext">Group * </label>
                             </div>
                             <div class="col-md-8" ondblclick="$('#group').val('').trigger('change');js_loadcurrent();">
-                                <select id="group" class="form-control selectpicker" data-live-search="true" onchange="js_GetListtt1();js_loadcurrent()">
+                                <select id="group" class="form-control selectpicker" data-live-search="true" onchange="js_GetListtt1()">
                                     <option value="">--- Group ---</option>
                                     @if (ViewBag.lst_Group != null)
                                     {
@@ -274,8 +274,10 @@
                                     <label>Số lượng tồn: &nbsp;</label> <span id="slton_info" class="txtinfo"></span>
                                 </div>
 
-                                <div class="col-md-6"> <a id="btnspkhac" href="#" onclick="js_nextSP()" class="form-control btn btn-info next1" style="max-width:100px;"><i class="fas fa-angle-double-right" aria-hidden="true" style="float: right; margin-left: 6px; margin-top: 3px;"></i>SP khác </a></div>
-                                <div class="col-md-6"> <a id="btnAdd" href="#" onclick="js_createbst()" class="form-control btn btn-info" style="max-width:100px;float:right"><i class="fas fa-plus" aria-hidden="true" style="float: left; margin-left: 6px; margin-top: 3px;"></i>Add BST </a></div>
+
+                                <div class="col-md-6"> 
+                                    <a id="btnAdd" href="#" onclick="js_add()" class="form-control btn btn-info" style="max-width:100px;float:right"><i class="fas fa-plus" aria-hidden="true" style="float: left; margin-left: 6px; margin-top: 3px;"></i>Add BST </a>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -376,15 +378,10 @@
         window.scrollTo(0, 0);
         var cate = $("#cate").val();
         var group = $("#group").val();
-        var Func = $("#Func").val();
-        var Range = $("#Range").val();
-        var bard = $("#bard").val();
-        var NN = $("#NN").val();
-        var MuaVu = $("#MuaVu").val();
         $.ajax({
             url: '/ThucTap/GetListCat',
             type: 'POST',
-            data: JSON.stringify({ Category: cate, Group: group, Function: Func, RangeRieview: Range, Band: bard, NguonNhap: NN, MuaVu: MuaVu }),
+            data: JSON.stringify({ Category: cate, Group: group }),
             contentType: 'application/json, charset=utf-8',
             beforeSend: function () {
                 js_Loading(true, 1);
@@ -432,8 +429,6 @@
 
     function js_loadcurrent() {
 
-        var cate = $("#cate").val();
-        var group = $("#group").val();
         var Func = $("#Func").val();
         var Range = $("#Range").val();
         var bard = $("#bard").val();
@@ -446,7 +441,7 @@
             $.ajax({
                 url: '/ThucTap/getListIMG',
                 type: 'POST',
-                data: JSON.stringify({ Category: cate, Group: group, Function: Func, RangeRieview: Range, Band: bard, NguonNhap: NN, MuaVu: MuaVu }),
+                data: JSON.stringify({ Function: Func, RangeRieview: Range, Band: bard, NguonNhap: NN, MuaVu: MuaVu }),
                 contentType: 'application/json, charset=utf-8',
                 beforeSend: function () {
                     js_Loading(true, 1);
@@ -518,7 +513,7 @@
             }
         });
     }
-    function js_nextSP() {
+@*    function js_nextSP() {
         var active = $('.swiper-pagination-bullet-active').data('id');
         var MaHangnext = $('.Thutu' + active + '#MaHang').val();
         //alert(MaHangnext);
@@ -551,7 +546,7 @@
                 js_Loading(false, 1);
             }
         });
-    }
+    }*@
 
     function js_nextSP01(Code) {
 
@@ -588,20 +583,36 @@
 
     function js_update() {
         //debugger;
-        let trs = $("#tbl_Item tbody tr");
-        if (trs.length) {
-            trs.each((index, tr) => {
-                let ID = String($(' #stt' + tr.id).val()).trim();
-                let slcombo = String($('#slcombo' + tr.id).val()).trim();
-                Sourceupdate.push({
-                    "stt": ID,
-                    "slcombo": slcombo
-                });
-            });
+
+        var cboxes = document.getElementsByName('check[]');
+        var arrCheckbox = [];
+        var i = 0;
+        for (var i = 0; i < cboxes.length; i++) {
+            if (cboxes[i].checked) {
+                var dc = {};
+                dc.id = cboxes[i].value;
+                dc.slcombo = $('#slcombo' + cboxes[i].id).val();
+
+
+                console.log(dc);
+                arrCheckbox.push(dc);
+            }
+        }
+        console.log('1');
+
+        console.log(arrCheckbox);
+
+        if (arrCheckbox.length == 0) {
+            alert("Vui lòng chọn ít nhất 1 bản ghi.");
+            return;
+        }
+        console.log('2');
+
+        if (arrCheckbox.length > 0) {
             $.ajax({
                 url: '/ThucTap/UpdateSL',
                 type: 'POST',
-                data: JSON.stringify({ lst: Sourceupdate }),
+                data: JSON.stringify({ lst: arrCheckbox }),
                 contentType: 'application/json, charset=utf-8',
                 beforeSend: function () {
                     js_Loading(true, 1);
@@ -617,9 +628,49 @@
                 error: function () {
                     js_Loading(false, 1);
                 }
-            });
 
+            });
         }
+    }
+
+    function js_add() {
+
+        var add = {};
+        add.catcode = $("#cate").val();
+        add.catname = '';
+        add.groupcode = $('#group').val(); 
+        add.groupname = '';
+        add.functcode = $('#Func').val();
+        add.functname = ''
+        add.MaHang = $('#item_codeinfo').html();
+        add.TenHang = $('#item_nameinfo').html();
+        add.Price = $('#price_info').html();
+        add.imglink = $('#imglink').val();
+        add.slcombo = '1';
+        console.log('một');
+        console.log(add);
+        $.ajax({
+            url: '/ThucTap/addBST',
+            type: 'POST',
+            data: JSON.stringify({ lst: add }),
+            contentType: 'application/json, charset=utf-8',
+            beforeSend: function () {
+                js_Loading(true, 1);
+            },
+            success: function (data) {
+                if (data == 1) {
+                    alert("Điều chỉnh thành công");
+                    $('#Detail_modal').modal('hide');
+                    js_GetListtt1();
+                    js_Loading(false, 1);
+                }
+            },
+            error: function () {
+                js_Loading(false, 1);
+            }
+
+        });
+
     }
 
 

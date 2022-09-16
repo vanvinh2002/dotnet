@@ -263,6 +263,41 @@ namespace ProductAllTool.DataAccess
                 return 0;
             }
         }
+        public static int CBO_ADDBST(string userid, string catcode, string catname, string groupcode, string groupname, string functcode, string functname, string MaHang, string TenHang, string price, string imglink, string slcombo)
+        {
+            DataSet ds = new DataSet();
+            try
+            {
+                using (var con = new SqlConnection(strConntt))
+                {
+                    con.Open();
+                    SqlCommand cmd = new SqlCommand("CBO_ADDBST", con);
+                    cmd.CommandType = CommandType.StoredProcedure;
+                    cmd.CommandTimeout = 3000;
+                    cmd.Parameters.Add(new SqlParameter("userid", userid));
+                    cmd.Parameters.Add(new SqlParameter("catcode", catcode));
+                    cmd.Parameters.Add(new SqlParameter("catname", catname));
+                    cmd.Parameters.Add(new SqlParameter("groupcode", groupcode));
+                    cmd.Parameters.Add(new SqlParameter("groupname", groupname));
+                    cmd.Parameters.Add(new SqlParameter("functcode", functcode));
+                    cmd.Parameters.Add(new SqlParameter("functname", functname));
+                    cmd.Parameters.Add(new SqlParameter("MaHang", MaHang));
+                    cmd.Parameters.Add(new SqlParameter("TenHang", TenHang));
+                    cmd.Parameters.Add(new SqlParameter("price", price));
+                    cmd.Parameters.Add(new SqlParameter("imglink", imglink));
+                    cmd.Parameters.Add(new SqlParameter("slcombo", slcombo));
+                    cmd.ExecuteNonQuery();
+
+                    con.Close();
+                    return 1;
+                }
+            }
+            catch (Exception ex)
+            {
+                LogBuild.CreateLogger(JsonConvert.SerializeObject(ex), "CBO_ADDBST");
+                return 0;
+            }
+        }
 
         public static List<objCombox> cbo_Cate()
         {
@@ -499,7 +534,7 @@ namespace ProductAllTool.DataAccess
             }
         }
 
-        public static DataTable cbo_Bang(string userid, string Category, string Group, string Function, string RangeRieview, string Band, string NguonNhap, string MuaVu)
+        public static DataTable cbo_Bang(string userid, string Category, string Group)
         {
             DataSet ds = new DataSet();
             try
@@ -513,11 +548,6 @@ namespace ProductAllTool.DataAccess
                     cmd.Parameters.Add(new SqlParameter("userid", userid));
                     cmd.Parameters.Add(new SqlParameter("Category", Category));
                     cmd.Parameters.Add(new SqlParameter("Group", Group));
-                    cmd.Parameters.Add(new SqlParameter("Function", Function));
-                    cmd.Parameters.Add(new SqlParameter("RangeRieview", RangeRieview));
-                    cmd.Parameters.Add(new SqlParameter("Band", Band));
-                    cmd.Parameters.Add(new SqlParameter("NguonNhap", NguonNhap));
-                    cmd.Parameters.Add(new SqlParameter("MuaVu", MuaVu));
 
                     using (SqlDataAdapter sda = new SqlDataAdapter(cmd))
                     { sda.Fill(ds); }
@@ -576,7 +606,7 @@ namespace ProductAllTool.DataAccess
             }
         }
 
-        public static List<getIMG> cbo_getListIMG(string userid, string Category, string Group, string Function, string RangeRieview, string Band, string NguonNhap, string MuaVu)
+        public static List<getIMG> cbo_getListIMG(string userid, string Function, string RangeRieview, string Band, string NguonNhap, string MuaVu)
         {
             List<getIMG> it_r = new List<getIMG>();
             using (var con = new SqlConnection(strConntt))
@@ -587,8 +617,6 @@ namespace ProductAllTool.DataAccess
                     SqlCommand cmd = new SqlCommand("cbo_getListIMG", con);
                     cmd.CommandType = CommandType.StoredProcedure;
                     cmd.Parameters.Add(new SqlParameter("userid", userid));
-                    cmd.Parameters.Add(new SqlParameter("Category", Category));
-                    cmd.Parameters.Add(new SqlParameter("Group", Group));
                     cmd.Parameters.Add(new SqlParameter("Function", Function));
                     cmd.Parameters.Add(new SqlParameter("RangeRieview", RangeRieview));
                     cmd.Parameters.Add(new SqlParameter("Band", Band));

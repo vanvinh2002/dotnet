@@ -126,6 +126,21 @@ namespace ProductAllTool.Models.HRM
         public int ID { set; get; }
         public String slcombo { set; get; }
     }
+    public class add_BST
+    {
+        public String catcode { set; get; }
+        public String catname { set; get; }
+        public String groupcode { set; get; }
+        public String groupname { set; get; }
+        public String functcode { set; get; }
+        public String functname { set; get; }
+        public String MaHang { set; get; }
+        public String TenHang { set; get; }
+        public String price { set; get; }
+        public String imglink { set; get; }
+        public String slcombo { set; get; }
+        
+    }
     public class SetTT
     {
         public String Ca { set; get; }
