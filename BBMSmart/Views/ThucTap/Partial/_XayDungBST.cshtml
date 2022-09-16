@@ -3,7 +3,7 @@
 
 <link href="~/Resource/Content/css/thickbox.css" rel="stylesheet" />
 <script src="~/Resource/Scripts/thickbox.js"></script>
-<table id="tbl_Item_XayDungBST" class="table table-bordered" style="width:99.9%">
+<table id="tbl_Item" class="table table-bordered" style="width:99.9%">
     <thead>
         @{
             if (Model != null)
@@ -11,38 +11,40 @@
                 var dt = Model as DataTable;
                 if (dt.Rows.Count > 0)
                 {
-                    <tr style="background: #ffffff; border-bottom: 1px solid #ddd !important; border-top: 1px solid #fff; border-left: 1px solid #fff; border-right: 1px solid #fff !important;">
-                        <td class="text-right" style="border: none !important;"></td>
-                        <td class="text-right" style="border: none !important;"></td>
-                        <td class="text-right" style="border: none !important;"></td>
-                        <td class="text-right" style="border: none !important;"></td>
-                        <td class="text-right" style="border: none !important;"></td>
+                <tr style="background: #ffffff; border-bottom: 1px solid #ddd !important; border-top: 1px solid #fff; border-left: 1px solid #fff; border-right: 1px solid #fff !important;">
+                    <td class="text-right" style="border: none !important;"></td>
+                    <td class="text-right" style="border: none !important;"></td>
+                    <td class="text-right" style="border: none !important;"></td>
+                    <td class="text-right" style="border: none !important;"></td>
+                    <td class="text-right" style="border: none !important;"></td>
+                    <td class="text-right" style="border: none !important;"></td>
 
-
-                    </tr>
+                </tr>
                 }
             }
         }
-        <tr>
-            <th class="text-left" style="vertical-align: top">
-                Mã BST
-            </th>
-            <th class="text-left" style="vertical-align: top">
-                Tên BST
-            </th>
-            <th class="text-left" style="vertical-align: top">
-                Hình Ảnh
-            </th>
-            <th class="text-left" style="vertical-align: top">
-                SL SKUs
-            </th>
-            <th class="text-left" style="vertical-align: top">
-                Giá Trị
-            </th>
+    <tr>
+        <th class="text-left" style="vertical-align: top">
+            Mã BST
+        </th>
+        <th class="text-left" style="vertical-align: top">
+            Tên BST
+        </th>
+        <th class="text-left" style="vertical-align: top">
+            Hình Ảnh
+        </th>
+        <th class="text-left" style="vertical-align: top">
+            SL SKUs
+        </th>
+        <th class="text-left" style="vertical-align: top">
+            Giá Trị
+        </th>
+        <th class="text-left" style="vertical-align: top">
+         Chi Tiết
+        </th>
 
 
-
-        </tr>
+    </tr>
     </thead>
     <tbody>
 
@@ -57,21 +59,24 @@
                     {
                         <tr id="row_@i">
                             <td class="text-left" style="width:65px; max-width: 65px;  overflow: hidden;white-space: nowrap" id="id_@i">
-                                @item["MaHang"]
+                                @item["Code"]
                             </td>
                             <td class="text-left" style="width: 100px; max-width: 100px;  overflow: hidden;white-space: nowrap">
-                                @item["TenHang"]
+                                @item["Name"]
                             </td>
                             <td class="text-right" style="width: 40px;">
-                                @item["Anh"]
+                                <img src=" @item["imglink"]"/>
+                               
                             </td>
                             <td class="text-left" style="width: 40px; max-width: 40px;  overflow: hidden;white-space: nowrap">
-                                @item["SoLuong"]
+                                @item["slcombo"]
                             </td>
                             <td class="text-left" style="width: 40px;">
-                                @item["GiaBan"]
+                                @item["price"]
                             </td>
-
+                             <td class="text-left" style="width: 40px;">
+                                @item["price"]
+                            </td>
 
                         </tr>
                         i++;

@@ -176,3 +176,23 @@ E:\BBS_THUCTAP\Lib.Utils.Package\obj\Debug\Lib.Utils.Package.csproj.CoreCompileI
 E:\BBS_THUCTAP\Lib.Utils.Package\obj\Debug\Lib.Utils.Package.csproj.CopyComplete
 E:\BBS_THUCTAP\Lib.Utils.Package\obj\Debug\Lib.Utils.Package.dll
 E:\BBS_THUCTAP\Lib.Utils.Package\obj\Debug\Lib.Utils.Package.pdb
+D:\Tài Liệu Thực Tập\ThucTap\Lib.Utils.Package\bin\Debug\Lib.Utils.Package.dll
+D:\Tài Liệu Thực Tập\ThucTap\Lib.Utils.Package\bin\Debug\Lib.Utils.Package.pdb
+D:\Tài Liệu Thực Tập\ThucTap\Lib.Utils.Package\bin\Debug\ActiveUp.Net.Common.dll
+D:\Tài Liệu Thực Tập\ThucTap\Lib.Utils.Package\bin\Debug\ActiveUp.Net.Dns.dll
+D:\Tài Liệu Thực Tập\ThucTap\Lib.Utils.Package\bin\Debug\ActiveUp.Net.Groupware.dll
+D:\Tài Liệu Thực Tập\ThucTap\Lib.Utils.Package\bin\Debug\ActiveUp.Net.Imap4.dll
+D:\Tài Liệu Thực Tập\ThucTap\Lib.Utils.Package\bin\Debug\ActiveUp.Net.Mail.dll
+D:\Tài Liệu Thực Tập\ThucTap\Lib.Utils.Package\bin\Debug\ActiveUp.Net.Nntp.dll
+D:\Tài Liệu Thực Tập\ThucTap\Lib.Utils.Package\bin\Debug\ActiveUp.Net.OpenPGP.dll
+D:\Tài Liệu Thực Tập\ThucTap\Lib.Utils.Package\bin\Debug\ActiveUp.Net.Pop3.dll
+D:\Tài Liệu Thực Tập\ThucTap\Lib.Utils.Package\bin\Debug\ActiveUp.Net.Smtp.dll
+D:\Tài Liệu Thực Tập\ThucTap\Lib.Utils.Package\bin\Debug\ActiveUp.Net.WhoIs.dll
+D:\Tài Liệu Thực Tập\ThucTap\Lib.Utils.Package\bin\Debug\EPPlus.dll
+D:\Tài Liệu Thực Tập\ThucTap\Lib.Utils.Package\bin\Debug\zxing.dll
+D:\Tài Liệu Thực Tập\ThucTap\Lib.Utils.Package\bin\Debug\zxing.presentation.dll
+D:\Tài Liệu Thực Tập\ThucTap\Lib.Utils.Package\obj\Debug\Lib.Utils.Package.csproj.AssemblyReference.cache
+D:\Tài Liệu Thực Tập\ThucTap\Lib.Utils.Package\obj\Debug\Lib.Utils.Package.csproj.CoreCompileInputs.cache
+D:\Tài Liệu Thực Tập\ThucTap\Lib.Utils.Package\obj\Debug\Lib.Utils.Package.csproj.CopyComplete
+D:\Tài Liệu Thực Tập\ThucTap\Lib.Utils.Package\obj\Debug\Lib.Utils.Package.dll
+D:\Tài Liệu Thực Tập\ThucTap\Lib.Utils.Package\obj\Debug\Lib.Utils.Package.pdb

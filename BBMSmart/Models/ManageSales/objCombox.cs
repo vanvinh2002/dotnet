@@ -125,4 +125,20 @@ namespace ProductAllTool.Models.ManageSales
         public string packType { set; get; }
         public int Price { set; get; }
     }
+
+    public class objXinNghi
+    {
+        public string MaNV { set; get; }
+        public string TenNV { set; get; }
+        public string ChucDanh { set; get; }
+        public string BoPhan { set; get; }
+        public string TenCH { set; get; }
+        public string TenPB { set; get; }
+    }
+
+    public class objautocode
+    {
+        public string Code { set; get; }
+    }
+
 }

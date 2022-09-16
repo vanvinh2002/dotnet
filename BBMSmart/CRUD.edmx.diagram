@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="d406ce653d744d108c8cdcd8bd3f9837" Name="Diagram1">
+        <EntityTypeShape EntityType="DBTHUCTAPModel.BD" Width="1.5" PointX="3" PointY="6" IsExpanded="true" />
+        <EntityTypeShape EntityType="DBTHUCTAPModel.BoSuuTap" Width="1.5" PointX="3" PointY="1" IsExpanded="true" />
+        <EntityTypeShape EntityType="DBTHUCTAPModel.Category" Width="1.5" PointX="0.75" PointY="1.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="DBTHUCTAPModel.CHUSOHUU" Width="1.5" PointX="0.75" PointY="6" IsExpanded="true" />
+        <EntityTypeShape EntityType="DBTHUCTAPModel.KHACHHANG" Width="1.5" PointX="5.75" PointY="4.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="DBTHUCTAPModel.SanPham" Width="1.5" PointX="5.25" PointY="1.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="DBTHUCTAPModel.sysdiagram" Width="1.5" PointX="7.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="DBTHUCTAPModel.tbl_BBM_SMART_HRM" Width="1.5" PointX="7.75" PointY="3.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="DBTHUCTAPModel.tbl_Bill" Width="1.5" PointX="9.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="DBTHUCTAPModel.CaLamViec" Width="1.5" PointX="0.75" PointY="9.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="DBTHUCTAPModel.tbl_BBS_Collection" Width="1.5" PointX="2.75" PointY="9.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="DBTHUCTAPModel.tbl_bbs_collection_detail" Width="1.5" PointX="9.75" PointY="3.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="DBTHUCTAPModel.tbl_bbs_out_ar_auto" Width="1.5" PointX="4.75" PointY="9.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="DBTHUCTAPModel.tbl_moTaCongViec" Width="1.5" PointX="6.75" PointY="9.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="DBTHUCTAPModel.tbl_potong" Width="1.5" PointX="8.75" PointY="10.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="DBTHUCTAPModel.tbl_tmp" Width="1.5" PointX="10.75" PointY="10.75" IsExpanded="true" />
+        <AssociationConnector Association="DBTHUCTAPModel.FK__BDS__MACSH__2739D489" ManuallyRouted="false" />
+        <AssociationConnector Association="DBTHUCTAPModel.FK__BoSuuTap__Catego__3493CFA7" ManuallyRouted="false" />
+        <AssociationConnector Association="DBTHUCTAPModel.FK__SanPham__MaBST__37703C52" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

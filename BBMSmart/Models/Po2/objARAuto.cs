@@ -38,4 +38,20 @@ namespace ProductAllTool.Models.Po2
 
     }
 
+    public class addlyDo
+    {
+
+        public int ID { get; set; }
+        public string LyDo { get; set; }
+
+    }
+
+    public class Xacnhan
+    {
+
+        public string Ca { get; set; }
+
+
+    }
+
 }

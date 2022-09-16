@@ -828,7 +828,7 @@ namespace ProductAllTool.DataAccess
 
 
 
-        public static DataTable tbl_XayBST(string userid)
+        public static DataTable tbl_XayBST(string userid, string MaBST, string TenBST)
         {
             DataSet ds = new DataSet();
             try
@@ -840,7 +840,8 @@ namespace ProductAllTool.DataAccess
                     cmd.CommandType = CommandType.StoredProcedure;
                     cmd.CommandTimeout = 30000;
                     cmd.Parameters.Add(new SqlParameter("userid", userid));
-
+                    cmd.Parameters.Add(new SqlParameter("MaBST", MaBST));
+                    cmd.Parameters.Add(new SqlParameter("TenBST", TenBST));
 
                     using (SqlDataAdapter sda = new SqlDataAdapter(cmd))
                     { sda.Fill(ds); }
@@ -856,6 +857,642 @@ namespace ProductAllTool.DataAccess
             }
         }
 
+        public static List<objautocode> sp_autocode()
+        {
+            List<objautocode> it_r = new List<objautocode>();
+            using (var con = new SqlConnection(strConnTT))
+            {
+                con.Open();
+                try
+                {
+                    SqlCommand cmd = new SqlCommand("sp_autocode", con);
+                    cmd.CommandType = CommandType.StoredProcedure;
+                    cmd.CommandTimeout = 300;
+                    var reader = cmd.ExecuteReader();
+
+                    while (reader.Read())
+                    {
+                        objautocode it_ = new objautocode
+                        {
+                            Code = reader["Code"].ToString(),
+                        };
+
+                        it_r.Add(it_);
+                    }
+                    con.Close();
+                    return it_r;
+                }
+                catch (Exception ex)
+                {
+                    con.Close();
+                    LogBuild.CreateLogger(JsonConvert.SerializeObject(ex), "sp_autocode");
+                    return it_r;
+                }
+            }
+        }
+
+        public static DataTable BST_ADD(string userid, string Code, string Name, string Category, string MuaVu, int DoiTuong, string GioiTinh, string ThuNhap, string USP, string ThongDiep)
+        {
+            DataSet ds = new DataSet();
+            try
+            {
+                using (var con = new SqlConnection(strConnTT))
+                {
+                    con.Open();
+                    SqlCommand cmd = new SqlCommand("BST_ADD", con);
+                    cmd.CommandType = CommandType.StoredProcedure;
+                    cmd.CommandTimeout = 30000;
+                    cmd.Parameters.Add(new SqlParameter("userid", userid));
+                    cmd.Parameters.Add(new SqlParameter("Code", Code));
+                    cmd.Parameters.Add(new SqlParameter("Name", Name));
+                    cmd.Parameters.Add(new SqlParameter("Category", Category));
+                    cmd.Parameters.Add(new SqlParameter("MuaVu", MuaVu));
+                    cmd.Parameters.Add(new SqlParameter("DoiTuong", DoiTuong));
+                    cmd.Parameters.Add(new SqlParameter("GioiTinh", GioiTinh));
+                    cmd.Parameters.Add(new SqlParameter("ThuNhap", ThuNhap));
+                    cmd.Parameters.Add(new SqlParameter("USP", USP));
+                    cmd.Parameters.Add(new SqlParameter("ThongDiep", ThongDiep));
+
+                    using (SqlDataAdapter sda = new SqlDataAdapter(cmd))
+                    { sda.Fill(ds); }
+
+                    con.Close();
+                    return ds.Tables[0];
+                }
+            }
+            catch (Exception ex)
+            {
+                LogBuild.CreateLogger(JsonConvert.SerializeObject(ex), "BST_ADD");
+                return ds.Tables[0];
+            }
+        }
+
+        #endregion
+
+        #region Xây dựng bộ sưu tập 
+
+        public static List<itemBST> sp_BBSmart_GetListThuongHieu(string uid)
+        {
+            List<itemBST> it_r = new List<itemBST>();
+
+            using (var con = new SqlConnection(strCon))
+            {
+                con.Open();
+                try
+                {
+                    SqlCommand cmd = new SqlCommand("sp_BBSmart_GetListThuongHieu", con);
+                    cmd.CommandType = CommandType.StoredProcedure;
+                    cmd.CommandTimeout = 30000;
+
+                    cmd.Parameters.Add(new SqlParameter("userid", uid));
+
+                    var reader = cmd.ExecuteReader();
+
+                    while (reader.Read())
+                    {
+                        itemBST it_ = new itemBST
+                        {
+                            ThuongHieu = reader["Thương hiệu"].ToString(),
+                        };
+
+                        it_r.Add(it_);
+                    }
+                    con.Close();
+
+                    return it_r;
+                }
+                catch (Exception ex)
+                {
+                    con.Close();
+                    LogBuild.CreateLogger(JsonConvert.SerializeObject(ex), "sp_BBSmart_GetListThuongHieu");
+                    return it_r;
+                }
+            }
+        }
+
+        public static List<itemBST> sp_BBSmart_GetListDoTuoi(string uid)
+        {
+            List<itemBST> it_r = new List<itemBST>();
+
+            using (var con = new SqlConnection(strCon))
+            {
+                con.Open();
+                try
+                {
+
+                    SqlCommand cmd = new SqlCommand("sp_BBSmart_GetListDoTuoi", con);
+                    cmd.CommandType = CommandType.StoredProcedure;
+                    cmd.CommandTimeout = 30000;
+
+                    cmd.Parameters.Add(new SqlParameter("userid", uid));
+
+                    var reader = cmd.ExecuteReader();
+
+                    while (reader.Read())
+                    {
+                        itemBST it_ = new itemBST
+                        {
+                            DaiTuoi = reader["Name 2"].ToString(),
+                        };
+
+                        it_r.Add(it_);
+                    }
+                    con.Close();
+
+                    return it_r;
+                }
+                catch (Exception ex)
+                {
+                    con.Close();
+                    LogBuild.CreateLogger(JsonConvert.SerializeObject(ex), "sp_BBSmart_GetListDoTuoi");
+                    return it_r;
+                }
+            }
+        }
+
+        public static List<objCombox> sp_bbs_collection_GetLstCodeBST()
+        {
+            List<objCombox> it_r = new List<objCombox>();
+
+            using (var con = new SqlConnection(strCon))
+            {
+                con.Open();
+                try
+                {
+
+                    SqlCommand cmd = new SqlCommand("sp_bbs_collection_GetLstCodeBST", con);
+                    cmd.CommandType = CommandType.StoredProcedure;
+                    cmd.CommandTimeout = 30000;
+                    var reader = cmd.ExecuteReader();
+
+                    while (reader.Read())
+                    {
+                        objCombox it_ = new objCombox
+                        {
+                            Code = reader["Code"].ToString(),
+                            Name = reader["Name"].ToString(),
+                        };
+
+                        it_r.Add(it_);
+                    }
+                    con.Close();
+
+                    return it_r;
+                }
+                catch (Exception ex)
+                {
+                    con.Close();
+                    LogBuild.CreateLogger(JsonConvert.SerializeObject(ex), "sp_bbs_collection_GetLstCodeBST");
+                    return it_r;
+                }
+            }
+        }
+
+        public static List<objCombox> sp_bbs_collection_GetLstNameBST()
+        {
+            List<objCombox> it_r = new List<objCombox>();
+
+            using (var con = new SqlConnection(strCon))
+            {
+                con.Open();
+                try
+                {
+
+                    SqlCommand cmd = new SqlCommand("sp_bbs_collection_GetLstNameBST", con);
+                    cmd.CommandType = CommandType.StoredProcedure;
+                    cmd.CommandTimeout = 30000;
+                    var reader = cmd.ExecuteReader();
+
+                    while (reader.Read())
+                    {
+                        objCombox it_ = new objCombox
+                        {
+                            Code = reader["Code"].ToString(),
+                            Name = reader["Name"].ToString(),
+                        };
+
+                        it_r.Add(it_);
+                    }
+                    con.Close();
+
+                    return it_r;
+                }
+                catch (Exception ex)
+                {
+                    con.Close();
+                    LogBuild.CreateLogger(JsonConvert.SerializeObject(ex), "sp_bbs_collection_GetLstNameBST");
+                    return it_r;
+                }
+            }
+        }
+
+        public static List<objCombox> sp_bbs_collection_getrangereview()
+        {
+            List<objCombox> it_r = new List<objCombox>();
+
+            using (var con = new SqlConnection(strCon))
+            {
+                con.Open();
+                try
+                {
+
+                    SqlCommand cmd = new SqlCommand("sp_bbs_collection_getrangereview", con);
+                    cmd.CommandType = CommandType.StoredProcedure;
+                    cmd.CommandTimeout = 30000;
+                    var reader = cmd.ExecuteReader();
+
+                    while (reader.Read())
+                    {
+                        objCombox it_ = new objCombox
+                        {
+                            Code = reader["Code"].ToString(),
+                            Name = reader["Name"].ToString(),
+                        };
+
+                        it_r.Add(it_);
+                    }
+                    con.Close();
+
+                    return it_r;
+                }
+                catch (Exception ex)
+                {
+                    con.Close();
+                    LogBuild.CreateLogger(JsonConvert.SerializeObject(ex), "sp_bbs_collection_getrangereview");
+                    return it_r;
+                }
+            }
+        }
+
+        public static List<objCombox> sp_bbs_collection_lstNguonNhap()
+        {
+            List<objCombox> it_r = new List<objCombox>();
+
+            using (var con = new SqlConnection(strCon))
+            {
+                con.Open();
+                try
+                {
+
+                    SqlCommand cmd = new SqlCommand("sp_bbs_collection_lstNguonNhap", con);
+                    cmd.CommandType = CommandType.StoredProcedure;
+                    cmd.CommandTimeout = 30000;
+                    var reader = cmd.ExecuteReader();
+
+                    while (reader.Read())
+                    {
+                        objCombox it_ = new objCombox
+                        {
+                            Code = reader["Code"].ToString(),
+                            Name = reader["Name"].ToString(),
+                        };
+
+                        it_r.Add(it_);
+                    }
+                    con.Close();
+
+                    return it_r;
+                }
+                catch (Exception ex)
+                {
+                    con.Close();
+                    LogBuild.CreateLogger(JsonConvert.SerializeObject(ex), "sp_bbs_collection_lstNguonNhap");
+                    return it_r;
+                }
+            }
+        }
+
+        public static List<objCombox> sp_bbs_collection_lstMuaVu()
+        {
+            List<objCombox> it_r = new List<objCombox>();
+
+            using (var con = new SqlConnection(strCon))
+            {
+                con.Open();
+                try
+                {
+
+                    SqlCommand cmd = new SqlCommand("sp_bbs_collection_lstMuaVu", con);
+                    cmd.CommandType = CommandType.StoredProcedure;
+                    cmd.CommandTimeout = 30000;
+                    var reader = cmd.ExecuteReader();
+
+                    while (reader.Read())
+                    {
+                        objCombox it_ = new objCombox
+                        {
+                            Code = reader["Code"].ToString(),
+                            Name = reader["Name"].ToString(),
+                        };
+
+                        it_r.Add(it_);
+                    }
+                    con.Close();
+
+                    return it_r;
+                }
+                catch (Exception ex)
+                {
+                    con.Close();
+                    LogBuild.CreateLogger(JsonConvert.SerializeObject(ex), "sp_bbs_collection_lstMuaVu");
+                    return it_r;
+                }
+            }
+        }
+
+        public static List<objCombox> sp_bbs_collection_lstbrand()
+        {
+            List<objCombox> it_r = new List<objCombox>();
+
+            using (var con = new SqlConnection(strCon))
+            {
+                con.Open();
+                try
+                {
+
+                    SqlCommand cmd = new SqlCommand("sp_bbs_collection_lstbrand", con);
+                    cmd.CommandType = CommandType.StoredProcedure;
+                    cmd.CommandTimeout = 30000;
+                    var reader = cmd.ExecuteReader();
+
+                    while (reader.Read())
+                    {
+                        objCombox it_ = new objCombox
+                        {
+                            Code = reader["Code"].ToString(),
+                            Name = reader["Name"].ToString(),
+                        };
+
+                        it_r.Add(it_);
+                    }
+                    con.Close();
+
+                    return it_r;
+                }
+                catch (Exception ex)
+                {
+                    con.Close();
+                    LogBuild.CreateLogger(JsonConvert.SerializeObject(ex), "sp_bbs_collection_lstbrand");
+                    return it_r;
+                }
+            }
+        }
+
+        public static List<objCombox> sp_bbs_collection_getbrand(string funct)
+        {
+            List<objCombox> it_r = new List<objCombox>();
+
+            using (var con = new SqlConnection(strCon))
+            {
+                con.Open();
+                try
+                {
+
+                    SqlCommand cmd = new SqlCommand("sp_bbs_collection_getbrand", con);
+                    cmd.CommandType = CommandType.StoredProcedure;
+                    cmd.CommandTimeout = 3000;
+                    cmd.Parameters.Add(new SqlParameter("funct", funct));
+                    var reader = cmd.ExecuteReader();
+
+                    while (reader.Read())
+                    {
+                        objCombox it_ = new objCombox
+                        {
+                            Code = reader["Code"].ToString(),
+                            Name = reader["Name"].ToString(),
+                        };
+
+                        it_r.Add(it_);
+                    }
+                    con.Close();
+
+                    return it_r;
+                }
+                catch (Exception ex)
+                {
+                    con.Close();
+                    LogBuild.CreateLogger(JsonConvert.SerializeObject(ex), "sp_bbs_collection_getbrand");
+                    return it_r;
+                }
+            }
+        }
+
+        public static List<objCombox> sp_bbs_collection_getMuaVu(string funct)
+        {
+            List<objCombox> it_r = new List<objCombox>();
+
+            using (var con = new SqlConnection(strCon))
+            {
+                con.Open();
+                try
+                {
+
+                    SqlCommand cmd = new SqlCommand("sp_bbs_collection_getMuaVu", con);
+                    cmd.CommandType = CommandType.StoredProcedure;
+                    cmd.CommandTimeout = 3000;
+                    cmd.Parameters.Add(new SqlParameter("funct", funct));
+                    var reader = cmd.ExecuteReader();
+
+                    while (reader.Read())
+                    {
+                        objCombox it_ = new objCombox
+                        {
+                            Code = reader["Code"].ToString(),
+                            Name = reader["Name"].ToString(),
+                        };
+
+                        it_r.Add(it_);
+                    }
+                    con.Close();
+
+                    return it_r;
+                }
+                catch (Exception ex)
+                {
+                    con.Close();
+                    LogBuild.CreateLogger(JsonConvert.SerializeObject(ex), "sp_bbs_collection_getMuaVu");
+                    return it_r;
+                }
+            }
+        }
+
+        public static List<objCombox> sp_bbs_collection_getNguonNhap(string funct)
+        {
+            List<objCombox> it_r = new List<objCombox>();
+
+            using (var con = new SqlConnection(strCon))
+            {
+                con.Open();
+                try
+                {
+
+                    SqlCommand cmd = new SqlCommand("sp_bbs_collection_getNguonNhap", con);
+                    cmd.CommandType = CommandType.StoredProcedure;
+                    cmd.CommandTimeout = 3000;
+                    cmd.Parameters.Add(new SqlParameter("funct", funct));
+                    var reader = cmd.ExecuteReader();
+
+                    while (reader.Read())
+                    {
+                        objCombox it_ = new objCombox
+                        {
+                            Code = reader["Code"].ToString(),
+                            Name = reader["Name"].ToString(),
+                        };
+
+                        it_r.Add(it_);
+                    }
+                    con.Close();
+
+                    return it_r;
+                }
+                catch (Exception ex)
+                {
+                    con.Close();
+                    LogBuild.CreateLogger(JsonConvert.SerializeObject(ex), "sp_bbs_collection_getNguonNhap");
+                    return it_r;
+                }
+            }
+        }
+
+        public static List<DivCatGroupFuncollect> sp_collection_SourceProduct_DivCatGroupFunc_v2_get(string uid)
+        {
+            List<DivCatGroupFuncollect> it_r = new List<DivCatGroupFuncollect>();
+
+
+            using (var con = new SqlConnection(strCon))
+            {
+                con.Open();
+
+                try
+                {
+
+                    SqlCommand cmd = new SqlCommand("sp_collection_SourceProduct_DivCatGroupFunc_v2_get", con);
+                    cmd.CommandType = CommandType.StoredProcedure;
+
+                    cmd.Parameters.Add(new SqlParameter("uid", uid));
+
+                    var reader = cmd.ExecuteReader();
+
+                    while (reader.Read())
+                    {
+                        DivCatGroupFuncollect it = new DivCatGroupFuncollect
+                        {
+                            DivisionCode = reader["DivisionCode"].ToString(),
+                            DivisionName = reader["DivisionName"].ToString(),
+                            CategoryCode = reader["CategoryCode"].ToString(),
+                            CategoryName = reader["CategoryName"].ToString(),
+                            GroupCode = reader["GroupCode"].ToString(),
+                            GroupName = reader["GroupName"].ToString(),
+                            FunctionCode = reader["FunctionCode"].ToString(),
+                            FunctionName = reader["FunctionName"].ToString()
+
+                        };
+
+                        it_r.Add(it);
+                    }
+                    con.Close();
+
+                    return it_r;
+
+                }
+                catch (Exception ex)
+                {
+                    con.Close();
+                    LogBuild.CreateLogger(JsonConvert.SerializeObject(ex), "sp_collection_SourceProduct_DivCatGroupFunc_v2_get");
+                    return it_r;
+                }
+            }
+
+        }
+
+        public static DataTable sp_bbs_collection_GetLstproductImg(string userid, string cat, string group, string funct, string range, string brand, string nguonnhap, string muavu)
+        {
+            DataSet ds = new DataSet();
+            try
+            {
+                using (var con = new SqlConnection(strCon))
+                {
+                    con.Open();
+                    SqlCommand cmd = new SqlCommand("sp_bbs_collection_GetLstproductImg", con);
+                    cmd.CommandType = CommandType.StoredProcedure;
+                    cmd.CommandTimeout = 30000;
+                    cmd.Parameters.Add(new SqlParameter("userid", userid));
+                    cmd.Parameters.Add(new SqlParameter("cat", cat));
+                    cmd.Parameters.Add(new SqlParameter("group", group));
+                    cmd.Parameters.Add(new SqlParameter("funct", funct));
+                    cmd.Parameters.Add(new SqlParameter("range", range));
+                    cmd.Parameters.Add(new SqlParameter("brand", brand));
+                    cmd.Parameters.Add(new SqlParameter("nguonnhap", nguonnhap));
+                    cmd.Parameters.Add(new SqlParameter("muavu", muavu));
+                    using (SqlDataAdapter sda = new SqlDataAdapter(cmd))
+                    { sda.Fill(ds); }
+
+                    con.Close();
+                    return ds.Tables[0];
+                }
+            }
+            catch (Exception ex)
+            {
+                LogBuild.CreateLogger(JsonConvert.SerializeObject(ex), "sp_bbs_collection_GetLstproductImg");
+                return ds.Tables[0];
+            }
+        }
+
+        public static List<collectiondetail> sp_bbs_collection_GetLstproduct(string userid, string mahang)
+        {
+            List<collectiondetail> it_r = new List<collectiondetail>();
+
+            using (var con = new SqlConnection(strCon))
+            {
+                con.Open();
+                try
+                {
+
+                    SqlCommand cmd = new SqlCommand("sp_bbs_collection_GetLstproduct", con);
+                    cmd.CommandType = CommandType.StoredProcedure;
+                    cmd.Parameters.Add(new SqlParameter("userid", userid));
+                    cmd.Parameters.Add(new SqlParameter("mahang", mahang));
+
+                    var reader = cmd.ExecuteReader();
+
+                    while (reader.Read())
+                    {
+                        collectiondetail it = new collectiondetail
+                        {
+                            Code = reader["Code"].ToString(),
+                            Name = reader["Name"].ToString(),
+                            hinhanh = reader["hinhanh"].ToString(),
+                            SLton = reader["SLton"].ToString(),
+                            GiaBanAll = reader["GiaBanAll"].ToString(),
+                            CategoryCode = reader["CategoryCode"].ToString(),
+                            CategoryName = reader["CategoryName"].ToString(),
+                            GroupCode = reader["GroupCode"].ToString(),
+                            GroupName = reader["GroupName"].ToString(),
+                            FunctionCode = reader["FunctionCode"].ToString(),
+                            FunctionName = reader["FunctionName"].ToString(),
+                            BrandCode = reader["BrandCode"].ToString(),
+                            BrandName = reader["BrandName"].ToString(),
+                            NguonNhapCode = reader["NguonNhapCode"].ToString(),
+                            NguonNhapName = reader["NguonNhapName"].ToString(),
+                            MuaVuCode = reader["MuaVuCode"].ToString(),
+                            MuaVuName = reader["MuaVuName"].ToString(),
+                        };
+
+                        it_r.Add(it);
+                    }
+                    con.Close();
+
+                    return it_r;
+                }
+                catch (Exception ex)
+                {
+                    con.Close();
+                    LogBuild.CreateLogger(JsonConvert.SerializeObject(ex), "sp_bbs_collection_GetLstproduct");
+                    return it_r;
+                }
+            }
+        }
 
         #endregion
 

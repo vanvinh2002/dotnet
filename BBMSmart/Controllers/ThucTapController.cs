@@ -18,6 +18,7 @@ using ProductAllTool.Models.ManageSales;
 using ProductAllTool.Models.Po2;
 using ProductAllTool.Models.HRM;
 
+
 namespace ProductAllTool.Controllers
 {
     public class ThucTapController : Controller
@@ -122,14 +123,18 @@ namespace ProductAllTool.Controllers
         #endregion
 
         #region Xây dựng BST
+
+
+
         public ActionResult XayDungBST()
         {
-            if (Session["uid"] != null && Session["uid"].ToString().Length > 0)
+            if (Session["uid"] != null && Session["uid"].ToString().Length > 0)   
             {
-
+                var listautocode = DataAccess.DataAccessTT.sp_autocode();
+                   ViewBag.listautocode[0] = listautocode; 
 
                 return View();
-            }
+            }  
             else
             {
                 SystemFunctions.SaveSession("ThucTap", "XayDungBST");
@@ -137,16 +142,61 @@ namespace ProductAllTool.Controllers
             }
         }
 
-        public ActionResult XayBST()
+        public ActionResult XayBST(string MaBST, string TenBST)
         {
             if (Session["uid"] != null && Session["uid"].ToString().Length > 0)
             {
-                DataTable table = DataAccess.DataAccessTT.tbl_XayBST(Session["uid"].ToString());
+                DataTable table = DataAccess.DataAccessTT.tbl_XayBST(Session["uid"].ToString(), MaBST, TenBST);
 
                 return PartialView("~/Views/ThucTap/Partial/_XayDungBST.cshtml", table);
 
             }
             return RedirectToAction("Login", "Account");
+        }
+
+        async public Task<ActionResult> uploadImg(string foldername)
+        {
+            try
+            {
+                var file = System.Web.HttpContext.Current.Request.Files["MyImages"];
+                string linkres = await SystemFunctions.UploadIMGDirect(foldername, file);
+                if (linkres.Contains("media.bibomart.net"))
+                {
+                    return Json(new { code = 1, link = linkres });
+                }
+                else
+                    return Json(new { code = 0, link = "" });
+            }
+            catch (Exception ex)
+            {
+                DataAccess.LogBuild.CreateLogger(ex.ToString(), "uploadImgmanagesales");
+                return Json(new { code = 0, link = ex.Message });
+            }
+        }
+
+        public ActionResult BST_ADD(string Code, string Name, string Category, string MuaVu, int DoiTuong, string GioiTinh, string ThuNhap, string USP, string ThongDiep)
+        {
+            if (Session["uid"] != null && Session["uid"].ToString().Length > 0)
+            {
+                DataTable table = DataAccess.DataAccessTT.BST_ADD(Session["uid"].ToString(), Code, Name, Category, MuaVu, DoiTuong, GioiTinh, ThuNhap, USP, ThongDiep);
+
+                return PartialView("~/Views/ThucTap/Partial/_XayDungBST.cshtml", table);
+
+            }
+            return RedirectToAction("Login", "Account");
+        }
+
+
+        [HttpGet]
+        public ActionResult Create()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public ActionResult Create(tbl_BBS_Collection Tbl_BBS_Collection)
+        {
+            return View();
         }
 
         #endregion

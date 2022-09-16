@@ -1,0 +1,594 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="DBTHUCTAPModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="BDS">
+    <Key>
+      <PropertyRef Name="MABDS" />
+    </Key>
+    <Property Name="MABDS" Type="varchar" MaxLength="10" Nullable="false" />
+    <Property Name="TENBDS" Type="nvarchar" MaxLength="50" />
+    <Property Name="DIACHI" Type="nvarchar" MaxLength="50" />
+    <Property Name="MACSH" Type="varchar" MaxLength="10" />
+    <Property Name="MAVP" Type="nvarchar" MaxLength="10" />
+  </EntityType>
+  <EntityType Name="BoSuuTap">
+    <Key>
+      <PropertyRef Name="MaBST" />
+    </Key>
+    <Property Name="MaBST" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="TenBST" Type="nvarchar" MaxLength="50" />
+    <Property Name="MuaVu" Type="nvarchar" MaxLength="50" />
+    <Property Name="DoiTuong" Type="nvarchar" MaxLength="50" />
+    <Property Name="GioiTinh" Type="bit" />
+    <Property Name="ThuNhap" Type="nvarchar" MaxLength="50" />
+    <Property Name="USP" Type="nvarchar" MaxLength="100" />
+    <Property Name="ThongDiep" Type="nvarchar" MaxLength="100" />
+    <Property Name="CategoryID" Type="varchar" MaxLength="10" />
+  </EntityType>
+  <!--Errors Found During Generation:
+warning 6002: The table/view 'DBTHUCTAP.dbo.CaLamViec' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+  <EntityType Name="CaLamViec">
+    <Key>
+      <PropertyRef Name="ID" />
+      <PropertyRef Name="MaPB" />
+      <PropertyRef Name="TenPB" />
+      <PropertyRef Name="BoPhan" />
+      <PropertyRef Name="LoaiCa" />
+      <PropertyRef Name="Ca" />
+      <PropertyRef Name="NoiLam" />
+      <PropertyRef Name="MaCH" />
+      <PropertyRef Name="TenCH" />
+      <PropertyRef Name="NhanCa" />
+      <PropertyRef Name="DoiCa" />
+      <PropertyRef Name="Loai" />
+      <PropertyRef Name="LoaiNghi" />
+      <PropertyRef Name="LyDoNghi" />
+      <PropertyRef Name="TuNgay" />
+      <PropertyRef Name="DenNgay" />
+      <PropertyRef Name="LoaiCong" />
+      <PropertyRef Name="SoGioNghi" />
+      <PropertyRef Name="TrangThai" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="MaNV" Type="varchar" MaxLength="10" />
+    <Property Name="TenNV" Type="nvarchar" MaxLength="50" />
+    <Property Name="ChucDanh" Type="nvarchar" MaxLength="50" />
+    <Property Name="MaPB" Type="varchar" MaxLength="10" Nullable="false" />
+    <Property Name="TenPB" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="BoPhan" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="LoaiCa" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="Ca" Type="varchar" MaxLength="10" Nullable="false" />
+    <Property Name="NoiLam" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="Ngay" Type="date" />
+    <Property Name="MaCH" Type="varchar" MaxLength="10" Nullable="false" />
+    <Property Name="TenCH" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="NhanCa" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="DoiCa" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="Loai" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="LoaiNghi" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="LyDoNghi" Type="nvarchar" MaxLength="100" Nullable="false" />
+    <Property Name="TuNgay" Type="date" Nullable="false" />
+    <Property Name="DenNgay" Type="date" Nullable="false" />
+    <Property Name="LoaiCong" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="SoGioNghi" Type="int" Nullable="false" />
+    <Property Name="TrangThai" Type="bit" Nullable="false" />
+    <Property Name="NgayBD" Type="date" />
+    <Property Name="NgayKT" Type="date" />
+    <Property Name="TrangThaiDuyet" Type="nvarchar" MaxLength="50" />
+    <Property Name="NgayLamLai" Type="date" />
+  </EntityType>
+  <EntityType Name="Category">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="varchar" MaxLength="10" Nullable="false" />
+    <Property Name="Ten" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="GroupCat" Type="nvarchar" MaxLength="50" />
+    <Property Name="Func" Type="nvarchar" MaxLength="50" />
+    <Property Name="RR" Type="nvarchar" MaxLength="50" />
+    <Property Name="Brand" Type="nvarchar" MaxLength="50" />
+    <Property Name="NguonNhap" Type="nvarchar" MaxLength="100" />
+    <Property Name="SLCombo" Type="int" />
+  </EntityType>
+  <EntityType Name="CHUSOHUU">
+    <Key>
+      <PropertyRef Name="MACSH" />
+    </Key>
+    <Property Name="MACSH" Type="varchar" MaxLength="10" Nullable="false" />
+    <Property Name="TENCSH" Type="nvarchar" MaxLength="50" />
+    <Property Name="DIACHI" Type="nvarchar" MaxLength="50" />
+    <Property Name="DIENTHOAI" Type="varchar" MaxLength="15" />
+    <Property Name="EMAIL" Type="nvarchar" MaxLength="50" />
+    <Property Name="CMND" Type="nvarchar" MaxLength="15" />
+  </EntityType>
+  <EntityType Name="KHACHHANG">
+    <Key>
+      <PropertyRef Name="MAKH" />
+    </Key>
+    <Property Name="MAKH" Type="char" MaxLength="5" Nullable="false" />
+    <Property Name="HOTEN" Type="nvarchar" MaxLength="50" Nullable="false" />
+  </EntityType>
+  <EntityType Name="SanPham">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="MaHang" Type="varchar" MaxLength="10" />
+    <Property Name="TenHang" Type="nvarchar" MaxLength="50" />
+    <Property Name="GiaBan" Type="money" />
+    <Property Name="SoLuong" Type="int" />
+    <Property Name="MaBST" Type="int" />
+    <Property Name="Anh" Type="nvarchar" MaxLength="400" />
+  </EntityType>
+  <EntityType Name="sysdiagrams">
+    <Key>
+      <PropertyRef Name="diagram_id" />
+    </Key>
+    <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
+    <Property Name="principal_id" Type="int" Nullable="false" />
+    <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="version" Type="int" />
+    <Property Name="definition" Type="varbinary(max)" />
+  </EntityType>
+  <EntityType Name="tbl_BBM_SMART_HRM">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="KhoiCode" Type="nvarchar" MaxLength="150" />
+    <Property Name="KhoiName" Type="nvarchar" MaxLength="250" />
+    <Property Name="BoPhanCode" Type="nvarchar" MaxLength="150" />
+    <Property Name="BoPhanName" Type="nvarchar" MaxLength="250" />
+    <Property Name="PhongBanCode" Type="nvarchar" MaxLength="250" />
+    <Property Name="PhongBanName" Type="nvarchar" MaxLength="250" />
+    <Property Name="CapBac" Type="nvarchar" MaxLength="250" />
+    <Property Name="ChucDanh" Type="nvarchar" MaxLength="250" />
+    <Property Name="MaCongViec" Type="nvarchar" MaxLength="150" />
+    <Property Name="TenCongViec" Type="nvarchar" MaxLength="250" />
+    <Property Name="TanSuatThucHien" Type="int" />
+    <Property Name="ThoiLuongThucHien" Type="decimal" Precision="18" Scale="2" />
+    <Property Name="TongThoiLuongThucHien" Type="decimal" Precision="18" Scale="2" />
+    <Property Name="MaNhanVien" Type="nvarchar" MaxLength="150" />
+    <Property Name="TenNhanVien" Type="nvarchar" MaxLength="250" />
+    <Property Name="TinhTrangHD" Type="nvarchar" MaxLength="250" />
+  </EntityType>
+  <!--Errors Found During Generation:
+warning 6002: The table/view 'DBTHUCTAP.dbo.tbl_BBS_Collection' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+  <EntityType Name="tbl_BBS_Collection">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Code" Type="nvarchar" MaxLength="100" />
+    <Property Name="Name" Type="nvarchar" MaxLength="250" />
+    <Property Name="Category" Type="nvarchar" MaxLength="100" />
+    <Property Name="MuaVu" Type="nvarchar" MaxLength="250" />
+    <Property Name="DoiTuong" Type="nvarchar" MaxLength="100" />
+    <Property Name="GioiTinh" Type="nvarchar" MaxLength="100" />
+    <Property Name="ThuNhap" Type="nvarchar" MaxLength="250" />
+    <Property Name="USP" Type="nvarchar" MaxLength="250" />
+    <Property Name="ThongDiep" Type="nvarchar" MaxLength="250" />
+    <Property Name="Themelink" Type="nvarchar" MaxLength="500" />
+    <Property Name="Status" Type="int" />
+    <Property Name="step" Type="nvarchar" MaxLength="50" />
+    <Property Name="CreateDate" Type="datetime" />
+    <Property Name="CreateBy" Type="nvarchar" MaxLength="100" />
+    <Property Name="Aprovedate" Type="datetime" />
+    <Property Name="AproveBy" Type="nvarchar" MaxLength="100" />
+    <Property Name="Action" Type="nvarchar" MaxLength="100" />
+    <Property Name="Aprovedate1" Type="datetime" />
+    <Property Name="Aprovedate2" Type="nvarchar" MaxLength="100" />
+    <Property Name="ModifyDate" Type="datetime" />
+    <Property Name="ModifyBy" Type="nvarchar" MaxLength="100" />
+  </EntityType>
+  <!--Errors Found During Generation:
+warning 6002: The table/view 'DBTHUCTAP.dbo.tbl_bbs_collection_detail' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+  <EntityType Name="tbl_bbs_collection_detail">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="IDparent" Type="nvarchar" MaxLength="100" />
+    <Property Name="catcode" Type="nvarchar" MaxLength="100" />
+    <Property Name="catname" Type="nvarchar" MaxLength="250" />
+    <Property Name="groupcode" Type="nvarchar" MaxLength="100" />
+    <Property Name="groupname" Type="nvarchar" MaxLength="250" />
+    <Property Name="functcode" Type="nvarchar" MaxLength="100" />
+    <Property Name="functname" Type="nvarchar" MaxLength="250" />
+    <Property Name="Range" Type="nvarchar" MaxLength="100" />
+    <Property Name="brandcode" Type="nvarchar" MaxLength="100" />
+    <Property Name="brandname" Type="nvarchar" MaxLength="250" />
+    <Property Name="nguonnhapcode" Type="nvarchar" MaxLength="100" />
+    <Property Name="nguonnhapname" Type="nvarchar" MaxLength="250" />
+    <Property Name="MuaVu" Type="nvarchar" MaxLength="100" />
+    <Property Name="MaHang" Type="nvarchar" MaxLength="100" />
+    <Property Name="TenHang" Type="nvarchar" MaxLength="100" />
+    <Property Name="imglink" Type="nvarchar" MaxLength="500" />
+    <Property Name="price" Type="decimal" Precision="18" Scale="2" />
+    <Property Name="slcombo" Type="decimal" Precision="18" Scale="2" />
+    <Property Name="status" Type="int" />
+    <Property Name="step" Type="nvarchar" MaxLength="50" />
+    <Property Name="createdate" Type="datetime" />
+    <Property Name="createby" Type="nvarchar" MaxLength="100" />
+    <Property Name="aprovedate" Type="datetime" />
+    <Property Name="aproveby" Type="nvarchar" MaxLength="100" />
+    <Property Name="aprovenote" Type="nvarchar" MaxLength="500" />
+    <Property Name="SLTon" Type="int" />
+  </EntityType>
+  <!--Errors Found During Generation:
+warning 6002: The table/view 'DBTHUCTAP.dbo.tbl_bbs_out_ar_auto' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+  <EntityType Name="tbl_bbs_out_ar_auto">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="KhoChiaCode" Type="nvarchar" MaxLength="100" />
+    <Property Name="KhoChiaName" Type="nvarchar" MaxLength="250" />
+    <Property Name="TinhKhoChia" Type="nvarchar" MaxLength="100" />
+    <Property Name="VendorCode" Type="nvarchar" MaxLength="250" />
+    <Property Name="VendorName" Type="nvarchar" MaxLength="250" />
+    <Property Name="Brand" Type="nvarchar" MaxLength="250" />
+    <Property Name="CH TSF" Type="decimal" Precision="18" Scale="2" />
+    <Property Name="Mien" Type="nvarchar" MaxLength="250" />
+    <Property Name="Tinh" Type="nvarchar" MaxLength="250" />
+    <Property Name="StoreCode" Type="nvarchar" MaxLength="250" />
+    <Property Name="StoreName" Type="nvarchar" MaxLength="250" />
+    <Property Name="ItemCode" Type="nvarchar" MaxLength="250" />
+    <Property Name="ItemName" Type="nvarchar" MaxLength="250" />
+    <Property Name="PS ERP" Type="decimal" Precision="18" Scale="2" />
+    <Property Name="DS ERP" Type="decimal" Precision="18" Scale="2" />
+    <Property Name="Min PSF" Type="decimal" Precision="18" Scale="2" />
+    <Property Name="SLTon" Type="decimal" Precision="18" Scale="2" />
+    <Property Name="SLBanD30" Type="decimal" Precision="18" Scale="2" />
+    <Property Name="StockDay" Type="decimal" Precision="18" Scale="2" />
+    <Property Name="SLGoiY" Type="decimal" Precision="18" Scale="2" />
+    <Property Name="SLDeXuat" Type="decimal" Precision="18" Scale="2" />
+    <Property Name="SLDuyet" Type="decimal" Precision="18" Scale="2" />
+    <Property Name="RNtopsalefunct" Type="decimal" Precision="18" Scale="0" />
+    <Property Name="asRegion" Type="nvarchar" MaxLength="50" />
+    <Property Name="Status" Type="nvarchar" MaxLength="50" />
+    <Property Name="StatusERP" Type="nvarchar" MaxLength="50" />
+    <Property Name="OrderNo" Type="nvarchar" MaxLength="250" />
+    <Property Name="Type" Type="int" />
+    <Property Name="Step" Type="nvarchar" MaxLength="50" />
+    <Property Name="Createdate" Type="datetime" />
+    <Property Name="Createby" Type="nvarchar" MaxLength="50" />
+    <Property Name="Aprovedate" Type="datetime" />
+    <Property Name="Approveby" Type="nvarchar" MaxLength="50" />
+    <Property Name="LyDo" Type="nvarchar" MaxLength="255" />
+  </EntityType>
+  <EntityType Name="tbl_Bill">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="HoVaTen" Type="nvarchar" MaxLength="50" />
+    <Property Name="SoDienThoai" Type="nvarchar" MaxLength="15" />
+    <Property Name="TenSanPham" Type="nvarchar" MaxLength="50" />
+    <Property Name="NgayMua" Type="datetime" />
+  </EntityType>
+  <!--Errors Found During Generation:
+warning 6013: The table/view 'DBTHUCTAP.dbo.tbl_khachhang' does not have a primary key defined and no valid primary key could be inferred. This table/view has been excluded. To use the entity, you will need to review your schema, add the correct keys, and uncomment it.
+        <EntityType Name="tbl_khachhang">
+          <Property Name="HoTen" Type="nvarchar" MaxLength="255" />
+          <Property Name="SoDienThoai" Type="nvarchar" MaxLength="20" />
+          <Property Name="DiaChi" Type="nvarchar" MaxLength="500" />
+          <Property Name="DonHang" Type="nvarchar" MaxLength="500" />
+          <Property Name="TongTien" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="NgayMua" Type="datetime" />
+        </EntityType>-->
+  <!--Errors Found During Generation:
+warning 6002: The table/view 'DBTHUCTAP.dbo.tbl_moTaCongViec' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+  <EntityType Name="tbl_moTaCongViec">
+    <Key>
+      <PropertyRef Name="MaCV" />
+    </Key>
+    <Property Name="MaCV" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="TenCV" Type="nvarchar" MaxLength="255" />
+    <Property Name="TanSuatCongViec" Type="decimal" Precision="18" Scale="2" />
+    <Property Name="ThoiLuongThucHien" Type="decimal" Precision="18" Scale="2" />
+    <Property Name="Khoi" Type="nvarchar" MaxLength="255" />
+    <Property Name="PhongBan" Type="nvarchar" MaxLength="255" />
+    <Property Name="BoPhan" Type="nvarchar" MaxLength="255" />
+    <Property Name="CapBac" Type="nvarchar" MaxLength="255" />
+    <Property Name="ChucDanh" Type="nvarchar" MaxLength="255" />
+    <Property Name="MaNv" Type="nvarchar" MaxLength="255" />
+    <Property Name="TenNv" Type="nvarchar" MaxLength="255" />
+    <Property Name="TinhTrangHoatDong" Type="nvarchar" MaxLength="50" />
+    <Property Name="Mien" Type="nvarchar" MaxLength="255" />
+    <Property Name="MaCHBP" Type="nvarchar" MaxLength="255" />
+    <Property Name="TenCHBP" Type="nvarchar" MaxLength="255" />
+    <Property Name="TongThoiGian" Type="decimal" Precision="18" Scale="2" />
+  </EntityType>
+  <!--Errors Found During Generation:
+warning 6002: The table/view 'DBTHUCTAP.dbo.tbl_potong' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+  <EntityType Name="tbl_potong">
+    <Key>
+      <PropertyRef Name="POTongMienBac" />
+      <PropertyRef Name="POTongMienNam" />
+      <PropertyRef Name="POTongMienBacInt" />
+      <PropertyRef Name="POTongMienNamInt" />
+      <PropertyRef Name="POTongToanQuoc" />
+      <PropertyRef Name="POTongToanQuocInt" />
+      <PropertyRef Name="GiaTriPOTongToanQuoc" />
+      <PropertyRef Name="POQuahan" />
+      <PropertyRef Name="TonKho" />
+    </Key>
+    <Property Name="Function" Type="nvarchar" MaxLength="100" />
+    <Property Name="FFunction" Type="nvarchar" MaxLength="503" />
+    <Property Name="MuaVu" Type="nvarchar" MaxLength="50" />
+    <Property Name="hisdate" Type="nvarchar" MaxLength="4000" />
+    <Property Name="POTongMienBac" Type="nvarchar" MaxLength="4000" Nullable="false" />
+    <Property Name="POTongMienNam" Type="nvarchar" MaxLength="4000" Nullable="false" />
+    <Property Name="POTongMienBacInt" Type="nvarchar" MaxLength="4000" Nullable="false" />
+    <Property Name="POTongMienNamInt" Type="nvarchar" MaxLength="4000" Nullable="false" />
+    <Property Name="POTongToanQuoc" Type="nvarchar" MaxLength="4000" Nullable="false" />
+    <Property Name="POTongToanQuocInt" Type="nvarchar" MaxLength="4000" Nullable="false" />
+    <Property Name="GiaTriPOTongToanQuoc" Type="nvarchar" MaxLength="4000" Nullable="false" />
+    <Property Name="POQuahan" Type="nvarchar" MaxLength="4000" Nullable="false" />
+    <Property Name="TonKho" Type="nvarchar" MaxLength="4000" Nullable="false" />
+    <Property Name="Intransit" Type="nvarchar" MaxLength="4000" />
+    <Property Name="POTongCR" Type="nvarchar" MaxLength="4000" />
+    <Property Name="DatThem" Type="nvarchar" MaxLength="4000" />
+    <Property Name="NgayTonKho" Type="nvarchar" MaxLength="100" />
+    <Property Name="sumPOTongMienBac" Type="nvarchar" MaxLength="4000" />
+    <Property Name="sumPOTongMienNam" Type="nvarchar" MaxLength="4000" />
+    <Property Name="sumPOTongToanQuoc" Type="nvarchar" MaxLength="4000" />
+    <Property Name="sumGiaTriPOTongToanQuoc" Type="nvarchar" MaxLength="4000" />
+    <Property Name="sumTonKho" Type="nvarchar" MaxLength="4000" />
+    <Property Name="sumIntransit" Type="nvarchar" MaxLength="4000" />
+    <Property Name="sumPOTongCR" Type="nvarchar" MaxLength="4000" />
+    <Property Name="sumDatThem" Type="nvarchar" MaxLength="4000" />
+  </EntityType>
+  <!--Errors Found During Generation:
+warning 6002: The table/view 'DBTHUCTAP.dbo.tbl_tmp' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+  <EntityType Name="tbl_tmp">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Code" Type="nvarchar" MaxLength="50" />
+    <Property Name="Name" Type="nvarchar" MaxLength="500" />
+  </EntityType>
+  <Association Name="FK__BDS__MACSH__2739D489">
+    <End Role="CHUSOHUU" Type="Self.CHUSOHUU" Multiplicity="0..1" />
+    <End Role="BDS" Type="Self.BDS" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="CHUSOHUU">
+        <PropertyRef Name="MACSH" />
+      </Principal>
+      <Dependent Role="BDS">
+        <PropertyRef Name="MACSH" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__BoSuuTap__Catego__3493CFA7">
+    <End Role="Category" Type="Self.Category" Multiplicity="0..1" />
+    <End Role="BoSuuTap" Type="Self.BoSuuTap" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Category">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="BoSuuTap">
+        <PropertyRef Name="CategoryID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__SanPham__MaBST__37703C52">
+    <End Role="BoSuuTap" Type="Self.BoSuuTap" Multiplicity="0..1" />
+    <End Role="SanPham" Type="Self.SanPham" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="BoSuuTap">
+        <PropertyRef Name="MaBST" />
+      </Principal>
+      <Dependent Role="SanPham">
+        <PropertyRef Name="MaBST" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="DBTHUCTAPModelStoreContainer">
+    <EntitySet Name="BDS" EntityType="Self.BDS" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="BoSuuTap" EntityType="Self.BoSuuTap" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Category" EntityType="Self.Category" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="CHUSOHUU" EntityType="Self.CHUSOHUU" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="KHACHHANG" EntityType="Self.KHACHHANG" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="SanPham" EntityType="Self.SanPham" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="tbl_BBM_SMART_HRM" EntityType="Self.tbl_BBM_SMART_HRM" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="tbl_Bill" EntityType="Self.tbl_Bill" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="CaLamViec" EntityType="Self.CaLamViec" store:Type="Tables" store:Schema="dbo">
+      <DefiningQuery>SELECT 
+    [CaLamViec].[ID] AS [ID], 
+    [CaLamViec].[MaNV] AS [MaNV], 
+    [CaLamViec].[TenNV] AS [TenNV], 
+    [CaLamViec].[ChucDanh] AS [ChucDanh], 
+    [CaLamViec].[MaPB] AS [MaPB], 
+    [CaLamViec].[TenPB] AS [TenPB], 
+    [CaLamViec].[BoPhan] AS [BoPhan], 
+    [CaLamViec].[LoaiCa] AS [LoaiCa], 
+    [CaLamViec].[Ca] AS [Ca], 
+    [CaLamViec].[NoiLam] AS [NoiLam], 
+    [CaLamViec].[Ngay] AS [Ngay], 
+    [CaLamViec].[MaCH] AS [MaCH], 
+    [CaLamViec].[TenCH] AS [TenCH], 
+    [CaLamViec].[NhanCa] AS [NhanCa], 
+    [CaLamViec].[DoiCa] AS [DoiCa], 
+    [CaLamViec].[Loai] AS [Loai], 
+    [CaLamViec].[LoaiNghi] AS [LoaiNghi], 
+    [CaLamViec].[LyDoNghi] AS [LyDoNghi], 
+    [CaLamViec].[TuNgay] AS [TuNgay], 
+    [CaLamViec].[DenNgay] AS [DenNgay], 
+    [CaLamViec].[LoaiCong] AS [LoaiCong], 
+    [CaLamViec].[SoGioNghi] AS [SoGioNghi], 
+    [CaLamViec].[TrangThai] AS [TrangThai], 
+    [CaLamViec].[NgayBD] AS [NgayBD], 
+    [CaLamViec].[NgayKT] AS [NgayKT], 
+    [CaLamViec].[TrangThaiDuyet] AS [TrangThaiDuyet], 
+    [CaLamViec].[NgayLamLai] AS [NgayLamLai]
+    FROM [dbo].[CaLamViec] AS [CaLamViec]</DefiningQuery>
+    </EntitySet>
+    <EntitySet Name="tbl_BBS_Collection" EntityType="Self.tbl_BBS_Collection" store:Type="Tables" store:Schema="dbo">
+      <DefiningQuery>SELECT 
+    [tbl_BBS_Collection].[ID] AS [ID], 
+    [tbl_BBS_Collection].[Code] AS [Code], 
+    [tbl_BBS_Collection].[Name] AS [Name], 
+    [tbl_BBS_Collection].[Category] AS [Category], 
+    [tbl_BBS_Collection].[MuaVu] AS [MuaVu], 
+    [tbl_BBS_Collection].[DoiTuong] AS [DoiTuong], 
+    [tbl_BBS_Collection].[GioiTinh] AS [GioiTinh], 
+    [tbl_BBS_Collection].[ThuNhap] AS [ThuNhap], 
+    [tbl_BBS_Collection].[USP] AS [USP], 
+    [tbl_BBS_Collection].[ThongDiep] AS [ThongDiep], 
+    [tbl_BBS_Collection].[Themelink] AS [Themelink], 
+    [tbl_BBS_Collection].[Status] AS [Status], 
+    [tbl_BBS_Collection].[step] AS [step], 
+    [tbl_BBS_Collection].[CreateDate] AS [CreateDate], 
+    [tbl_BBS_Collection].[CreateBy] AS [CreateBy], 
+    [tbl_BBS_Collection].[Aprovedate] AS [Aprovedate], 
+    [tbl_BBS_Collection].[AproveBy] AS [AproveBy], 
+    [tbl_BBS_Collection].[Action] AS [Action], 
+    [tbl_BBS_Collection].[Aprovedate1] AS [Aprovedate1], 
+    [tbl_BBS_Collection].[Aprovedate2] AS [Aprovedate2], 
+    [tbl_BBS_Collection].[ModifyDate] AS [ModifyDate], 
+    [tbl_BBS_Collection].[ModifyBy] AS [ModifyBy]
+    FROM [dbo].[tbl_BBS_Collection] AS [tbl_BBS_Collection]</DefiningQuery>
+    </EntitySet>
+    <EntitySet Name="tbl_bbs_collection_detail" EntityType="Self.tbl_bbs_collection_detail" store:Type="Tables" store:Schema="dbo">
+      <DefiningQuery>SELECT 
+    [tbl_bbs_collection_detail].[ID] AS [ID], 
+    [tbl_bbs_collection_detail].[IDparent] AS [IDparent], 
+    [tbl_bbs_collection_detail].[catcode] AS [catcode], 
+    [tbl_bbs_collection_detail].[catname] AS [catname], 
+    [tbl_bbs_collection_detail].[groupcode] AS [groupcode], 
+    [tbl_bbs_collection_detail].[groupname] AS [groupname], 
+    [tbl_bbs_collection_detail].[functcode] AS [functcode], 
+    [tbl_bbs_collection_detail].[functname] AS [functname], 
+    [tbl_bbs_collection_detail].[Range] AS [Range], 
+    [tbl_bbs_collection_detail].[brandcode] AS [brandcode], 
+    [tbl_bbs_collection_detail].[brandname] AS [brandname], 
+    [tbl_bbs_collection_detail].[nguonnhapcode] AS [nguonnhapcode], 
+    [tbl_bbs_collection_detail].[nguonnhapname] AS [nguonnhapname], 
+    [tbl_bbs_collection_detail].[MuaVu] AS [MuaVu], 
+    [tbl_bbs_collection_detail].[MaHang] AS [MaHang], 
+    [tbl_bbs_collection_detail].[TenHang] AS [TenHang], 
+    [tbl_bbs_collection_detail].[imglink] AS [imglink], 
+    [tbl_bbs_collection_detail].[price] AS [price], 
+    [tbl_bbs_collection_detail].[slcombo] AS [slcombo], 
+    [tbl_bbs_collection_detail].[status] AS [status], 
+    [tbl_bbs_collection_detail].[step] AS [step], 
+    [tbl_bbs_collection_detail].[createdate] AS [createdate], 
+    [tbl_bbs_collection_detail].[createby] AS [createby], 
+    [tbl_bbs_collection_detail].[aprovedate] AS [aprovedate], 
+    [tbl_bbs_collection_detail].[aproveby] AS [aproveby], 
+    [tbl_bbs_collection_detail].[aprovenote] AS [aprovenote], 
+    [tbl_bbs_collection_detail].[SLTon] AS [SLTon]
+    FROM [dbo].[tbl_bbs_collection_detail] AS [tbl_bbs_collection_detail]</DefiningQuery>
+    </EntitySet>
+    <EntitySet Name="tbl_bbs_out_ar_auto" EntityType="Self.tbl_bbs_out_ar_auto" store:Type="Tables" store:Schema="dbo">
+      <DefiningQuery>SELECT 
+    [tbl_bbs_out_ar_auto].[ID] AS [ID], 
+    [tbl_bbs_out_ar_auto].[KhoChiaCode] AS [KhoChiaCode], 
+    [tbl_bbs_out_ar_auto].[KhoChiaName] AS [KhoChiaName], 
+    [tbl_bbs_out_ar_auto].[TinhKhoChia] AS [TinhKhoChia], 
+    [tbl_bbs_out_ar_auto].[VendorCode] AS [VendorCode], 
+    [tbl_bbs_out_ar_auto].[VendorName] AS [VendorName], 
+    [tbl_bbs_out_ar_auto].[Brand] AS [Brand], 
+    [tbl_bbs_out_ar_auto].[CH TSF] AS [CH TSF], 
+    [tbl_bbs_out_ar_auto].[Mien] AS [Mien], 
+    [tbl_bbs_out_ar_auto].[Tinh] AS [Tinh], 
+    [tbl_bbs_out_ar_auto].[StoreCode] AS [StoreCode], 
+    [tbl_bbs_out_ar_auto].[StoreName] AS [StoreName], 
+    [tbl_bbs_out_ar_auto].[ItemCode] AS [ItemCode], 
+    [tbl_bbs_out_ar_auto].[ItemName] AS [ItemName], 
+    [tbl_bbs_out_ar_auto].[PS ERP] AS [PS ERP], 
+    [tbl_bbs_out_ar_auto].[DS ERP] AS [DS ERP], 
+    [tbl_bbs_out_ar_auto].[Min PSF] AS [Min PSF], 
+    [tbl_bbs_out_ar_auto].[SLTon] AS [SLTon], 
+    [tbl_bbs_out_ar_auto].[SLBanD30] AS [SLBanD30], 
+    [tbl_bbs_out_ar_auto].[StockDay] AS [StockDay], 
+    [tbl_bbs_out_ar_auto].[SLGoiY] AS [SLGoiY], 
+    [tbl_bbs_out_ar_auto].[SLDeXuat] AS [SLDeXuat], 
+    [tbl_bbs_out_ar_auto].[SLDuyet] AS [SLDuyet], 
+    [tbl_bbs_out_ar_auto].[RNtopsalefunct] AS [RNtopsalefunct], 
+    [tbl_bbs_out_ar_auto].[asRegion] AS [asRegion], 
+    [tbl_bbs_out_ar_auto].[Status] AS [Status], 
+    [tbl_bbs_out_ar_auto].[StatusERP] AS [StatusERP], 
+    [tbl_bbs_out_ar_auto].[OrderNo] AS [OrderNo], 
+    [tbl_bbs_out_ar_auto].[Type] AS [Type], 
+    [tbl_bbs_out_ar_auto].[Step] AS [Step], 
+    [tbl_bbs_out_ar_auto].[Createdate] AS [Createdate], 
+    [tbl_bbs_out_ar_auto].[Createby] AS [Createby], 
+    [tbl_bbs_out_ar_auto].[Aprovedate] AS [Aprovedate], 
+    [tbl_bbs_out_ar_auto].[Approveby] AS [Approveby], 
+    [tbl_bbs_out_ar_auto].[LyDo] AS [LyDo]
+    FROM [dbo].[tbl_bbs_out_ar_auto] AS [tbl_bbs_out_ar_auto]</DefiningQuery>
+    </EntitySet>
+    <EntitySet Name="tbl_moTaCongViec" EntityType="Self.tbl_moTaCongViec" store:Type="Tables" store:Schema="dbo">
+      <DefiningQuery>SELECT 
+    [tbl_moTaCongViec].[MaCV] AS [MaCV], 
+    [tbl_moTaCongViec].[TenCV] AS [TenCV], 
+    [tbl_moTaCongViec].[TanSuatCongViec] AS [TanSuatCongViec], 
+    [tbl_moTaCongViec].[ThoiLuongThucHien] AS [ThoiLuongThucHien], 
+    [tbl_moTaCongViec].[Khoi] AS [Khoi], 
+    [tbl_moTaCongViec].[PhongBan] AS [PhongBan], 
+    [tbl_moTaCongViec].[BoPhan] AS [BoPhan], 
+    [tbl_moTaCongViec].[CapBac] AS [CapBac], 
+    [tbl_moTaCongViec].[ChucDanh] AS [ChucDanh], 
+    [tbl_moTaCongViec].[MaNv] AS [MaNv], 
+    [tbl_moTaCongViec].[TenNv] AS [TenNv], 
+    [tbl_moTaCongViec].[TinhTrangHoatDong] AS [TinhTrangHoatDong], 
+    [tbl_moTaCongViec].[Mien] AS [Mien], 
+    [tbl_moTaCongViec].[MaCHBP] AS [MaCHBP], 
+    [tbl_moTaCongViec].[TenCHBP] AS [TenCHBP], 
+    [tbl_moTaCongViec].[TongThoiGian] AS [TongThoiGian]
+    FROM [dbo].[tbl_moTaCongViec] AS [tbl_moTaCongViec]</DefiningQuery>
+    </EntitySet>
+    <EntitySet Name="tbl_potong" EntityType="Self.tbl_potong" store:Type="Tables" store:Schema="dbo">
+      <DefiningQuery>SELECT 
+    [tbl_potong].[Function] AS [Function], 
+    [tbl_potong].[FFunction] AS [FFunction], 
+    [tbl_potong].[MuaVu] AS [MuaVu], 
+    [tbl_potong].[hisdate] AS [hisdate], 
+    [tbl_potong].[POTongMienBac] AS [POTongMienBac], 
+    [tbl_potong].[POTongMienNam] AS [POTongMienNam], 
+    [tbl_potong].[POTongMienBacInt] AS [POTongMienBacInt], 
+    [tbl_potong].[POTongMienNamInt] AS [POTongMienNamInt], 
+    [tbl_potong].[POTongToanQuoc] AS [POTongToanQuoc], 
+    [tbl_potong].[POTongToanQuocInt] AS [POTongToanQuocInt], 
+    [tbl_potong].[GiaTriPOTongToanQuoc] AS [GiaTriPOTongToanQuoc], 
+    [tbl_potong].[POQuahan] AS [POQuahan], 
+    [tbl_potong].[TonKho] AS [TonKho], 
+    [tbl_potong].[Intransit] AS [Intransit], 
+    [tbl_potong].[POTongCR] AS [POTongCR], 
+    [tbl_potong].[DatThem] AS [DatThem], 
+    [tbl_potong].[NgayTonKho] AS [NgayTonKho], 
+    [tbl_potong].[sumPOTongMienBac] AS [sumPOTongMienBac], 
+    [tbl_potong].[sumPOTongMienNam] AS [sumPOTongMienNam], 
+    [tbl_potong].[sumPOTongToanQuoc] AS [sumPOTongToanQuoc], 
+    [tbl_potong].[sumGiaTriPOTongToanQuoc] AS [sumGiaTriPOTongToanQuoc], 
+    [tbl_potong].[sumTonKho] AS [sumTonKho], 
+    [tbl_potong].[sumIntransit] AS [sumIntransit], 
+    [tbl_potong].[sumPOTongCR] AS [sumPOTongCR], 
+    [tbl_potong].[sumDatThem] AS [sumDatThem]
+    FROM [dbo].[tbl_potong] AS [tbl_potong]</DefiningQuery>
+    </EntitySet>
+    <EntitySet Name="tbl_tmp" EntityType="Self.tbl_tmp" store:Type="Tables" store:Schema="dbo">
+      <DefiningQuery>SELECT 
+    [tbl_tmp].[ID] AS [ID], 
+    [tbl_tmp].[Code] AS [Code], 
+    [tbl_tmp].[Name] AS [Name]
+    FROM [dbo].[tbl_tmp] AS [tbl_tmp]</DefiningQuery>
+    </EntitySet>
+    <AssociationSet Name="FK__BDS__MACSH__2739D489" Association="Self.FK__BDS__MACSH__2739D489">
+      <End Role="CHUSOHUU" EntitySet="CHUSOHUU" />
+      <End Role="BDS" EntitySet="BDS" />
+    </AssociationSet>
+    <AssociationSet Name="FK__BoSuuTap__Catego__3493CFA7" Association="Self.FK__BoSuuTap__Catego__3493CFA7">
+      <End Role="Category" EntitySet="Category" />
+      <End Role="BoSuuTap" EntitySet="BoSuuTap" />
+    </AssociationSet>
+    <AssociationSet Name="FK__SanPham__MaBST__37703C52" Association="Self.FK__SanPham__MaBST__37703C52">
+      <End Role="BoSuuTap" EntitySet="BoSuuTap" />
+      <End Role="SanPham" EntitySet="SanPham" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>
