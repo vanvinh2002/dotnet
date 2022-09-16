@@ -37,7 +37,18 @@ namespace ProductAllTool.Models.ManageSales
 
 
     }
-    
+    public class getIMG
+    {
+        public string Code { set; get; }
+        public string Name { set; get; }
+        public string hinhanh { set; get; }
+        public string giabanall { set; get; }
+        public string slton { set; get; }
+
+
+
+    }
+
     public class ThongTinBST
     {
         public string Code { set; get; }
@@ -49,6 +60,7 @@ namespace ProductAllTool.Models.ManageSales
         public string ThuNhap { set; get; }
         public string USP { set; get; }
         public string ThongDiep { set; get; }
+
 
 
 

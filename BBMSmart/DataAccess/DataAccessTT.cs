@@ -237,6 +237,32 @@ namespace ProductAllTool.DataAccess
                 return 0;
             }
         }
+        public static int cbo_updateSL(string userid, int ID, string slcombo)
+        {
+            DataSet ds = new DataSet();
+            try
+            {
+                using (var con = new SqlConnection(strConntt))
+                {
+                    con.Open();
+                    SqlCommand cmd = new SqlCommand("cbo_updateSL", con);
+                    cmd.CommandType = CommandType.StoredProcedure;
+                    cmd.CommandTimeout = 3000;
+                    cmd.Parameters.Add(new SqlParameter("userid", userid));
+                    cmd.Parameters.Add(new SqlParameter("ID", ID));
+                    cmd.Parameters.Add(new SqlParameter("slcombo", slcombo));
+                    cmd.ExecuteNonQuery();
+
+                    con.Close();
+                    return 1;
+                }
+            }
+            catch (Exception ex)
+            {
+                LogBuild.CreateLogger(JsonConvert.SerializeObject(ex), "cbo_updateSL");
+                return 0;
+            }
+        }
 
         public static List<objCombox> cbo_Cate()
         {
@@ -473,7 +499,7 @@ namespace ProductAllTool.DataAccess
             }
         }
 
-        public static DataTable cbo_Bang(string userid, string Category, string MaBST, string TenBST, string Group, string Function, string RangeRieview, string Band, string NguonNhap, string MuaVu)
+        public static DataTable cbo_Bang(string userid, string Category, string Group, string Function, string RangeRieview, string Band, string NguonNhap, string MuaVu)
         {
             DataSet ds = new DataSet();
             try
@@ -486,8 +512,6 @@ namespace ProductAllTool.DataAccess
                     cmd.CommandTimeout = 30000;
                     cmd.Parameters.Add(new SqlParameter("userid", userid));
                     cmd.Parameters.Add(new SqlParameter("Category", Category));
-                    cmd.Parameters.Add(new SqlParameter("MaBST", MaBST));
-                    cmd.Parameters.Add(new SqlParameter("TenBST", TenBST));
                     cmd.Parameters.Add(new SqlParameter("Group", Group));
                     cmd.Parameters.Add(new SqlParameter("Function", Function));
                     cmd.Parameters.Add(new SqlParameter("RangeRieview", RangeRieview));
@@ -547,6 +571,88 @@ namespace ProductAllTool.DataAccess
                 {
                     con.Close();
                     LogBuild.CreateLogger(JsonConvert.SerializeObject(ex), "TK_BSTT");
+                    return it_r;
+                }
+            }
+        }
+
+        public static List<getIMG> cbo_getListIMG(string userid, string Category, string Group, string Function, string RangeRieview, string Band, string NguonNhap, string MuaVu)
+        {
+            List<getIMG> it_r = new List<getIMG>();
+            using (var con = new SqlConnection(strConntt))
+            {
+                con.Open();
+                try
+                {
+                    SqlCommand cmd = new SqlCommand("cbo_getListIMG", con);
+                    cmd.CommandType = CommandType.StoredProcedure;
+                    cmd.Parameters.Add(new SqlParameter("userid", userid));
+                    cmd.Parameters.Add(new SqlParameter("Category", Category));
+                    cmd.Parameters.Add(new SqlParameter("Group", Group));
+                    cmd.Parameters.Add(new SqlParameter("Function", Function));
+                    cmd.Parameters.Add(new SqlParameter("RangeRieview", RangeRieview));
+                    cmd.Parameters.Add(new SqlParameter("Band", Band));
+                    cmd.Parameters.Add(new SqlParameter("NguonNhap", NguonNhap));
+                    cmd.Parameters.Add(new SqlParameter("MuaVu", MuaVu));
+                    var reader = cmd.ExecuteReader();
+
+                    while (reader.Read())
+                    {
+                        getIMG it_ = new getIMG
+                        {
+                            Code = reader["Code"].ToString(),
+                            Name = reader["Name"].ToString(),
+                            hinhanh = reader["hinhanh"].ToString(),
+                            giabanall = reader["giabanall"].ToString(),
+                            slton = reader["slton"].ToString(),
+                        };
+                        it_r.Add(it_);
+                    }
+                    con.Close();
+                    return it_r;
+                }
+                catch (Exception ex)
+                {
+                    con.Close();
+                    LogBuild.CreateLogger(JsonConvert.SerializeObject(ex), "cbo_getListIMG");
+                    return it_r;
+                }
+            }
+        }
+
+        public static List<getIMG> cbo_listcollect(string userid, string mahang)
+        {
+            List<getIMG> it_r = new List<getIMG>();
+            using (var con = new SqlConnection(strConntt))
+            {
+                con.Open();
+                try
+                {
+                    SqlCommand cmd = new SqlCommand("cbo_listcollect", con);
+                    cmd.CommandType = CommandType.StoredProcedure;
+                    cmd.Parameters.Add(new SqlParameter("userid", userid));
+                    cmd.Parameters.Add(new SqlParameter("mahang", mahang));
+                    var reader = cmd.ExecuteReader();
+
+                    while (reader.Read())
+                    {
+                        getIMG it_ = new getIMG
+                        {
+                            Code = reader["Code"].ToString(),
+                            Name = reader["Name"].ToString(),
+                            hinhanh = reader["hinhanh"].ToString(),
+                            giabanall = reader["giabanall"].ToString(),
+                            slton = reader["slton"].ToString(),
+                        };
+                        it_r.Add(it_);
+                    }
+                    con.Close();
+                    return it_r;
+                }
+                catch (Exception ex)
+                {
+                    con.Close();
+                    LogBuild.CreateLogger(JsonConvert.SerializeObject(ex), "cbo_listcollect");
                     return it_r;
                 }
             }

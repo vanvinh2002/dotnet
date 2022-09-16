@@ -121,6 +121,11 @@ namespace ProductAllTool.Models.HRM
         public int ID { set; get; }
         public String LyDo { set; get; }
     }
+    public class updateSL
+    {
+        public int ID { set; get; }
+        public String slcombo { set; get; }
+    }
     public class SetTT
     {
         public String Ca { set; get; }

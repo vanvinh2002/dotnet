@@ -1,9 +1,12 @@
 ﻿@using System.Data
 @using ProductAllTool.Models.ManageSales;
-
+@{
+    var lsthd = (List<objCombox>)Session["listhanhdongdc"];
+    var listLoaidc = (List<objCombox>)Session["listLoaidc"];
+}
 <link href="~/Resource/Content/css/thickbox.css" rel="stylesheet" />
 <script src="~/Resource/Scripts/thickbox.js"></script>
-<table id="tbl_Item" class="table table-bordered" >
+<table id="tbl_Item" class="table table-bordered" style="width:99.9%">
     <thead>
         <tr class="bg-primary">
             <th class="text-left " style="vertical-align: top">
@@ -30,6 +33,10 @@
             <th class="text-left" style="vertical-align: top">
                 SL combo
             </th>
+            <th class="text-left" style="vertical-align: top">
+                Chọn <br />
+                <input type="checkbox" id="checkall" class="text-center" onchange="checkall()" />
+            </th>
         </tr>
     </thead>
     <tbody>
@@ -43,32 +50,35 @@
                     var i = 0;
                     foreach (DataRow item in dt.Rows)
                     {
-                        <tr id="row_@i">
-                            <td class="text-left" style="width: 40px; max-width: 40px;  overflow: hidden;white-space: nowrap">
-                                @item["catname"]
-                            </td>
-                            <td class="text-left" style="width: 40px; max-width: 40px;  overflow: hidden;white-space: nowrap">
-                                @item["groupname"]
-                            </td>
-                            <td class="text-left" style="width: 40px; max-width: 40px;  overflow: hidden;white-space: nowrap">
-                                @item["functname"]
-                            </td>
-                            <td class="text-left" style="width: 40px; max-width: 40px;  overflow: hidden;white-space: nowrap">
-                               @* @item["STT"]*@
-                            </td>
-                            <td class="text-left" style="width: 40px; max-width: 40px;  overflow: hidden;white-space: nowrap">
-                                @item["MaHang"]
-                            </td>
-                            <td class="text-left" style="width: 40px; max-width: 40px;  overflow: hidden;white-space: nowrap">
-                                @item["TenHang"]
-                            </td>
-                            <td class="text-left" style="width: 40px; max-width: 40px;  overflow: hidden;white-space: nowrap">
-                                @item["price"]
-                            </td>
-                            <td class="text-left" style="width: 40px; max-width: 40px;  overflow: hidden;white-space: nowrap">
-                                @item["slcombo"]
-                            </td>
-                        </tr>
+                <tr id="row_@i">
+                    <td class="text-left" style="width: 25px; max-width: 25px; overflow: hidden; white-space: nowrap">
+                        @item["catname"]
+                    </td>
+                    <td class="text-left" style="width: 40px; max-width: 40px;  overflow: hidden;white-space: nowrap">
+                        @item["groupname"]
+                    </td>
+                    <td class="text-left" style="width: 40px; max-width: 40px;  overflow: hidden;white-space: nowrap">
+                        @item["functname"]
+                    </td>
+                    <td class="text-left" style="widtH: 25px; max-width: 25px; overflow: hidden; white-space: nowrap ">
+                        @item["STT"]
+                    </td>
+                    <td class="text-left" style="width: 40px; max-width: 40px;  overflow: hidden;white-space: nowrap">
+                        @item["MaHang"]
+                    </td>
+                    <td class="text-left" style="width: 40px; max-width: 40px;  overflow: hidden;white-space: nowrap">
+                        @item["TenHang"]
+                    </td>
+                    <td class="text-left" style="width: 40px; max-width: 40px;  overflow: hidden;white-space: nowrap">
+                        @item["price"]
+                    </td>
+                    <td class="text-left" style="width: 40px; max-width: 40px;  overflow: hidden;white-space: nowrap">
+                        <input type="text" id="slcombo_@i" value="@item["slcombo"]" />
+                    </td>
+                    <td class="text-left">
+                        <input id="_@i" class="text-center" name="check[]" type="checkbox" value="@item["ID"]" />
+                    </td>
+                </tr>
                         i++;
                     }
                 }
@@ -78,5 +88,19 @@
     <tfoot>
     </tfoot>
 </table>
+<script>
+    function checkall() {
+        var cboxes = document.getElementsByName('check[]');
+        for (var i = 0; i < cboxes.length; i++) {
+            if ($('#checkall').is(":checked")) {
+                cboxes[i].checked = true;
+            }
+            else {
+                cboxes[i].checked = false;
+            }
+        }
+    }
+
+</script>
 
 

@@ -120,6 +120,7 @@ namespace ProductAllTool.Controllers
                 var lst_MuaVu = DataAccess.DataAccessTT.cbo_MuaVu();
                 ViewBag.lst_MuaVu = lst_MuaVu;
 
+
                 return View();
             }
             else
@@ -128,11 +129,11 @@ namespace ProductAllTool.Controllers
                 return RedirectToAction("Login", "Account");
             }
         }
-        public ActionResult GetListCat( string Category, string MaBST, string TenBST,string Group, string Function, string RangeRieview, string Band, string NguonNhap, string MuaVu)
+        public ActionResult GetListCat( string Category,string Group, string Function, string RangeRieview, string Band, string NguonNhap, string MuaVu)
         {
             if (Session["uid"] != null && Session["uid"].ToString().Length > 0)
             {
-                DataTable table = DataAccess.DataAccessTT.cbo_Bang(Session["uid"].ToString(), Category, MaBST, TenBST, Group, Function, RangeRieview, Band, NguonNhap, MuaVu);
+                DataTable table = DataAccess.DataAccessTT.cbo_Bang(Session["uid"].ToString(), Category, Group, Function, RangeRieview, Band, NguonNhap, MuaVu);
 
                 return PartialView("~/Views/ThucTap/Partial/__ChiTietBoSuuTap.cshtml", table);
 
@@ -146,10 +147,57 @@ namespace ProductAllTool.Controllers
             {
                 List<ThongTinBST> listBST = DataAccess.DataAccessTT.TK_BSTT(Session["uid"].ToString(), MaBST, TenBST);
 
-                return Json(listBST);
+
+                return this.Json(listBST, JsonRequestBehavior.AllowGet);
 
             }
             return RedirectToAction("Login", "Account");
+        }
+        public ActionResult getListIMG(string Category, string Group, string Function, string RangeRieview, string Band, string NguonNhap, string MuaVu)
+        {
+            if (Session["uid"] != null && Session["uid"].ToString().Length > 0)
+            {
+                var listIMG = DataAccess.DataAccessTT.cbo_getListIMG(Session["uid"].ToString(), Category, Group, Function, RangeRieview, Band, NguonNhap, MuaVu);
+                
+
+                return this.Json(listIMG, JsonRequestBehavior.AllowGet);
+
+            }
+            return RedirectToAction("Login", "Account");
+        }
+        public ActionResult GetListcollectionnext(string mahang)
+        {
+            if (Session["uid"] != null && Session["uid"].ToString().Length > 0)
+            {
+                var listcollect = DataAccess.DataAccessTT.cbo_listcollect(Session["uid"].ToString(), mahang);
+
+
+                return this.Json(listcollect, JsonRequestBehavior.AllowGet);
+
+            }
+            return RedirectToAction("Login", "Account");
+        }
+
+        [HttpPost]
+        public ActionResult UpdateSL(List<updateSL> lst)
+        {
+            try
+            {
+                if (Session["uid"] != null && Session["uid"].ToString().Length > 0)
+                {
+                    foreach (updateSL po in lst)
+                    {
+                        DataAccess.DataAccessTT.sp_lydo_update(Session["uid"].ToString(), po.ID, po.slcombo);
+                    }
+                    return Json(1);
+                }
+                return RedirectToAction("Login", "Account");
+            }
+            catch (Exception ex)
+            {
+                LogBuild.CreateLogger(JsonConvert.SerializeObject(ex), "UpdateTest");
+                return Json(null);
+            }
         }
 
         #endregion
