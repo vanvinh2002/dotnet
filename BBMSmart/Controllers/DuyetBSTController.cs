@@ -162,25 +162,39 @@ namespace ProductAllTool.Controllers
             }
         }
 
+        //[HttpPost]
+        //public ActionResult BSTCreateBST(List<addBST> info)
+        //{
+        //    try
+        //    {
+        //        if (Session["uid"] != null && Session["uid"].ToString().Length > 0)
+        //        {
+        //            foreach (addBST po in info)
+        //            {
+        //                DataAccess.DataAccessBST.BST_CreateBST(Session["uid"].ToString(), po.MaHang, po.TenHang, po.price, po.SLTon, po.imglink, po.catcode, po.catname);
+        //            }
+        //            return Json(1);
+        //        }
+        //        return RedirectToAction("Login", "Account");
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        LogBuild.CreateLogger(JsonConvert.SerializeObject(ex), "BSTCreateBST");
+        //        return Json(null);
+        //    }
+        //}
         [HttpPost]
-        public ActionResult BSTCreateBST(List<addBST> info)
+        public ActionResult BSTCreateBST(addBST lst)
         {
             try
             {
-                if (Session["uid"] != null && Session["uid"].ToString().Length > 0)
-                {
-                    foreach (addBST po in info)
-                    {
-                        DataAccess.DataAccessBST.BST_CreateBST(Session["uid"].ToString(), po.cateid);
-                    }
-                    return Json(1);
-                }
-                return RedirectToAction("Login", "Account");
+                string rs = DataAccess.DataAccessBST.BST_CreateBST(Session["uid"].ToString(), lst);
+
+                return Json(new { result = rs });
             }
             catch (Exception ex)
             {
-                LogBuild.CreateLogger(JsonConvert.SerializeObject(ex), "BSTCreateBST");
-                return Json(null);
+                return Json(new { result = ex.Message });
             }
         }
 

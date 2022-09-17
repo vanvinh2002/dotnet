@@ -593,9 +593,8 @@ namespace ProductAllTool.DataAccess
             }
         }
 
-        public static int BST_CreateBST(string userid, string cateid)
+        public static string BST_CreateBST(string userid, addBST lst)
         {
-            DataSet ds = new DataSet();
             try
             {
                 using (var con = new SqlConnection(strConnTHUCTAP))
@@ -605,17 +604,24 @@ namespace ProductAllTool.DataAccess
                     cmd.CommandType = CommandType.StoredProcedure;
                     cmd.CommandTimeout = 300;
                     cmd.Parameters.Add(new SqlParameter("userid", userid));
-                    cmd.Parameters.Add(new SqlParameter("cateid", cateid));
-                    cmd.ExecuteNonQuery();
+                    cmd.Parameters.Add(new SqlParameter("MaHang", lst.MaHang));
+                    cmd.Parameters.Add(new SqlParameter("TenHang", lst.TenHang));
+                    cmd.Parameters.Add(new SqlParameter("price", lst.price));
+                    cmd.Parameters.Add(new SqlParameter("SLTon", lst.SLTon));
+                    cmd.Parameters.Add(new SqlParameter("imglink", lst.imglink));
+                    cmd.Parameters.Add(new SqlParameter("catcode", lst.catcode));
+                    cmd.Parameters.Add(new SqlParameter("code", lst.Code));
+                    cmd.Parameters.Add(new SqlParameter("name", lst.Name));
+                    var result = (string)cmd.ExecuteScalar();
 
                     con.Close();
-                    return 1;
+                    return result;
                 }
             }
             catch (Exception ex)
             {
                 LogBuild.CreateLogger(JsonConvert.SerializeObject(ex), "BST_CreateBST");
-                return 0;
+                return ex.Message.ToString();
             }
         }
 

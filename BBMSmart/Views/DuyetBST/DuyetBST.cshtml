@@ -557,25 +557,29 @@
     //    }
     //}
     function js_createbst() {
-        var CodebstNew = $('#CodebstNew').val();
-        var NamebstNew = $('#NamebstNew').val();
-        var IDparentnew = $('#IDparent').val();
-        var bst = {};
-        bst.ID = $('#IDparent').val();
-        bst.mahang = $("#item_codeinfo").html();
+        var lst = new Object();
+        lst.MaHang = $('#item_codeinfo').html();
+        lst.TenHang = $('#item_nameinfo').html();
+        lst.price = $('#price_info').html();
+        lst.SLTon = $('#slton_info').html();
+        lst.imglink = $('#imgLink').val();
+        lst.catcode = $('#Cate1').html();
+        lst.code = $('#MaBST1').html();
+        lst.name = $('#TenBST1').html();
 
+        console.log(lst);
         $.ajax({
             url: '/DuyetBST/BSTCreateBST',
             type: 'POST',
-            data: JSON.stringify({ info: bst }),
+            data: JSON.stringify({ lst: lst }),
             contentType: 'application/json, charset=utf-8',
             beforeSend: function () {
                 js_Loading(true, 1);
             },
             success: function (data) {
                 if (data) {
-                    js_GetListCollectAcceptDetail(CodebstNew, NamebstNew, IDparentnew, '1');
-                    $('#upload_theme').hide();
+                    alert("Add thanh cong");
+                    js_GetListDBST();
                 } else {
                     alert("Có lỗi xảy ra");
                 }

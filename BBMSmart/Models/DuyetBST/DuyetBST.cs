@@ -56,8 +56,13 @@ namespace ProductAllTool.Models.DuyetBST
 
     public class addBST
     {
-        public string cateid { get; set; }
-        public string Themelink { get; set; }
-        public string step { get; set; }
+        public string MaHang { get; set; }
+        public string TenHang { get; set; }
+        public string price { get; set; }
+        public string SLTon { get; set; }
+        public string imglink { get; set; }
+        public string catcode { get; set; }
+        public string Code { get; set; }
+        public string Name { get; set; }
     }
 }
