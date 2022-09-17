@@ -263,7 +263,7 @@ namespace ProductAllTool.DataAccess
                 return 0;
             }
         }
-        public static int CBO_ADDBST(string userid, string catcode, string catname, string groupcode, string groupname, string functcode, string functname, string MaHang, string TenHang, string price, string imglink, string slcombo)
+        public static int cbo_addBST(string userid, string code, string name,string catecode, string MaHang, string TenHang, string price, string imglink, string slcombo)
         {
             DataSet ds = new DataSet();
             try
@@ -271,16 +271,13 @@ namespace ProductAllTool.DataAccess
                 using (var con = new SqlConnection(strConntt))
                 {
                     con.Open();
-                    SqlCommand cmd = new SqlCommand("CBO_ADDBST", con);
+                    SqlCommand cmd = new SqlCommand("cbo_addBST", con);
                     cmd.CommandType = CommandType.StoredProcedure;
                     cmd.CommandTimeout = 3000;
                     cmd.Parameters.Add(new SqlParameter("userid", userid));
-                    cmd.Parameters.Add(new SqlParameter("catcode", catcode));
-                    cmd.Parameters.Add(new SqlParameter("catname", catname));
-                    cmd.Parameters.Add(new SqlParameter("groupcode", groupcode));
-                    cmd.Parameters.Add(new SqlParameter("groupname", groupname));
-                    cmd.Parameters.Add(new SqlParameter("functcode", functcode));
-                    cmd.Parameters.Add(new SqlParameter("functname", functname));
+                    cmd.Parameters.Add(new SqlParameter("code", code));
+                    cmd.Parameters.Add(new SqlParameter("name", name));
+                    cmd.Parameters.Add(new SqlParameter("catecode", catecode));
                     cmd.Parameters.Add(new SqlParameter("MaHang", MaHang));
                     cmd.Parameters.Add(new SqlParameter("TenHang", TenHang));
                     cmd.Parameters.Add(new SqlParameter("price", price));
@@ -294,7 +291,7 @@ namespace ProductAllTool.DataAccess
             }
             catch (Exception ex)
             {
-                LogBuild.CreateLogger(JsonConvert.SerializeObject(ex), "CBO_ADDBST");
+                LogBuild.CreateLogger(JsonConvert.SerializeObject(ex), "cbo_addBST");
                 return 0;
             }
         }

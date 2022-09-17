@@ -111,7 +111,7 @@
                                     {
                                         foreach (objCombox box in (List<objCombox>)ViewBag.lst_cate)
                                         {
-                                            <option value="@box.Code">@box.Name</option>
+                                            <option  value="@box.Code">@box.Name</option>
                                         }
                                     }
                                 </select>
@@ -126,7 +126,7 @@
                                     {
                                         foreach (objCombox box in (List<objCombox>)ViewBag.lst_Group)
                                         {
-                                            <option value="@box.Code">@box.Name</option>
+                                            <option  value="@box.Code">@box.Name</option>
                                         }
                                     }
                                 </select>
@@ -141,7 +141,7 @@
                                     {
                                         foreach (objCombox box in (List<objCombox>)ViewBag.lst_Func)
                                         {
-                                            <option value="@box.Code">@box.Name</option>
+                                            <option  value="@box.Code">@box.Name</option>
                                         }
                                     }
                                 </select>
@@ -276,7 +276,7 @@
 
 
                                 <div class="col-md-6"> 
-                                    <a id="btnAdd" href="#" onclick="js_add()" class="form-control btn btn-info" style="max-width:100px;float:right"><i class="fas fa-plus" aria-hidden="true" style="float: left; margin-left: 6px; margin-top: 3px;"></i>Add BST </a>
+                                    <a id="btnAdd" href="#" onclick="js_add()" class="form-control btn btn-info" style="max-width:100px;float:right"></i>Add BST </a>
                                 </div>
                             </div>
                         </div>
@@ -634,43 +634,38 @@
     }
 
     function js_add() {
-
-        var add = {};
-        add.catcode = $("#cate").val();
-        add.catname = '';
-        add.groupcode = $('#group').val(); 
-        add.groupname = '';
-        add.functcode = $('#Func').val();
-        add.functname = ''
+        var add = new Object();
+        add.code = $("#Ma").html();
+        add.name = $("#Ten").html();
+        add.code = $("#Category").html();
         add.MaHang = $('#item_codeinfo').html();
         add.TenHang = $('#item_nameinfo').html();
         add.Price = $('#price_info').html();
-        add.imglink = $('#imglink').val();
+        add.imglink = $('#imgLink').val();
         add.slcombo = '1';
-        console.log('một');
+
         console.log(add);
-        $.ajax({
-            url: '/ThucTap/addBST',
-            type: 'POST',
-            data: JSON.stringify({ lst: add }),
-            contentType: 'application/json, charset=utf-8',
-            beforeSend: function () {
-                js_Loading(true, 1);
-            },
-            success: function (data) {
-                if (data == 1) {
-                    alert("Điều chỉnh thành công");
-                    $('#Detail_modal').modal('hide');
-                    js_GetListtt1();
+            $.ajax({
+                url: '/ThucTap/AddBST',
+                type: 'POST',
+                data: JSON.stringify({add }),
+                contentType: 'application/json, charset=utf-8',
+                beforeSend: function () {
+                    js_Loading(true, 1);
+                },
+                success: function (data) {
+                    if (data) {
+                        js_GetListtt1();
+                       
+                    } else {
+                        alert("Có lỗi xảy ra");
+                    }
+                    js_Loading(false, 1);
+                },
+                error: function () {
                     js_Loading(false, 1);
                 }
-            },
-            error: function () {
-                js_Loading(false, 1);
-            }
-
-        });
-
+            });
     }
 
 

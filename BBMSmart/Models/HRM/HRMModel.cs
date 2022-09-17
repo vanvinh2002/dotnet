@@ -119,26 +119,23 @@ namespace ProductAllTool.Models.HRM
     public class AddLydo
     {
         public int ID { set; get; }
-        public String LyDo { set; get; }
+        public string LyDo { set; get; }
     }
     public class updateSL
     {
         public int ID { set; get; }
-        public String slcombo { set; get; }
+        public string slcombo { set; get; }
     }
-    public class add_BST
+    public class addBoSuuTap
     {
-        public String catcode { set; get; }
-        public String catname { set; get; }
-        public String groupcode { set; get; }
-        public String groupname { set; get; }
-        public String functcode { set; get; }
-        public String functname { set; get; }
-        public String MaHang { set; get; }
-        public String TenHang { set; get; }
-        public String price { set; get; }
-        public String imglink { set; get; }
-        public String slcombo { set; get; }
+        public string code { set; get; }
+        public string name { set; get; }
+        public string catecode { set; get; }
+        public string MaHang { set; get; }
+        public string TenHang { set; get; }
+        public string price { set; get; }
+        public string imglink { set; get; }
+        public string slcombo { set; get; }
         
     }
     public class SetTT
