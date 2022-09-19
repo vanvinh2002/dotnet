@@ -116,6 +116,18 @@ namespace ProductAllTool.Models.HRM
 
 
     }
+
+    public class addBST
+    {
+        public string Code { get; set; }
+        public string Name { get; set; }
+        public string MaHang { get; set; }
+        public string TenHang { get; set; }
+        public decimal price { get; set; }
+        public string imglink { get; set; }
+        public decimal slcombo { get; set; }
+        public string catcode { get; set; }
+    }
     public class AddLydo
     {
         public int ID { set; get; }
@@ -125,18 +137,6 @@ namespace ProductAllTool.Models.HRM
     {
         public int ID { set; get; }
         public string slcombo { set; get; }
-    }
-    public class addBoSuuTap
-    {
-        public string code { set; get; }
-        public string name { set; get; }
-        public string catecode { set; get; }
-        public string MaHang { set; get; }
-        public string TenHang { set; get; }
-        public string price { set; get; }
-        public string imglink { set; get; }
-        public string slcombo { set; get; }
-        
     }
     public class SetTT
     {

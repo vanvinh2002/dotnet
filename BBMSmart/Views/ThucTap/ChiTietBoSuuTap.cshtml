@@ -276,7 +276,7 @@
 
 
                                 <div class="col-md-6"> 
-                                    <a id="btnAdd" href="#" onclick="js_add()" class="form-control btn btn-info" style="max-width:100px;float:right"></i>Add BST </a>
+                                    <a id="btnAdd" href="#" onclick="js_add()" class="form-control btn btn-info" style="max-width:100px;float:right">Add BST </a>
                                 </div>
                             </div>
                         </div>
@@ -633,39 +633,41 @@
         }
     }
 
-    function js_add() {
-        var add = new Object();
-        add.code = $("#Ma").html();
-        add.name = $("#Ten").html();
-        add.code = $("#Category").html();
-        add.MaHang = $('#item_codeinfo').html();
-        add.TenHang = $('#item_nameinfo').html();
-        add.Price = $('#price_info').html();
-        add.imglink = $('#imgLink').val();
-        add.slcombo = '1';
 
-        console.log(add);
-            $.ajax({
-                url: '/ThucTap/AddBST',
-                type: 'POST',
-                data: JSON.stringify({add }),
-                contentType: 'application/json, charset=utf-8',
-                beforeSend: function () {
-                    js_Loading(true, 1);
-                },
-                success: function (data) {
-                    if (data) {
-                        js_GetListtt1();
-                       
-                    } else {
-                        alert("Có lỗi xảy ra");
-                    }
-                    js_Loading(false, 1);
-                },
-                error: function () {
-                    js_Loading(false, 1);
+    function js_add() {
+        var lst = {};
+        lst.code = $('#Ma').html();
+        lst.name = $('#Ten').html();
+        lst.MaHang = $('#item_codeinfo').html();
+        lst.TenHang = $('#item_nameinfo').html();
+        lst.price = $('#price_info').html();
+        lst.imglink = $('#imgLink').val();
+        //lst.slcombo = $('#slton_info').html();
+        lst.slcombo = 1;
+        lst.catcode = $('#Category').html();
+
+        console.log(lst);
+        $.ajax({
+            url: '/ThucTap/BSTCreateBST',
+            type: 'POST',
+            data: JSON.stringify({ lst: lst }),
+            contentType: 'application/json, charset=utf-8',
+            beforeSend: function () {
+                js_Loading(true, 1);
+            },
+            success: function (data) {
+                if (data) {
+                    alert("Add thanh cong");
+                    //js_GetListDBST();
+                } else {
+                    alert("Có lỗi xảy ra");
                 }
-            });
+                js_Loading(false, 1);
+            },
+            error: function () {
+                js_Loading(false, 1);
+            }
+        });
     }
 
 

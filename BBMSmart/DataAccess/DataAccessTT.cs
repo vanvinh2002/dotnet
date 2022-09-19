@@ -263,35 +263,36 @@ namespace ProductAllTool.DataAccess
                 return 0;
             }
         }
-        public static int cbo_addBST(string userid, string code, string name,string catecode, string MaHang, string TenHang, string price, string imglink, string slcombo)
+        public static int BST_CreateBST(string userid, addBST lst)
         {
-            DataSet ds = new DataSet();
             try
             {
                 using (var con = new SqlConnection(strConntt))
                 {
                     con.Open();
-                    SqlCommand cmd = new SqlCommand("cbo_addBST", con);
+                    SqlCommand cmd = new SqlCommand("BST_CreateBST", con);
                     cmd.CommandType = CommandType.StoredProcedure;
-                    cmd.CommandTimeout = 3000;
+
                     cmd.Parameters.Add(new SqlParameter("userid", userid));
-                    cmd.Parameters.Add(new SqlParameter("code", code));
-                    cmd.Parameters.Add(new SqlParameter("name", name));
-                    cmd.Parameters.Add(new SqlParameter("catecode", catecode));
-                    cmd.Parameters.Add(new SqlParameter("MaHang", MaHang));
-                    cmd.Parameters.Add(new SqlParameter("TenHang", TenHang));
-                    cmd.Parameters.Add(new SqlParameter("price", price));
-                    cmd.Parameters.Add(new SqlParameter("imglink", imglink));
-                    cmd.Parameters.Add(new SqlParameter("slcombo", slcombo));
-                    cmd.ExecuteNonQuery();
+                    cmd.Parameters.Add(new SqlParameter("code", lst.Code));
+                    cmd.Parameters.Add(new SqlParameter("name", lst.Name));
+                    cmd.Parameters.Add(new SqlParameter("MaHang", lst.MaHang));
+                    cmd.Parameters.Add(new SqlParameter("TenHang", lst.TenHang));
+                    cmd.Parameters.Add(new SqlParameter("price", lst.price));
+                    cmd.Parameters.Add(new SqlParameter("imglink", lst.imglink));
+                    cmd.Parameters.Add(new SqlParameter("slcombo", lst.slcombo));
+                    cmd.Parameters.Add(new SqlParameter("catcode", lst.catcode));
+
+                    var reader = cmd.ExecuteNonQuery();
 
                     con.Close();
+
                     return 1;
                 }
             }
             catch (Exception ex)
             {
-                LogBuild.CreateLogger(JsonConvert.SerializeObject(ex), "cbo_addBST");
+                LogBuild.CreateLogger(JsonConvert.SerializeObject(ex), "BST_CreateBST");
                 return 0;
             }
         }

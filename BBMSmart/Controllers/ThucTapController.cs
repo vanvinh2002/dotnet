@@ -200,23 +200,21 @@ namespace ProductAllTool.Controllers
             }
         }
         [HttpPost]
-        public ActionResult AddBST(List<addBoSuuTap> list)
+        public ActionResult BSTCreateBST(addBST lst)
         {
             try
             {
                 if (Session["uid"] != null && Session["uid"].ToString().Length > 0)
                 {
-                    foreach (addBoSuuTap add in list)
-                    {
-                        DataAccess.DataAccessTT.cbo_addBST(Session["uid"].ToString(), add.code, add.name,add.catecode, add.MaHang, add.TenHang, add.price, add.imglink, add.slcombo);
-                    }
+                    DataAccess.DataAccessTT.BST_CreateBST(Session["uid"].ToString(), lst);
+
                     return Json(1);
                 }
                 return RedirectToAction("Login", "Account");
             }
             catch (Exception ex)
             {
-                LogBuild.CreateLogger(JsonConvert.SerializeObject(ex), "AddBST");
+                LogBuild.CreateLogger(JsonConvert.SerializeObject(ex), "BSTCreateBST");
                 return Json(null);
             }
         }
