@@ -131,7 +131,7 @@ namespace ProductAllTool.Controllers
             if (Session["uid"] != null && Session["uid"].ToString().Length > 0)   
             {
                 var listautocode = DataAccess.DataAccessTT.sp_autocode();
-                   ViewBag.listautocode[0] = listautocode; 
+                ViewBag.listautocode = listautocode[0].Code;
 
                 return View();
             }  
@@ -169,35 +169,30 @@ namespace ProductAllTool.Controllers
             }
             catch (Exception ex)
             {
-                DataAccess.LogBuild.CreateLogger(ex.ToString(), "uploadImgmanagesales");
+                DataAccess.LogBuild.CreateLogger(ex.ToString(), "uploadImg");
                 return Json(new { code = 0, link = ex.Message });
             }
         }
-
-        public ActionResult BST_ADD(string Code, string Name, string Category, string MuaVu, int DoiTuong, string GioiTinh, string ThuNhap, string USP, string ThongDiep)
-        {
-            if (Session["uid"] != null && Session["uid"].ToString().Length > 0)
-            {
-                DataTable table = DataAccess.DataAccessTT.BST_ADD(Session["uid"].ToString(), Code, Name, Category, MuaVu, DoiTuong, GioiTinh, ThuNhap, USP, ThongDiep);
-
-                return PartialView("~/Views/ThucTap/Partial/_XayDungBST.cshtml", table);
-
-            }
-            return RedirectToAction("Login", "Account");
-        }
-
-
-        [HttpGet]
-        public ActionResult Create()
-        {
-            return View();
-        }
-
         [HttpPost]
-        public ActionResult Create(tbl_BBS_Collection Tbl_BBS_Collection)
+        public ActionResult BSTAdd(create lst)
         {
-            return View();
+            try
+            {
+                if (Session["uid"] != null && Session["uid"].ToString().Length > 0)
+                {
+                    DataAccess.DataAccessTT.BST_ADD(Session["uid"].ToString(), lst);
+                    return Json(1);
+                }
+                return RedirectToAction("Login", "Account");
+            }
+            catch (Exception ex)
+            {
+                LogBuild.CreateLogger(JsonConvert.SerializeObject(ex), "BSTAdd");
+                return Json(null);
+            }
         }
+
+
 
         #endregion
 

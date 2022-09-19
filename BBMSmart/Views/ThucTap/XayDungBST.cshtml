@@ -15,76 +15,76 @@
                     <div class="col-md-6">
                         <div class="col-md-12">
                             <div>
-                                <button type="button" class="btn btn-primary" onclick="js_BST_ADD();">Tạo Mới</button>
+                                <button type="button" class="btn btn-primary" onclick="js_BST_ADD(); ">Tạo Mới</button>
                             </div>
                             <div>
-                                <button type="button" class="btn btn-primary" onclick="">Lưu </button>
+                                <button type="button" class="btn btn-primary" onclick="js_BST_ADD(); js_clearbox()">Lưu </button>
                             </div>
                             <br />
-                            <br />
+                            <br />   
                             <div class="col-md-12">
-                                <label>Mã BST &nbsp;</label> <span id="MaBST" class="txtma"></span>
-                                <input id="MaBST" type="text" class="form-control" value="" disabled />
-                                @ViewBag.listautocode[0]
+                                <label>Mã BST &nbsp;</label>
+                                <input id="MaBST" type="text" class="form-control" value="  @ViewBag.listautocode" disabled />
+                              
                             </div>
 
 
                             <div class="col-md-12">
-                                <label>Tên BST  &nbsp;</label> <span id="TenBST" class="txtten"></span>
-                                <input id="tenBST" type="text" class="form-control" />
+                                <label>Tên BST  &nbsp;</label> 
+                                <input id="TenBST" type="text" class="form-control" />
                             </div>
 
 
                             <div class="col-md-12">
-                                <label>Category &nbsp;</label> <span id="Category" class="txtcate"></span>
-                                <input id="category" type="text" class="form-control" />
+                                <label>Category &nbsp;</label> 
+                                <input id="Category" type="text" class="form-control" />
                             </div>
 
                             <div class="col-md-12">
-                                <label>Mùa vụ  &nbsp;</label> <span id="MuaVu" class="txtmuavu"></span>
-                                <input id="muaVu" type="text" class="form-control" />
-                            </div>
-
-
-                            <div class="col-md-12">
-                                <label>Đối Tượng &nbsp;</label> <span id="DoiTuong" class="txtdoituong"></span>
-                                <input id="doiTuong" type="text" class="form-control" />
+                                <label>Mùa vụ  &nbsp;</label> 
+                                <input id="MuaVu" type="text" class="form-control" />
                             </div>
 
 
                             <div class="col-md-12">
-                                <label>Giới Tính &nbsp;</label> <span id="GioiYinh" class="txtgioitinh"></span>
-                                <input id="gioiTinh" type="text" class="form-control" />
+                                <label>Đối Tượng &nbsp;</label> 
+                                <input id="DoiTuong" type="text" class="form-control" />
                             </div>
 
 
                             <div class="col-md-12">
-                                <label>Thu Nhập &nbsp;</label> <span id="ThuNhap" class="txtthunhap"></span>
-                                <input id="thuNhap" type="text" class="form-control" />
+                                <label>Giới Tính &nbsp;</label>
+                                <input id="GioiTinh" type="text" class="form-control" />
                             </div>
 
 
                             <div class="col-md-12">
-                                <label>USP &nbsp;</label> <span id="USP" class="txtusp"></span>
-                                <input id="usp" type="text" class="form-control" />
+                                <label>Thu Nhập &nbsp;</label> 
+                                <input id="ThuNhap" type="text" class="form-control"/>
                             </div>
 
 
                             <div class="col-md-12">
-                                <label>Thông Điệp &nbsp;</label> <span id="ThongDiep" class="txtthongdiep"></span>
-                                <input id="thongDiep" type="text" class="form-control" />
+                                <label>USP &nbsp;</label>
+                                <input id="Usp" type="text" class="form-control"/>
+                            </div>
+
+
+                            <div class="col-md-12">
+                                <label>Thông Điệp &nbsp;</label> 
+                                <input id="ThongDiep" type="text" class="form-control"/>
                             </div>
 
                         </div>
                     </div>
                     <div class="col-md-6">
                         <div class="col-md-12">
-                            <label class="text text-primary" ondblclick="$('#MaBST').val().trigger('Change')">Mã BST:</label>
-                            <input id="MaBST" type="text" onchange="js_XayBST();" />
+                            <label class="text text-primary" ondblclick="$('#MaBST1').val().trigger('Change')">Mã BST:</label>
+                            <input id="MaBST1" type="text" onchange="js_XayBST();" />
                         </div>
                         <div class="col-md-12">
-                            <label class="text text-primary" ondblclick="$('#MaBST').val().trigger('Change')">Tên BST:</label>
-                            <input id="TenBST" type="text" onchange="js_XayBST();" />
+                            <label class="text text-primary" ondblclick="$('#TenBST1').val().trigger('Change')">Tên BST:</label>
+                            <input id="TenBST1" type="text" onchange="js_XayBST();" />
                         </div>
                         <br />
                         <div class="col-md-12 col-xs-12 half_col ">
@@ -157,8 +157,8 @@
     }
     function js_XayBST() {
       
-        var MaBST = $('#MaBST').val();
-        var TenBST = $('#TenBST').val();
+        var MaBST = $('#MaBST1').val();
+        var TenBST = $('#TenBST1').val();
 
         $.ajax({
             url: '/ThucTap/XayBST',
@@ -178,7 +178,17 @@
             }
         });
     }
-
+    function js_clearbox() {
+        $("#TenBST").val('').selectpicker("refresh");
+        $("#Category").val('').selectpicker("refresh");
+        $("#MuaVu").val('').selectpicker("refresh");
+        $("#DoiTuong").val('').selectpicker("refresh");
+        $("#GioiTinh").val('').selectpicker("refresh");
+        $("#ThuNhap").val('').selectpicker("refresh");
+        $("#Usp").val('').selectpicker("refresh");
+        $("#ThongDiep").val('').selectpicker("refresh");
+        $("#imgLink").val('').selectpicker("refresh");
+    }
     $("#fileUpload").change(function () {
         var vtrUpload = $("#fileUpload").val().toLowerCase();
         var regexVTRUpload = new RegExp("(.*?)\.(png|jpg|jpeg)$");
@@ -235,33 +245,42 @@
 
     function js_BST_ADD() {
 
-        var MaBST = $('#MaBST').val();
-        var TenBST = $('#TenBST').val();
-        var Category = $('#Category').val();
-        var MuaVu = $('#MuaVu').val();
-        var DoiTuong = $('#DoiTuong').val();
-        var GioiYinh = $('#GioiYinh').val();
-        var ThuNhap = $('#ThuNhap').val();
-        var USP = $('#USP').val();
-        var ThongDiep = $('#ThongDiep').val();
+        var add = {};
+        debugger
+        add.Code = $('#MaBST').val();
+        add.Name = $('#TenBST').val();
+        add.Category = $('#Category').val();
+        add.MuaVu = $('#MuaVu').val();
+        add.DoiTuong = $('#DoiTuong').val();
+        add.GioiTinh = $('#GioiTinh').val();
+        add.ThuNhap = $('#ThuNhap').val();
+        add.Usp = $('#Usp').val();
+        add.ThongDiep = $('#ThongDiep').val();
+        add.Themelink = $('#imgLink').val();
+        console.log(add)
 
-        $.ajax({
-            url: '/ThucTap/BST_ADD',
-            type: 'POST',
-            data: JSON.stringify({ MaBST: MaBST, TenBST: TenBST }),
-            contentType: 'application/json, charset=utf-8',
-            beforeSend: function () {
-                js_Loading(true, 1);
-            },
-            success: function (data) {
-                $('#div-content').html(data);
-                js_ReloadTable();
-                js_Loading(false, 1);
-            },
-            error: function () {
-                js_Loading(false, 1);
-            }
-        });
+            $.ajax({
+                type: "POST",
+                url: "/ThucTap/BSTAdd",
+                data: JSON.stringify({ lst: add }),
+                contentType: "application/json; charset=utf-8",
+                beforeSend: function () {
+                    js_Loading(true, 1);
+                },
+
+                success: function (data) {
+                    if (data) {
+                        alert("Thêm thành công");
+                        /*js_XayBST();*/
+                    } else {
+                        alert("Có lỗi xảy ra");
+                    }
+                    js_Loading(false, 1);
+                },
+                error: function () {
+                    js_Loading(false, 1);
+                }
+            });
     }
 
     

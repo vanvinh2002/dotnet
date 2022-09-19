@@ -584,7 +584,6 @@
     <Compile Include="Models\comparePrice\compareLine.cs" />
     <Compile Include="Models\comparePrice\RP_Accept_Item.cs" />
     <Compile Include="Models\comparePrice\Thongtindoithu.cs" />
-    <Compile Include="Models\create.cs" />
     <Compile Include="Models\ERP_API\Member\MemberItem.cs" />
     <Compile Include="Models\ERP_API\PushSales\OrderProductItem.cs" />
     <Compile Include="Models\ERP_API\PushSales\PushSalesOrder_Item.cs" />

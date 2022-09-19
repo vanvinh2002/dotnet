@@ -30,6 +30,7 @@ using System.Threading.Tasks;
 using System.Web;
 using ProductAllTool.Models.Approve;
 using ProductAllTool.Models.Po;
+using ProductAllTool.Models.Po2;
 using ProductAllTool.Models.HRM;
 
 namespace ProductAllTool.DataAccess
@@ -185,6 +186,7 @@ namespace ProductAllTool.DataAccess
             }
         }
 
+       
         public static List<objCombox> AR_CuaHang()
         {
             List<objCombox> it_r = new List<objCombox>();
@@ -891,9 +893,8 @@ namespace ProductAllTool.DataAccess
             }
         }
 
-        public static DataTable BST_ADD(string userid, string Code, string Name, string Category, string MuaVu, int DoiTuong, string GioiTinh, string ThuNhap, string USP, string ThongDiep)
+        public static int BST_ADD(string userid, create lst)
         {
-            DataSet ds = new DataSet();
             try
             {
                 using (var con = new SqlConnection(strConnTT))
@@ -901,32 +902,31 @@ namespace ProductAllTool.DataAccess
                     con.Open();
                     SqlCommand cmd = new SqlCommand("BST_ADD", con);
                     cmd.CommandType = CommandType.StoredProcedure;
-                    cmd.CommandTimeout = 30000;
-                    cmd.Parameters.Add(new SqlParameter("userid", userid));
-                    cmd.Parameters.Add(new SqlParameter("Code", Code));
-                    cmd.Parameters.Add(new SqlParameter("Name", Name));
-                    cmd.Parameters.Add(new SqlParameter("Category", Category));
-                    cmd.Parameters.Add(new SqlParameter("MuaVu", MuaVu));
-                    cmd.Parameters.Add(new SqlParameter("DoiTuong", DoiTuong));
-                    cmd.Parameters.Add(new SqlParameter("GioiTinh", GioiTinh));
-                    cmd.Parameters.Add(new SqlParameter("ThuNhap", ThuNhap));
-                    cmd.Parameters.Add(new SqlParameter("USP", USP));
-                    cmd.Parameters.Add(new SqlParameter("ThongDiep", ThongDiep));
 
-                    using (SqlDataAdapter sda = new SqlDataAdapter(cmd))
-                    { sda.Fill(ds); }
+                    cmd.Parameters.Add(new SqlParameter("userid",userid));
+                    cmd.Parameters.Add(new SqlParameter("Code", lst.Code));
+                    cmd.Parameters.Add(new SqlParameter("Name", lst.Name));
+                    cmd.Parameters.Add(new SqlParameter("Category", lst.Category));
+                    cmd.Parameters.Add(new SqlParameter("MuaVu", lst.MuaVu));
+                    cmd.Parameters.Add(new SqlParameter("DoiTuong", lst.DoiTuong));
+                    cmd.Parameters.Add(new SqlParameter("GioiTinh", lst.GioiTinh));
+                    cmd.Parameters.Add(new SqlParameter("ThuNhap", lst.ThuNhap));
+                    cmd.Parameters.Add(new SqlParameter("USP", lst.USP));
+                    cmd.Parameters.Add(new SqlParameter("ThongDiep", lst.ThongDiep));
+                    cmd.Parameters.Add(new SqlParameter("Themelink", lst.Themelink));
+                    var reader = cmd.ExecuteNonQuery();
 
                     con.Close();
-                    return ds.Tables[0];
+
+                    return 1;
                 }
             }
             catch (Exception ex)
             {
                 LogBuild.CreateLogger(JsonConvert.SerializeObject(ex), "BST_ADD");
-                return ds.Tables[0];
+                return 0;
             }
         }
-
         #endregion
 
         #region Xây dựng bộ sưu tập 
