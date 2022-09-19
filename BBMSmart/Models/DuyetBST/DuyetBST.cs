@@ -45,7 +45,7 @@ namespace ProductAllTool.Models.DuyetBST
         public string Name { get; set; }
         public string hinhanh { get; set; }
         public string GiaBanAll { get; set; }
-        public string SLTon { get; set; }
+        public string slcombo { get; set; }
     }
 
     public class UpdateSP
@@ -56,13 +56,13 @@ namespace ProductAllTool.Models.DuyetBST
 
     public class addBST
     {
-        public string MaHang { get; set; }
-        public string TenHang { get; set; }
-        public string price { get; set; }
-        public string SLTon { get; set; }
-        public string imglink { get; set; }
-        public string catcode { get; set; }
         public string Code { get; set; }
         public string Name { get; set; }
+        public string MaHang { get; set; }
+        public string TenHang { get; set; }
+        public decimal price { get; set; }
+        public string imglink { get; set; }
+        public decimal slcombo { get; set; }
+        public string catcode { get; set; }
     }
 }

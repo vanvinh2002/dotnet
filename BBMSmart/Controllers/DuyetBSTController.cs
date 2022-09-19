@@ -183,18 +183,24 @@ namespace ProductAllTool.Controllers
         //        return Json(null);
         //    }
         //}
+
         [HttpPost]
         public ActionResult BSTCreateBST(addBST lst)
         {
             try
             {
-                string rs = DataAccess.DataAccessBST.BST_CreateBST(Session["uid"].ToString(), lst);
+                if (Session["uid"] != null && Session["uid"].ToString().Length > 0)
+                {
+                    DataAccess.DataAccessBST.BST_CreateBST(Session["uid"].ToString(), lst);
 
-                return Json(new { result = rs });
+                    return Json(1);
+                }
+                return RedirectToAction("Login", "Account");
             }
             catch (Exception ex)
             {
-                return Json(new { result = ex.Message });
+                LogBuild.CreateLogger(JsonConvert.SerializeObject(ex), "BSTCreateBST");
+                return Json(null);
             }
         }
 

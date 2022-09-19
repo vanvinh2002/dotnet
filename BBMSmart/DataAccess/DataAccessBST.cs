@@ -325,7 +325,7 @@ namespace ProductAllTool.DataAccess
                             Code = reader["Code"].ToString(),
                             Name = reader["Name"].ToString(),
                             GiaBanAll = reader["GiaBanAll"].ToString(),
-                            SLTon = reader["SLTon"].ToString(),
+                            slcombo = reader["slcombo"].ToString(),
                             hinhanh = reader["hinhanh"].ToString()
                         };
 
@@ -374,7 +374,7 @@ namespace ProductAllTool.DataAccess
                             Code = reader["Code"].ToString(),
                             Name = reader["Name"].ToString(),
                             GiaBanAll = reader["GiaBanAll"].ToString(),
-                            SLTon = reader["SLTon"].ToString(),
+                            slcombo = reader["slcombo"].ToString(),
                             hinhanh = reader["hinhanh"].ToString()
                         };
 
@@ -422,7 +422,7 @@ namespace ProductAllTool.DataAccess
                             Code = reader["Code"].ToString(),
                             Name = reader["Name"].ToString(),
                             GiaBanAll = reader["GiaBanAll"].ToString(),
-                            SLTon = reader["SLTon"].ToString(),
+                            slcombo = reader["slcombo"].ToString(),
                             hinhanh = reader["hinhanh"].ToString()
                         };
 
@@ -593,7 +593,7 @@ namespace ProductAllTool.DataAccess
             }
         }
 
-        public static string BST_CreateBST(string userid, addBST lst)
+        public static int BST_CreateBST(string userid, addBST lst)
         {
             try
             {
@@ -602,26 +602,28 @@ namespace ProductAllTool.DataAccess
                     con.Open();
                     SqlCommand cmd = new SqlCommand("BST_CreateBST", con);
                     cmd.CommandType = CommandType.StoredProcedure;
-                    cmd.CommandTimeout = 300;
+
                     cmd.Parameters.Add(new SqlParameter("userid", userid));
+                    cmd.Parameters.Add(new SqlParameter("code", lst.Code));
+                    cmd.Parameters.Add(new SqlParameter("name", lst.Name));
                     cmd.Parameters.Add(new SqlParameter("MaHang", lst.MaHang));
                     cmd.Parameters.Add(new SqlParameter("TenHang", lst.TenHang));
                     cmd.Parameters.Add(new SqlParameter("price", lst.price));
-                    cmd.Parameters.Add(new SqlParameter("SLTon", lst.SLTon));
                     cmd.Parameters.Add(new SqlParameter("imglink", lst.imglink));
+                    cmd.Parameters.Add(new SqlParameter("slcombo", lst.slcombo));
                     cmd.Parameters.Add(new SqlParameter("catcode", lst.catcode));
-                    cmd.Parameters.Add(new SqlParameter("code", lst.Code));
-                    cmd.Parameters.Add(new SqlParameter("name", lst.Name));
-                    var result = (string)cmd.ExecuteScalar();
+
+                    var reader = cmd.ExecuteNonQuery();
 
                     con.Close();
-                    return result;
+
+                    return 1;
                 }
             }
             catch (Exception ex)
             {
                 LogBuild.CreateLogger(JsonConvert.SerializeObject(ex), "BST_CreateBST");
-                return ex.Message.ToString();
+                return 0;
             }
         }
 

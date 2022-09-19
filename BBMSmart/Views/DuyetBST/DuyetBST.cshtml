@@ -257,7 +257,7 @@
                         <label>Giá bán: &nbsp;</label> <span id="price_info" class="txtinfo"></span>
                     </div>
                     <div class="col-md-8">
-                        <label>Số lượng tồn: &nbsp;</label> <span id="slton_info" class="txtinfo"></span>
+                        <label>Slcombo: &nbsp;</label> <span id="slton_info" class="txtinfo"></span>
                     </div>
                 </div>
                 <div class="row showbuton">
@@ -416,7 +416,7 @@
                         $('#item_codeinfo').html(data[0].Code);
                         $('#item_nameinfo').html(data[0].Name);
                         $('#price_info').html(data[0].GiaBanAll);
-                        $('#slton_info').html(data[0].SLTon);
+                        $('#slton_info').html(data[0].slcombo);
                         $('#imgLink').val(data[0].hinhanh);
                         $('#upload_theme').hide();
                         $('.showicon').show();
@@ -492,7 +492,7 @@
                 $('#item_codeinfo').html(data[0].Code);
                 $('#item_nameinfo').html(data[0].Name);
                 $('#price_info').html(data[0].GiaBanAll);
-                $('#slton_info').html(data[0].SLTon);
+                $('#slton_info').html(data[0].slcombo);
                 $('#imgLink').val(data[0].hinhanh);
 
                 $('#upload_theme').hide();
@@ -523,7 +523,7 @@
                 $('#item_codeinfo').html(data[0].Code);
                 $('#item_nameinfo').html(data[0].Name);
                 $('#price_info').html(data[0].GiaBanAll);
-                $('#slton_info').html(data[0].SLTon);
+                $('#slton_info').html(data[0].slcombo);
                 $('#imgLink').val(data[0].hinhanh);
 
                 $('#upload_theme').hide();
@@ -557,15 +557,15 @@
     //    }
     //}
     function js_createbst() {
-        var lst = new Object();
+        var lst = {};
+        lst.code = $('#MaBST1').html();
+        lst.name = $('#TenBST1').html();
         lst.MaHang = $('#item_codeinfo').html();
         lst.TenHang = $('#item_nameinfo').html();
         lst.price = $('#price_info').html();
-        lst.SLTon = $('#slton_info').html();
         lst.imglink = $('#imgLink').val();
+        lst.slcombo = $('#slton_info').html();
         lst.catcode = $('#Cate1').html();
-        lst.code = $('#MaBST1').html();
-        lst.name = $('#TenBST1').html();
 
         console.log(lst);
         $.ajax({
@@ -579,7 +579,7 @@
             success: function (data) {
                 if (data) {
                     alert("Add thanh cong");
-                    js_GetListDBST();
+                    //js_GetListDBST();
                 } else {
                     alert("Có lỗi xảy ra");
                 }
