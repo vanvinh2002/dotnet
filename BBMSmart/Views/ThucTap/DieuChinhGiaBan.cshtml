@@ -1,0 +1,526 @@
+﻿@using ProductAllTool.Models.ManageSales;
+@using ProductAllTool.Common
+@{
+    ViewBag.Title = "Điều chỉnh giá bán";
+    Layout = "~/Views/Shared/_Layout_V2.cshtml";
+}
+<style>
+
+
+    .filter-option-inner-inner {
+        font-size: 12px;
+    }
+
+    .btn-info {
+        background-color: #f3f3f3 !important;
+        color: #333;
+        border: 1px solid #d5d5d5;
+    }
+
+    .btn {
+        border-radius: 0px;
+        padding: 4px 12px;
+    }
+
+    #modalDetails .form-control {
+        height: 30px !important;
+        font-size: 12px !important;
+    }
+
+    .bootstrap-select.show-tick .dropdown-menu .selected span.check-mark {
+        left: 6px !important;
+        right: unset !important;
+    }
+
+    .box_kichthuoc input {
+        margin-bottom: 3px;
+    }
+
+    .title_05 h3 {
+        font-size: 19px;
+        text-transform: uppercase;
+        margin-top: 7px;
+        margin-bottom: 1px;
+    }
+
+    .modal-footer {
+        padding: 15px 0px !important;
+    }
+
+    input, select, textarea {
+        max-width: 100% !important;
+    }
+
+    .multiselect {
+        width: 181px;
+        line-height: 13px;
+        border-radius: 0px;
+        background-color: #fff;
+    }
+
+    .form-check-inline {
+        display: inline-block;
+    }
+
+    .box_option_thung {
+        margin-top: 9px;
+    }
+
+    .row_1 {
+        width: 93%;
+        margin: 0 auto;
+    }
+
+    .bootstrap-select.form-control-sm .dropdown-toggle {
+        padding: 5px !important;
+    }
+
+    #tbl_Item_length {
+        bottom: 0px;
+        position: absolute;
+        display: none;
+    }
+
+    #tbl_Item_paginate {
+        float: right;
+    }
+
+    .dropdown-menu {
+        /*left: 0px !important;*/
+        right: 0px !important;
+        margin-top: 0px;
+    }
+
+    table.dataTable tfoot td {
+        padding: 3px 2px 1px 18px !important;
+        border-top: 1px solid #111;
+    }
+
+    #div-content {
+        margin-top: 140px;
+    }
+
+    .box_foot {
+        font-size: 12px;
+    }
+
+    .dropdown-toggle {
+        z-index: unset !important;
+    }
+
+    .btn_ver_m2 {
+        width: 148px !important;
+        background-color: #5f7e98 !important;
+        color: #fff;
+        padding: 5px 5px !important;
+        border: none;
+        font-weight: 600;
+        border-radius: 4px !important;
+    }
+
+    .btn_ver {
+        background-color: #5f7e98 !important;
+        color: #fff;
+        font-size: 12px !important;
+        border: none;
+        font-weight: 600;
+    }
+
+
+    .bootstrap-select .form-control {
+        width: 320px;
+        max-width: 320px;
+    }
+
+    input[type="radio"], input[type="checkbox"] {
+        margin: 4px 21px 0;
+    }
+
+    /* Style the tab */
+    .tab {
+        overflow: hidden;
+        border: 1px solid #ccc;
+        background-color: #f1f1f1;
+        border-top-right-radius: 14px;
+    }
+
+        .tab button {
+            background-color: inherit;
+            border: none;
+            outline: none;
+            cursor: pointer;
+            padding: 7px 0px;
+            transition: 0.3s;
+            font-size: 13px;
+            border-top-right-radius: 14px;
+            width: 19%;
+        }
+
+            .tab button:hover {
+                background-color: #ddd;
+            }
+
+            .tab button.active {
+                background-color: #5f7e98;
+                color: #ffffff;
+                font-weight: 500;
+            }
+
+    .tabcontent {
+        padding: 10px 0px;
+        border: 1px solid #ccc;
+        border-top: none;
+    }
+
+    .half_cols {
+        width: 50%
+    }
+
+    .txtinfo {
+        font-size: 13px
+    }
+
+    .half_col {
+        padding-left: 0px;
+        padding-right: 0px;
+    }
+
+    ._jw-tpk-container {
+        right: 15px;
+        top: 967px;
+    }
+</style>
+<style>
+    input[type='date']:after {
+        color: #aaa;
+        content: attr(placeholder);
+    }
+</style>
+
+<div class="col-md-12">
+    <div class="tab box_loaihinh" id="content_LoaiHinh" style=" height: 35px; width: 100%">
+        <button class="tablinks active Tab01" onclick="ActiveTab('Tab01')">Điều Chỉnh Gía</button>
+        <button class="tablinks Tab02" onclick="ActiveTab('Tab02')">Duyệt</button>
+    </div>
+
+</div>
+
+<div id="DieuChinhGia" class="tabcontent conten01" style="display:block;height:1000px;" >
+    <div class="col-md-12" style="width: 100%; display: flex; margin-top: 20px;">
+        <div class="col-md-1" style="width:20%;padding:0px">
+            <label>Category</label>
+        </div>
+        <div class="col-md-1" style="width:30%;padding:0px" ondblclick="$('#Category').val('').trigger('change')">
+            <select id="Category" class="form-control selectpicker" data-live-search="true" onchange="js_GetListtt1();">
+                <option value="">------------ Chọn Category ------------</option>
+                @if (ViewBag.lsttest1 != null)
+                {
+                    foreach (objCombox box in (List<objCombox>)ViewBag.lsttest1)
+                    {
+                        <option value="@box.Code">@box.Name</option>
+                    }
+                }
+            </select>
+        </div>
+        <div class="col-md-1" style="width:20%;padding:0px 10px">
+            <label>Function</label>
+        </div>
+        <div class="col-md-1" style="width: 30%;padding:0px" ondblclick="$('#Function').val('').trigger('change')">
+            <select id="Function" class="form-control selectpicker" data-live-search="true" onchange="js_GetListtt1();">
+                <option value="">------------ Chọn Function ------------</option>
+                @if (ViewBag.lsttest3 != null)
+                {
+                    foreach (objCombox box in (List<objCombox>)ViewBag.lsttest3)
+                    {
+                        <option value="@box.Code">@box.Name</option>
+                    }
+                }
+            </select>
+        </div>
+        <div class="col-md-1" style="width:20%;padding:0px 10px">
+            <a style="max-width: 280px;text-align: center;" href="#" class="form-control btn btn-info"><i class="fa fa-hand-point-right" aria-hidden="true" style="margin-top: 3px;"></i>Tìm Kiếm &nbsp;&nbsp;&nbsp;&nbsp;</a>
+        </div>
+    </div>
+    <div class="col-md-12" style="width: 100%; display: flex; margin-top: 20px;">
+        <div class="col-md-1" style="width:20%;padding:0px">
+            <label>Brand</label>
+        </div>
+        <div class="col-md-1" style="width:30%;padding:0px" ondblclick="$('#Brand').val('').trigger('change')">
+            <select id="Brand" class="form-control selectpicker" data-live-search="true" onchange="js_GetListtt1();">
+                <option value="">------------ Chọn Brand ------------</option>
+                @if (ViewBag.lsttest2 != null)
+                {
+                    foreach (objCombox box in (List<objCombox>)ViewBag.lsttest2)
+                    {
+                        <option value="@box.Code">@box.Name</option>
+                    }
+                }
+            </select>
+        </div>
+        <div class="col-md-1" style="width:20%;padding:0px 10px">
+            <label>Mã Hàng</label>
+        </div>
+        <div class="col-md-1" style="width: 30%;padding:0px" ondblclick="$('#MaHang').val('').trigger('change')">
+            <select id="MaHang" class="form-control selectpicker" data-live-search="true" onchange="js_GetListtt1();">
+                <option value="">------------ Chọn Mã Hàng ------------</option>
+                @if (ViewBag.lsttest4 != null)
+                {
+                    foreach (objCombox box in (List<objCombox>)ViewBag.lsttest4)
+                    {
+                        <option value="@box.Code">@box.Name</option>
+                    }
+                }
+            </select>
+        </div>
+        <div class="col-md-1" style="width:20%;padding:0px 10px">
+            <a style="max-width: 280px;text-align: center;" href="#" class="form-control btn btn-info" onclick="js_approve()">Gửi Đề Xuất</a>
+        </div>
+    </div>
+
+    <div class="col-md-12" id="div-content" style="margin-top:20px">
+        @Html.Partial("~/Views/ThucTap/Partial/_DieuChinhGiaBan.cshtml")
+    </div>
+</div>
+
+<div id="XacNhan" class="tabcontent conten02" style="display:none;height:1000px">
+    <div class="col-md-12" style="width: 100%; display: flex; margin-top: 20px;">
+        <div class="col-md-1" style="width:20%;padding:0px">
+            <label>Category</label>
+        </div>
+        <div class="col-md-1" style="width:30%;padding:0px" ondblclick="$('#Category1').val('').trigger('change')">
+            <select id="Category1" class="form-control selectpicker" data-live-search="true" onchange="js_GetListtt2();">
+                <option value="">------------ Chọn Category ------------</option>
+                @if (ViewBag.lsttest1 != null)
+                {
+                    foreach (objCombox box in (List<objCombox>)ViewBag.lsttest1)
+                    {
+                        <option value="@box.Code">@box.Name</option>
+                    }
+                }
+            </select>
+        </div>
+        <div class="col-md-1" style="width:20%;padding:0px 10px">
+            <label>Function</label>
+        </div>
+        <div class="col-md-1" style="width: 30%;padding:0px" ondblclick="$('#Function1').val('').trigger('change')">
+            <select id="Function1" class="form-control selectpicker" data-live-search="true" onchange="js_GetListtt2();">
+                <option value="">------------ Chọn Function ------------</option>
+                @if (ViewBag.lsttest3 != null)
+                {
+                    foreach (objCombox box in (List<objCombox>)ViewBag.lsttest3)
+                    {
+                        <option value="@box.Code">@box.Name</option>
+                    }
+                }
+            </select>
+        </div>
+        <div class="col-md-1" style="width:20%;padding:0px 10px">
+            <a style="max-width: 280px;text-align: center;" href="#" class="form-control btn btn-info"><i class="fa fa-hand-point-right" aria-hidden="true" style="margin-top: 3px;"></i>Tìm Kiếm &nbsp;&nbsp;&nbsp;&nbsp;</a>
+        </div>
+    </div>
+    <div class="col-md-12" style="width: 100%; display: flex; margin-top: 20px;">
+        <div class="col-md-1" style="width:20%;padding:0px">
+            <label>Brand</label>
+        </div>
+        <div class="col-md-1" style="width:30%;padding:0px" ondblclick="$('#Brand1').val('').trigger('change')">
+            <select id="Brand1" class="form-control selectpicker" data-live-search="true" onchange="js_GetListtt2();">
+                <option value="">------------ Chọn Brand ------------</option>
+                @if (ViewBag.lsttest2 != null)
+                {
+                    foreach (objCombox box in (List<objCombox>)ViewBag.lsttest2)
+                    {
+                        <option value="@box.Code">@box.Name</option>
+                    }
+                }
+            </select>
+        </div>
+        <div class="col-md-1" style="width:20%;padding:0px 10px">
+            <label>Mã Hàng</label>
+        </div>
+        <div class="col-md-1" style="width: 30%;padding:0px" ondblclick="$('#MaHang1').val('').trigger('change')">
+            <select id="MaHang1" class="form-control selectpicker" data-live-search="true" onchange="js_GetListtt2();">
+                <option value="">------------ Chọn Mã Hàng ------------</option>
+                @if (ViewBag.lsttest4 != null)
+                {
+                    foreach (objCombox box in (List<objCombox>)ViewBag.lsttest4)
+                    {
+                        <option value="@box.Code">@box.Name</option>
+                    }
+                }
+            </select>
+        </div>
+        <div class="col-md-1" style="width:20%;padding:0px 10px">
+            <a style="max-width: 280px;text-align: center;" href="#" class="form-control btn btn-info">Duyệt</a>
+        </div>
+    </div>
+    
+    <div class="col-md-12" id="div-content1" style="margin-top:20px">
+        @Html.Partial("~/Views/ThucTap/Partial/_DuyetDieuChinhGia.cshtml")
+    </div>
+
+</div>
+
+
+
+<script src="https://cdn.jsdelivr.net/timepicker.js/latest/timepicker.min.js"></script>
+<link href="https://cdn.jsdelivr.net/timepicker.js/latest/timepicker.min.css" rel="stylesheet" />
+<script type="text/javascript">
+
+    $(function () {
+        $('#txtHead').html("Điều Chỉnh Giá Bán");
+        js_GetListtt1();
+    });
+    function js_ReloadTable() {
+        $('#tbl_Item')
+            .DataTable({
+                lengthMenu: [[5, 10, 50, 70, 100, -1], [5, 10, 50, 70, 100]],
+                columnDefs: [],
+                autoWidth: false,
+                "searching": false,
+                order: [[0, "desc"]],
+                "pageLength": 30
+            });
+    }
+    function js_ReloadTable1() {
+        $('#tbl_Item1')
+            .DataTable({
+                lengthMenu: [[5, 10, 50, 70, 100, -1], [5, 10, 50, 70, 100]],
+                columnDefs: [],
+                autoWidth: false,
+                "searching": false,
+                order: [[0, "desc"]],
+                "pageLength": 30
+            });
+    }
+
+
+    function ActiveTab(r) {
+        if (r == "Tab01") {
+
+            $('.conten02').hide();
+            $('.conten01').show();
+           
+
+            $('.Tab02').removeClass("active");
+            $('.conten01').removeClass("active");
+            $('.Tab01').addClass("active");
+            js_GetListtt1();
+        }
+        else if (r == "Tab02") {
+            $('.conten01').hide();
+            $('.conten02').show();
+
+            $('.Tab01').removeClass("active");
+
+            $('.conten02').removeClass("active");
+            $('.Tab02').addClass("active");
+            js_GetListtt2();
+        }
+    }
+    function js_GetListtt1() {
+
+        var Category = $("#Category").val();
+        var Function = $("#Function").val();
+        var Brand = $("#Brand").val();
+        var MaHang = $("#MaHang").val();
+        $.ajax({
+            url: '/ThucTap/ListDCGB',
+            type: 'POST',
+            data: JSON.stringify({ Category: Category, Function: Function, Brand: Brand, MaHang: MaHang }),
+            contentType: 'application/json, charset=utf-8',
+            beforeSend: function () {
+                js_Loading(true, 1);
+            },
+            success: function (data) {
+                console.log(data);
+                $('#div-content').html(data);
+                js_ReloadTable();
+                js_Loading(false, 1);
+            },
+            error: function () {
+                js_Loading(false, 1);
+            }
+        });
+    }
+
+    function js_GetListtt2() {
+
+        var Category = $("#Category1").val();
+        var Function = $("#Function1").val();
+        var Brand = $("#Brand1").val();
+        var MaHang = $("#MaHang1").val();
+        $.ajax({
+            url: '/ThucTap/ListDuyetDCGB',
+            type: 'POST',
+            data: JSON.stringify({ Category: Category, Function: Function, Brand: Brand, MaHang: MaHang }),
+            contentType: 'application/json, charset=utf-8',
+            beforeSend: function () {
+                js_Loading(true, 1);
+            },
+            success: function (data) {
+                console.log(data);
+                $('#div-content1').html(data);
+                js_ReloadTable1();
+                js_Loading(false, 1);
+            },
+            error: function () {
+                js_Loading(false, 1);
+            }
+        });
+    }
+
+    function js_approve() {
+        // debugger;
+
+        var cboxes = document.getElementsByName('check[]');
+        var arrCheckbox = [];
+        var i = 0;
+        for (var i = 0; i < cboxes.length; i++) {
+            if (cboxes[i].checked) {
+                var dc = {};
+                dc.ID = cboxes[i].value;
+                dc.GiaDieuChinh = $('#GiaDieuChinh' + cboxes[i].id).val();
+                dc.GiaKhaoSat = $('#GiaKhaoSat' + cboxes[i].id).val();
+                dc.ngayapdung = $('#ngayapdung' + cboxes[i].id).val();
+                console.log(dc);
+                arrCheckbox.push(dc);
+            }
+        }
+        console.log('1');
+
+        console.log(arrCheckbox);
+
+        if (arrCheckbox.length == 0) {
+            alert("Vui lòng chọn ít nhất 1 bản ghi.");
+            return;
+        }
+        console.log('2');
+
+        if (arrCheckbox.length > 0) {
+            $.ajax({
+                url: '/ThucTap/UpdateStatus',
+                type: 'POST',
+                data: JSON.stringify({ lst: arrCheckbox }),
+                contentType: 'application/json, charset=utf-8',
+                beforeSend: function () {
+                    js_Loading(true, 1);
+                },
+                success: function (data) {
+                    if (data == 1) {
+                        alert("Điều chỉnh thành công");
+                        $('#Detail_modal').modal('hide');
+                        js_GetListtt1();
+                        js_Loading(false, 1);
+                    }
+                },
+                error: function () {
+                    js_Loading(false, 1);
+                }
+
+            });
+        }
+
+    }
+
+</script>
+

@@ -1102,6 +1102,233 @@ namespace ProductAllTool.DataAccess
         }
         #endregion
 
+
+        #region Test
+        public static List<objCombox> Test_Category()
+        {
+            List<objCombox> it_r = new List<objCombox>();
+            using (var con = new SqlConnection(strConntt))
+            {
+                con.Open();
+                try
+                {
+                    SqlCommand cmd = new SqlCommand("Test_Category", con);
+                    cmd.CommandType = CommandType.StoredProcedure;
+                    cmd.CommandTimeout = 300;
+                    var reader = cmd.ExecuteReader();
+
+                    while (reader.Read())
+                    {
+                        objCombox it_ = new objCombox
+                        {
+                            Code = reader["Code"].ToString(),
+                            Name = reader["Name"].ToString(),
+                        };
+                        it_r.Add(it_);
+                    }
+                    con.Close();
+                    return it_r;
+                }
+                catch (Exception ex)
+                {
+                    con.Close();
+                    LogBuild.CreateLogger(JsonConvert.SerializeObject(ex), "Test_Category");
+                    return it_r;
+                }
+            }
+        }
+        public static List<objCombox> Test_Brand()
+        {
+            List<objCombox> it_r = new List<objCombox>();
+            using (var con = new SqlConnection(strConntt))
+            {
+                con.Open();
+                try
+                {
+                    SqlCommand cmd = new SqlCommand("Test_Brand", con);
+                    cmd.CommandType = CommandType.StoredProcedure;
+                    cmd.CommandTimeout = 300;
+                    var reader = cmd.ExecuteReader();
+
+                    while (reader.Read())
+                    {
+                        objCombox it_ = new objCombox
+                        {
+                            Code = reader["Code"].ToString(),
+                            Name = reader["Name"].ToString(),
+                        };
+                        it_r.Add(it_);
+                    }
+                    con.Close();
+                    return it_r;
+                }
+                catch (Exception ex)
+                {
+                    con.Close();
+                    LogBuild.CreateLogger(JsonConvert.SerializeObject(ex), "Test_Brand");
+                    return it_r;
+                }
+            }
+        }
+        public static List<objCombox> Test_Function()
+        {
+            List<objCombox> it_r = new List<objCombox>();
+            using (var con = new SqlConnection(strConntt))
+            {
+                con.Open();
+                try
+                {
+                    SqlCommand cmd = new SqlCommand("Test_Function", con);
+                    cmd.CommandType = CommandType.StoredProcedure;
+                    cmd.CommandTimeout = 300;
+                    var reader = cmd.ExecuteReader();
+
+                    while (reader.Read())
+                    {
+                        objCombox it_ = new objCombox
+                        {
+                            Code = reader["Code"].ToString(),
+                            Name = reader["Name"].ToString(),
+                        };
+                        it_r.Add(it_);
+                    }
+                    con.Close();
+                    return it_r;
+                }
+                catch (Exception ex)
+                {
+                    con.Close();
+                    LogBuild.CreateLogger(JsonConvert.SerializeObject(ex), "Test_Function");
+                    return it_r;
+                }
+            }
+        }
+        public static List<objCombox> Test_MaHang()
+        {
+            List<objCombox> it_r = new List<objCombox>();
+            using (var con = new SqlConnection(strConntt))
+            {
+                con.Open();
+                try
+                {
+                    SqlCommand cmd = new SqlCommand("Test_MaHang", con);
+                    cmd.CommandType = CommandType.StoredProcedure;
+                    cmd.CommandTimeout = 300;
+                    var reader = cmd.ExecuteReader();
+
+                    while (reader.Read())
+                    {
+                        objCombox it_ = new objCombox
+                        {
+                            Code = reader["Code"].ToString(),
+                            Name = reader["Name"].ToString(),
+                        };
+                        it_r.Add(it_);
+                    }
+                    con.Close();
+                    return it_r;
+                }
+                catch (Exception ex)
+                {
+                    con.Close();
+                    LogBuild.CreateLogger(JsonConvert.SerializeObject(ex), "Test_MaHang");
+                    return it_r;
+                }
+            }
+        }
+        public static DataTable Test_Bang(string userid, string Category, string Function, string Brand, string MaHang)
+        {
+            DataSet ds = new DataSet();
+            try
+            {
+                using (var con = new SqlConnection(strConntt))
+                {
+                    con.Open();
+                    SqlCommand cmd = new SqlCommand("Test_Bang", con);
+                    cmd.CommandType = CommandType.StoredProcedure;
+                    cmd.CommandTimeout = 30000;
+                    cmd.Parameters.Add(new SqlParameter("userid", userid));
+                    cmd.Parameters.Add(new SqlParameter("Category", Category));
+                    cmd.Parameters.Add(new SqlParameter("Function", Function));
+                    cmd.Parameters.Add(new SqlParameter("Brand", Brand));
+                    cmd.Parameters.Add(new SqlParameter("MaHang", MaHang));
+
+                    using (SqlDataAdapter sda = new SqlDataAdapter(cmd))
+                    { sda.Fill(ds); }
+
+                    con.Close();
+                    return ds.Tables[0];
+                }
+            }
+            catch (Exception ex)
+            {
+                LogBuild.CreateLogger(JsonConvert.SerializeObject(ex), "Test_Bang");
+                return ds.Tables[0];
+            }
+        }
+
+        public static DataTable Test_BangDuyet(string userid, string Category, string Function, string Brand, string MaHang)
+        {
+            DataSet ds = new DataSet();
+            try
+            {
+                using (var con = new SqlConnection(strConntt))
+                {
+                    con.Open();
+                    SqlCommand cmd = new SqlCommand("Test_BangDuyet", con);
+                    cmd.CommandType = CommandType.StoredProcedure;
+                    cmd.CommandTimeout = 30000;
+                    cmd.Parameters.Add(new SqlParameter("userid", userid));
+                    cmd.Parameters.Add(new SqlParameter("Category", Category));
+                    cmd.Parameters.Add(new SqlParameter("Function", Function));
+                    cmd.Parameters.Add(new SqlParameter("Brand", Brand));
+                    cmd.Parameters.Add(new SqlParameter("MaHang", MaHang));
+
+                    using (SqlDataAdapter sda = new SqlDataAdapter(cmd))
+                    { sda.Fill(ds); }
+
+                    con.Close();
+                    return ds.Tables[0];
+                }
+            }
+            catch (Exception ex)
+            {
+                LogBuild.CreateLogger(JsonConvert.SerializeObject(ex), "Test_BangDuyet");
+                return ds.Tables[0];
+            }
+        }
+
+        public static int Test_UpdateStus(string userid, int ID, string GiaDieuChinh, string GiaKhaoSat, string ngayapdung)
+        {
+            DataSet ds = new DataSet();
+            try
+            {
+                using (var con = new SqlConnection(strConntt))
+                {
+                    con.Open();
+                    SqlCommand cmd = new SqlCommand("Test_UpdateStus", con);
+                    cmd.CommandType = CommandType.StoredProcedure;
+                    cmd.CommandTimeout = 3000;
+                    cmd.Parameters.Add(new SqlParameter("userid", userid));
+                    cmd.Parameters.Add(new SqlParameter("ID", ID));
+                    cmd.Parameters.Add(new SqlParameter("GiaDieuChinh", GiaDieuChinh));
+                    cmd.Parameters.Add(new SqlParameter("GiaKhaoSat", GiaKhaoSat));
+                    cmd.Parameters.Add(new SqlParameter("ngayapdung", ngayapdung));
+
+                    cmd.ExecuteNonQuery();
+
+                    con.Close();
+                    return 1;
+                }
+            }
+            catch (Exception ex)
+            {
+                LogBuild.CreateLogger(JsonConvert.SerializeObject(ex), "Test_UpdateStus");
+                return 0;
+            }
+        }
+        #endregion
+
     }
 }
 

@@ -1,0 +1,129 @@
+﻿@using System.Data
+@using ProductAllTool.Models.ManageSales;
+@{
+    var lsthd = (List<objCombox>)Session["listhanhdongdc"];
+    var listLoaidc = (List<objCombox>)Session["listLoaidc"];
+}
+<link href="~/Resource/Content/css/thickbox.css" rel="stylesheet" />
+<script src="~/Resource/Scripts/thickbox.js"></script>
+<table id="tbl_Item" class="table table-bordered" style="width:99.9%">
+    <thead>
+        <tr>
+            <th class="text-left " style="vertical-align: top">
+                Category
+            </th>
+            <th class="text-left" style="vertical-align: top">
+                Brand
+            </th>
+            <th class="text-left" style="vertical-align: top">
+                Function
+            </th>
+            <th class="text-left" style="vertical-align: top">
+                Mã Hàng
+            </th>
+            <th class="text-left" style="vertical-align: top">
+                Tên Hàng
+            </th>
+            <th class="text-left" style="vertical-align: top">
+                Giá Bán
+            </th>
+            <th class="text-left" style="vertical-align: top">
+                Giá Điều Chỉnh
+            </th>
+            <th class="text-left" style="vertical-align: top">
+                Giá Khảo Sát
+            </th>
+            <th class="text-left" style="vertical-align: top">
+                Ngày áp dụng<br />
+                <input type="date" id="checkallngay" class="text-center" onchange="checkallngay()" />
+            </th>
+            <th class="text-left" style="vertical-align: top">
+                Chọn <br />
+                <input type="checkbox" id="checkall" class="text-center" onchange="checkall()" />
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+
+        @{
+            if (Model != null)
+            {
+                var dt = Model as DataTable;
+                if (dt.Rows.Count > 0)
+                {
+                    var i = 0;
+                    foreach (DataRow item in dt.Rows)
+                    {
+                <tr id="row_@i">
+                    <td class="text-left" style="width:65px; max-width: 65px;  overflow: hidden;white-space: nowrap">
+                        @item["Catename"]
+                    </td>
+                    <td class="text-left" style="width: 100px; max-width: 100px;  overflow: hidden;white-space: nowrap">
+                        @item["BrandName"]
+                    </td>
+                    <td class="text-right" style="width: 100px;">
+                        @item["FunctionName"]
+                    </td>
+                    <td class="text-left" style="width: 100px; max-width: 100px; overflow: hidden; white-space: nowrap ">
+                        @item["Code"]
+                    </td>
+                    <td class="text-left" style="width: 150px;">
+                        @item["Name"]
+                    </td>
+                    <td class="text-left" style="width: 40px;">
+                        @item["price"]
+                    </td>
+                    <td class="text-left" style="width: 40px;">
+                        <input type="text" id="GiaDieuChinh_@i" value="@item["GiaDieuChinh"]" />
+                    </td>
+                    <td class="text-left" style="max-width: 40px;">
+                        <input type="text" id="GiaKhaoSat_@i" value="@item["GiaKhaoSat"]" />
+                    </td>
+                    <td class="text-left" style="max-width: 20px;">
+                        <input type="date" id="ngayapdung_@i" name="checkngay[]" value="@item["ngayapdung"]" />
+                    </td>
+                    <td class="text-left" style="width: 10px;">
+                        <input id="_@i" class="text-center" name="check[]" type="checkbox" value="@item["ID"]" />
+                    </td>
+
+
+                </tr>
+                        i++;
+                    }
+                }
+            }
+        }
+    </tbody>
+        <tfoot>
+        </tfoot>
+    </table>
+<script>
+    function checkall() {
+        var cboxes = document.getElementsByName('check[]');
+        for (var i = 0; i < cboxes.length; i++) {
+            if ($('#checkall').is(":checked")) {
+                cboxes[i].checked = true;
+            }
+            else {
+                cboxes[i].checked = false;
+            }
+        }
+    }
+    function checkallngay() {
+        var ngay = document.getElementsByName('checkngay[]');
+        for (var i = 0; i < ngay.length; i++) {
+            if ($('#checkallngay').is(":checked")) {
+                ngay[i].checked = true;
+            }
+            else {
+                ngay[i].checked = false;
+            }
+        }
+    }
+
+</script>
+
+
+
+
+

@@ -3563,6 +3563,9 @@
     <Content Include="Views\SHIFT\__TakeABreakShift.cshtml" />
     <Content Include="Views\ThucTap\ChiTietBoSuuTap.cshtml" />
     <Content Include="Views\ThucTap\Partial\__ChiTietBoSuuTap.cshtml" />
+    <Content Include="Views\ThucTap\DieuChinhGiaBan.cshtml" />
+    <Content Include="Views\ThucTap\Partial\_DieuChinhGiaBan.cshtml" />
+    <Content Include="Views\ThucTap\Partial\_DuyetDieuChinhGia.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

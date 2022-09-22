@@ -1,4 +1,4 @@
-﻿@*@using System.Data
+﻿@using System.Data
 @using ProductAllTool.Models.ManageSales;
 @{
     var lsthd = (List<objCombox>)Session["listhanhdongdc"];
@@ -6,32 +6,35 @@
 }
 <link href="~/Resource/Content/css/thickbox.css" rel="stylesheet" />
 <script src="~/Resource/Scripts/thickbox.js"></script>
-<table id="tbl_Item" class="table table-bordered" style="width:99.9%">
+<table id="tbl_Item1" class="table table-bordered" style="width:99.9%">
     <thead>
-        <tr class="bg-primary">
+        <tr>
             <th class="text-left " style="vertical-align: top">
                 Category
             </th>
             <th class="text-left" style="vertical-align: top">
-                Group
+                Brand
             </th>
             <th class="text-left" style="vertical-align: top">
                 Function
             </th>
             <th class="text-left" style="vertical-align: top">
-                STT
+                Mã Hàng
             </th>
             <th class="text-left" style="vertical-align: top">
-                Mã hàng
+                Tên Hàng
             </th>
             <th class="text-left" style="vertical-align: top">
-                Tên hàng
+                Giá Bán
             </th>
             <th class="text-left" style="vertical-align: top">
-                Giá bán
+                Giá Điều Chỉnh
             </th>
             <th class="text-left" style="vertical-align: top">
-                SL combo
+                Giá Khảo Sát
+            </th>
+            <th class="text-left" style="vertical-align: top">
+                Ngày áp dụng
             </th>
             <th class="text-left" style="vertical-align: top">
                 Chọn <br />
@@ -51,33 +54,38 @@
                     foreach (DataRow item in dt.Rows)
                     {
                         <tr id="row_@i">
-                            <td class="text-left" style="width: 25px; max-width: 25px; overflow: hidden; white-space: nowrap">
-                                @item["catname"]
+                            <td class="text-left" style="width:65px; max-width: 65px;  overflow: hidden;white-space: nowrap">
+                                @item["Catename"]
                             </td>
-                            <td class="text-left" style="width: 40px; max-width: 40px;  overflow: hidden;white-space: nowrap">
-                                @item["groupname"]
+                            <td class="text-left" style="width: 100px; max-width: 100px;  overflow: hidden;white-space: nowrap">
+                                @item["BrandName"]
                             </td>
-                            <td class="text-left" style="width: 40px; max-width: 40px;  overflow: hidden;white-space: nowrap">
-                                @item["functname"]
+                            <td class="text-right" style="width: 100px;">
+                                @item["FunctionName"]
                             </td>
-                            <td class="text-left" style="widtH: 25px; max-width: 25px; overflow: hidden; white-space: nowrap ">
-                                @item["STT"]
+                            <td class="text-left" style="width: 100px; max-width: 100px; overflow: hidden; white-space: nowrap ">
+                                @item["Code"]
                             </td>
-                            <td class="text-left" style="width: 40px; max-width: 40px;  overflow: hidden;white-space: nowrap">
-                                @item["MaHang"]
+                            <td class="text-left" style="width: 150px;">
+                                @item["Name"]
                             </td>
-                            <td class="text-left" style="width: 40px; max-width: 40px;  overflow: hidden;white-space: nowrap">
-                                @item["TenHang"]
-                            </td>
-                            <td class="text-left" style="width: 40px; max-width: 40px;  overflow: hidden;white-space: nowrap">
+                            <td class="text-left" style="width: 40px;">
                                 @item["price"]
                             </td>
-                            <td class="text-left" style="width: 40px; max-width: 40px;  overflow: hidden;white-space: nowrap">
-                                <input type="text" id="slcombo_@i" value="@item["slcombo"]" />
+                            <td class="text-left" style="width: 40px;">
+                                <input type="text" id="GDC_@i" value="@item["GDC"]" />
                             </td>
-                            <td class="text-left" style="width: 20px; max-width: 20px;  overflow: hidden;white-space: nowrap">
-                                <input id="_@i" class="text-center" name="check[]" type="checkbox" value="@item["ID"]" />
+                            <td class="text-left" style="max-width: 40px;">
+                                <input type="text" id="GKS_@i" value="@item["GKS"]" />
                             </td>
+                            <td class="text-left" style="max-width: 20px;">
+                                <input type="date" id="NgayApDung_@i" value="@item["NgayApDung"]" />
+                            </td>
+                            <td class="text-left"style="width: 10px;">
+                                <input id="_@i" class="text-center" name="check[]" type="checkbox"value="@item["ID"]"/>
+                            </td>
+
+
                         </tr>
                         i++;
                     }
@@ -85,9 +93,9 @@
             }
         }
     </tbody>
-    <tfoot>
-    </tfoot>
-</table>
+        <tfoot>
+        </tfoot>
+    </table>
 <script>
     function checkall() {
         var cboxes = document.getElementsByName('check[]');
@@ -104,4 +112,6 @@
 </script>
 
 
-*@
+
+
+

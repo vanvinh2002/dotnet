@@ -222,6 +222,81 @@ namespace ProductAllTool.Controllers
         #endregion
 
 
+        #region Test
+        public ActionResult DieuChinhGiaBan()
+        {
+            if (Session["uid"] != null && Session["uid"].ToString().Length > 0)
+            {
+                var lst_test1 = DataAccess.DataAccessTT.Test_Category();
+                ViewBag.lsttest1 = lst_test1;
+
+                var lst_test2 = DataAccess.DataAccessTT.Test_Brand();
+                ViewBag.lsttest2 = lst_test2;
+
+                var lst_test3 = DataAccess.DataAccessTT.Test_Function();
+                ViewBag.lsttest3 = lst_test3;
+                
+                var lst_test4 = DataAccess.DataAccessTT.Test_MaHang();
+                ViewBag.lsttest4 = lst_test4;
+
+                return View();
+            }
+            else
+            {
+                SystemFunctions.SaveSession("ThucTap", "DieuChinhGiaBan");
+                return RedirectToAction("Login", "Account");
+            }
+        }
+
+        public ActionResult ListDCGB(string Category, string Function, string Brand, string MaHang)
+        {
+            if (Session["uid"] != null && Session["uid"].ToString().Length > 0)
+            {
+                DataTable table = DataAccess.DataAccessTT.Test_Bang(Session["uid"].ToString(), Category, Function, Brand, MaHang);
+
+                return PartialView("~/Views/ThucTap/Partial/_DieuChinhGiaBan.cshtml", table);
+
+            }
+            return RedirectToAction("Login", "Account");
+        }
+        public ActionResult ListDuyetDCGB(string Category, string Function, string Brand, string MaHang)
+        {
+            if (Session["uid"] != null && Session["uid"].ToString().Length > 0)
+            {
+                DataTable table = DataAccess.DataAccessTT.Test_BangDuyet(Session["uid"].ToString(), Category, Function, Brand, MaHang);
+
+                return PartialView("~/Views/ThucTap/Partial/_DuyetDieuChinhGia.cshtml", table);
+
+            }
+            return RedirectToAction("Login", "Account");
+        }
+
+        [HttpPost]
+        public ActionResult UpdateStatus(List<updatestatus> lst)
+        {
+            try
+            {
+                if (Session["uid"] != null && Session["uid"].ToString().Length > 0)
+                {
+                    foreach (updatestatus po in lst)
+                    {
+                        DataAccess.DataAccessTT.Test_UpdateStus(Session["uid"].ToString(), po.ID, po.GiaDieuChinh,po.GiaKhaoSat,po.ngayapdung);
+                    }
+                    return Json(1);
+                }
+                return RedirectToAction("Login", "Account");
+            }
+            catch (Exception ex)
+            {
+                LogBuild.CreateLogger(JsonConvert.SerializeObject(ex), "UpdateStatus");
+                return Json(null);
+            }
+        }
+
+        #endregion
+
+
+
         #region Thuc tap 2
         public ActionResult ThucTap2()
         {
