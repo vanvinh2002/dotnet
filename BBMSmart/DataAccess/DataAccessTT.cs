@@ -929,6 +929,395 @@ namespace ProductAllTool.DataAccess
         }
         #endregion
 
+        #region Test
+
+        public static List<objCombox> TTUV_GioiTinh()
+        {
+            List<objCombox> it_r = new List<objCombox>();
+            using (var con = new SqlConnection(strConnTT))
+            {
+                con.Open();
+                try
+                {
+                    SqlCommand cmd = new SqlCommand("TTUV_GioiTinh", con);
+                    cmd.CommandType = CommandType.StoredProcedure;
+                    cmd.CommandTimeout = 300;
+                    var reader = cmd.ExecuteReader();
+
+                    while (reader.Read())
+                    {
+                        objCombox it_ = new objCombox
+                        {
+                            Code = reader["Code"].ToString(),
+                            Name = reader["Name"].ToString(),
+                        };
+
+                        it_r.Add(it_);
+                    }
+                    con.Close();
+                    return it_r;
+                }
+                catch (Exception ex)
+                {
+                    con.Close();
+                    LogBuild.CreateLogger(JsonConvert.SerializeObject(ex), "TTUV_GioiTinh");
+                    return it_r;
+                }
+            }
+        }
+
+        public static List<objCombox> TTUV_TinhTrang()
+        {
+            List<objCombox> it_r = new List<objCombox>();
+            using (var con = new SqlConnection(strConnTT))
+            {
+                con.Open();
+                try
+                {
+                    SqlCommand cmd = new SqlCommand("TTUV_TinhTrang", con);
+                    cmd.CommandType = CommandType.StoredProcedure;
+                    cmd.CommandTimeout = 300;
+                    var reader = cmd.ExecuteReader();
+
+                    while (reader.Read())
+                    {
+                        objCombox it_ = new objCombox
+                        {
+                            Code = reader["Code"].ToString(),
+                            Name = reader["Name"].ToString(),
+                        };
+
+                        it_r.Add(it_);
+                    }
+                    con.Close();
+                    return it_r;
+                }
+                catch (Exception ex)
+                {
+                    con.Close();
+                    LogBuild.CreateLogger(JsonConvert.SerializeObject(ex), "TTUV_TinhTrang");
+                    return it_r;
+                }
+            }
+        }
+
+        public static List<objCombox> TTUV_TinhThanhThuongTru()
+        {
+            List<objCombox> it_r = new List<objCombox>();
+            using (var con = new SqlConnection(strConnTT))
+            {
+                con.Open();
+                try
+                {
+                    SqlCommand cmd = new SqlCommand("TTUV_TinhThanhThuongTru", con);
+                    cmd.CommandType = CommandType.StoredProcedure;
+                    cmd.CommandTimeout = 300;
+                    var reader = cmd.ExecuteReader();
+
+                    while (reader.Read())
+                    {
+                        objCombox it_ = new objCombox
+                        {
+                            Code = reader["Code"].ToString(),
+                            Name = reader["Name"].ToString(),
+                        };
+
+                        it_r.Add(it_);
+                    }
+                    con.Close();
+                    return it_r;
+                }
+                catch (Exception ex)
+                {
+                    con.Close();
+                    LogBuild.CreateLogger(JsonConvert.SerializeObject(ex), "TTUV_TinhThanhThuongTru");
+                    return it_r;
+                }
+            }
+        }
+
+        public static List<objCombox> TTUV_TinhThanhCMND()
+        {
+            List<objCombox> it_r = new List<objCombox>();
+            using (var con = new SqlConnection(strConnTT))
+            {
+                con.Open();
+                try
+                {
+                    SqlCommand cmd = new SqlCommand("TTUV_TinhThanhCMND", con);
+                    cmd.CommandType = CommandType.StoredProcedure;
+                    cmd.CommandTimeout = 300;
+                    var reader = cmd.ExecuteReader();
+
+                    while (reader.Read())
+                    {
+                        objCombox it_ = new objCombox
+                        {
+                            Code = reader["Code"].ToString(),
+                            Name = reader["Name"].ToString(),
+                        };
+
+                        it_r.Add(it_);
+                    }
+                    con.Close();
+                    return it_r;
+                }
+                catch (Exception ex)
+                {
+                    con.Close();
+                    LogBuild.CreateLogger(JsonConvert.SerializeObject(ex), "TTUV_TinhThanhCMND");
+                    return it_r;
+                }
+            }
+        }
+
+        public static List<objCombox> TTUV_QuanHuyenThuongTru()
+        {
+            List<objCombox> it_r = new List<objCombox>();
+            using (var con = new SqlConnection(strConnTT))
+            {
+                con.Open();
+                try
+                {
+                    SqlCommand cmd = new SqlCommand("TTUV_QuanHuyenThuongTru", con);
+                    cmd.CommandType = CommandType.StoredProcedure;
+                    cmd.CommandTimeout = 300;
+                    var reader = cmd.ExecuteReader();
+
+                    while (reader.Read())
+                    {
+                        objCombox it_ = new objCombox
+                        {
+                            Code = reader["Code"].ToString(),
+                            Name = reader["Name"].ToString(),
+                        };
+
+                        it_r.Add(it_);
+                    }
+                    con.Close();
+                    return it_r;
+                }
+                catch (Exception ex)
+                {
+                    con.Close();
+                    LogBuild.CreateLogger(JsonConvert.SerializeObject(ex), "TTUV_QuanHuyenThuongTru");
+                    return it_r;
+                }
+            }
+        }
+
+        public static List<objCombox> TTUV_QuanHuyenCMND()
+        {
+            List<objCombox> it_r = new List<objCombox>();
+            using (var con = new SqlConnection(strConnTT))
+            {
+                con.Open();
+                try
+                {
+                    SqlCommand cmd = new SqlCommand("TTUV_QuanHuyenCMND", con);
+                    cmd.CommandType = CommandType.StoredProcedure;
+                    cmd.CommandTimeout = 300;
+                    var reader = cmd.ExecuteReader();
+
+                    while (reader.Read())
+                    {
+                        objCombox it_ = new objCombox
+                        {
+                            Code = reader["Code"].ToString(),
+                            Name = reader["Name"].ToString(),
+                        };
+
+                        it_r.Add(it_);
+                    }
+                    con.Close();
+                    return it_r;
+                }
+                catch (Exception ex)
+                {
+                    con.Close();
+                    LogBuild.CreateLogger(JsonConvert.SerializeObject(ex), "TTUV_QuanHuyenCMND");
+                    return it_r;
+                }
+            }
+        }
+
+        public static List<objCombox> TTUV_PhuongXaThuongTru()
+        {
+            List<objCombox> it_r = new List<objCombox>();
+            using (var con = new SqlConnection(strConnTT))
+            {
+                con.Open();
+                try
+                {
+                    SqlCommand cmd = new SqlCommand("TTUV_PhuongXaThuongTru", con);
+                    cmd.CommandType = CommandType.StoredProcedure;
+                    cmd.CommandTimeout = 300;
+                    var reader = cmd.ExecuteReader();
+
+                    while (reader.Read())
+                    {
+                        objCombox it_ = new objCombox
+                        {
+                            Code = reader["Code"].ToString(),
+                            Name = reader["Name"].ToString(),
+                        };
+
+                        it_r.Add(it_);
+                    }
+                    con.Close();
+                    return it_r;
+                }
+                catch (Exception ex)
+                {
+                    con.Close();
+                    LogBuild.CreateLogger(JsonConvert.SerializeObject(ex), "TTUV_PhuongXaThuongTru");
+                    return it_r;
+                }
+            }
+        }
+
+        public static List<objCombox> TTUV_PhuongXaCMND()
+        {
+            List<objCombox> it_r = new List<objCombox>();
+            using (var con = new SqlConnection(strConnTT))
+            {
+                con.Open();
+                try
+                {
+                    SqlCommand cmd = new SqlCommand("TTUV_PhuongXaCMND", con);
+                    cmd.CommandType = CommandType.StoredProcedure;
+                    cmd.CommandTimeout = 300;
+                    var reader = cmd.ExecuteReader();
+
+                    while (reader.Read())
+                    {
+                        objCombox it_ = new objCombox
+                        {
+                            Code = reader["Code"].ToString(),
+                            Name = reader["Name"].ToString(),
+                        };
+
+                        it_r.Add(it_);
+                    }
+                    con.Close();
+                    return it_r;
+                }
+                catch (Exception ex)
+                {
+                    con.Close();
+                    LogBuild.CreateLogger(JsonConvert.SerializeObject(ex), "TTUV_PhuongXaCMND");
+                    return it_r;
+                }
+            }
+        }
+
+        public static List<objCombox> TTUV_TinhThanhTamTru()
+        {
+            List<objCombox> it_r = new List<objCombox>();
+            using (var con = new SqlConnection(strConnTT))
+            {
+                con.Open();
+                try
+                {
+                    SqlCommand cmd = new SqlCommand("TTUV_TinhThanhTamTru", con);
+                    cmd.CommandType = CommandType.StoredProcedure;
+                    cmd.CommandTimeout = 300;
+                    var reader = cmd.ExecuteReader();
+
+                    while (reader.Read())
+                    {
+                        objCombox it_ = new objCombox
+                        {
+                            Code = reader["Code"].ToString(),
+                            Name = reader["Name"].ToString(),
+                        };
+
+                        it_r.Add(it_);
+                    }
+                    con.Close();
+                    return it_r;
+                }
+                catch (Exception ex)
+                {
+                    con.Close();
+                    LogBuild.CreateLogger(JsonConvert.SerializeObject(ex), "TTUV_TinhThanhTamTru");
+                    return it_r;
+                }
+            }
+        }
+
+        public static List<objCombox> TTUV_QuanHuyenTamTru()
+        {
+            List<objCombox> it_r = new List<objCombox>();
+            using (var con = new SqlConnection(strConnTT))
+            {
+                con.Open();
+                try
+                {
+                    SqlCommand cmd = new SqlCommand("TTUV_QuanHuyenTamTru", con);
+                    cmd.CommandType = CommandType.StoredProcedure;
+                    cmd.CommandTimeout = 300;
+                    var reader = cmd.ExecuteReader();
+
+                    while (reader.Read())
+                    {
+                        objCombox it_ = new objCombox
+                        {
+                            Code = reader["Code"].ToString(),
+                            Name = reader["Name"].ToString(),
+                        };
+
+                        it_r.Add(it_);
+                    }
+                    con.Close();
+                    return it_r;
+                }
+                catch (Exception ex)
+                {
+                    con.Close();
+                    LogBuild.CreateLogger(JsonConvert.SerializeObject(ex), "TTUV_QuanHuyenTamTru");
+                    return it_r;
+                }
+            }
+        }
+
+        public static List<objCombox> TTUV_PhuongXaaTamTru()
+        {
+            List<objCombox> it_r = new List<objCombox>();
+            using (var con = new SqlConnection(strConnTT))
+            {
+                con.Open();
+                try
+                {
+                    SqlCommand cmd = new SqlCommand("TTUV_PhuongXaaTamTru", con);
+                    cmd.CommandType = CommandType.StoredProcedure;
+                    cmd.CommandTimeout = 300;
+                    var reader = cmd.ExecuteReader();
+
+                    while (reader.Read())
+                    {
+                        objCombox it_ = new objCombox
+                        {
+                            Code = reader["Code"].ToString(),
+                            Name = reader["Name"].ToString(),
+                        };
+
+                        it_r.Add(it_);
+                    }
+                    con.Close();
+                    return it_r;
+                }
+                catch (Exception ex)
+                {
+                    con.Close();
+                    LogBuild.CreateLogger(JsonConvert.SerializeObject(ex), "TTUV_PhuongXaaTamTru");
+                    return it_r;
+                }
+            }
+        }
+
+        #endregion
+
         #region Xây dựng bộ sưu tập 
 
         public static List<itemBST> sp_BBSmart_GetListThuongHieu(string uid)

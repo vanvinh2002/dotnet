@@ -1,0 +1,900 @@
+﻿@using ProductAllTool.Models.ManageSales;
+@using ProductAllTool.Common
+@using System.Data
+
+@{
+    ViewBag.Title = "Khai Báo Thông Tin Hồ Sơ Ứng Viên";
+    Layout = "~/Views/Shared/_Layout_V2.cshtml";
+}
+
+<style>
+
+
+    .filter-option-inner-inner {
+        font-size: 12px;
+    }
+
+    .btn-info {
+        background-color: #f3f3f3 !important;
+        color: #333;
+        border: 1px solid #d5d5d5;
+    }
+
+    .btn {
+        border-radius: 0px;
+        padding: 4px 12px;
+    }
+
+    #modalDetails .form-control {
+        height: 30px !important;
+        font-size: 12px !important;
+    }
+
+    .bootstrap-select.show-tick .dropdown-menu .selected span.check-mark {
+        left: 6px !important;
+        right: unset !important;
+    }
+
+    .box_kichthuoc input {
+        margin-bottom: 3px;
+    }
+
+    .title_05 h3 {
+        font-size: 19px;
+        text-transform: uppercase;
+        margin-top: 7px;
+        margin-bottom: 1px;
+    }
+
+    .modal-footer {
+        padding: 15px 0px !important;
+    }
+
+    input, select, textarea {
+        max-width: 100% !important;
+    }
+
+    .multiselect {
+        width: 181px;
+        line-height: 13px;
+        border-radius: 0px;
+        background-color: #fff;
+    }
+
+    .form-check-inline {
+        display: inline-block;
+    }
+
+    .box_option_thung {
+        margin-top: 9px;
+    }
+
+    .row_1 {
+        width: 93%;
+        margin: 0 auto;
+    }
+
+    .bootstrap-select.form-control-sm .dropdown-toggle {
+        padding: 5px !important;
+    }
+
+    #tbl_Item_length {
+        bottom: 0px;
+        position: absolute;
+        display: none;
+    }
+
+    #tbl_Item_paginate {
+        float: right;
+    }
+
+    .dropdown-menu {
+        /*left: 0px !important;*/
+        right: 0px !important;
+        margin-top: 0px;
+    }
+
+    table.dataTable tfoot td {
+        padding: 3px 2px 1px 18px !important;
+        border-top: 1px solid #111;
+    }
+
+    #div-content {
+        margin-top: 140px;
+    }
+
+    .box_foot {
+        font-size: 12px;
+    }
+
+    .dropdown-toggle {
+        z-index: unset !important;
+    }
+
+    .btn_ver_m2 {
+        width: 148px !important;
+        background-color: #5f7e98 !important;
+        color: #fff;
+        padding: 5px 5px !important;
+        border: none;
+        font-weight: 600;
+        border-radius: 4px !important;
+    }
+
+    .btn_ver {
+        background-color: #5f7e98 !important;
+        color: #fff;
+        font-size: 12px !important;
+        border: none;
+        font-weight: 600;
+    }
+
+
+    .bootstrap-select .form-control {
+        width: 320px;
+        max-width: 320px;
+    }
+
+    input[type="radio"], input[type="checkbox"] {
+        margin: 4px 21px 0;
+    }
+
+    /* Style the tab */
+    .tab {
+        overflow: hidden;
+        border: 1px solid #ccc;
+        background-color: #f1f1f1;
+        border-top-right-radius: 14px;
+    }
+
+        .tab button {
+            background-color: inherit;
+            border: none;
+            outline: none;
+            cursor: pointer;
+            padding: 7px 0px;
+            transition: 0.3s;
+            font-size: 13px;
+            border-top-right-radius: 14px;
+            width: 19%;
+        }
+
+            .tab button:hover {
+                background-color: #ddd;
+            }
+
+            .tab button.active {
+                background-color: #5f7e98;
+                color: #ffffff;
+                font-weight: 500;
+            }
+
+    .tabcontent {
+        padding: 10px 0px;
+        border: 1px solid #ccc;
+        border-top: none;
+    }
+
+    .half_cols {
+        width: 50%
+    }
+
+    .txtinfo {
+        font-size: 13px
+    }
+
+    .half_col {
+        padding-left: 0px;
+        padding-right: 0px;
+    }
+
+    ._jw-tpk-container {
+        right: 15px;
+        top: 967px;
+    }
+</style>
+<style>
+    input[type='date']:after {
+        color: #aaa;
+        content: attr(placeholder);
+    }
+</style>
+
+<div class="col-md-12">
+    <div class="tab box_loaihinh" id="content_LoaiHinh" style=" height: 35px; width: 100%">
+        <button class="tablinks active Tab01" onclick="ActiveTab('Tab01')">Khai Báo  </button>
+        <button class="tablinks Tab02" onclick="ActiveTab('Tab02')">Danh Sách </button>
+    </div>
+</div>
+<div id="KhaiBao" class="tabcontent conten01" style="display:block;height:1000px">
+            <div>
+                <h3>Thông Tin Cơ Bản</h3>
+            </div>
+            <div class="col-md-12">
+                <div class="col-md-1 c1">
+                    <label>Tên ứng viên </label>
+                </div>
+                <div class="col-md-1 c2" ">
+                    <input id="TenUV" type="text" class="form-control" value="  @ViewBag.listautocode" />
+                </div>
+                <div class="col-md-1 c3">
+                    <label>Tên gọi thường </label>
+                </div>
+                <div class="col-md-1 c4" ondblclick="$('#mien').val('').trigger('change')">
+                    <input id="TenGT" type="text" class="form-control" value="  @ViewBag.listautocode" />
+                </div>
+            </div>
+            <div class="col-md-12">
+                <div class="col-md-1 c1">
+                    <label>Mã ứng viên </label>
+                </div>
+                <div class="col-md-1 c2" ondblclick="$('#MaUV').val('').trigger('change')">
+                    <input id="MaUV" type="text" class="form-control" value="  @ViewBag.listautocode" />
+                </div>
+                <div class="col-md-1 c3">
+                    <label>Tên tiếng hoa </label>
+                </div>
+                <div class="col-md-1 c4">
+                <input id="TenTH" type="text" class="form-control" value="  @ViewBag.listautocode" />
+            </div>
+            </div>
+            <div class="col-md-12">
+                <div class="col-md-1 c1">
+                    <label>Số báo danh  </label>
+                </div>
+                <div class="col-md-1 c2" ondblclick="$('#SBD').val('').trigger('change')">
+                    <input id="SBD" type="text" class="form-control" value="  @ViewBag.listautocode" />
+                </div>
+                <div class="col-md-1 c3">
+                    <label>Số CMND </label>
+                </div>
+                <div class="col-md-1 c4">
+                    <input id="SCMND" type="text" class="form-control" value="  @ViewBag.listautocode" />
+                </div>
+            </div>
+            <div class="col-md-12">
+                <div class="col-md-1 c1">
+                    <label>Giới tính </label>
+                </div>
+                <div class="col-md-1 c2">
+                    <select id="GioiTinh" class="form-control selectpicker" data-live-search="true" onchange=" ">
+                        <option value="">--- Chọn giới tính ---</option>
+                        @if (ViewBag.list_test1 != null)
+                        {
+                            foreach (objCombox box in (List<objCombox>)ViewBag.list_test1)
+                            {
+                                <option value="@box.Code">@box.Name</option>
+                            }
+                        }
+                    </select>
+                </div>
+                <div class="col-md-1 c3">
+                    <label>Ngày cấp CMND </label>
+                </div>
+                <div class="col-md-1 c4">
+                    <input id="NgayCap" type="date" class="form-control" placeholder="Date" value="  @ViewBag.listautocode" />
+                </div>
+            </div>
+            <div class="col-md-12">
+                <div class="col-md-1 c1">
+                    <label>Tình trạng hôn nhân  </label>
+                </div>
+                <div class="col-md-1 c2">
+                    <select id="TinhTrang" class="form-control selectpicker" data-live-search="true" onchange=" ">
+                        <option value="">--- Chọn tình trạng hôn nhân ---</option>
+                        @if (ViewBag.list_test2 != null)
+                        {
+                            foreach (objCombox box in (List<objCombox>)ViewBag.list_test2)
+                            {
+                                <option value="@box.Code">@box.Name</option>
+                            }
+                        }
+                    </select>
+                </div>
+                <div class="col-md-1 c3">
+                    <label>Nơi cấp </label>
+                </div>
+                <div class="col-md-1 c4">
+                    <input id="NoiCap" type="text" class="form-control" value="  @ViewBag.listautocode" />
+                </div>
+            </div>
+            <div class="col-md-12">
+                <div class="col-md-1 c1">
+                    <label>Ngày sinh </label>
+                </div>
+                <div class="col-md-1 c2">
+                    <input id="NgaySinh" type="date" class="form-control" placeholder="Date" value="  @ViewBag.listautocode" />
+                </div>
+                <div class="col-md-1 c3">
+                    <label>MST </label>
+                </div>
+                <div class="col-md-1 c4">
+                    <input id="MST" type="text" class="form-control" value="  @ViewBag.listautocode" />
+                </div>
+            </div>
+            <div class="col-md-12">
+                <div class="col-md-1 c1">
+                    <label>Nơi sinh </label>
+                </div>
+                <div class="col-md-1 c2">
+                    <input id="NoiSinh" type="text" class="form-control" value="  @ViewBag.listautocode" />
+                </div>
+                <div class="col-md-1 c3">
+                    <label>Ngày áp dụng </label>
+                </div>
+                <div class="col-md-1 c4">
+                    <input id="NgayAD" type="date" class="form-control" placeholder="Date" value="  @ViewBag.listautocode" />
+                </div>
+            </div>
+            <div class="col-md-12">
+                <div class="col-md-1 c1">
+                    <label>Nguyên Quán </label>
+                </div>
+                <div class="col-md-1 c2">
+                    <input id="NguyenQuan" type="text" class="form-control" value="  @ViewBag.listautocode" />
+                </div>
+                <div class="col-md-1 c3">
+                    <label>Cơ quan quản lý </label>
+                </div>
+                <div class="col-md-1 c4">
+                    <input id="CQQL" type="text" class="form-control" value="  @ViewBag.listautocode" />
+                </div>
+            </div>
+            <div class="col-md-12">
+                <div class="col-md-1 c1">
+                    <label>Quốc tịch </label>
+                </div>
+                <div class="col-md-1 c2">
+                    <input id="QuocTich" type="text" class="form-control" value="  @ViewBag.listautocode" />
+                </div>
+                <div class="col-md-1 c3">
+                    <label>Số hộ chiếu  </label>
+                </div>
+                <div class="col-md-1 c4">
+                    <input id="SHC" type="text" class="form-control" value="  @ViewBag.listautocode" />
+                </div>
+            </div>
+            <div class="col-md-12">
+                <div class="col-md-1 c1">
+                    <label>Tôn giáo  </label>
+                </div>
+                <div class="col-md-1 c2">
+                    <input id="TonGiao" type="text" class="form-control" value="  @ViewBag.listautocode" />
+                </div>
+                <div class="col-md-1 c3">
+                    <label>Nơi Cấp </label>
+                </div>
+                <div class="col-md-1 c4">
+                    <input id="NoiCap1" type="text" class="form-control" value="  @ViewBag.listautocode" />
+                </div>
+            </div>
+            <div class="col-md-12">
+                <div class="col-md-1 c1">
+                    <label>Trình độ văn hóa </label>
+                </div>
+                <div class="col-md-1 c2">
+                    <input id="TDVH" type="text" class="form-control" value="  @ViewBag.listautocode" />
+                </div>
+                <div class="col-md-1 c3">
+                    <label>Ngày cấp </label>
+                </div>
+                <div class="col-md-1 c4">
+                    <input id="NgayCap" type="date" class="form-control" placeholder="Date" value="  @ViewBag.listautocode" />
+                </div>
+            </div>
+            <div class="col-md-12">
+                <div class="col-md-1 c1">
+                    <label>Trình học vấn </label>
+                </div>
+                <div class="col-md-1 c2">
+                    <input id="TrinhHocVan" type="text" class="form-control" value="  @ViewBag.listautocode" />
+                </div>
+                <div class="col-md-1 c3">
+                    <label>Ngày hết hạn </label>
+                </div>
+                <div class="col-md-1 c4">
+                    <input id="NgayHetHan" type="date" class="form-control" placeholder="Date" value="  @ViewBag.listautocode" />
+                </div>
+            </div>
+            <div class="col-md-12">
+                <div class="col-md-1 c1">
+                    <label> </label>
+                </div>
+                <div class="col-md-1 c2">
+                </div>
+                <div class="col-md-1 c3">
+                    <label>Số thẻ căn cước </label>
+                </div>
+                <div class="col-md-1 c4">
+                    <input id="STCC" type="text" class="form-control" value="  @ViewBag.listautocode" />
+                </div>
+            </div>
+
+            <div>
+                <h3>Thông Tin Liên Lạc</h3>
+            </div>
+            <div class="col-md-12">
+                <div class="col-md-1 c1">
+                    <label> Đt di động</label>
+                </div>
+                <div class="col-md-1 c2" ondblclick="$('#DTdiDong').val('').trigger('change')">
+                    <input id="DTdiDong" type="text" class="form-control" value="  @ViewBag.listautocode" />
+                </div>
+                <div class="col-md-1 c3">
+                    <label>Đt di động 2 </label>
+                </div>
+                <div class="col-md-1 c4" ondblclick="$('#DTdiDong2').val('').trigger('change')">
+                    <input id="DTdiDong2" type="text" class="form-control" value="  @ViewBag.listautocode" />
+                </div>
+            </div>
+            <div class="col-md-12">
+                <div class="col-md-1 c1">
+                    <label>Điện thoại nhà </label>
+                </div>
+                <div class="col-md-1 c2">
+                    <input id="DTN" type="text" class="form-control" value="  @ViewBag.listautocode" />
+                </div>
+                <div class="col-md-1 c3">
+                    <label>Email </label>
+                </div>
+                <div class="col-md-1 c4">
+                    <input id="Email" type="text" class="form-control" value="  @ViewBag.listautocode" />
+                </div>
+            </div>
+            <div class="col-md-12">
+                <div class="col-md-6">
+                    <h3>Địa Chỉ Thường Trú</h3>
+                </div>
+                <div class="col-md-6">
+                    <h3>Địa Chỉ CMND</h3>
+                </div>
+            </div>
+            <div class="col-md-12">
+                <div class="col-md-1 c1">
+                    <label>Quốc gia </label>
+                </div>
+                <div class="col-md-1 c2">
+                    <input id="quocgia" type="text" class="form-control" value="  @ViewBag.listautocode" />
+                </div>
+                <div class="col-md-1 c3">
+                    <label>Quốc gia </label>
+                </div>
+                <div class="col-md-1 c4">
+                    <input id="quocgia1" type="text" class="form-control" value="  @ViewBag.listautocode" />
+                </div>
+            </div>
+            <div class="col-md-12">
+                <div class="col-md-1 c1">
+                    <label>Tỉnh thành </label>
+                </div>
+                <div class="col-md-1 c2">
+                    <select id="tinhthanh" class="form-control selectpicker" data-live-search="true" onchange=" ">
+                        <option value="">--- Chọn tỉnh TP ---</option>
+                        @if (ViewBag.list_test3 != null)
+                        {
+                            foreach (objCombox box in (List<objCombox>)ViewBag.list_test3)
+                            {
+                                <option value="@box.Code">@box.Name</option>
+                            }
+                        }
+                    </select>
+                </div>
+                <div class="col-md-1 c3">
+                    <label>Tỉnh thành </label>
+                </div>
+                <div class="col-md-1 c4">
+                    <select id="tinhthanh2" class="form-control selectpicker" data-live-search="true" onchange=" ">
+                        <option value="">--- Chọn tỉnh TP ---</option>
+                        @if (ViewBag.list_test4 != null)
+                        {
+                            foreach (objCombox box in (List<objCombox>)ViewBag.list_test4)
+                            {
+                                <option value="@box.Code">@box.Name</option>
+                            }
+                        }
+                    </select>
+                </div>
+            </div>
+            <div class="col-md-12">
+                <div class="col-md-1 c1">
+                    <label>Quận huyện </label>
+                </div>
+                <div class="col-md-1 c2">
+                    <select id="quanhuyen" class="form-control selectpicker" data-live-search="true" onchange=" ">
+                        <option value="">--- Chọn Quận/Huyện ---</option>
+                        @if (ViewBag.list_test5 != null)
+                        {
+                            foreach (objCombox box in (List<objCombox>)ViewBag.list_test5)
+                            {
+                                <option value="@box.Code">@box.Name</option>
+                            }
+                        }
+                    </select>
+                </div>
+                <div class="col-md-1 c3">
+                    <label>Quận huyện </label>
+                </div>
+                <div class="col-md-1 c4">
+                    <select id="quanhuyen2" class="form-control selectpicker" data-live-search="true" onchange=" ">
+                        <option value="">--- Chọn Quận/Huyện ---</option>
+                        @if (ViewBag.list_test6 != null)
+                        {
+                            foreach (objCombox box in (List<objCombox>)ViewBag.list_test6)
+                            {
+                                <option value="@box.Code">@box.Name</option>
+                            }
+                        }
+                    </select>
+                </div>
+            </div>
+            <div class="col-md-12">
+                <div class="col-md-1 c1">
+                    <label>Phường xã </label>
+                </div>
+                <div class="col-md-1 c2">
+                    <select id="phuongxa" class="form-control selectpicker" data-live-search="true" onchange=" ">
+                        <option value="">--- Chọn Phường Xã ---</option>
+                        @if (ViewBag.list_test7 != null)
+                        {
+                            foreach (objCombox box in (List<objCombox>)ViewBag.list_test7)
+                            {
+                                <option value="@box.Code">@box.Name</option>
+                            }
+                        }
+                    </select>
+                </div>
+                <div class="col-md-1 c3">
+                    <label>Phường xã </label>
+                </div>
+                <div class="col-md-1 c4">
+                    <select id="phuongxa2" class="form-control selectpicker" data-live-search="true" onchange=" ">
+                        <option value="">--- Chọn Phường/Xã ---</option>
+                        @if (ViewBag.list_test8 != null)
+                        {
+                            foreach (objCombox box in (List<objCombox>)ViewBag.list_test8)
+                            {
+                                <option value="@box.Code">@box.Name</option>
+                            }
+                        }
+                    </select>
+                </div>
+            </div>
+            <div class="col-md-12">
+                <div class="col-md-1 c1">
+                    <label>Địa chỉ thường trú </label>
+                </div>
+                <div class="col-md-1 c2">
+                    <input id="diachiTT" type="text" class="form-control" value="  @ViewBag.listautocode" />
+                </div>
+                <div class="col-md-1 c3">
+                    <label>Địa chỉ CMND </label>
+                </div>
+                <div class="col-md-1 c4">
+                    <input id="diachiCMND" type="text" class="form-control" value="  @ViewBag.listautocode" />
+                </div>
+            </div>
+            <div>
+                <h3>Địa Chỉ Tạm Trú</h3>
+            </div>
+            <div class="col-md-12">
+                <div class="col-md-1 c1">
+                    <label>Quốc gia </label>
+                </div>
+                <div class="col-md-1 c2">
+                    <input id="quocgia" type="text" class="form-control" value="  @ViewBag.listautocode" />
+                </div>
+                <div class="col-md-1 c3">
+                    <label> </label>
+                </div>
+                <div class="col-md-1 c4">
+                </div>
+            </div>
+            <div class="col-md-12">
+                <div class="col-md-1 c1">
+                    <label>Tỉnh thành </label>
+                </div>
+                <div class="col-md-1 c2">
+                    <select id="tinhthanh3" class="form-control selectpicker" data-live-search="true" onchange=" ">
+                        <option value="">--- Chọn tỉnh TP ---</option>
+                        @if (ViewBag.list_test9 != null)
+                        {
+                            foreach (objCombox box in (List<objCombox>)ViewBag.list_test9)
+                            {
+                                <option value="@box.Code">@box.Name</option>
+                            }
+                        }
+                    </select>
+                </div>
+                <div class="col-md-1 c3">
+                    <label></label>
+                </div>
+                <div class="col-md-1 c4">
+                </div>
+            </div>
+            <div class="col-md-12">
+                <div class="col-md-1 c1">
+                    <label>Quận huyện </label>
+                </div>
+                <div class="col-md-1 c2">
+                    <select id="quanhuyen3" class="form-control selectpicker" data-live-search="true" onchange=" ">
+                        <option value="">--- Chọn Quận/Huyện ---</option>
+                        @if (ViewBag.list_test10 != null)
+                        {
+                            foreach (objCombox box in (List<objCombox>)ViewBag.list_test10)
+                            {
+                                <option value="@box.Code">@box.Name</option>
+                            }
+                        }
+                    </select>
+                </div>
+                <div class="col-md-1 c3">
+                    <label> </label>
+                </div>
+                <div class="col-md-1 c4">
+                </div>
+            </div>
+            <div class="col-md-12">
+                <div class="col-md-1 c1">
+                    <label>Phường xã </label>
+                </div>
+                <div class="col-md-1 c2">
+                    <select id="phuongxa3" class="form-control selectpicker" data-live-search="true" onchange=" ">
+                        <option value="">--- Chọn Quận/Huyện ---</option>
+                        @if (ViewBag.list_test11 != null)
+                        {
+                            foreach (objCombox box in (List<objCombox>)ViewBag.list_test11)
+                            {
+                                <option value="@box.Code">@box.Name</option>
+                            }
+                        }
+                    </select>
+                </div>
+                <div class="col-md-1 c3">
+                    <label></label>
+                </div>
+                <div class="col-md-1 c4">
+                </div>
+            </div>
+            <div class="col-md-12">
+                <div class="col-md-1 c1">
+                    <label>Địa chỉ tạm trú </label>
+                </div>
+                <div class="col-md-1 c2">
+                    <input id="diachiTT2" type="text" class="form-control" value="  @ViewBag.listautocode" />
+                </div>
+                <div class="col-md-1 c3">
+                    <label></label>
+                </div>
+                <div class="col-md-1 c4">
+                </div>
+            </div>
+            <div>
+                <h3>Thông Tin Chi Tiết</h3>
+            </div>
+            <div class="col-md-12">
+                <div class="col-md-1 c1">
+                    <label>Tình trạng sức khỏe </label>
+                </div>
+                <div class="col-md-1 c2">
+                    <input id="TTsuckhoe" type="text" class="form-control" value="  @ViewBag.listautocode" />
+                </div>
+                <div class="col-md-1 c3">
+                    <label>Huyết áp</label>
+                </div>
+                <div class="col-md-1 c4">
+                    <input id="huyetap" type="text" class="form-control" value="  @ViewBag.listautocode" />
+                </div>
+            </div>
+            <div class="col-md-12">
+                <div class="col-md-1 c1">
+                    <label>Chiều cao(cm) </label>
+                </div>
+                <div class="col-md-1 c2">
+                    <input id="chieucao" type="text" class="form-control" value="  @ViewBag.listautocode" />
+                </div>
+                <div class="col-md-1 c3">
+                    <label>Nhịp tim</label>
+                </div>
+                <div class="col-md-1 c4">
+                    <input id="nhiptim" type="text" class="form-control" value="  @ViewBag.listautocode" />
+                </div>
+            </div>
+            <div class="col-md-12">
+                <div class="col-md-1 c1">
+                    <label>Cân nặng(kg) </label>
+                </div>
+                <div class="col-md-1 c2">
+                    <input id="" type="text" class="form-control" value="  @ViewBag.listautocode" />
+                </div>cannang
+                <div class="col-md-1 c3">
+                    <label>Size quần </label>
+                </div>
+                <div class="col-md-1 c4">
+                    <input id="sizequan" type="text" class="form-control" value="  @ViewBag.listautocode" />
+                </div>
+            </div>
+            <div class="col-md-12">
+                <div class="col-md-1 c1">
+                    <label>Mắt trái </label>
+                </div>
+                <div class="col-md-1 c2">
+                    <input id="mattrai" type="text" class="form-control" value="  @ViewBag.listautocode" />
+                </div>
+                <div class="col-md-1 c3">
+                    <label>Bằng lái xe</label>
+                </div>
+                <div class="col-md-1 c4">
+                    <input id="banglaixe" type="text" class="form-control" value="  @ViewBag.listautocode" />
+                </div>
+            </div>
+            <div class="col-md-12">
+                <div class="col-md-1 c1">
+                    <label>Mắt phải </label>
+                </div>
+                <div class="col-md-1 c2">
+                    <input id="matphai" type="text" class="form-control" value="  @ViewBag.listautocode" />
+                </div>
+                <div class="col-md-1 c3">
+                    <label></label>
+                </div>
+                <div class="col-md-1 c4">
+                </div>
+            </div>
+            <div class="col-md-12">
+                <div class="col-md-1 c1">
+                    <label>Bệnh lý </label>
+                </div>
+                <div class="col-md-1 c2">
+                    <input id="benhly" type="text" class="form-control" value="  @ViewBag.listautocode" />
+                </div>
+                <div class="col-md-1 c3">
+                    <label></label>
+                </div>
+                <div class="col-md-1 c4">
+                </div>
+            </div>
+            <hr />
+            <div class="text-center">
+                <button type="button" class="btn btn-primary" onclick="js_TTUV_ADD(); js_clearbox()">Lưu</button>
+            </div>
+        </div>
+  
+<div id="danhsach" class="tabcontent conten02" style="display:none;height:1000px">
+
+    </div>
+<script type="text/javascript">
+
+
+    $(function () {
+        $('#txtHead').html("Khai Báo Thông Tin Hồ Sơ Ứng Viên");
+    });
+    function js_ReloadTable() {
+        $('#tbl_Item')
+            .DataTable({
+                lengthMenu: [[20, 50, 70, 100, -1], [20, 50, 70, 100,]],
+                "pageLength": 8,
+                fixedHeader: {
+                    headerOffset: 147
+                },
+                columnDefs: [
+                ],
+                "orderClasses": false,
+                "deferRender": true,
+
+                autoWidth: false,
+                bAutoWidth: false,
+                "searching": false,
+                reponsive: false,
+                order: []
+            });
+    }
+
+        function ActiveTab(r) {
+            if (r == "Tab01") {
+
+                $('.conten02').hide();
+                $('.conten01').show();
+
+                $('.Tab02').removeClass("active");
+
+                $('.conten01').removeClass("active");
+                $('.Tab01').addClass("active");
+
+
+            }
+            else if (r == "Tab02") {
+                $('.conten01').hide();
+                $('.conten02').show();
+
+                $('.Tab01').removeClass("active");
+
+                $('.conten02').removeClass("active");
+                $('.Tab02').addClass("active");
+
+            }
+
+            function js_TTUV_ADD() {
+
+                var add = {};
+                debugger
+                add.Ten = $('#TenUV').val();
+                add.Ma = $('#MaUV').val();
+                add.SBD = $('#SBD').val();
+                add.GioiTinh = $('#GioiTinh').val();
+                add.TinhTrangHonNhan = $('#TinhTrang').val();
+                add.NgaySinh = $('#GioiTinh').val();
+                add.NoiSinh = $('#ThuNhap').val();
+                add.NguyenQuan = $('#Usp').val();
+                add.QuocTich = $('#ThongDiep').val();
+                add.TonGiao = $('#imgLink').val();
+                add.TrinhDoVanHoa = $('#imgLink').val();
+                add.TrinhDoHocVan = $('#imgLink').val();
+                add.TenThuongGoi = $('#TenGT').val();
+                add.TenTiengHoa = $('#TenTH').val();
+                add.SoCMND = $('#SCMND').val();
+                add.NgayCapCMND = $('#NgayCap').val();
+                add.NoiCapCMND = $('#imgLink').val();
+                add.MST = $('#imgLink').val();
+                add.NgayApDung = $('#imgLink').val();
+                add.CoQuanQuanLy = $('#imgLink').val();
+                add.SoHoChieu = $('#imgLink').val();
+                add.NoiCapSHC = $('#imgLink').val();
+                add.NgayCapSHC = $('#imgLink').val();
+                add.NgayHetHanSHC = $('#imgLink').val();
+                add.SoCCCD = $('#imgLink').val();
+                add.DTDD = $('#imgLink').val();
+                add.DTDD2 = $('#imgLink').val();
+                add.DTN = $('#imgLink').val();
+                add.Email = $('#imgLink').val();
+                add.QuocgiaThuongTru = $('#imgLink').val();
+                add.TinhThanhThuongTru  = $('#imgLink').val();
+                add.QuanHuyenThuongTru = $('#imgLink').val();
+                add.PhuongXaThuongTru = $('#imgLink').val();
+                add.DiaChiThuongTru = $('#imgLink').val();
+                add.QuocGiaCMND = $('#imgLink').val();
+                add.TinhThanhCMND = $('#imgLink').val();
+                add.QuanHuyenCMND = $('#imgLink').val();
+                add.PhuongXaCMND = $('#imgLink').val();
+                add.DiaChiCMND = $('#imgLink').val();
+                add.QuocGiaTamTru = $('#imgLink').val();
+                add.TinhThanhTamTru = $('#imgLink').val();
+                add.QuanHuyenTamTru = $('#imgLink').val();
+                add.PhuongXaTamTru = $('#phuongxa3').val();
+                add.DiaChiTamTru = $('#diachiTT2').val();
+                add.TinhTrangSucKhoe = $('#TTsuckhoe').val();
+                add.ChieuCao = $('#chieucao').val();
+                add.CanNang = $('#cannang').val();
+                add.MatTrai = $('#mattrai').val();
+                add.MatPhai = $('#matphai').val();
+                add.BenhLy = $('#benhly').val();
+                add.HuyetAp = $('#huyetap').val();
+                add.NhipTim = $('#nhiptim').val();
+                add.SizeQuan = $('#sizequan').val();
+                add.BangLaiXe = $('#banglaixe').val();
+
+
+                $.ajax({
+                    type: "POST",
+                    url: "/ThucTap/BSTAdd",
+                    data: JSON.stringify({ lst: add }),
+                    contentType: "application/json; charset=utf-8",
+                    beforeSend: function () {
+                        js_Loading(true, 1);
+                    },
+
+                    success: function (data) {
+                        if (data) {
+                            alert("Thêm thành công");
+                            /*js_XayBST();*/
+                        } else {
+                            alert("Có lỗi xảy ra");
+                        }
+                        js_Loading(false, 1);
+                    },
+                    error: function () {
+                        js_Loading(false, 1);
+                    }
+                });
+            }
+
+</script>

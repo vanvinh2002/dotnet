@@ -196,6 +196,51 @@ namespace ProductAllTool.Controllers
 
         #endregion
 
+        #region Xây dựng BST
+
+
+
+        public ActionResult HoSoUngVien()
+        {
+            if (Session["uid"] != null && Session["uid"].ToString().Length > 0)
+            {
+                var list_test1 = DataAccess.DataAccessTT.TTUV_GioiTinh();
+                ViewBag.list_test1 = list_test1;
+                var list_test2 = DataAccess.DataAccessTT.TTUV_TinhTrang();
+                ViewBag.list_test2 = list_test2;
+                var list_test3 = DataAccess.DataAccessTT.TTUV_TinhThanhThuongTru();
+                ViewBag.list_test3 = list_test3;
+                var list_test4 = DataAccess.DataAccessTT.TTUV_TinhThanhCMND();
+                ViewBag.list_test4 = list_test4;
+                var list_test5 = DataAccess.DataAccessTT.TTUV_QuanHuyenThuongTru();
+                ViewBag.list_test5 = list_test5;
+                var list_test6 = DataAccess.DataAccessTT.TTUV_QuanHuyenCMND();
+                ViewBag.list_test6 = list_test6;
+                var list_test7 = DataAccess.DataAccessTT.TTUV_PhuongXaThuongTru();
+                ViewBag.list_test7 = list_test7;
+                var list_test8 = DataAccess.DataAccessTT.TTUV_PhuongXaCMND();
+                ViewBag.list_test8 = list_test8;
+                var list_test9 = DataAccess.DataAccessTT.TTUV_TinhThanhTamTru();
+                ViewBag.list_test9 = list_test9;
+                var list_test10 = DataAccess.DataAccessTT.TTUV_QuanHuyenTamTru();
+                ViewBag.list_test10 = list_test10;
+                var list_test11 = DataAccess.DataAccessTT.TTUV_PhuongXaaTamTru();
+                ViewBag.list_test11 = list_test11;
+                return View();
+            }
+            else
+            {
+                SystemFunctions.SaveSession("ThucTap", "HoSoUngVien");
+                return RedirectToAction("Login", "Account");
+            }
+        }
+
+       
+
+
+
+        #endregion
+
         #region BalancedScorecard
         public ActionResult BalancedScorecard()
         {
