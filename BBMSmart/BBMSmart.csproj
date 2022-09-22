@@ -337,8 +337,10 @@
     <Compile Include="Controllers\GDMobileController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManagerUserController.cs" />
+    <Compile Include="Controllers\MDSItemController.cs" />
     <Compile Include="Controllers\NotificationController.cs" />
     <Compile Include="Controllers\ThucTapController.cs" />
+    <Compile Include="DataAccess\DataAccessMDSItem.cs" />
     <Compile Include="DataAccess\DataAccessNoti.cs" />
     <Compile Include="DataAccess\DataAccessHRM.cs" />
     <Compile Include="DataAccess\DataAccess.cs" />
@@ -415,6 +417,7 @@
     <Compile Include="Models\ManageUse\ManagerUserModel.cs" />
     <Compile Include="Models\ManageUse\Premission.cs" />
     <Compile Include="Models\ManageUse\StoreItem.cs" />
+    <Compile Include="Models\MDS\MDSModel.cs" />
     <Compile Include="Models\Po2\objARAuto.cs" />
     <Compile Include="Models\Po\itemBST.cs" />
     <Compile Include="Models\Po\NARApr_Item.cs" />
@@ -3568,6 +3571,9 @@
     <Content Include="Views\GDMobile\Tabs\__NhanCaMobile.cshtml" />
     <Content Include="Views\DuyetBST\DuyetBST.cshtml" />
     <Content Include="Views\DuyetBST\Table\__DuyetBST.cshtml" />
+    <Content Include="Views\MDSItem\MDSItem.cshtml" />
+    <Content Include="Views\MDSItem\Tables\__tbl_dsitem.cshtml" />
+    <Content Include="Views\MDSItem\Tables\__tbl_dsduyetitem.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
