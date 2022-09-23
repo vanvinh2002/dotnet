@@ -3842,6 +3842,7 @@
     <Content Include="Views\Mobile\Mb\_SwitchShiftDetail.cshtml" />
     <Content Include="Views\Mobile\Mb\_TakeABreakShift.cshtml" />
     <Content Include="Views\ThucTap\HoSoUngVien.cshtml" />
+    <Content Include="Views\ThucTap\Partial\__HoSoUngVien.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

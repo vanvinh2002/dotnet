@@ -1316,6 +1316,114 @@ namespace ProductAllTool.DataAccess
             }
         }
 
+        public static int TTUV_ADD(string userid, TTUVadd lst)
+        {
+            try
+            {
+                using (var con = new SqlConnection(strConnTT))
+                {
+                    con.Open();
+                    SqlCommand cmd = new SqlCommand("TTUV_ADD", con);
+                    cmd.CommandType = CommandType.StoredProcedure;
+
+                    cmd.Parameters.Add(new SqlParameter("Ten", lst.Ten));
+                    cmd.Parameters.Add(new SqlParameter("Ma", lst.Ma));
+                    cmd.Parameters.Add(new SqlParameter("SBD", lst.SBD));
+                    cmd.Parameters.Add(new SqlParameter("GioiTinh", lst.GioiTinh));
+                    cmd.Parameters.Add(new SqlParameter("TinhTrangHonNhan", lst.TinhTrangHonNhan));
+                    cmd.Parameters.Add(new SqlParameter("NgaySinh", lst.NgaySinh));
+                    cmd.Parameters.Add(new SqlParameter("NoiSinh", lst.NoiSinh));
+                    cmd.Parameters.Add(new SqlParameter("NguyenQuan", lst.NguyenQuan));
+                    cmd.Parameters.Add(new SqlParameter("QuocTich", lst.Quoctich));
+                    cmd.Parameters.Add(new SqlParameter("TonGiao", lst.TonGiao));
+                    cmd.Parameters.Add(new SqlParameter("TrinhDoVanHoa", lst.TrinhDoVanHoa));
+                    cmd.Parameters.Add(new SqlParameter("TrinhDoHocVan", lst.TrinhDoHocVan));
+                    cmd.Parameters.Add(new SqlParameter("TenThuongGoi", lst.TenThuongGoi));
+                    cmd.Parameters.Add(new SqlParameter("TenTiengHoa", lst.TenTiengHoa));
+                    cmd.Parameters.Add(new SqlParameter("SoCMND", lst.SoCMND));
+                    cmd.Parameters.Add(new SqlParameter("NgayCapCMND", lst.NgayCapCMND));
+                    cmd.Parameters.Add(new SqlParameter("NoiCapCMND", lst.NoiCapCMND));
+                    cmd.Parameters.Add(new SqlParameter("MST", lst.MST));
+                    cmd.Parameters.Add(new SqlParameter("NgayApDung", lst.NgayApDung));
+                    cmd.Parameters.Add(new SqlParameter("CoQuanQuanLy", lst.CoQuanQuanLy));
+                    cmd.Parameters.Add(new SqlParameter("SoHoChieu", lst.SoHoChieu));
+                    cmd.Parameters.Add(new SqlParameter("NoiCapSHC", lst.NoiCapSHC));
+                    cmd.Parameters.Add(new SqlParameter("NgayCapSHC", lst.NgayCapSHC));
+                    cmd.Parameters.Add(new SqlParameter("NgayHetHanSHC", lst.NgayHetHanSHC));
+                    cmd.Parameters.Add(new SqlParameter("SoCCCD", lst.SoCCCD));
+                    cmd.Parameters.Add(new SqlParameter("DTDD", lst.DTDD));
+                    cmd.Parameters.Add(new SqlParameter("DTDD2", lst.DTDD2));
+                    cmd.Parameters.Add(new SqlParameter("DTN", lst.DTN));
+                    cmd.Parameters.Add(new SqlParameter("Email", lst.Email));
+                    cmd.Parameters.Add(new SqlParameter("QuocgiaThuongTru", lst.QuocgiaThuongTru));
+                    cmd.Parameters.Add(new SqlParameter("TinhThanhThuongTru", lst.TinhThanhThuongTru));
+                    cmd.Parameters.Add(new SqlParameter("QuanHuyenThuongTru", lst.QuanHuyenThuongTru));
+                    cmd.Parameters.Add(new SqlParameter("PhuongXaThuongTru", lst.PhuongXaThuongTru));
+                    cmd.Parameters.Add(new SqlParameter("DiaChiThuongTru", lst.DiaChiThuongTru));
+                    cmd.Parameters.Add(new SqlParameter("QuocGiaCMND", lst.QuocGiaCMND));
+                    cmd.Parameters.Add(new SqlParameter("TinhThanhCMND", lst.TinhThanhCMND));
+                    cmd.Parameters.Add(new SqlParameter("QuanHuyenCMND", lst.QuanHuyenCMND));
+                    cmd.Parameters.Add(new SqlParameter("PhuongXaCMND", lst.PhuongXaCMND));
+                    cmd.Parameters.Add(new SqlParameter("DiaChiCMND", lst.DiaChiCMND));
+                    cmd.Parameters.Add(new SqlParameter("QuocGiaTamTru", lst.QuocGiaTamTru));
+                    cmd.Parameters.Add(new SqlParameter("TinhThanhTamTru", lst.TinhThanhTamTru));
+                    cmd.Parameters.Add(new SqlParameter("QuanHuyenTamTru", lst.QuanHuyenTamTru));
+                    cmd.Parameters.Add(new SqlParameter("PhuongXaTamTru", lst.PhuongXaTamTru));
+                    cmd.Parameters.Add(new SqlParameter("DiaChiTamTru", lst.DiaChiTamTru));
+                    cmd.Parameters.Add(new SqlParameter("TinhTrangSucKhoe", lst.TinhTrangSucKhoe));
+                    cmd.Parameters.Add(new SqlParameter("ChieuCao", lst.ChieuCao));
+                    cmd.Parameters.Add(new SqlParameter("CanNang", lst.CanNang));
+                    cmd.Parameters.Add(new SqlParameter("MatTrai", lst.MatTrai));
+                    cmd.Parameters.Add(new SqlParameter("MatPhai", lst.MatPhai));
+                    cmd.Parameters.Add(new SqlParameter("BenhLy", lst.BenhLy));
+                    cmd.Parameters.Add(new SqlParameter("HuyetAp", lst.HuyetAp));
+                    cmd.Parameters.Add(new SqlParameter("NhipTim", lst.NhipTim));
+                    cmd.Parameters.Add(new SqlParameter("SizeQuan", lst.SizeQuan));
+                    cmd.Parameters.Add(new SqlParameter("BangLaiXe", lst.BangLaiXe));
+                    
+
+                    var reader = cmd.ExecuteNonQuery();
+
+                    con.Close();
+
+                    return 1;
+                }
+            }
+            catch (Exception ex)
+            {
+                LogBuild.CreateLogger(JsonConvert.SerializeObject(ex), "TTUV_ADD");
+                return 0;
+            }
+        }
+
+        public static DataTable TTUV_GetDS(string userid,string Ma, int SBD)
+        {
+            DataSet ds = new DataSet();
+            try
+            {
+                using (var con = new SqlConnection(strConnTT))
+                {
+                    con.Open();
+                    SqlCommand cmd = new SqlCommand("TTUV_GetDS", con);
+                    cmd.CommandType = CommandType.StoredProcedure;
+                    cmd.CommandTimeout = 30000;
+                    cmd.Parameters.Add(new SqlParameter("userid", userid));
+                    cmd.Parameters.Add(new SqlParameter("Ma", Ma));
+                    cmd.Parameters.Add(new SqlParameter("SBD", SBD));
+                    using (SqlDataAdapter sda = new SqlDataAdapter(cmd))
+                    { sda.Fill(ds); }
+
+                    con.Close();
+                    return ds.Tables[0];
+                }
+            }
+            catch (Exception ex)
+            {
+                LogBuild.CreateLogger(JsonConvert.SerializeObject(ex), "TTUV_GetDS");
+                return ds.Tables[0];
+            }
+        }
+
         #endregion
 
         #region Xây dựng bộ sưu tập 

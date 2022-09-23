@@ -235,9 +235,37 @@ namespace ProductAllTool.Controllers
             }
         }
 
-       
 
+        [HttpPost]
+        public ActionResult TTUVADD(TTUVadd lst)
+        {
+            try
+            {
+                if (Session["uid"] != null && Session["uid"].ToString().Length > 0)
+                {
+                    DataAccess.DataAccessTT.TTUV_ADD(Session["uid"].ToString(), lst);
+                    return Json(1);
+                }
+                return RedirectToAction("Login", "Account");
+            }
+            catch (Exception ex)
+            {
+                LogBuild.CreateLogger(JsonConvert.SerializeObject(ex), "TTUVADD");
+                return Json(null);
+            }
+        }
 
+        public ActionResult TTUVGetDS( string Ma, string SBD)
+        {
+            if (Session["uid"] != null && Session["uid"].ToString().Length > 0)
+            {
+                DataTable table = DataAccess.DataAccessTT.TTUV_GetDS(Session["uid"].ToString(),Ma,Convert.ToInt32(SBD));
+
+                return PartialView("~/Views/ThucTap/Partial/__HoSoUngVien.cshtml", table);
+
+            }
+            return RedirectToAction("Login", "Account");
+        }
 
         #endregion
 

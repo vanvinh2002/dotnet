@@ -200,64 +200,66 @@
     }
 </style>
 
+
+
 <div class="col-md-12">
     <div class="tab box_loaihinh" id="content_LoaiHinh" style=" height: 35px; width: 100%">
         <button class="tablinks active Tab01" onclick="ActiveTab('Tab01')">Khai Báo  </button>
         <button class="tablinks Tab02" onclick="ActiveTab('Tab02')">Danh Sách </button>
     </div>
 </div>
-<div id="KhaiBao" class="tabcontent conten01" style="display:block;height:1000px">
+<div id="KhaiBao" class="tabcontent conten01" style="display:block;height:1500px">
             <div>
                 <h3>Thông Tin Cơ Bản</h3>
             </div>
             <div class="col-md-12">
                 <div class="col-md-1 c1">
-                    <label>Tên ứng viên </label>
+                    <label>Tên ứng viên</label>
                 </div>
                 <div class="col-md-1 c2" ">
-                    <input id="TenUV" type="text" class="form-control" value="  @ViewBag.listautocode" />
+                    <input id="TenUV" type="text" class="form-control" />
                 </div>
                 <div class="col-md-1 c3">
-                    <label>Tên gọi thường </label>
+                    <label>Tên gọi thường</label>
                 </div>
                 <div class="col-md-1 c4" ondblclick="$('#mien').val('').trigger('change')">
-                    <input id="TenGT" type="text" class="form-control" value="  @ViewBag.listautocode" />
+                    <input id="TenGT" type="text" class="form-control"  />
                 </div>
             </div>
             <div class="col-md-12">
                 <div class="col-md-1 c1">
-                    <label>Mã ứng viên </label>
+                    <label>Mã ứng viên</label>
                 </div>
                 <div class="col-md-1 c2" ondblclick="$('#MaUV').val('').trigger('change')">
-                    <input id="MaUV" type="text" class="form-control" value="  @ViewBag.listautocode" />
+                    <input id="MaUV" type="text" class="form-control"/>
                 </div>
                 <div class="col-md-1 c3">
-                    <label>Tên tiếng hoa </label>
+                    <label>Tên tiếng hoa</label>
                 </div>
                 <div class="col-md-1 c4">
-                <input id="TenTH" type="text" class="form-control" value="  @ViewBag.listautocode" />
+                <input id="TenTH" type="text" class="form-control"/>
             </div>
             </div>
             <div class="col-md-12">
                 <div class="col-md-1 c1">
-                    <label>Số báo danh  </label>
+                    <label>Số báo danh</label>
                 </div>
                 <div class="col-md-1 c2" ondblclick="$('#SBD').val('').trigger('change')">
-                    <input id="SBD" type="text" class="form-control" value="  @ViewBag.listautocode" />
+                    <input id="SBD" type="text" class="form-control"/>
                 </div>
                 <div class="col-md-1 c3">
-                    <label>Số CMND </label>
+                    <label>Số CMND</label>
                 </div>
                 <div class="col-md-1 c4">
-                    <input id="SCMND" type="text" class="form-control" value="  @ViewBag.listautocode" />
+                    <input id="SCMND" type="text" class="form-control"/>
                 </div>
             </div>
             <div class="col-md-12">
                 <div class="col-md-1 c1">
-                    <label>Giới tính </label>
+                    <label>Giới tính</label>
                 </div>
                 <div class="col-md-1 c2">
-                    <select id="GioiTinh" class="form-control selectpicker" data-live-search="true" onchange=" ">
+                    <select id="GioiTinh" class="form-control selectpicker" data-live-search="true">
                         <option value="">--- Chọn giới tính ---</option>
                         @if (ViewBag.list_test1 != null)
                         {
@@ -269,18 +271,18 @@
                     </select>
                 </div>
                 <div class="col-md-1 c3">
-                    <label>Ngày cấp CMND </label>
+                    <label>Ngày cấp CMND</label>
                 </div>
                 <div class="col-md-1 c4">
-                    <input id="NgayCap" type="date" class="form-control" placeholder="Date" value="  @ViewBag.listautocode" />
+                    <input id="NgayCap" type="date" class="form-control" placeholder="Date"/>
                 </div>
             </div>
             <div class="col-md-12">
                 <div class="col-md-1 c1">
-                    <label>Tình trạng hôn nhân  </label>
+                    <label>Tình trạng hôn nhân</label>
                 </div>
                 <div class="col-md-1 c2">
-                    <select id="TinhTrang" class="form-control selectpicker" data-live-search="true" onchange=" ">
+                    <select id="TinhTrang" class="form-control selectpicker" data-live-search="true">
                         <option value="">--- Chọn tình trạng hôn nhân ---</option>
                         @if (ViewBag.list_test2 != null)
                         {
@@ -292,108 +294,108 @@
                     </select>
                 </div>
                 <div class="col-md-1 c3">
-                    <label>Nơi cấp </label>
+                    <label>Nơi cấp</label>
                 </div>
                 <div class="col-md-1 c4">
-                    <input id="NoiCap" type="text" class="form-control" value="  @ViewBag.listautocode" />
+                    <input id="NoiCap" type="text" class="form-control"/>
                 </div>
             </div>
             <div class="col-md-12">
                 <div class="col-md-1 c1">
-                    <label>Ngày sinh </label>
+                    <label>Ngày sinh</label>
                 </div>
                 <div class="col-md-1 c2">
-                    <input id="NgaySinh" type="date" class="form-control" placeholder="Date" value="  @ViewBag.listautocode" />
+                    <input id="NgaySinh" type="date" class="form-control" placeholder="Date"/>
                 </div>
                 <div class="col-md-1 c3">
                     <label>MST </label>
                 </div>
                 <div class="col-md-1 c4">
-                    <input id="MST" type="text" class="form-control" value="  @ViewBag.listautocode" />
+                    <input id="MST" type="text" class="form-control"/>
                 </div>
             </div>
             <div class="col-md-12">
                 <div class="col-md-1 c1">
-                    <label>Nơi sinh </label>
+                    <label>Nơi sinh</label>
                 </div>
                 <div class="col-md-1 c2">
-                    <input id="NoiSinh" type="text" class="form-control" value="  @ViewBag.listautocode" />
+                    <input id="NoiSinh" type="text" class="form-control"/>
                 </div>
                 <div class="col-md-1 c3">
-                    <label>Ngày áp dụng </label>
+                    <label>Ngày áp dụng</label>
                 </div>
                 <div class="col-md-1 c4">
-                    <input id="NgayAD" type="date" class="form-control" placeholder="Date" value="  @ViewBag.listautocode" />
+                    <input id="NgayAD" type="date" class="form-control" placeholder="Date"/>
                 </div>
             </div>
             <div class="col-md-12">
                 <div class="col-md-1 c1">
-                    <label>Nguyên Quán </label>
+                    <label>Nguyên Quán</label>
                 </div>
                 <div class="col-md-1 c2">
-                    <input id="NguyenQuan" type="text" class="form-control" value="  @ViewBag.listautocode" />
+                    <input id="NguyenQuan" type="text" class="form-control"/>
                 </div>
                 <div class="col-md-1 c3">
-                    <label>Cơ quan quản lý </label>
+                    <label>Cơ quan quản lý</label>
                 </div>
                 <div class="col-md-1 c4">
-                    <input id="CQQL" type="text" class="form-control" value="  @ViewBag.listautocode" />
+                    <input id="CQQL" type="text" class="form-control"/>
                 </div>
             </div>
             <div class="col-md-12">
                 <div class="col-md-1 c1">
-                    <label>Quốc tịch </label>
+                    <label>Quốc tịch</label>
                 </div>
                 <div class="col-md-1 c2">
-                    <input id="QuocTich" type="text" class="form-control" value="  @ViewBag.listautocode" />
+                    <input id="QuocTich" type="text" class="form-control"/>
                 </div>
                 <div class="col-md-1 c3">
-                    <label>Số hộ chiếu  </label>
+                    <label>Số hộ chiếu </label>
                 </div>
                 <div class="col-md-1 c4">
-                    <input id="SHC" type="text" class="form-control" value="  @ViewBag.listautocode" />
+                    <input id="SHC" type="text" class="form-control"  />
                 </div>
             </div>
             <div class="col-md-12">
                 <div class="col-md-1 c1">
-                    <label>Tôn giáo  </label>
+                    <label>Tôn giáo</label>
                 </div>
                 <div class="col-md-1 c2">
-                    <input id="TonGiao" type="text" class="form-control" value="  @ViewBag.listautocode" />
+                    <input id="TonGiao" type="text" class="form-control"/>
                 </div>
                 <div class="col-md-1 c3">
-                    <label>Nơi Cấp </label>
+                    <label>Nơi Cấp</label>
                 </div>
                 <div class="col-md-1 c4">
-                    <input id="NoiCap1" type="text" class="form-control" value="  @ViewBag.listautocode" />
+                    <input id="NoiCap1" type="text" class="form-control"/>
                 </div>
             </div>
             <div class="col-md-12">
                 <div class="col-md-1 c1">
-                    <label>Trình độ văn hóa </label>
+                    <label>Trình độ văn hóa</label>
                 </div>
                 <div class="col-md-1 c2">
-                    <input id="TDVH" type="text" class="form-control" value="  @ViewBag.listautocode" />
+                    <input id="TDVH" type="text" class="form-control"/>
                 </div>
                 <div class="col-md-1 c3">
-                    <label>Ngày cấp </label>
+                    <label>Ngày cấp</label>
                 </div>
                 <div class="col-md-1 c4">
-                    <input id="NgayCap" type="date" class="form-control" placeholder="Date" value="  @ViewBag.listautocode" />
+                    <input id="NgayCap1" type="date" class="form-control" placeholder="Date"/>
                 </div>
             </div>
             <div class="col-md-12">
                 <div class="col-md-1 c1">
-                    <label>Trình học vấn </label>
+                    <label>Trình học vấn</label>
                 </div>
                 <div class="col-md-1 c2">
-                    <input id="TrinhHocVan" type="text" class="form-control" value="  @ViewBag.listautocode" />
+                    <input id="TrinhHocVan" type="text" class="form-control"/>
                 </div>
                 <div class="col-md-1 c3">
-                    <label>Ngày hết hạn </label>
+                    <label>Ngày hết hạn</label>
                 </div>
                 <div class="col-md-1 c4">
-                    <input id="NgayHetHan" type="date" class="form-control" placeholder="Date" value="  @ViewBag.listautocode" />
+                    <input id="NgayHetHan" type="date" class="form-control" placeholder="Date"/>
                 </div>
             </div>
             <div class="col-md-12">
@@ -403,10 +405,10 @@
                 <div class="col-md-1 c2">
                 </div>
                 <div class="col-md-1 c3">
-                    <label>Số thẻ căn cước </label>
+                    <label>Số thẻ căn cước</label>
                 </div>
                 <div class="col-md-1 c4">
-                    <input id="STCC" type="text" class="form-control" value="  @ViewBag.listautocode" />
+                    <input id="STCC" type="text" class="form-control"/>
                 </div>
             </div>
 
@@ -418,27 +420,27 @@
                     <label> Đt di động</label>
                 </div>
                 <div class="col-md-1 c2" ondblclick="$('#DTdiDong').val('').trigger('change')">
-                    <input id="DTdiDong" type="text" class="form-control" value="  @ViewBag.listautocode" />
+                    <input id="DTdiDong" type="text" class="form-control"/>
                 </div>
                 <div class="col-md-1 c3">
-                    <label>Đt di động 2 </label>
+                    <label>Đt di động 2</label>
                 </div>
                 <div class="col-md-1 c4" ondblclick="$('#DTdiDong2').val('').trigger('change')">
-                    <input id="DTdiDong2" type="text" class="form-control" value="  @ViewBag.listautocode" />
+                    <input id="DTdiDong2" type="text" class="form-control"/>
                 </div>
             </div>
             <div class="col-md-12">
                 <div class="col-md-1 c1">
-                    <label>Điện thoại nhà </label>
+                    <label>Điện thoại nhà</label>
                 </div>
                 <div class="col-md-1 c2">
-                    <input id="DTN" type="text" class="form-control" value="  @ViewBag.listautocode" />
+                    <input id="DTN" type="text" class="form-control"/>
                 </div>
                 <div class="col-md-1 c3">
                     <label>Email </label>
                 </div>
                 <div class="col-md-1 c4">
-                    <input id="Email" type="text" class="form-control" value="  @ViewBag.listautocode" />
+                    <input id="Email" type="text" class="form-control"/>
                 </div>
             </div>
             <div class="col-md-12">
@@ -451,24 +453,24 @@
             </div>
             <div class="col-md-12">
                 <div class="col-md-1 c1">
-                    <label>Quốc gia </label>
+                    <label>Quốc gia</label>
                 </div>
                 <div class="col-md-1 c2">
-                    <input id="quocgia" type="text" class="form-control" value="  @ViewBag.listautocode" />
+                    <input id="quocgia" type="text" class="form-control"/>
                 </div>
                 <div class="col-md-1 c3">
-                    <label>Quốc gia </label>
+                    <label>Quốc gia</label>
                 </div>
                 <div class="col-md-1 c4">
-                    <input id="quocgia1" type="text" class="form-control" value="  @ViewBag.listautocode" />
+                    <input id="quocgia2" type="text" class="form-control"/>
                 </div>
             </div>
             <div class="col-md-12">
                 <div class="col-md-1 c1">
-                    <label>Tỉnh thành </label>
+                    <label>Tỉnh thành</label>
                 </div>
                 <div class="col-md-1 c2">
-                    <select id="tinhthanh" class="form-control selectpicker" data-live-search="true" onchange=" ">
+                    <select id="tinhthanh" class="form-control selectpicker" data-live-search="true">
                         <option value="">--- Chọn tỉnh TP ---</option>
                         @if (ViewBag.list_test3 != null)
                         {
@@ -483,7 +485,7 @@
                     <label>Tỉnh thành </label>
                 </div>
                 <div class="col-md-1 c4">
-                    <select id="tinhthanh2" class="form-control selectpicker" data-live-search="true" onchange=" ">
+                    <select id="tinhthanh2" class="form-control selectpicker" data-live-search="true" >
                         <option value="">--- Chọn tỉnh TP ---</option>
                         @if (ViewBag.list_test4 != null)
                         {
@@ -497,10 +499,10 @@
             </div>
             <div class="col-md-12">
                 <div class="col-md-1 c1">
-                    <label>Quận huyện </label>
+                    <label>Quận huyện</label>
                 </div>
                 <div class="col-md-1 c2">
-                    <select id="quanhuyen" class="form-control selectpicker" data-live-search="true" onchange=" ">
+                    <select id="quanhuyen" class="form-control selectpicker" data-live-search="true">
                         <option value="">--- Chọn Quận/Huyện ---</option>
                         @if (ViewBag.list_test5 != null)
                         {
@@ -512,10 +514,10 @@
                     </select>
                 </div>
                 <div class="col-md-1 c3">
-                    <label>Quận huyện </label>
+                    <label>Quận huyện</label>
                 </div>
                 <div class="col-md-1 c4">
-                    <select id="quanhuyen2" class="form-control selectpicker" data-live-search="true" onchange=" ">
+                    <select id="quanhuyen2" class="form-control selectpicker" data-live-search="true">
                         <option value="">--- Chọn Quận/Huyện ---</option>
                         @if (ViewBag.list_test6 != null)
                         {
@@ -529,10 +531,10 @@
             </div>
             <div class="col-md-12">
                 <div class="col-md-1 c1">
-                    <label>Phường xã </label>
+                    <label>Phường xã</label>
                 </div>
                 <div class="col-md-1 c2">
-                    <select id="phuongxa" class="form-control selectpicker" data-live-search="true" onchange=" ">
+                    <select id="phuongxa" class="form-control selectpicker" data-live-search="true">
                         <option value="">--- Chọn Phường Xã ---</option>
                         @if (ViewBag.list_test7 != null)
                         {
@@ -544,10 +546,10 @@
                     </select>
                 </div>
                 <div class="col-md-1 c3">
-                    <label>Phường xã </label>
+                    <label>Phường xã</label>
                 </div>
                 <div class="col-md-1 c4">
-                    <select id="phuongxa2" class="form-control selectpicker" data-live-search="true" onchange=" ">
+                    <select id="phuongxa2" class="form-control selectpicker" data-live-search="true" >
                         <option value="">--- Chọn Phường/Xã ---</option>
                         @if (ViewBag.list_test8 != null)
                         {
@@ -561,16 +563,16 @@
             </div>
             <div class="col-md-12">
                 <div class="col-md-1 c1">
-                    <label>Địa chỉ thường trú </label>
+                    <label>Địa chỉ thường trú</label>
                 </div>
                 <div class="col-md-1 c2">
-                    <input id="diachiTT" type="text" class="form-control" value="  @ViewBag.listautocode" />
+                    <input id="diachiTT" type="text" class="form-control"/>
                 </div>
                 <div class="col-md-1 c3">
                     <label>Địa chỉ CMND </label>
                 </div>
                 <div class="col-md-1 c4">
-                    <input id="diachiCMND" type="text" class="form-control" value="  @ViewBag.listautocode" />
+                    <input id="diachiCMND" type="text" class="form-control"/>
                 </div>
             </div>
             <div>
@@ -581,20 +583,20 @@
                     <label>Quốc gia </label>
                 </div>
                 <div class="col-md-1 c2">
-                    <input id="quocgia" type="text" class="form-control" value="  @ViewBag.listautocode" />
+                    <input id="quocgia3" type="text" class="form-control"/>
                 </div>
                 <div class="col-md-1 c3">
-                    <label> </label>
+                    <label></label>
                 </div>
                 <div class="col-md-1 c4">
                 </div>
             </div>
             <div class="col-md-12">
                 <div class="col-md-1 c1">
-                    <label>Tỉnh thành </label>
+                    <label>Tỉnh thành</label>
                 </div>
                 <div class="col-md-1 c2">
-                    <select id="tinhthanh3" class="form-control selectpicker" data-live-search="true" onchange=" ">
+                    <select id="tinhthanh3" class="form-control selectpicker" data-live-search="true" >
                         <option value="">--- Chọn tỉnh TP ---</option>
                         @if (ViewBag.list_test9 != null)
                         {
@@ -613,10 +615,10 @@
             </div>
             <div class="col-md-12">
                 <div class="col-md-1 c1">
-                    <label>Quận huyện </label>
+                    <label>Quận huyện</label>
                 </div>
                 <div class="col-md-1 c2">
-                    <select id="quanhuyen3" class="form-control selectpicker" data-live-search="true" onchange=" ">
+                    <select id="quanhuyen3" class="form-control selectpicker" data-live-search="true">
                         <option value="">--- Chọn Quận/Huyện ---</option>
                         @if (ViewBag.list_test10 != null)
                         {
@@ -635,10 +637,10 @@
             </div>
             <div class="col-md-12">
                 <div class="col-md-1 c1">
-                    <label>Phường xã </label>
+                    <label>Phường xã</label>
                 </div>
                 <div class="col-md-1 c2">
-                    <select id="phuongxa3" class="form-control selectpicker" data-live-search="true" onchange=" ">
+                    <select id="phuongxa3" class="form-control selectpicker" data-live-search="true">
                         <option value="">--- Chọn Quận/Huyện ---</option>
                         @if (ViewBag.list_test11 != null)
                         {
@@ -657,10 +659,10 @@
             </div>
             <div class="col-md-12">
                 <div class="col-md-1 c1">
-                    <label>Địa chỉ tạm trú </label>
+                    <label>Địa chỉ tạm trú</label>
                 </div>
                 <div class="col-md-1 c2">
-                    <input id="diachiTT2" type="text" class="form-control" value="  @ViewBag.listautocode" />
+                    <input id="diachiTT2" type="text" class="form-control"/>
                 </div>
                 <div class="col-md-1 c3">
                     <label></label>
@@ -673,16 +675,16 @@
             </div>
             <div class="col-md-12">
                 <div class="col-md-1 c1">
-                    <label>Tình trạng sức khỏe </label>
+                    <label>Tình trạng sức khỏe</label>
                 </div>
                 <div class="col-md-1 c2">
-                    <input id="TTsuckhoe" type="text" class="form-control" value="  @ViewBag.listautocode" />
+                    <input id="TTsuckhoe" type="text" class="form-control"/>
                 </div>
                 <div class="col-md-1 c3">
                     <label>Huyết áp</label>
                 </div>
                 <div class="col-md-1 c4">
-                    <input id="huyetap" type="text" class="form-control" value="  @ViewBag.listautocode" />
+                    <input id="huyetap" type="text" class="form-control"/>
                 </div>
             </div>
             <div class="col-md-12">
@@ -690,13 +692,13 @@
                     <label>Chiều cao(cm) </label>
                 </div>
                 <div class="col-md-1 c2">
-                    <input id="chieucao" type="text" class="form-control" value="  @ViewBag.listautocode" />
+                    <input id="chieucao" type="text" class="form-control"/>
                 </div>
                 <div class="col-md-1 c3">
                     <label>Nhịp tim</label>
                 </div>
                 <div class="col-md-1 c4">
-                    <input id="nhiptim" type="text" class="form-control" value="  @ViewBag.listautocode" />
+                    <input id="nhiptim" type="text" class="form-control"/>
                 </div>
             </div>
             <div class="col-md-12">
@@ -704,13 +706,13 @@
                     <label>Cân nặng(kg) </label>
                 </div>
                 <div class="col-md-1 c2">
-                    <input id="" type="text" class="form-control" value="  @ViewBag.listautocode" />
-                </div>cannang
+                    <input id="cannang" type="text" class="form-control"/>
+                </div>
                 <div class="col-md-1 c3">
                     <label>Size quần </label>
                 </div>
                 <div class="col-md-1 c4">
-                    <input id="sizequan" type="text" class="form-control" value="  @ViewBag.listautocode" />
+                    <input id="sizequan" type="text" class="form-control"/>
                 </div>
             </div>
             <div class="col-md-12">
@@ -718,13 +720,13 @@
                     <label>Mắt trái </label>
                 </div>
                 <div class="col-md-1 c2">
-                    <input id="mattrai" type="text" class="form-control" value="  @ViewBag.listautocode" />
+                    <input id="mattrai" type="text" class="form-control"/>
                 </div>
                 <div class="col-md-1 c3">
                     <label>Bằng lái xe</label>
                 </div>
                 <div class="col-md-1 c4">
-                    <input id="banglaixe" type="text" class="form-control" value="  @ViewBag.listautocode" />
+                    <input id="banglaixe" type="text" class="form-control"/>
                 </div>
             </div>
             <div class="col-md-12">
@@ -732,7 +734,7 @@
                     <label>Mắt phải </label>
                 </div>
                 <div class="col-md-1 c2">
-                    <input id="matphai" type="text" class="form-control" value="  @ViewBag.listautocode" />
+                    <input id="matphai" type="text" class="form-control"/>
                 </div>
                 <div class="col-md-1 c3">
                     <label></label>
@@ -745,7 +747,7 @@
                     <label>Bệnh lý </label>
                 </div>
                 <div class="col-md-1 c2">
-                    <input id="benhly" type="text" class="form-control" value="  @ViewBag.listautocode" />
+                    <input id="benhly" type="text" class="form-control"/>
                 </div>
                 <div class="col-md-1 c3">
                     <label></label>
@@ -760,13 +762,33 @@
         </div>
   
 <div id="danhsach" class="tabcontent conten02" style="display:none;height:1000px">
-
+    <div class="col-md-12">
+        <div class="col-md-1 c1">
+            <label>Mã ứng viên </label>
+        </div>
+        <div class="col-md-1 c2" onclick="$('#Ma').val('').trigger('change')">
+            <input id="Ma" type="text" class="form-control"/>
+        </div>
+        <div class="col-md-1 c3">
+            <label>Số Báo Danh</label>
+        </div>
+        <div class="col-md-1 c2" onclick="$('#SBD1').val('').trigger('change')">
+            <input id="SBD1" type="text" class="form-control"/>
+        </div>
+        <div class="col-md-1 c5">
+            <a href="#" class="form-control btn btn-info" onclick="js_TTUV_GetDS()"><i class="fa fa-search" aria-hidden="true" style="margin-left: 6px;margin-top: 3px;"></i>Tìm kiếm</a>
+        </div>
     </div>
+                    <div class="col-md-12" id="div-content">
+                        @Html.Partial("~/Views/ThucTap/Partial/__HoSoUngVien.cshtml")
+                    </div>              
+ </div>
 <script type="text/javascript">
 
 
     $(function () {
         $('#txtHead').html("Khai Báo Thông Tin Hồ Sơ Ứng Viên");
+        js_TTUV_GetDS();
     });
     function js_ReloadTable() {
         $('#tbl_Item')
@@ -779,7 +801,7 @@
                 columnDefs: [
                 ],
                 "orderClasses": false,
-                "deferRender": true,
+                "deferRender": true,  
 
                 autoWidth: false,
                 bAutoWidth: false,
@@ -789,30 +811,31 @@
             });
     }
 
-        function ActiveTab(r) {
-            if (r == "Tab01") {
+    function ActiveTab(r) {
+        if (r == "Tab01") {
 
-                $('.conten02').hide();
-                $('.conten01').show();
+            $('.conten02').hide();
+            $('.conten01').show();
 
-                $('.Tab02').removeClass("active");
+            $('.Tab02').removeClass("active");
 
-                $('.conten01').removeClass("active");
-                $('.Tab01').addClass("active");
+            $('.conten01').removeClass("active");
+            $('.Tab01').addClass("active");
 
 
-            }
-            else if (r == "Tab02") {
-                $('.conten01').hide();
-                $('.conten02').show();
+        }
+        else if (r == "Tab02") {
+            $('.conten01').hide();
+            $('.conten02').show();
 
-                $('.Tab01').removeClass("active");
+            $('.Tab01').removeClass("active");
 
-                $('.conten02').removeClass("active");
-                $('.Tab02').addClass("active");
+            $('.conten02').removeClass("active");
+            $('.Tab02').addClass("active");
+            js_TTUV_GetDS();
 
-            }
-
+        }
+    }
             function js_TTUV_ADD() {
 
                 var add = {};
@@ -822,43 +845,43 @@
                 add.SBD = $('#SBD').val();
                 add.GioiTinh = $('#GioiTinh').val();
                 add.TinhTrangHonNhan = $('#TinhTrang').val();
-                add.NgaySinh = $('#GioiTinh').val();
-                add.NoiSinh = $('#ThuNhap').val();
-                add.NguyenQuan = $('#Usp').val();
-                add.QuocTich = $('#ThongDiep').val();
-                add.TonGiao = $('#imgLink').val();
-                add.TrinhDoVanHoa = $('#imgLink').val();
-                add.TrinhDoHocVan = $('#imgLink').val();
+                add.NgaySinh = $('#NgaySinh').val();
+                add.NoiSinh = $('#NoiSinh').val();
+                add.NguyenQuan = $('#NguyenQuan').val();
+                add.Quoctich = $('#QuocTich').val();
+                add.TonGiao = $('#TonGiao').val();
+                add.TrinhDoVanHoa = $('#TDVH').val();
+                add.TrinhDoHocVan = $('#TrinhHocVan').val();
                 add.TenThuongGoi = $('#TenGT').val();
                 add.TenTiengHoa = $('#TenTH').val();
                 add.SoCMND = $('#SCMND').val();
                 add.NgayCapCMND = $('#NgayCap').val();
-                add.NoiCapCMND = $('#imgLink').val();
-                add.MST = $('#imgLink').val();
-                add.NgayApDung = $('#imgLink').val();
-                add.CoQuanQuanLy = $('#imgLink').val();
-                add.SoHoChieu = $('#imgLink').val();
-                add.NoiCapSHC = $('#imgLink').val();
-                add.NgayCapSHC = $('#imgLink').val();
-                add.NgayHetHanSHC = $('#imgLink').val();
-                add.SoCCCD = $('#imgLink').val();
-                add.DTDD = $('#imgLink').val();
-                add.DTDD2 = $('#imgLink').val();
-                add.DTN = $('#imgLink').val();
-                add.Email = $('#imgLink').val();
-                add.QuocgiaThuongTru = $('#imgLink').val();
-                add.TinhThanhThuongTru  = $('#imgLink').val();
-                add.QuanHuyenThuongTru = $('#imgLink').val();
-                add.PhuongXaThuongTru = $('#imgLink').val();
-                add.DiaChiThuongTru = $('#imgLink').val();
-                add.QuocGiaCMND = $('#imgLink').val();
-                add.TinhThanhCMND = $('#imgLink').val();
-                add.QuanHuyenCMND = $('#imgLink').val();
-                add.PhuongXaCMND = $('#imgLink').val();
-                add.DiaChiCMND = $('#imgLink').val();
-                add.QuocGiaTamTru = $('#imgLink').val();
-                add.TinhThanhTamTru = $('#imgLink').val();
-                add.QuanHuyenTamTru = $('#imgLink').val();
+                add.NoiCapCMND = $('#NoiCap').val();
+                add.MST = $('#MST').val();
+                add.NgayApDung = $('#NgayAD').val();
+                add.CoQuanQuanLy = $('#CQQL').val();
+                add.SoHoChieu = $('#SHC').val();
+                add.NoiCapSHC = $('#NoiCap1').val();
+                add.NgayCapSHC = $('#NgayCap1').val();
+                add.NgayHetHanSHC = $('#NgayHetHan').val();
+                add.SoCCCD = $('#STCC').val();
+                add.DTDD = $('#DTdiDong').val();
+                add.DTDD2 = $('#DTdiDong2').val();
+                add.DTN = $('#DTN').val();
+                add.Email = $('#Email').val();
+                add.QuocgiaThuongTru = $('#quocgia').val();
+                add.TinhThanhThuongTru = $('#tinhthanh').val();
+                add.QuanHuyenThuongTru = $('#quanhuyen').val();
+                add.PhuongXaThuongTru = $('#phuongxa').val();
+                add.DiaChiThuongTru = $('#diachiTT').val();
+                add.QuocGiaCMND = $('#quocgia2').val();
+                add.TinhThanhCMND = $('#tinhthanh2').val();
+                add.QuanHuyenCMND = $('#quanhuyen2').val();
+                add.PhuongXaCMND = $('#phuongxa2').val();
+                add.DiaChiCMND = $('#diachiCMND').val();
+                add.QuocGiaTamTru = $('#quocgia3').val();
+                add.TinhThanhTamTru = $('#tinhthanh3').val();
+                add.QuanHuyenTamTru = $('#quanhuyen3').val();
                 add.PhuongXaTamTru = $('#phuongxa3').val();
                 add.DiaChiTamTru = $('#diachiTT2').val();
                 add.TinhTrangSucKhoe = $('#TTsuckhoe').val();
@@ -872,10 +895,10 @@
                 add.SizeQuan = $('#sizequan').val();
                 add.BangLaiXe = $('#banglaixe').val();
 
-
+                console.log(add)
                 $.ajax({
                     type: "POST",
-                    url: "/ThucTap/BSTAdd",
+                    url: "/ThucTap/TTUVADD",
                     data: JSON.stringify({ lst: add }),
                     contentType: "application/json; charset=utf-8",
                     beforeSend: function () {
@@ -884,8 +907,8 @@
 
                     success: function (data) {
                         if (data) {
-                            alert("Thêm thành công");
-                            /*js_XayBST();*/
+                            alert("Lưu thành công");
+                           
                         } else {
                             alert("Có lỗi xảy ra");
                         }
@@ -896,5 +919,87 @@
                     }
                 });
             }
+
+            function js_clearbox() {
+                $("#TenUV").val('').selectpicker("refresh");
+                $("#MaUV").val('').selectpicker("refresh");
+                $("#SBD").val('').selectpicker("refresh");
+                $("#GioiTinh").val('').selectpicker("refresh");
+                $("#TinhTrang").val('').selectpicker("refresh");
+                $("#NgaySinh").val('').selectpicker("refresh");
+                $("#NoiSinh").val('').selectpicker("refresh");
+                $("#NguyenQuan").val('').selectpicker("refresh");
+                $("#QuocTich").val('').selectpicker("refresh");
+                $("#TonGiao").val('').selectpicker("refresh");
+                $("#TDVH").val('').selectpicker("refresh");
+                $("#TrinhHocVan").val('').selectpicker("refresh");
+                $("#TenGT").val('').selectpicker("refresh");
+                $("#TenTH").val('').selectpicker("refresh");
+                $("#SCMND").val('').selectpicker("refresh");
+                $("#NgayCap").val('').selectpicker("refresh");
+                $("#NoiCap").val('').selectpicker("refresh");
+                $("#MST").val('').selectpicker("refresh");
+                $("#NgayAD").val('').selectpicker("refresh");
+                $("#CQQL").val('').selectpicker("refresh");
+                $("#SHC").val('').selectpicker("refresh");
+                $("#NoiCap1").val('').selectpicker("refresh");
+                $("#NgayCap1").val('').selectpicker("refresh");
+                $("#NgayHetHan").val('').selectpicker("refresh");
+                $("#STCC").val('').selectpicker("refresh");
+                $("#DTdiDong").val('').selectpicker("refresh");
+                $("#DTdiDong2").val('').selectpicker("refresh");
+                $("#DTN").val('').selectpicker("refresh");
+                $("#Email").val('').selectpicker("refresh");
+                $("#quocgia").val('').selectpicker("refresh");
+                $("#tinhthanh").val('').selectpicker("refresh");
+                $("#quanhuyen").val('').selectpicker("refresh");
+                $("#phuongxa").val('').selectpicker("refresh");
+                $("#diachiTT").val('').selectpicker("refresh");
+                $("#quocgia2").val('').selectpicker("refresh");
+                $("#tinhthanh2").val('').selectpicker("refresh");
+                $("#quanhuyen2").val('').selectpicker("refresh");
+                $("#phuongxa2").val('').selectpicker("refresh");
+                $("#diachiCMND").val('').selectpicker("refresh");
+                $("#quocgia3").val('').selectpicker("refresh");
+                $("#tinhthanh3").val('').selectpicker("refresh");
+                $("#quanhuyen3").val('').selectpicker("refresh");
+                $("#phuongxa3").val('').selectpicker("refresh");
+                $("#diachiTT2").val('').selectpicker("refresh");
+                $("#TTsuckhoe").val('').selectpicker("refresh");
+                $("#chieucao").val('').selectpicker("refresh");
+                $("#cannang").val('').selectpicker("refresh");
+                $("#mattrai").val('').selectpicker("refresh");
+                $("#matphai").val('').selectpicker("refresh");
+                $("#benhly").val('').selectpicker("refresh");
+                $("#huyetap").val('').selectpicker("refresh");
+                $("#nhiptim").val('').selectpicker("refresh");
+                $("#sizequan").val('').selectpicker("refresh");
+                $("#banglaixe").val('').selectpicker("refresh");
+     
+    }
+
+    function js_TTUV_GetDS() {
+
+        var Ma = $("Ma").val();
+        var SBD = $("SBD1").val();
+        $.ajax({
+
+            url: '/ThucTap/TTUVGetDS',
+            type: 'POST',
+            data: JSON.stringify({ Ma: Ma, SBD: SBD }),
+            contentType: 'application/json, charset=utf-8',
+            beforeSend: function () {
+                js_Loading(true, 1);
+            },
+            success: function (data) {
+                $('#div-content').html(data);
+                js_ReloadTable();
+                js_Loading(false, 1);
+            },
+            error: function () {
+                js_Loading(false, 1);
+            }
+        });
+    }
 
 </script>
