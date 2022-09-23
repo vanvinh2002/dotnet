@@ -1327,6 +1327,32 @@ namespace ProductAllTool.DataAccess
                 return 0;
             }
         }
+        public static int Test_SETTT(string userid, int ID)
+        {
+            DataSet ds = new DataSet();
+            try
+            {
+                using (var con = new SqlConnection(strConntt))
+                {
+                    con.Open();
+                    SqlCommand cmd = new SqlCommand("Test_SETTT", con);
+                    cmd.CommandType = CommandType.StoredProcedure;
+                    cmd.CommandTimeout = 3000;
+                    cmd.Parameters.Add(new SqlParameter("userid", userid));
+                    cmd.Parameters.Add(new SqlParameter("ID", ID));
+
+                    cmd.ExecuteNonQuery();
+
+                    con.Close();
+                    return 1;
+                }
+            }
+            catch (Exception ex)
+            {
+                LogBuild.CreateLogger(JsonConvert.SerializeObject(ex), "Test_SETTT");
+                return 0;
+            }
+        }
         #endregion
 
     }

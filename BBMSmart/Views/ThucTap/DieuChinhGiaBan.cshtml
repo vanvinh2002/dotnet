@@ -205,7 +205,7 @@
 
 </div>
 
-<div id="DieuChinhGia" class="tabcontent conten01" style="display:block;height:1000px;" >
+<div id="DieuChinhGia" class="tabcontent conten01" style="display:block;height:2000px;">
     <div class="col-md-12" style="width: 100%; display: flex; margin-top: 20px;">
         <div class="col-md-1" style="width:20%;padding:0px">
             <label>Category</label>
@@ -273,7 +273,24 @@
             </select>
         </div>
         <div class="col-md-1" style="width:20%;padding:0px 10px">
-            <a style="max-width: 280px;text-align: center;" href="#" class="form-control btn btn-info" onclick="js_approve()">Gửi Đề Xuất</a>
+            <a style="max-width: 280px;text-align: center;" href="#" class="form-control btn btn-info"data-toggle="modal" data-target="#myModal1" >Gửi Đề Xuất</a>
+            <div class="modal fade" id="myModal1" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                            <h4 class="modal-title" id="myModalLabel">Xác Nhận</h4>
+                        </div>
+                        <div class="modal-body">
+                            Bạn có chắc chắn muốn gửi Duyệt
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-default" data-dismiss="modal">Hủy</button>
+                            <button type="button" class="btn btn-primary" onclick="js_approve()">Xác Nhận</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 
@@ -315,7 +332,7 @@
             </select>
         </div>
         <div class="col-md-1" style="width:20%;padding:0px 10px">
-            <a style="max-width: 280px;text-align: center;" href="#" class="form-control btn btn-info"><i class="fa fa-hand-point-right" aria-hidden="true" style="margin-top: 3px;"></i>Tìm Kiếm &nbsp;&nbsp;&nbsp;&nbsp;</a>
+            <a style="max-width: 280px;text-align: center;" href="#" class="form-control btn btn-info" >Tìm Kiếm </a>
         </div>
     </div>
     <div class="col-md-12" style="width: 100%; display: flex; margin-top: 20px;">
@@ -350,15 +367,33 @@
             </select>
         </div>
         <div class="col-md-1" style="width:20%;padding:0px 10px">
-            <a style="max-width: 280px;text-align: center;" href="#" class="form-control btn btn-info">Duyệt</a>
+            <a style="max-width: 280px;text-align: center;" href="#" class="form-control btn btn-info" data-toggle="modal" data-target="#myModal">Duyệt</a>
+            <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                            <h4 class="modal-title" id="myModalLabel">Xác Nhận</h4>
+                        </div>
+                        <div class="modal-body">
+                            Bạn có chắc chắn muốn Duyệt
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-default" data-dismiss="modal">Hủy</button>
+                            <button type="button" class="btn btn-primary"  onclick="js_DuyetBang()">Xác Nhận</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
-    
+
     <div class="col-md-12" id="div-content1" style="margin-top:20px">
         @Html.Partial("~/Views/ThucTap/Partial/_DuyetDieuChinhGia.cshtml")
     </div>
 
 </div>
+
 
 
 
@@ -380,9 +415,10 @@
                 order: [[0, "desc"]],
                 "pageLength": 30
             });
+
     }
     function js_ReloadTable1() {
-        $('#tbl_Item1')
+        $('#tbl_Item_1')
             .DataTable({
                 lengthMenu: [[5, 10, 50, 70, 100, -1], [5, 10, 50, 70, 100]],
                 columnDefs: [],
@@ -399,7 +435,7 @@
 
             $('.conten02').hide();
             $('.conten01').show();
-           
+
 
             $('.Tab02').removeClass("active");
             $('.conten01').removeClass("active");
@@ -469,6 +505,7 @@
         });
     }
 
+
     function js_approve() {
         // debugger;
 
@@ -492,6 +529,7 @@
 
         if (arrCheckbox.length == 0) {
             alert("Vui lòng chọn ít nhất 1 bản ghi.");
+            $('#myModal1').modal('hide');
             return;
         }
         console.log('2');
@@ -508,7 +546,7 @@
                 success: function (data) {
                     if (data == 1) {
                         alert("Điều chỉnh thành công");
-                        $('#Detail_modal').modal('hide');
+                        $('#myModal1').modal('hide');
                         js_GetListtt1();
                         js_Loading(false, 1);
                     }
@@ -521,6 +559,53 @@
         }
 
     }
+    function js_DuyetBang() {
+        var cboxes1 = document.getElementsByName('check1[]');
+        var arrCheckbox = [];
+        var i = 0;
+        for (var i = 0; i < cboxes1.length; i++) {
+            if (cboxes1[i].checked) {
+                var dc = {};
+                dc.ID = cboxes1[i].value;
+                console.log(dc);
+                arrCheckbox.push(dc);
+            }
+        }
+        console.log('1');
 
+        console.log(arrCheckbox);
+
+        if (arrCheckbox.length == 0) {
+            alert("Vui lòng chọn ít nhất 1 bản ghi.");
+            $('#myModal').modal('hide');
+            return;
+        }
+        console.log('2');
+
+        if (arrCheckbox.length > 0) {
+            $.ajax({
+                url: '/ThucTap/DuyetBang',
+                type: 'POST',
+                data: JSON.stringify({ lst1: arrCheckbox }),
+                contentType: 'application/json, charset=utf-8',
+                beforeSend: function () {
+                    js_Loading(true, 1);
+                },
+                success: function (data) {
+                    if (data == 1) {
+                        alert("Duyệt thành công");
+                        $('#myModal').modal('hide');
+                        js_GetListtt2();
+                        js_Loading(false, 1);
+                    }
+                },
+                error: function () {
+                    js_Loading(false, 1);
+                }
+
+            });
+        }
+
+    }
 </script>
 

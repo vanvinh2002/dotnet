@@ -293,6 +293,28 @@ namespace ProductAllTool.Controllers
             }
         }
 
+        [HttpPost]
+        public ActionResult DuyetBang(List<setDuyet> lst1)
+        {
+            try
+            {
+                if (Session["uid"] != null && Session["uid"].ToString().Length > 0)
+                {
+                    foreach (setDuyet po in lst1)
+                    {
+                        DataAccess.DataAccessTT.Test_SETTT(Session["uid"].ToString(), po.ID);
+                    }
+                    return Json(1);
+                }
+                return RedirectToAction("Login", "Account");
+            }
+            catch (Exception ex)
+            {
+                LogBuild.CreateLogger(JsonConvert.SerializeObject(ex), "DuyetBang");
+                return Json(null);
+            }
+        }
+
         #endregion
 
 

@@ -6,7 +6,7 @@
 }
 <link href="~/Resource/Content/css/thickbox.css" rel="stylesheet" />
 <script src="~/Resource/Scripts/thickbox.js"></script>
-<table id="tbl_Item1" class="table table-bordered" style="width:99.9%">
+<table id="tbl_Item_1" class="table table-bordered" style="width:99.9%">
     <thead>
         <tr>
             <th class="text-left " style="vertical-align: top">
@@ -73,16 +73,16 @@
                                 @item["price"]
                             </td>
                             <td class="text-left" style="width: 40px;">
-                                <input type="text" id="GDC_@i" value="@item["GDC"]" />
+                                @item["GDC"]
                             </td>
                             <td class="text-left" style="max-width: 40px;">
-                                <input type="text" id="GKS_@i" value="@item["GKS"]" />
+                                @item["GKS"]
                             </td>
                             <td class="text-left" style="max-width: 20px;">
-                                <input type="date" id="NgayApDung_@i" value="@item["NgayApDung"]" />
+                                @item["NgayApDung"]
                             </td>
                             <td class="text-left"style="width: 10px;">
-                                <input id="_@i" class="text-center" name="check[]" type="checkbox"value="@item["ID"]"/>
+                                <input id="_@i" class="text-center" name="check1[]" type="checkbox"value="@item["ID"]"/>
                             </td>
 
 
@@ -98,13 +98,13 @@
     </table>
 <script>
     function checkall() {
-        var cboxes = document.getElementsByName('check[]');
-        for (var i = 0; i < cboxes.length; i++) {
+        var cboxes1 = document.getElementsByName('check1[]');
+        for (var i = 0; i < cboxes1.length; i++) {
             if ($('#checkall').is(":checked")) {
-                cboxes[i].checked = true;
+                cboxes1[i].checked = true;
             }
             else {
-                cboxes[i].checked = false;
+                cboxes1[i].checked = false;
             }
         }
     }

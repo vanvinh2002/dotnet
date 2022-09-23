@@ -133,6 +133,10 @@ namespace ProductAllTool.Models.HRM
         public int ID { set; get; }
         public string LyDo { set; get; }
     }
+    public class setDuyet
+    {
+        public int ID { set; get; }
+    }
     public class updatestatus
     {
         public int ID { set; get; }
