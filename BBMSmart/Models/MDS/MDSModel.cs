@@ -23,17 +23,17 @@ namespace ProductAllTool.Models.MDS
         public string NguonNhap { get; set; }
         public string XuatXu { get; set; }
         public string DVT { get; set; }
-        public string TrongLuong { get; set; }
-        public string Cao { get; set; }
-        public string Rong { get; set; }
-        public string Sau { get; set; }
-        public string CaoHop { get; set; }
-        public string RongHop { get; set; }
-        public string SauHop { get; set; }
+        public decimal TrongLuong { get; set; }
+        public decimal Cao { get; set; }
+        public decimal Rong { get; set; }
+        public decimal Sau { get; set; }
+        public decimal CaoHop { get; set; }
+        public decimal RongHop { get; set; }
+        public decimal SauHop { get; set; }
         public string GiaMua1 { get; set; }
         public string Line { get; set; }
         public string VAT { get; set; }
-        public string GiaMua2 { get; set; }
+        public decimal GiaMua2 { get; set; }
         public string GiaNY { get; set; }
     }
 

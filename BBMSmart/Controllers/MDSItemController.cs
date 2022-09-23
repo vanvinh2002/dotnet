@@ -55,16 +55,16 @@ namespace ProductAllTool.Controllers
             }
             else
             {
-                SystemFunctions.SaveSession("GDMobile", "LayoutMobileTT3");
+                SystemFunctions.SaveSession("MDSItem", "MDSItem");
                 return RedirectToAction("Login", "Account");
             }
         }
 
-        public ActionResult GetTableDSItem(string NCC, string TenSP)
+        public ActionResult GetTableDSItem(string NCC2, string TenSP2)
         {
             if (Session["uid"] != null && Session["uid"].ToString().Length > 0)
             {
-                DataTable table = DataAccess.DataAccessMDSItem.MDS_GetTblDSItem(Session["uid"].ToString(), NCC, TenSP);
+                DataTable table = DataAccess.DataAccessMDSItem.MDS_GetTblDSItem(Session["uid"].ToString(), NCC2, TenSP2);
 
                 return PartialView("~/Views/MDSItem/Tables/__tbl_dsitem.cshtml", table);
             }

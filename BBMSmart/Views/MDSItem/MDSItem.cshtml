@@ -202,7 +202,7 @@
         <button class="tablinks Tab03" onclick="ActiveTab('Tab03')">Duyệt danh sách item mới</button>
     </div>
 </div>
-<div id="Tab01" class="tabcontent conten01" style="display:block;height:1000px">
+<div id="Tab01" class="tabcontent conten01" style="display:block;height:1200px">
     <div class="col-md-12" style="width:100%;display:flex;">
         <div class="col-md-6" style="width:20%;padding:0px">
             <h3>THÔNG TIN HÀNG HÓA - DỊCH VỤ</h3>
@@ -220,13 +220,23 @@
             <label>Nhà cung cấp</label>
         </div>
         <div class="col-md-6" style="width:30%;padding:0;" ondblclick="$('#DenNgay').val('').trigger('change')">
-            <input id="NCC" type="text" class="form-control" placeholder="Text ..." style="width:250px;max-width:100% !important;" onchange=";" />
+            <input id="NCC" type="text" class="form-control" value="4" style="width:250px;max-width:100% !important;" onchange=";" />
+            @*<select id="NCC" class="form-control selectpicker" data-live-search="true" onchange="js_GetTableDSItem();">
+                    <option value="">NCC</option>
+                    @if (ViewBag.MDS_cboNCC != null)
+                    {
+                        foreach (objCombox box in (List<objCombox>)ViewBag.MDS_cboNCC)
+                        {
+                            <option value="@box.Code">@box.Name</option>
+                        }
+                    }
+                </select>*@
         </div>
         <div class="col-md-6" style="width:20%;padding:0px">
-            <label>Tên sản phẩm</label>
+            <label>Link sản phẩm</label>
         </div>
         <div class="col-md-6" style="width:30%;padding:0;" ondblclick="$('#DenNgay').val('').trigger('change')">
-            <input id="Link" type="text" class="form-control" placeholder="Text ..." style="width:250px;max-width:100% !important;" onchange=";" />
+            <input id="Link" type="text" class="form-control" value="4" style="width:250px;max-width:100% !important;" onchange=";" />
         </div>
     </div>
     <div class="col-md-12">
@@ -234,13 +244,13 @@
             <label>Tên sản phẩm</label>
         </div>
         <div class="col-md-6" style="width:30%;padding:0;" ondblclick="$('#DenNgay').val('').trigger('change')">
-            <input id="TenSP" type="text" class="form-control" placeholder="Text ..." style="width:250px;max-width:100% !important;" onchange="" />
+            <input id="TenSP" type="text" class="form-control" value="4" style="width:250px;max-width:100% !important;" onchange="" />
         </div>
         <div class="col-md-6" style="width:20%;padding:0px">
             <label>Mô tả</label>
         </div>
         <div class="col-md-6" style="width:30%;padding:0;" ondblclick="$('#DenNgay').val('').trigger('change')">
-            <input id="DenNgay" type="text" class="form-control" placeholder="Text ..." style="width:250px;max-width:100% !important;" onchange="" />
+            <input id="DenNgay" type="text" class="form-control" value="4" style="width:250px;max-width:100% !important;" onchange="" />
         </div>
     </div>
     <div class="col-md-12">
@@ -248,7 +258,7 @@
             <label>Barcode</label>
         </div>
         <div class="col-md-6" style="width:30%;padding:0;" ondblclick="$('#DenNgay').val('').trigger('change')">
-            <input id="Barcode" type="text" class="form-control" placeholder="Text ..." style="width:250px;max-width:100% !important;" onchange="" />
+            <input id="Barcode" type="text" class="form-control" value="4" style="width:250px;max-width:100% !important;" onchange="" />
         </div>
     </div>
     <div class="col-md-12">
@@ -256,7 +266,7 @@
             <label>Function</label>
         </div>
         <div class="col-md-6" style="width:30%;padding:0;" ondblclick="$('#DenNgay').val('').trigger('change')">
-            <input id="Func" type="text" class="form-control" placeholder="Text ..." style="width:250px;max-width:100% !important;" onchange="" />
+            <input id="Func" type="text" class="form-control" value="4" style="width:250px;max-width:100% !important;" onchange="" />
         </div>
     </div>
     <div class="col-md-12">
@@ -264,7 +274,7 @@
             <label>Division ERP</label>
         </div>
         <div class="col-md-6" style="width:30%;padding:0;" ondblclick="$('#DenNgay').val('').trigger('change')">
-            <input id="DivE" type="text" class="form-control" placeholder="Text ..." style="width:250px;max-width:100% !important;" onchange="" />
+            <input id="DivE" type="text" class="form-control" value="4" style="width:250px;max-width:100% !important;" onchange="" />
         </div>
     </div>
     <div class="col-md-12">
@@ -272,7 +282,7 @@
             <label>Category ERP</label>
         </div>
         <div class="col-md-6" style="width:30%;padding:0;" ondblclick="$('#DenNgay').val('').trigger('change')">
-            <input id="CatE" type="text" class="form-control" placeholder="Text ..." style="width:250px;max-width:100% !important;" onchange="" />
+            <input id="CatE" type="text" class="form-control" value="4" style="width:250px;max-width:100% !important;" onchange="" />
         </div>
     </div>
     <div class="col-md-12">
@@ -280,7 +290,7 @@
             <label>Group ERP</label>
         </div>
         <div class="col-md-6" style="width:30%;padding:0;" ondblclick="$('#DenNgay').val('').trigger('change')">
-            <input id="GroE" type="text" class="form-control" placeholder="Text ..." style="width:250px;max-width:100% !important;" onchange="" />
+            <input id="GroE" type="text" class="form-control" value="4" style="width:250px;max-width:100% !important;" onchange="" />
         </div>
     </div>
     <div class="col-md-12">
@@ -288,7 +298,7 @@
             <label>Division 18</label>
         </div>
         <div class="col-md-6" style="width:30%;padding:0;" ondblclick="$('#DenNgay').val('').trigger('change')">
-            <input id="Div18" type="text" class="form-control" placeholder="Text ..." style="width:250px;max-width:100% !important;" onchange="" />
+            <input id="Div18" type="text" class="form-control" value="4" style="width:250px;max-width:100% !important;" onchange="" />
         </div>
     </div>
     <div class="col-md-12">
@@ -296,7 +306,7 @@
             <label>Category 18</label>
         </div>
         <div class="col-md-6" style="width:30%;padding:0;" ondblclick="$('#DenNgay').val('').trigger('change')">
-            <input id="Cat18" type="text" class="form-control" placeholder="Text ..." style="width:250px;max-width:100% !important;" onchange="" />
+            <input id="Cat18" type="text" class="form-control" value="4" style="width:250px;max-width:100% !important;" onchange="" />
         </div>
     </div>
     <div class="col-md-12">
@@ -304,7 +314,7 @@
             <label>Group 18</label>
         </div>
         <div class="col-md-6" style="width:30%;padding:0;" ondblclick="$('#DenNgay').val('').trigger('change')">
-            <input id="Gro18" type="text" class="form-control" placeholder="Text ..." style="width:250px;max-width:100% !important;" onchange="" />
+            <input id="Gro18" type="text" class="form-control" value="4" style="width:250px;max-width:100% !important;" onchange="" />
         </div>
     </div>
     <div class="col-md-12">
@@ -312,7 +322,7 @@
             <label>HH/KG</label>
         </div>
         <div class="col-md-6" style="width:30%;padding:0;" ondblclick="$('#DenNgay').val('').trigger('change')">
-            <input id="HH" type="text" class="form-control" placeholder="Text ..." style="width:250px;max-width:100% !important;" onchange="" />
+            <input id="HH" type="text" class="form-control" value="4" style="width:250px;max-width:100% !important;" onchange="" />
         </div>
     </div>
     <div class="col-md-12">
@@ -320,7 +330,7 @@
             <label>Màu vụ</label>
         </div>
         <div class="col-md-6" style="width:30%;padding:0;" ondblclick="$('#DenNgay').val('').trigger('change')">
-            <input id="MuaVu" type="text" class="form-control" placeholder="Text ..." style="width:250px;max-width:100% !important;" onchange="" />
+            <input id="MuaVu" type="text" class="form-control" value="4" style="width:250px;max-width:100% !important;" onchange="" />
         </div>
     </div>
     <div class="col-md-12">
@@ -328,7 +338,7 @@
             <label>Thương hiệu</label>
         </div>
         <div class="col-md-6" style="width:30%;padding:0;" ondblclick="$('#DenNgay').val('').trigger('change')">
-            <input id="ThuongHieu" type="text" class="form-control" placeholder="Text ..." style="width:250px;max-width:100% !important;" onchange="" />
+            <input id="ThuongHieu" type="text" class="form-control" value="4" style="width:250px;max-width:100% !important;" onchange="" />
         </div>
     </div>
     <div class="col-md-12">
@@ -336,7 +346,7 @@
             <label>nguồn nhập</label>
         </div>
         <div class="col-md-6" style="width:30%;padding:0;" ondblclick="$('#DenNgay').val('').trigger('change')">
-            <input id="NguonNhap" type="text" class="form-control" placeholder="Text ..." style="width:250px;max-width:100% !important;" onchange="" />
+            <input id="NguonNhap" type="text" class="form-control" value="4" style="width:250px;max-width:100% !important;" onchange="" />
         </div>
     </div>
     <div class="col-md-12">
@@ -344,7 +354,7 @@
             <label>Xuất sứ</label>
         </div>
         <div class="col-md-6" style="width:30%;padding:0;" ondblclick="$('#DenNgay').val('').trigger('change')">
-            <input id="XuatXu" type="text" class="form-control" placeholder="Text ..." style="width:250px;max-width:100% !important;" onchange="" />
+            <input id="XuatXu" type="text" class="form-control" value="4" style="width:250px;max-width:100% !important;" onchange="" />
         </div>
     </div>
     <div class="col-md-12">
@@ -352,7 +362,7 @@
             <label>Đơn vị tính</label>
         </div>
         <div class="col-md-6" style="width:30%;padding:0;" ondblclick="$('#DenNgay').val('').trigger('change')">
-            <input id="DVT" type="text" class="form-control" placeholder="Text ..." style="width:250px;max-width:100% !important;" onchange="" />
+            <input id="DVT" type="text" class="form-control" value="4" style="width:250px;max-width:100% !important;" onchange="" />
         </div>
     </div>
     <div class="col-md-12">
@@ -360,7 +370,7 @@
             <label>Trọng lượng(gram)</label>
         </div>
         <div class="col-md-6" style="width:30%;padding:0;" ondblclick="$('#DenNgay').val('').trigger('change')">
-            <input id="TrongLuong" type="text" class="form-control" placeholder="Text ..." style="width:250px;max-width:100% !important;" onchange="" />
+            <input id="TrongLuong" type="text" class="form-control" value="4" style="width:250px;max-width:100% !important;" onchange="" />
         </div>
     </div>
     <div class="col-md-12" style="width:100%;display:flex;">
@@ -368,13 +378,13 @@
             <label>Kích thước</label>
         </div>
         <div class="col-md-6" style="width:30%;padding:0;" ondblclick="$('#DenNgay').val('').trigger('change')">
-            <input id="Cao" type="text" class="form-control" placeholder="Text ..." style="width:250px;max-width:100% !important;" onchange="" />
+            <input id="Cao" type="text" class="form-control" value="4" style="width:250px;max-width:100% !important;" onchange="" />
         </div>
         <div class="col-md-6" style="width:30%;padding:0;" ondblclick="$('#DenNgay').val('').trigger('change')">
-            <input id="Rong" type="text" class="form-control" placeholder="Text ..." style="width:250px;max-width:100% !important;" onchange="" />
+            <input id="Rong" type="text" class="form-control" value="4" style="width:250px;max-width:100% !important;" onchange="" />
         </div>
         <div class="col-md-6" style="width:30%;padding:0;" ondblclick="$('#DenNgay').val('').trigger('change')">
-            <input id="Sau" type="text" class="form-control" placeholder="Text ..." style="width:250px;max-width:100% !important;" onchange="" />
+            <input id="Sau" type="text" class="form-control" value="4" style="width:250px;max-width:100% !important;" onchange="" />
         </div>
     </div>
     <div class="col-md-12" style="width:100%;display:flex;">
@@ -382,14 +392,14 @@
             <label>Quy cách đóng gói</label>
         </div>
         <div class="col-md-6" style="width:30%;padding:0;" ondblclick="$('#DenNgay').val('').trigger('change')">
-            <input id="CaoHop" type="text" class="form-control" placeholder="Text ..." style="width:250px;max-width:100% !important;" onchange="" />
+            <input id="CaoHop" type="text" class="form-control" value="4" style="width:250px;max-width:100% !important;" onchange="" />
         </div>
 
         <div class="col-md-6" style="width:30%;padding:0;" ondblclick="$('#DenNgay').val('').trigger('change')">
-            <input id="RongHop" type="text" class="form-control" placeholder="Text ..." style="width:250px;max-width:100% !important;" onchange="" />
+            <input id="RongHop" type="text" class="form-control" value="4" style="width:250px;max-width:100% !important;" onchange="" />
         </div>
         <div class="col-md-6" style="width:30%;padding:0;" ondblclick="$('#DenNgay').val('').trigger('change')">
-            <input id="SauHop" type="text" class="form-control" placeholder="Text ..." style="width:250px;max-width:100% !important;" onchange="" />
+            <input id="SauHop" type="text" class="form-control" value="4" style="width:250px;max-width:100% !important;" onchange="" />
         </div>
     </div>
     @*<div class="col-md-12" style="width:100%;display:flex;">
@@ -397,13 +407,13 @@
                 <label>Kích thước</label>
             </div>
             <div class="col-md-3" style="width:30%;padding:0;" ondblclick="$('#DenNgay').val('').trigger('change')">
-                <input id="DenNgay" type="text" class="form-control" placeholder="Text ..." style="width:250px;max-width:100% !important;" onchange="();" />
+                <input id="DenNgay" type="text" class="form-control" value="4" style="width:250px;max-width:100% !important;" onchange="();" />
             </div>
             <div class="col-md-3" style="width:30%;padding:0;" ondblclick="$('#DenNgay').val('').trigger('change')">
-                <input id="DenNgay" type="text" class="form-control" placeholder="Text ..." style="width:250px;max-width:100% !important;" onchange="();" />
+                <input id="DenNgay" type="text" class="form-control" value="4" style="width:250px;max-width:100% !important;" onchange="();" />
             </div>
             <div class="col-md-3" style="width:30%;padding:0;" ondblclick="$('#DenNgay').val('').trigger('change')">
-                <input id="DenNgay" type="text" class="form-control" placeholder="Text ..." style="width:250px;max-width:100% !important;" onchange="();" />
+                <input id="DenNgay" type="text" class="form-control" value="4" style="width:250px;max-width:100% !important;" onchange="();" />
             </div>
         </div>*@
     <hr>
@@ -417,7 +427,7 @@
             <label>Giá mua(-VAT)</label>
         </div>
         <div class="col-md-3" style="width:30%;padding:0;" ondblclick="$('#DenNgay').val('').trigger('change')">
-            <input id="GiaMua1" type="text" class="form-control" placeholder="Text ..." style="width:250px;max-width:100% !important;" onchange="" />
+            <input id="GiaMua1" type="text" class="form-control" value="4" style="width:250px;max-width:100% !important;" onchange="" />
         </div>
     </div>
     <div class="col-md-12" style="width:100%;display:flex;">
@@ -425,7 +435,7 @@
             <label>Line Discount(%)</label>
         </div>
         <div class="col-md-3" style="width:30%;padding:0;" ondblclick="$('#DenNgay').val('').trigger('change')">
-            <input id="Line" type="text" class="form-control" placeholder="Text ..." style="width:250px;max-width:100% !important;" onchange="" />
+            <input id="Line" type="text" class="form-control" value="4" style="width:250px;max-width:100% !important;" onchange="" />
         </div>
     </div>
     <div class="col-md-12">
@@ -433,7 +443,7 @@
             <label>HH/KG</label>
         </div>
         <div class="col-md-6" style="width:30%;padding:0;" ondblclick="$('#DenNgay').val('').trigger('change')">
-            <input id="VAT" type="text" class="form-control" placeholder="Text ..." style="width:250px;max-width:100% !important;" onchange="" />
+            <input id="VAT" type="text" class="form-control" value="4" style="width:250px;max-width:100% !important;" onchange="" />
         </div>
     </div>
     <div class="col-md-12" style="width:100%;display:flex;">
@@ -441,7 +451,7 @@
             <label>Giá mua(+VAT)</label>
         </div>
         <div class="col-md-3" style="width:30%;padding:0;" ondblclick="$('#DenNgay').val('').trigger('change')">
-            <input id="GiaMua2" type="text" class="form-control" placeholder="Text ..." style="width:250px;max-width:100% !important;" onchange="" />
+            <input id="GiaMua2" type="text" class="form-control" value="4" style="width:250px;max-width:100% !important;" onchange="" />
         </div>
     </div>
     <div class="col-md-12" style="width:100%;display:flex;">
@@ -449,42 +459,29 @@
             <label>Giá bán niêm yết</label>
         </div>
         <div class="col-md-3" style="width:30%;padding:0;" ondblclick="$('#DenNgay').val('').trigger('change')">
-            <input id="GiaNY" type="text" class="form-control" placeholder="Text ..." style="width:250px;max-width:100% !important;" onchange="" />
+            <input id="GiaNY" type="text" class="form-control" value="4" style="width:250px;max-width:100% !important;" onchange="" />
         </div>
     </div>
-    <hr>
-    <div class="col-md-12" style="width:100%;display:flex;">
-        <div class="col-md-6" style="width:20%;padding:0px">
-            <h3>THÔNG TIN SIZE - MÀU</h3>
+    <br>
+    @*<div class="col-md-12" style="width:100%;display:flex;">
+            <div class="col-md-6" style="width:20%;padding:0px">
+                <h3>THÔNG TIN SIZE - MÀU</h3>
+            </div>
         </div>
-    </div>
-    <div class="col-md-12" style="width:100%;display:flex;">
-        <table class="table table-bordered>
-            <thead class="table-success text-center">
-                <tr>
-                    <th>Size</th>
-                    <th>Màu</th>
-                    <th>Barcode</th>
-                    <th>Chức năng</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr>
-                    <td>
+        <div class="col-md-12" style="width:100%;display:flex;">
+            <table class="table table-bordered>
+                <thead class="table-success text-center">
+                    <tr>
+                        <th>Size</th>
+                        <th>Màu</th>
+                        <th>Barcode</th>
+                        <th>Chức năng</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>
 
-                        <select id="Ca" class="form-control selectpicker" data-live-search="true" onchange="">
-                            <option value="">ca</option>
-                            @if (ViewBag.lst_Ca != null)
-                            {
-                                foreach (objCombox box in (List<objCombox>)ViewBag.lst_Ca)
-                                {
-                                    <option value="@box.Code">@box.Name</option>
-                                }
-                            }
-                        </select>
-                    </td>
-                    <td>
-                        <div class="col-md-6" style="width:30%;padding:0px" ondblclick="$('#Ca').val('').trigger('change')">
                             <select id="Ca" class="form-control selectpicker" data-live-search="true" onchange="">
                                 <option value="">ca</option>
                                 @if (ViewBag.lst_Ca != null)
@@ -495,40 +492,53 @@
                                     }
                                 }
                             </select>
-                        </div>
-                    </td>
-                    <td>
-                        <div class="col-md-6" style="width:30%;padding:0px" ondblclick="$('#Ca').val('').trigger('change')">
-                            <select id="Ca" class="form-control selectpicker" data-live-search="true" onchange="">
-                                <option value="">ca</option>
-                                @if (ViewBag.lst_Ca != null)
-                                {
-                                    foreach (objCombox box in (List<objCombox>)ViewBag.lst_Ca)
+                        </td>
+                        <td>
+                            <div class="col-md-6" style="width:30%;padding:0px" ondblclick="$('#Ca').val('').trigger('change')">
+                                <select id="Ca" class="form-control selectpicker" data-live-search="true" onchange="">
+                                    <option value="">ca</option>
+                                    @if (ViewBag.lst_Ca != null)
                                     {
-                                        <option value="@box.Code">@box.Name</option>
+                                        foreach (objCombox box in (List<objCombox>)ViewBag.lst_Ca)
+                                        {
+                                            <option value="@box.Code">@box.Name</option>
+                                        }
                                     }
-                                }
-                            </select>
-                        </div>
-                    </td>
-                    <td>
-                        <div class="col-md-6" style="width:30%;padding:0px" ondblclick="$('#Ca').val('').trigger('change')">
-                            <select id="Ca" class="form-control selectpicker" data-live-search="true" onchange="">
-                                <option value="">ca</option>
-                                @if (ViewBag.lst_Ca != null)
-                                {
-                                    foreach (objCombox box in (List<objCombox>)ViewBag.lst_Ca)
+                                </select>
+                            </div>
+                        </td>
+                        <td>
+                            <div class="col-md-6" style="width:30%;padding:0px" ondblclick="$('#Ca').val('').trigger('change')">
+                                <select id="Ca" class="form-control selectpicker" data-live-search="true" onchange="">
+                                    <option value="">ca</option>
+                                    @if (ViewBag.lst_Ca != null)
                                     {
-                                        <option value="@box.Code">@box.Name</option>
+                                        foreach (objCombox box in (List<objCombox>)ViewBag.lst_Ca)
+                                        {
+                                            <option value="@box.Code">@box.Name</option>
+                                        }
                                     }
-                                }
-                            </select>
-                        </div>
-                    </td>
-                </tr>
-            </tbody>
-        </table>
-    </div>
+                                </select>
+                            </div>
+                        </td>
+                        <td>
+                            <div class="col-md-6" style="width:30%;padding:0px" ondblclick="$('#Ca').val('').trigger('change')">
+                                <select id="Ca" class="form-control selectpicker" data-live-search="true" onchange="">
+                                    <option value="">ca</option>
+                                    @if (ViewBag.lst_Ca != null)
+                                    {
+                                        foreach (objCombox box in (List<objCombox>)ViewBag.lst_Ca)
+                                        {
+                                            <option value="@box.Code">@box.Name</option>
+                                        }
+                                    }
+                                </select>
+                            </div>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>*@
     <div class="col-md-12" style="width:100%;display:flex">
         <div class="col-md-6" style="width:50%"> <a href="#" style="margin-top:5px;text-align:center;width:50%" onclick="js_createitem()" class="form-control btn btn-info btn_ver">Xác nhận </a></div>
     </div>
@@ -538,8 +548,8 @@
         <div class="col-md-1" style="width:20%;padding:0px">
             <label>Nhà cung cấp</label>
         </div>
-        <div class="col-md-1" style="width:30%;padding:0px" ondblclick="$('#NCC').val('').trigger('change')">
-            <select id="NCC" class="form-control selectpicker" data-live-search="true" onchange="js_GetTableDSItem();">
+        <div class="col-md-1" style="width:30%;padding:0px" ondblclick="$('#NCC2').val('').trigger('change')">
+            <select id="NCC2" class="form-control selectpicker" data-live-search="true" onchange="js_GetTableDSItem();">
                 <option value="">NCC</option>
                 @if (ViewBag.MDS_cboNCC != null)
                 {
@@ -550,56 +560,45 @@
                 }
             </select>
         </div>
-        <div class="col-md-1" style="width:20%;padding:0px">
-            <label>Nhà cung cấp</label>
-        </div>
-        <div class="col-md-1" style="width:30%;padding:0px" ondblclick="$('#Ca').val('').trigger('change')">
-            <select id="Ca" class="form-control selectpicker" data-live-search="true" onchange="();">
-                <option value="">ca</option>
-                @if (ViewBag.MDS_cboNCC != null)
-                {
-                    foreach (objCombox box in (List<objCombox>)ViewBag.MDS_cboNCC)
+        @*<div class="col-md-1" style="width:20%;padding:0px">
+                <label>Nhà cung cấp</label>
+            </div>
+            <div class="col-md-1" style="width:30%;padding:0px" ondblclick="$('#Ca').val('').trigger('change')">
+                <select id="Ca" class="form-control selectpicker" data-live-search="true" onchange="();">
+                    <option value="">ca</option>
+                    @if (ViewBag.MDS_cboNCC != null)
                     {
-                        <option value="@box.Code">@box.Name</option>
+                        foreach (objCombox box in (List<objCombox>)ViewBag.MDS_cboNCC)
+                        {
+                            <option value="@box.Code">@box.Name</option>
+                        }
                     }
-                }
-            </select>
-        </div>
+                </select>
+            </div>*@
     </div>
     <div class="col-md-12" style="width:100%;display:flex;">
         <div class="col-md-1" style="width:20%;padding:0px">
             <label>Tên sản phẩm</label>
         </div>
-        <div class="col-md-1" style="width:30%;padding:0px" ondblclick="$('#TenSP').val('').trigger('change')">
-            <select id="TenSP" class="form-control selectpicker" data-live-search="true" onchange="js_GetTableDSItem();">
-                <option value="">Tên sản phẩm</option>
-                @if (ViewBag.MDS_cboSP != null)
-                {
-                    foreach (objCombox box in (List<objCombox>)ViewBag.MDS_cboSP)
+        <div class="col-md-1" style="width:30%;padding:0px" ondblclick="$('#TenSP2').val('').trigger('change')">
+            <input class="form-control" id="TenSP2" data-live-search="true" type="search" onsearch="js_GetTableDSItem()" style="width: 67%" />
+            @*<select id="TenSP" class="form-control selectpicker" data-live-search="true" onchange="js_GetTableDSItem();">
+                    <option value="">Tên sản phẩm</option>
+                    @if (ViewBag.MDS_cboSP != null)
                     {
-                        <option value="@box.Code">@box.Name</option>
+                        foreach (objCombox box in (List<objCombox>)ViewBag.MDS_cboSP)
+                        {
+                            <option value="@box.Code">@box.Name</option>
+                        }
                     }
-                }
-            </select>
+                </select>*@
         </div>
-        <div class="col-md-1" style="width:50%"> <a href="#" style="margin-top:5px;text-align:center;width:50%" onclick="js_setTrangThai()" class="form-control btn btn-info btn_ver">Xác nhận </a></div>
-    </div>
-    <div class="col-md-12" style="width:100%;display:flex;">
-        <div class="col-md-1" style="width:30%;padding:0px" ondblclick="$('#Ca').val('').trigger('change')">
-            <select id="Ca" class="form-control selectpicker" data-live-search="true" onchange="();">
-                <option value="">Chọn hành động</option>
-                @if (ViewBag.MDS_cboNCC != null)
-                {
-                    foreach (objCombox box in (List<objCombox>)ViewBag.MDS_cboNCC)
-                    {
-                        <option value="@box.Code">@box.Name</option>
-                    }
-                }
-            </select>
+        <div class="col-md-1" style="width:50%">
+            <a href="#" style="margin-top:5px;text-align:center;width:50%" onclick="js_setTrangThai()" class="form-control btn btn-info btn_ver">Xác nhận </a>
         </div>
     </div>
     <br />
-    <div class="col-md-12" id="div-content" style="margin-top:0px">
+    <div class="col-md-12" id="div-content-item" style="margin-top:0px">
         @Html.Partial("~/Views/MDSItem/Tables/__tbl_dsitem.cshtml")
     </div>
 </div>
@@ -620,21 +619,21 @@
                 }
             </select>
         </div>
-        <div class="col-md-1" style="width:20%;padding:0px">
-            <label>Nhà cung cấp</label>
-        </div>
-        <div class="col-md-1" style="width:30%;padding:0px" ondblclick="$('#Ca').val('').trigger('change')">
-            <select id="Ca" class="form-control selectpicker" data-live-search="true" onchange="();">
-                <option value="">ca</option>
-                @if (ViewBag.MDS_cboNCC != null)
-                {
-                    foreach (objCombox box in (List<objCombox>)ViewBag.MDS_cboNCC)
+        @*<div class="col-md-1" style="width:20%;padding:0px">
+                <label>Nhà cung cấp</label>
+            </div>
+            <div class="col-md-1" style="width:30%;padding:0px" ondblclick="$('#Ca').val('').trigger('change')">
+                <select id="Ca" class="form-control selectpicker" data-live-search="true" onchange="();">
+                    <option value="">ca</option>
+                    @if (ViewBag.MDS_cboNCC != null)
                     {
-                        <option value="@box.Code">@box.Name</option>
+                        foreach (objCombox box in (List<objCombox>)ViewBag.MDS_cboNCC)
+                        {
+                            <option value="@box.Code">@box.Name</option>
+                        }
                     }
-                }
-            </select>
-        </div>
+                </select>
+            </div>*@
     </div>
     <div class="col-md-12" style="width:100%;display:flex;">
         <div class="col-md-1" style="width:20%;padding:0px">
@@ -654,44 +653,25 @@
         </div>
         <div class="col-md-1" style="width:50%"> <a href="#" style="margin-top:5px;text-align:center;width:50%" onclick="js_setTrangThai1()" class="form-control btn btn-info btn_ver">Xác nhận </a></div>
     </div>
-    <div class="col-md-12" style="width:100%;display:flex;">
-        <div class="col-md-1" style="width:30%;padding:0px" ondblclick="$('#Ca').val('').trigger('change')">
-            <select id="Ca" class="form-control selectpicker" data-live-search="true" onchange="();">
-                <option value="">Chọn hành động</option>
-                @if (ViewBag.MDS_cboNCC != null)
-                {
-                    foreach (objCombox box in (List<objCombox>)ViewBag.MDS_cboNCC)
-                    {
-                        <option value="@box.Code">@box.Name</option>
-                    }
-                }
-            </select>
-        </div>
-    </div>
     <br />
-    <div class="col-md-12" id="div-content1" style="margin-top:0px">
+    <div class="col-md-12" id="div-content-duyet" style="margin-top:0px">
         @Html.Partial("~/Views/MDSItem/Tables/__tbl_dsduyetitem.cshtml")
     </div>
 </div>
 
 <script type="text/javascript">
     $(function () {
-        js_GetTableDSItem();
-        js_GetTableDSItem1();
+
     });
     function ActiveTab(r) {
         if (r == "Tab01") {
 
             $('.conten02').hide();
             $('.conten03').hide();
-            $('.conten04').hide();
-            $('.conten05').hide();
             $('.conten01').show();
 
             $('.Tab02').removeClass("active");
             $('.Tab03').removeClass("active");
-            $('.Tab04').removeClass("active");
-            $('.Tab05').removeClass("active");
 
             $('.conten01').removeClass("active");
             $('.Tab01').addClass("active");
@@ -700,74 +680,67 @@
         else if (r == "Tab02") {
             $('.conten01').hide();
             $('.conten03').hide();
-            $('.conten04').hide();
-            $('.conten05').hide();
             $('.conten02').show();
 
             $('.Tab01').removeClass("active");
             $('.Tab03').removeClass("active");
-            $('.Tab04').removeClass("active");
-            $('.Tab05').removeClass("active");
-
             $('.conten02').removeClass("active");
             $('.Tab02').addClass("active");
-
+            js_GetTableDSItem();
         }
         else if (r == "Tab03") {
             $('.conten01').hide();
             $('.conten02').hide();
-            $('.conten04').hide();
-            $('.conten05').hide();
             $('.conten03').show();
 
             $('.Tab01').removeClass("active");
             $('.Tab02').removeClass("active");
-            $('.Tab04').removeClass("active");
-            $('.Tab05').removeClass("active");
 
             $('.conten03').removeClass("active");
             $('.Tab03').addClass("active");
-            js_GetTableDSItem
+            js_GetTableDSItem1();
         }
     }
     function js_ReloadTable() {
-        $('#tbl_Item')
+        var table = $('#tbl_Item')
+            .DataTable({
+                lengthMenu: [[5, 10, 50, 70, 100, 200], [5, 10, 50, 70, 100, 200]],
+                columnDefs: [],
+                autoWidth: false,
+                "searching": true,
+                order: [[0, "desc"]],
+                "pageLength": 10
+            });
+        $('#TenSP2').on('keyup', function () {
+            table.search(this.value).draw();
+        });
+    }
+    function js_ReloadTableDuyet() {
+        $('#tbl_Item_Duyet')
             .DataTable({
                 lengthMenu: [[5, 10, 50, 70, 100, 200], [5, 10, 50, 70, 100, 200]],
                 columnDefs: [],
                 autoWidth: false,
                 "searching": false,
                 order: [[0, "desc"]],
-                "pageLength": 5
+                "pageLength": 10
             });
     }
-    function js_ReloadTable1() {
-        $('#tbl_Item1')
-            .DataTable({
-                lengthMenu: [[5, 10, 50, 70, 100, 200], [5, 10, 50, 70, 100, 200]],
-                columnDefs: [],
-                autoWidth: false,
-                "searching": false,
-                order: [[0, "desc"]],
-                "pageLength": 5
-            });
-    }
-
     function js_GetTableDSItem() {
         window.scrollTo(0, 0);
-        var NCC = $('#NCC').val();
-        var TenSP = $('#TenSP').val();
+        var NCC2 = $('#NCC2').val();
 
+        var TenSP2 = $('#TenSP2').val();
         $.ajax({
             url: '/MDSItem/GetTableDSItem',
             type: 'POST',
-            data: JSON.stringify({ NCC: NCC, TenSP: TenSP }),
+            data: JSON.stringify({ NCC2: NCC2, TenSP2: TenSP2 }),
             contentType: 'application/json, charset=utf-8',
             beforeSend: function () {
                 js_Loading(true, 1);
             },
             success: function (data) {
-                $('#div-content').html(data);
+                $('#div-content-item').html(data);
                 js_ReloadTable();
                 js_Loading(false, 1);
             },
@@ -790,8 +763,8 @@
                 js_Loading(true, 1);
             },
             success: function (data) {
-                $('#div-content1').html(data);
-                js_ReloadTable1();
+                $('#div-content-duyet').html(data);
+                js_ReloadTableDuyet();
                 js_Loading(false, 1);
             },
             error: function () {
@@ -835,8 +808,7 @@
                 success: function (data) {
                     if (data == 1) {
                         alert("Điều chỉnh thành công");
-                        js_ReloadTable();
-                        js_ReloadTable1();
+                        js_GetTableDSItem();
                         js_Loading(false, 1);
                     }
                 },
@@ -883,7 +855,7 @@
                 success: function (data) {
                     if (data == 1) {
                         alert("Điều chỉnh thành công");
-                        js_ReloadTable1();
+                        js_GetTableDSItem1();
                         js_Loading(false, 1);
                     }
                 },
@@ -937,7 +909,7 @@
             success: function (data) {
                 if (data) {
                     alert("Add thanh cong");
-                    //js_GetListDBST();
+                    @*js_GetTableDSItem();*@
                 } else {
                     alert("Có lỗi xảy ra");
                 }
