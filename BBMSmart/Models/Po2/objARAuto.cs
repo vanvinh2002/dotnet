@@ -72,7 +72,6 @@ namespace ProductAllTool.Models.Po2
     {
         public string Ten { get; set; }
         public string Ma { get; set; }
-        public int SBD { get; set; }
         public string GioiTinh { get; set; }
         public string TinhTrangHonNhan { get; set; }
         public DateTime NgaySinh { get; set; }
@@ -82,7 +81,6 @@ namespace ProductAllTool.Models.Po2
         public string TonGiao { get; set; }
         public string TrinhDoVanHoa { get; set; }
         public string TrinhDoHocVan { get; set; }
-        public string Themelink { get; set; }
         public string TenThuongGoi { get; set; }
         public string TenTiengHoa { get; set; }
         public int SoCMND { get; set; }
@@ -125,6 +123,7 @@ namespace ProductAllTool.Models.Po2
         public string NhipTim { get; set; }
         public string SizeQuan { get; set; }
         public string BangLaiXe { get; set; }
+        public string SBD { get; set; }
 
     }
 

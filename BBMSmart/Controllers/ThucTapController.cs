@@ -259,7 +259,7 @@ namespace ProductAllTool.Controllers
         {
             if (Session["uid"] != null && Session["uid"].ToString().Length > 0)
             {
-                DataTable table = DataAccess.DataAccessTT.TTUV_GetDS(Session["uid"].ToString(),Ma,Convert.ToInt32(SBD));
+                DataTable table = DataAccess.DataAccessTT.TTUV_GetDS(Session["uid"].ToString(),Ma,SBD);
 
                 return PartialView("~/Views/ThucTap/Partial/__HoSoUngVien.cshtml", table);
 

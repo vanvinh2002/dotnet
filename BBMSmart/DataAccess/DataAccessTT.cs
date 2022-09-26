@@ -1328,7 +1328,6 @@ namespace ProductAllTool.DataAccess
 
                     cmd.Parameters.Add(new SqlParameter("Ten", lst.Ten));
                     cmd.Parameters.Add(new SqlParameter("Ma", lst.Ma));
-                    cmd.Parameters.Add(new SqlParameter("SBD", lst.SBD));
                     cmd.Parameters.Add(new SqlParameter("GioiTinh", lst.GioiTinh));
                     cmd.Parameters.Add(new SqlParameter("TinhTrangHonNhan", lst.TinhTrangHonNhan));
                     cmd.Parameters.Add(new SqlParameter("NgaySinh", lst.NgaySinh));
@@ -1380,6 +1379,7 @@ namespace ProductAllTool.DataAccess
                     cmd.Parameters.Add(new SqlParameter("NhipTim", lst.NhipTim));
                     cmd.Parameters.Add(new SqlParameter("SizeQuan", lst.SizeQuan));
                     cmd.Parameters.Add(new SqlParameter("BangLaiXe", lst.BangLaiXe));
+                    cmd.Parameters.Add(new SqlParameter("SBD", lst.SBD));
                     
 
                     var reader = cmd.ExecuteNonQuery();
@@ -1396,7 +1396,7 @@ namespace ProductAllTool.DataAccess
             }
         }
 
-        public static DataTable TTUV_GetDS(string userid,string Ma, int SBD)
+        public static DataTable TTUV_GetDS(string userid, string Ma, string SBD)
         {
             DataSet ds = new DataSet();
             try

@@ -216,7 +216,7 @@
                 <div class="col-md-1 c1">
                     <label>Tên ứng viên</label>
                 </div>
-                <div class="col-md-1 c2" ">
+                <div class="col-md-1 c2" >
                     <input id="TenUV" type="text" class="form-control" />
                 </div>
                 <div class="col-md-1 c3">
@@ -757,27 +757,27 @@
             </div>
             <hr />
             <div class="text-center">
-                <button type="button" class="btn btn-primary" onclick="js_TTUV_ADD(); js_clearbox()">Lưu</button>
+                <button type="button" class="btn btn-primary" onclick="js_TTUV_ADD();">Lưu</button>
             </div>
         </div>
   
 <div id="danhsach" class="tabcontent conten02" style="display:none;height:1000px">
     <div class="col-md-12">
-        <div class="col-md-1 c1">
-            <label>Mã ứng viên </label>
-        </div>
-        <div class="col-md-1 c2" onclick="$('#Ma').val('').trigger('change')">
-            <input id="Ma" type="text" class="form-control"/>
-        </div>
-        <div class="col-md-1 c3">
-            <label>Số Báo Danh</label>
-        </div>
-        <div class="col-md-1 c2" onclick="$('#SBD1').val('').trigger('change')">
-            <input id="SBD1" type="text" class="form-control"/>
-        </div>
-        <div class="col-md-1 c5">
-            <a href="#" class="form-control btn btn-info" onclick="js_TTUV_GetDS()"><i class="fa fa-search" aria-hidden="true" style="margin-left: 6px;margin-top: 3px;"></i>Tìm kiếm</a>
-        </div>
+            <div class="col-md-1 c1">
+                <label>Mã ứng viên </label>
+            </div>
+            <div class="col-md-1 c2" onclick="$('#Maa').val('').trigger('change')">
+                <input id="Maa" type="text" class="form-control" onchange="js_TTUV_GetDS()"/>
+            </div>
+            <div class="col-md-1 c3">
+                <label>Số Báo Danh</label>
+            </div>
+            <div class="col-md-1 c2" onclick="$('#SBD1').val('').trigger('change')">
+                <input id="SBD1" type="text" class="form-control" onchange="js_TTUV_GetDS()"/>
+            </div>
+            <div class="col-md-1 c5">
+                <button href="#" type="submit" class="form-control btn btn-info" onclick="js_TTUV_GetDS();"><i class="fa fa-search" aria-hidden="true" style="margin-left: 6px;margin-top: 3px;"></i>Tìm kiếm</button>
+            </div>
     </div>
                     <div class="col-md-12" id="div-content">
                         @Html.Partial("~/Views/ThucTap/Partial/__HoSoUngVien.cshtml")
@@ -977,10 +977,9 @@
                 $("#banglaixe").val('').selectpicker("refresh");
      
     }
-
-    function js_TTUV_GetDS() {
-
-        var Ma = $("Ma").val();
+     function js_TTUV_GetDS() {
+        debugger
+        var Ma = $("Maa").val();
         var SBD = $("SBD1").val();
         $.ajax({
 
