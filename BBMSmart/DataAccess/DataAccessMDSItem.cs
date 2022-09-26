@@ -540,6 +540,41 @@ namespace ProductAllTool.DataAccess
             }
         }
 
+        public static List<objCombox> MDS_cboSP1()
+        {
+            List<objCombox> it_r = new List<objCombox>();
+            using (var con = new SqlConnection(strConnTHUCTAP))
+            {
+                con.Open();
+                try
+                {
+                    SqlCommand cmd = new SqlCommand("MDS_cboSP1", con);
+                    cmd.CommandType = CommandType.StoredProcedure;
+                    cmd.CommandTimeout = 300;
+                    var reader = cmd.ExecuteReader();
+
+                    while (reader.Read())
+                    {
+                        objCombox it_ = new objCombox
+                        {
+                            Code = reader["Code"].ToString(),
+                            Name = reader["Name"].ToString(),
+                        };
+
+                        it_r.Add(it_);
+                    }
+                    con.Close();
+                    return it_r;
+                }
+                catch (Exception ex)
+                {
+                    con.Close();
+                    LogBuild.CreateLogger(JsonConvert.SerializeObject(ex), "MDS_cboSP1");
+                    return it_r;
+                }
+            }
+        }
+
         public static List<objCombox> MDS_cboSP()
         {
             List<objCombox> it_r = new List<objCombox>();

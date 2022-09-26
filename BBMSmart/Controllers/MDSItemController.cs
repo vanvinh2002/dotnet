@@ -15,6 +15,9 @@ namespace ProductAllTool.Controllers
     public class MDSItemController : Controller
     {
         // GET: MDSItem
+
+        #region CBO
+
         public ActionResult MDSItem()
         {
             if (Session["uid"] != null && Session["uid"].ToString().Length > 0)
@@ -51,6 +54,8 @@ namespace ProductAllTool.Controllers
                 ViewBag.MDS_cboDVT = MDS_cboDVT;
                 var MDS_cboSP = DataAccess.DataAccessMDSItem.MDS_cboSP();
                 ViewBag.MDS_cboSP = MDS_cboSP;
+                var MDS_cboSP1 = DataAccess.DataAccessMDSItem.MDS_cboSP1();
+                ViewBag.MDS_cboSP1 = MDS_cboSP1;
                 return View();
             }
             else
@@ -59,6 +64,10 @@ namespace ProductAllTool.Controllers
                 return RedirectToAction("Login", "Account");
             }
         }
+
+        #endregion CBO
+
+        #region GetTable
 
         public ActionResult GetTableDSItem(string NCC2, string TenSP2)
         {
@@ -82,6 +91,10 @@ namespace ProductAllTool.Controllers
             return RedirectToAction("Login", "Account");
         }
 
+        #endregion GetTable
+
+        #region SetTT
+
         [HttpPost]
         public ActionResult MDSSetTrangThai(List<setTrangThai> lst)
         {
@@ -104,6 +117,7 @@ namespace ProductAllTool.Controllers
             }
         }
 
+        [HttpPost]
         public ActionResult MDSSetTrangThai1(List<setTrangThai> lst)
         {
             try
@@ -125,6 +139,10 @@ namespace ProductAllTool.Controllers
             }
         }
 
+        #endregion SetTT
+
+        #region Create Item
+
         public ActionResult MDSCreateItem(MDSModel lst)
         {
             try
@@ -143,5 +161,7 @@ namespace ProductAllTool.Controllers
                 return Json(null);
             }
         }
+
+        #endregion Create Item
     }
 }
