@@ -508,19 +508,23 @@
 
     function js_approve() {
         // debugger;
-
+       
         var cboxes = document.getElementsByName('check[]');
         var arrCheckbox = [];
         var i = 0;
         for (var i = 0; i < cboxes.length; i++) {
             if (cboxes[i].checked) {
-                var dc = {};
-                dc.ID = cboxes[i].value;
-                dc.GiaDieuChinh = $('#GiaDieuChinh' + cboxes[i].id).val();
-                dc.GiaKhaoSat = $('#GiaKhaoSat' + cboxes[i].id).val();
-                dc.ngayapdung = $('#ngayapdung' + cboxes[i].id).val();
-                console.log(dc);
-                arrCheckbox.push(dc);
+                if ($('#GiaDieuChinh' + cboxes[i].id).val().length > 0 && $('#GiaKhaoSat' + cboxes[i].id).val().length > 0 && $('#ngayapdung' + cboxes[i].id).val().length > 0) {
+                    var dc = {};
+                    dc.ID = cboxes[i].value;
+                    dc.GiaDieuChinh = $('#GiaDieuChinh' + cboxes[i].id).val();
+                    dc.GiaKhaoSat = $('#GiaKhaoSat' + cboxes[i].id).val();
+                    dc.ngayapdung = $('#ngayapdung' + cboxes[i].id).val();
+                    console.log(dc);
+                    arrCheckbox.push(dc);
+                } else {
+                    alert("Vui lòng nhập đủ thông tin");
+                }              
             }
         }
         console.log('1');
@@ -531,9 +535,9 @@
             alert("Vui lòng chọn ít nhất 1 bản ghi.");
             $('#myModal1').modal('hide');
             return;
-        }
-        console.log('2');
+            }
 
+        console.log('2');
         if (arrCheckbox.length > 0) {
             $.ajax({
                 url: '/ThucTap/UpdateStatus',
@@ -556,7 +560,7 @@
                 }
 
             });
-        }
+            }
 
     }
     function js_DuyetBang() {
